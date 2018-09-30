@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.breakering.com/2018/09/28/1/</loc>
+    
+    <lastmod>2018-09-30T08:05:03.546Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.breakering.com/tags/index.html</loc>
     
     <lastmod>2018-09-30T07:22:08.366Z</lastmod>
@@ -10,13 +17,6 @@
   
   <url>
     <loc>http://blog.breakering.com/2018/09/30/hello-world/</loc>
-    
-    <lastmod>2018-09-30T07:22:08.362Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/2018/09/28/1/</loc>
     
     <lastmod>2018-09-30T07:22:08.362Z</lastmod>
     

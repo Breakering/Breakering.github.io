@@ -109,15 +109,15 @@
 <meta property="og:site_name" content="Jacob Blog">
 <meta property="og:description" content="简单地说，内网穿透依赖于 NAT 原理，根据 NAT 设备不同大致可分为以下 4 大类(前3种NAT类型可统称为cone类型)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1046366/201809/1046366-20180927105622574-1652030646.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1046366/201809/1046366-20180927105631267-34167117.png">
+<meta property="og:image" content="http://blog.breakering.com/images/1046366-20180927105622574-1652030646.png">
+<meta property="og:image" content="http://blog.breakering.com/images/1046366-20180927105631267-34167117.png">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1046366/201809/1046366-20180927105727421-1721871308.png">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1046366/201809/1046366-20180927105741148-1074788234.png">
-<meta property="og:updated_time" content="2018-09-30T07:22:08.362Z">
+<meta property="og:updated_time" content="2018-09-30T08:05:03.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内网穿透frp">
 <meta name="twitter:description" content="简单地说，内网穿透依赖于 NAT 原理，根据 NAT 设备不同大致可分为以下 4 大类(前3种NAT类型可统称为cone类型)">
-<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1046366/201809/1046366-20180927105622574-1652030646.png">
+<meta name="twitter:image" content="http://blog.breakering.com/images/1046366-20180927105622574-1652030646.png">
 
 
 
@@ -487,7 +487,7 @@
 <p><strong>其他具体配置说明请参考<a href="https://github.com/fatedier/frp/blob/master/README_zh.md" target="_blank" rel="noopener">frp README</a> 文档</strong></p>
 <h2 id="4-3-启动frp-client"><a href="#4-3-启动frp-client" class="headerlink" title="4.3). 启动frp client"></a>4.3). 启动frp client</h2><p>设置完成后执行 ./frpc -c frpc.ini 启动即可</p>
 <p><strong>ps:当然也可以使用supervisor来管理</strong></p>
-<h1 id="五、测试"><a href="#五、测试" class="headerlink" title="五、测试"></a>五、测试</h1><p>服务端和客户端同时开启完成后，即可访问 <a href="http://127.0.0.1:7500" target="_blank" rel="noopener">http://127.0.0.1:7500</a> 进入 frp 控制面板，如下<br><img src="https://img2018.cnblogs.com/blog/1046366/201809/1046366-20180927105622574-1652030646.png" alt=""><br><img src="https://img2018.cnblogs.com/blog/1046366/201809/1046366-20180927105631267-34167117.png" alt=""><br>此时通过 ssh <a href="mailto:root@127.0.0.1" target="_blank" rel="noopener">root@127.0.0.1</a> -p 8081 即可ssh到gitlab，通过访问<a href="http://gitlab.xxxx.com:8080" target="_blank" rel="noopener">http://gitlab.xxxx.com:8080</a> 即可访问gitlab服务</p>
+<h1 id="五、测试"><a href="#五、测试" class="headerlink" title="五、测试"></a>五、测试</h1><p>服务端和客户端同时开启完成后，即可访问 <a href="http://127.0.0.1:7500" target="_blank" rel="noopener">http://127.0.0.1:7500</a> 进入 frp 控制面板，如下<br><img src="/images/1046366-20180927105622574-1652030646.png" alt=""><br><img src="/images/1046366-20180927105631267-34167117.png" alt=""><br>此时通过 ssh <a href="mailto:root@127.0.0.1" target="_blank" rel="noopener">root@127.0.0.1</a> -p 8081 即可ssh到gitlab，通过访问<a href="http://gitlab.xxxx.com:8080" target="_blank" rel="noopener">http://gitlab.xxxx.com:8080</a> 即可访问gitlab服务</p>
 <h1 id="六、GitLab通过frp代理"><a href="#六、GitLab通过frp代理" class="headerlink" title="六、GitLab通过frp代理"></a>六、GitLab通过frp代理</h1><p>通过上述配置，确实可以通过 <a href="http://gitlab.xxxx.com:8080" target="_blank" rel="noopener">http://gitlab.xxxx.com:8080</a> 访问gitlab服务,但是你会发现缺少静态文件,因为gitlab的静态文件是nginx代理的，走的tcp协议,需要一种解决方案。</p>
 <h2 id="方案一、使用frp的static-file的插件"><a href="#方案一、使用frp的static-file的插件" class="headerlink" title="方案一、使用frp的static_file的插件"></a>方案一、使用frp的static_file的插件</h2><p>虽然可以成功，通过 <a href="http://127.0.0.1:8082" target="_blank" rel="noopener">http://127.0.0.1:8082</a> 即可访问gitlab的静态文件，并且也可以通过nginx反向代理到gitlab.xxxx.com这个域名上，但是速度会很慢很慢,nginx配置如下:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server &#123;                                                                                                                                                                                                    </span><br><span class="line">    listen  80; </span><br><span class="line">    server_name  gitlab.xxxx.com;</span><br><span class="line">    location / &#123; </span><br><span class="line">        proxy_pass http://gitlab.xxxx.com:8080;</span><br><span class="line">    &#125;   </span><br><span class="line">    location /assets &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8082;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -538,7 +538,7 @@
   <p><span>本文标题:</span><a href="/2018/09/28/1/">内网穿透frp</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Jacob 的个人博客">Jacob</a></p>
   <p><span>发布时间:</span>2018年09月28日 - 20:09</p>
-  <p><span>最后更新:</span>2018年09月30日 - 15:09</p>
+  <p><span>最后更新:</span>2018年09月30日 - 16:09</p>
   <p><span>原始链接:</span><a href="/2018/09/28/1/" title="内网穿透frp">http://blog.breakering.com/2018/09/28/1/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://blog.breakering.com/2018/09/28/1/"  aria-label="复制成功！"></i></span>
   </p>
