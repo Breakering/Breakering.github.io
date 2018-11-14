@@ -69,7 +69,6 @@ body {
   line-height: 1;
   color: #000;
   background: #fff;
-  background-image: url('/images/background.jpg');
 }
 ol,
 ul {
@@ -121,7 +120,7 @@ a img {
 body {
   background: #ddd;
   font-family: "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
-  background-image: url('/images/background.jpg');
+  background-image: url("/images/background.jpg");
   background-attachment: fixed;
   font-size: 100%;
   color: #817c7c;
@@ -395,6 +394,7 @@ body >header {
   width: 100%;
   -webkit-box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
   box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
+  background: url("/images/banner.jpg") center #2ca6cb;
   color: #fff;
   padding: 1em 0 0.8em;
 }
