@@ -122,6 +122,7 @@ body {
   background: #ddd;
   font-family: "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
   background-image: url('/images/background.jpg');
+  background-attachment: fixed;
   font-size: 100%;
   color: #817c7c;
   line-height: 1.5;
