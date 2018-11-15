@@ -1,7 +1,7 @@
 ---
 title: Hexo同步
 date: 2018-11-15 15:27:52
-description:
+description: 其他电脑同步博客的方法!
 tags: Hexo
 categories: Hexo
 ---
