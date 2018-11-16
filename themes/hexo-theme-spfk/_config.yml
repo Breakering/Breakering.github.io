@@ -135,6 +135,7 @@ friends:
   银角大王: https://www.cnblogs.com/wupeiqi/
   导师刘又源: https://www.cnblogs.com/zingp/
   赵凡: https://www.cnblogs.com/zhaof/
+  luuman: https://luuman.github.io/
 
 # 打赏
 # 请在需要打赏的文章的md文件头部，设置属性reward: true
@@ -150,7 +151,7 @@ alipay: /img/alipay.png
 weixin: /img/weixin.png
 
 #是否开启“关于我”。
-aboutme: Python is cool!
+aboutme: This is Jacob!This is my blog,believe it or not!
 #aboutme: false
 
 # 是否在新窗口打开链接
@@ -196,4 +197,4 @@ visit_counter:
 TipTitle: true
 
 # Loading
-# Loading: true
+Loading: true
