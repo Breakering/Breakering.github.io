@@ -5,9 +5,9 @@
 ## Tags Cloud Page: `hexo new page tags`
 menu:
   博客首页: /
-  归档: /archives
-  标签: /tags
-  关于: /about
+  归档: /archives/index.html
+  标签: /tags/index.html
+  关于: /about/index.html
 # 静心阅读: /tags
 # 光影之路: /instagram
 # 随笔: /tags/随笔
