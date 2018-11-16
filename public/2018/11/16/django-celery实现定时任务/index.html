@@ -3,20 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo初识 | Jacob Blog</title>
+  <title>django-celery实现定时任务 | Jacob Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简单介绍hexo的用法.">
-<meta name="keywords" content="Hexo">
+  <meta name="description" content="使用django-celery实现定时任务，可以不用重启celery beat进程">
+<meta name="keywords" content="Django">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo初识">
-<meta property="og:url" content="http://blog.breakering.com/2018/09/28/hello-world/index.html">
+<meta property="og:title" content="django-celery实现定时任务">
+<meta property="og:url" content="http://blog.breakering.com/2018/11/16/django-celery实现定时任务/index.html">
 <meta property="og:site_name" content="Jacob Blog">
-<meta property="og:description" content="简单介绍hexo的用法.">
+<meta property="og:description" content="使用django-celery实现定时任务，可以不用重启celery beat进程">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-15T07:27:29.462Z">
+<meta property="og:image" content="http://blog.breakering.com/images/2018-11-16/QQ20170613-215907.jpg">
+<meta property="og:image" content="http://blog.breakering.com/images/2018-11-16/QQ20170613-220348.jpg">
+<meta property="og:updated_time" content="2018-11-16T09:28:52.974Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo初识">
-<meta name="twitter:description" content="简单介绍hexo的用法.">
+<meta name="twitter:title" content="django-celery实现定时任务">
+<meta name="twitter:description" content="使用django-celery实现定时任务，可以不用重启celery beat进程">
+<meta name="twitter:image" content="http://blog.breakering.com/images/2018-11-16/QQ20170613-215907.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Jacob Blog" type="application/atom+xml">
   
@@ -252,11 +255,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-django-celery实现定时任务" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/28/hello-world/" class="article-date">
-      <time datetime="2018-09-28T12:58:27.000Z" itemprop="datePublished">2018-09-28</time>
+      <a href="/2018/11/16/django-celery实现定时任务/" class="article-date">
+      <time datetime="2018-11-16T09:11:53.000Z" itemprop="datePublished">2018-11-16</time>
 </a>
     </div>
   
@@ -269,7 +272,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hexo初识
+      django-celery实现定时任务
     </h1>
   
 
@@ -278,13 +281,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+    <a class="article-category-link" href="/categories/Django/">Django</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/">Django</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -294,15 +297,26 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>我们知道celery可以直接用在django项目中，但是配置稍微繁琐，还有添加定时任务需要重启celery beat进程，实在蛋疼，好在找到了<code>django-celery</code>这个模块，话不多说，让我们用起来吧。</p>
+<h2 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h2><p>安装还是很简单的，直接pip即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django-clery</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时会将一些依赖库一并安装，比如celery等</p>
+</blockquote>
+<p>接下来是django项目中的配置，在settings中配置如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># INSTALLED_APPS中加入djcelery</span><br><span class="line">INSTALLED_APPS = [</span><br><span class="line">    ....</span><br><span class="line">    &apos;djcelery&apos;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># 配置djcelery相关参数，ResultStore默认存储在数据库可不必重写 ，</span><br><span class="line">djcelery.setup_loader()</span><br><span class="line">BROKER_URL = &apos;redis://127.0.0.1:6379/8&apos;  # 配置你的redis地址和库</span><br><span class="line"># 使用和Django一样的时区</span><br><span class="line">CELERY_TIMEZONE = TIME_ZONE</span><br><span class="line"></span><br><span class="line"># 以上为基本配置，以下为周期性任务定义</span><br><span class="line">CELERYBEAT_SCHEDULER = &apos;djcelery.schedulers.DatabaseScheduler&apos;</span><br></pre></td></tr></table></figure>
+<p>同步数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
+<h2 id="创建task"><a href="#创建task" class="headerlink" title="创建task"></a>创建task</h2><p>在你的app下面创建一个<code>tasks.py</code>文件，文件名必须一致，<code>django-celery</code>默认情况下会自动从各个app中寻找该模块。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> task</span><br><span class="line"></span><br><span class="line"><span class="meta">@task(name='send_msg')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_msg</span><span class="params">(msg)</span>:</span></span><br><span class="line">    print(msg)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：task装饰器的<code>name</code>参数最好和函数名一致或者干脆不指定。</p>
+</blockquote>
+<h2 id="创建定时任务"><a href="#创建定时任务" class="headerlink" title="创建定时任务"></a>创建定时任务</h2><p>接下来我们就可以在Django admin中创建定时任务了</p>
+<p><img src="/images/2018-11-16/QQ20170613-215907.jpg" alt=""><br><img src="/images/2018-11-16/QQ20170613-220348.jpg" alt=""></p>
+<h2 id="启动beat和worker"><a href="#启动beat和worker" class="headerlink" title="启动beat和worker"></a>启动beat和worker</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py celery worker -l info</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py celery beat</span><br></pre></td></tr></table></figure>
+<p>之后就可以观察日志了，另外可以使用<code>supervisor</code>来管理这两个进程。</p>
 
       
       
@@ -358,13 +372,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/28/hello-world/">Hexo初识</a></p>
+        <p><span>本文标题:</span><a href="/2018/11/16/django-celery实现定时任务/">django-celery实现定时任务</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Jacob 的个人博客">Jacob</a></p>
-        <p><span>发布时间:</span>2018年09月28日 - 20时58分</p>
-        <p><span>最后更新:</span>2018年11月15日 - 15时27分</p>
+        <p><span>发布时间:</span>2018年11月16日 - 17时11分</p>
+        <p><span>最后更新:</span>2018年11月16日 - 17时28分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/28/hello-world/" title="Hexo初识">http://blog.breakering.com/2018/09/28/hello-world/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.breakering.com/2018/09/28/hello-world/　　作者: Jacob" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/11/16/django-celery实现定时任务/" title="django-celery实现定时任务">http://blog.breakering.com/2018/11/16/django-celery实现定时任务/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.breakering.com/2018/11/16/django-celery实现定时任务/　　作者: Jacob" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -377,18 +391,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2018/11/15/Hexo同步/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Hexo同步
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/09/28/内网穿透frp/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">内网穿透frp</div>
+    <a href="/2018/11/16/Linux在局域网如何通过hostname获取其ip/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux在局域网如何通过hostname获取其ip</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -399,7 +404,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装和配置"><span class="toc-number">2.</span> <span class="toc-text">安装和配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建task"><span class="toc-number">3.</span> <span class="toc-text">创建task</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建定时任务"><span class="toc-number">4.</span> <span class="toc-text">创建定时任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动beat和worker"><span class="toc-number">5.</span> <span class="toc-text">启动beat和worker</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -466,13 +471,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/11/15/Hexo同步/" title="上一篇: Hexo同步">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/09/28/内网穿透frp/" title="下一篇: 内网穿透frp">
+            <a href="/2018/11/16/Linux在局域网如何通过hostname获取其ip/" title="下一篇: Linux在局域网如何通过hostname获取其ip">
                 <i class="fa fa-angle-right"></i>
             </a>
         
