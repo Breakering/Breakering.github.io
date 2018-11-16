@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[django-celery实现定时任务]]></title>
+    <url>%2F2018%2F11%2F16%2Fdjango-celery%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%2F</url>
+    <content type="text"><![CDATA[介绍我们知道celery可以直接用在django项目中，但是配置稍微繁琐，还有添加定时任务需要重启celery beat进程，实在蛋疼，好在找到了django-celery这个模块，话不多说，让我们用起来吧。 安装和配置安装还是很简单的，直接pip即可 1pip install django-clery 此时会将一些依赖库一并安装，比如celery等 接下来是django项目中的配置，在settings中配置如下: 1234567891011121314# INSTALLED_APPS中加入djceleryINSTALLED_APPS = [ .... &apos;djcelery&apos;]# 配置djcelery相关参数，ResultStore默认存储在数据库可不必重写 ，djcelery.setup_loader()BROKER_URL = &apos;redis://127.0.0.1:6379/8&apos; # 配置你的redis地址和库# 使用和Django一样的时区CELERY_TIMEZONE = TIME_ZONE# 以上为基本配置，以下为周期性任务定义CELERYBEAT_SCHEDULER = &apos;djcelery.schedulers.DatabaseScheduler&apos; 同步数据库 1python manage.py migrate 创建task在你的app下面创建一个tasks.py文件，文件名必须一致，django-celery默认情况下会自动从各个app中寻找该模块。 12345from celery import task@task(name='send_msg')def send_msg(msg): print(msg) 注意：task装饰器的name参数最好和函数名一致或者干脆不指定。 创建定时任务接下来我们就可以在Django admin中创建定时任务了 启动beat和worker1python manage.py celery worker -l info 1python manage.py celery beat 之后就可以观察日志了，另外可以使用supervisor来管理这两个进程。]]></content>
+      <categories>
+        <category>Django</category>
+      </categories>
+      <tags>
+        <tag>Django</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Linux在局域网如何通过hostname获取其ip]]></title>
     <url>%2F2018%2F11%2F16%2FLinux%E5%9C%A8%E5%B1%80%E5%9F%9F%E7%BD%91%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87hostname%E8%8E%B7%E5%8F%96%E5%85%B6ip%2F</url>
     <content type="text"><![CDATA[只需要hostname固定，就可以在局域网通过ping hostname.local来获取其ip]]></content>
