@@ -6,8 +6,8 @@
 menu:
   博客首页: /
   标签: /tags/index.html
-  归档: /archives/index.html
   相册: /photo/index.html
+  归档: /archives/index.html
   关于: /about/index.html
 # 静心阅读: /tags
 # 光影之路: /instagram
