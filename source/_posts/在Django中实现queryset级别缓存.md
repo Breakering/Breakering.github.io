@@ -1,7 +1,7 @@
 ---
 title: 在Django中实现queryset级别缓存
 date: 2018-11-16 11:50:19
-description: 
+description: django中实现queryset级别缓存
 tags: Django
 categories: Django
 ---
