@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.breakering.com/"/>
-  <updated>2018-11-16T08:42:41.767Z</updated>
+  <updated>2018-11-16T05:13:45.336Z</updated>
   <id>http://blog.breakering.com/</id>
   
   <author>
@@ -15,24 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>我的壁纸</title>
-    <link href="http://blog.breakering.com/2018/11/16/%E6%88%91%E7%9A%84%E5%A3%81%E7%BA%B8/"/>
-    <id>http://blog.breakering.com/2018/11/16/我的壁纸/</id>
-    <published>2018-11-16T08:40:01.000Z</published>
-    <updated>2018-11-16T08:42:41.767Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="wallpaper" scheme="http://blog.breakering.com/categories/wallpaper/"/>
-    
-    
-      <category term="wallpaper" scheme="http://blog.breakering.com/tags/wallpaper/"/>
-    
-  </entry>
   
   <entry>
     <title>在Django中实现queryset级别缓存</title>
