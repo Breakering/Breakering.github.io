@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Django常见错误解决办法]]></title>
+    <url>%2F2018%2F11%2F19%2FDjango%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[ProgrammingError: relation “default_cache_table” does not exist 123......django.db.utils.ProgrammingError: relation &quot;default_cache_table&quot; does not existLINE 1: SELECT cache_key, value, expires FROM &quot;default_cache_table&quot; WHERE ca... 类似上述这种错误，可以用下面这句命令解决: 1python manage.py createcachetable]]></content>
+      <categories>
+        <category>Django</category>
+      </categories>
+      <tags>
+        <tag>Django</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PostgreSQL允许被远程访问]]></title>
     <url>%2F2018%2F11%2F19%2FPostgreSQL%E5%85%81%E8%AE%B8%E8%A2%AB%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%2F</url>
     <content type="text"><![CDATA[1.修改postgresql.confpostgresql.conf存放位置在/etc/postgresql/9.x/main下，这里的x取决于你安装PostgreSQL的版本号，编辑或添加下面一行，使PostgreSQL可以接受来自任意IP的连接请求。 1listen_addresses = &apos;*&apos; 2.修改pg_hba.conf修改pg_hba.conf位置与postgresql.conf相同，虽然上面配置允许任意地址连接PostgreSQL，但是这在pg中还不够，我们还需在pg_hba.conf中配置服务端允许的认证方式。任意编辑器打开该文件，编辑或添加下面一行。 12# TYPE DATABASE USER CIDR-ADDRESS METHODhost all all 0.0.0.0/0 md5 默认pg只允许本机通过密码认证登录，修改为上面内容后即可以对任意IP访问进行密码验证。对照上面的注释可以很容易搞明白每列的含义，具体的支持项可以查阅文末参考引用。 完成上两项配置后执行sudo service postgresql restart重启PostgreSQL服务后，允许外网访问的配置就算生效了。]]></content>
