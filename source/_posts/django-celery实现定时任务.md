@@ -5,6 +5,7 @@ description: 使用django-celery实现定时任务，可以不用重启celery be
 tags: Django
 categories: Django
 photos:
+original: true
 ---
 ## 介绍
 我们知道celery可以直接用在django项目中，但是配置稍微繁琐，还有添加定时任务需要重启celery beat进程，实在蛋疼，好在找到了`django-celery`这个模块，话不多说，让我们用起来吧。

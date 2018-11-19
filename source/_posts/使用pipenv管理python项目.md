@@ -5,6 +5,7 @@ description: 使用pipenv管理python项目
 tags: Python
 categories: Python
 photos:
+original: false
 ---
 ## 安装pipenv
 

@@ -5,6 +5,7 @@ description: PostgreSQL允许被远程访问
 tags: PostgreSQL
 categories: PostgreSQL
 photos:
+original: false
 ---
 ## 1.修改postgresql.conf
 

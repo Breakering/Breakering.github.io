@@ -4,6 +4,7 @@ description: 简单地说，内网穿透依赖于 NAT 原理，根据 NAT 设备
 date: 2018-09-28 20:58:27
 tags: 
 categories: 内网穿透
+original: true
 ---
 # 一、内网穿透原理
 简单地说，内网穿透依赖于 NAT 原理，根据 NAT 设备不同大致可分为以下 4 大类(前3种NAT类型可统称为cone类型)：

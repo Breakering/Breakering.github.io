@@ -5,6 +5,7 @@ description: Django常见错误解决办法
 tags: Django
 categories: Django
 photos:
+original: true
 ---
 1. ProgrammingError: relation "default_cache_table" does not exist
 
