@@ -1,7 +1,7 @@
 ---
 title: 使用pipenv管理python项目
 date: 2018-11-19 14:19:10
-description:
+description: 使用pipenv管理python项目
 tags: Python
 categories: Python
 photos:
