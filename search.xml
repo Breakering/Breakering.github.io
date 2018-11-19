@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[GitLab升级]]></title>
+    <url>%2F2018%2F11%2F19%2FGitLab%E5%8D%87%E7%BA%A7%2F</url>
+    <content type="text"><![CDATA[更新 GitLab 我们用的是 GitLab Omnibus 7.10.5 版本，查到Doc（6.x.x 等低版本区别对待，详见文档）。按照文档：123456# To update to a newer GitLab version, all you have to do is:# Debian/Ubuntusudo apt-get updatesudo apt-get install gitlab-ce# Centos/RHELsudo yum install gitlab-ce 看起来太简单了！事实上，也就是这么简单。 但是，问题来了，sudo apt-get install gilab-ce 默认所用的源是 packages-gitlab-com.s3.amazonaws.com，然后你懂的，被墙了！ 解决办法有两个： 给 apt 加代理； 换源。 1). 给 apt 加代理考虑到换源可能产生其他的依赖问题，先尝试 加代理。结果是加了代理还是不行！原因可能是代理连接速度问题，总是超时。 这里参考的是 打造Linux 终端翻墙环境 使用 shadowsocks + privoxy 。 2). 换源解决！Docs 里已经有声明其实： 首先，添加信任 GitLab 里的 GPG 公钥： 1curl https://packages.gitlab.com/gpg.key 2&gt; /dev/null | sudo apt-key add - &amp;&gt;/dev/null 然后把 /etc/apt/sources.list.d/gitlab_gitlab-ce.list 文件中默认的源换成 deb https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu trusty main 最后： 12sudo updatesudo apt-get install gitlab-ce 安装完成！ 对于更新版本跨度较大的情况1). 关闭部分gitlab服务升级之前，我们首先要关闭gitlab部分服务，如下： 123gitlab-ctl stop unicorngitlab-ctl stop sidekiqgitlab-ctl stop nginx 2). 选择要升级的版本版本查看地址 然后执行命令： 1apt-get install gitlab-ce=11.0.3-ce.0 其中11.0.3替换为你要升级的版本号。 ps:版本跨度过大，请务必一个小版本一个小版本的更新 另外，附上一次成功的更新过程对应的版本号： 9.2.5--&gt;9.5.6--&gt;10.0.6--&gt;10.8.5--&gt;11.0.3 3). 重启gitlab12gitlab-ctl reconfiguregitlab-ctl restart References: http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/ https://about.gitlab.com/downloads/#ubuntu1404 https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/ http://docs.gitlab.com/omnibus/update/README.html https://about.gitlab.com/upgrade-to-package-repository/ https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/trusty/gitlab-ce_8.9.5-ce.0_amd64.deb https://www.ilanni.com/?p=13917 https://www.58jb.com/html/189.html]]></content>
+      <categories>
+        <category>GitLab</category>
+      </categories>
+      <tags>
+        <tag>GitLab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[GitLab备份与恢复]]></title>
+    <url>%2F2018%2F11%2F19%2FGitLab%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D%2F</url>
+    <content type="text"><![CDATA[一、 备份gitlabgitlab的备份比较简单，我们直接使用gitlab本身提供的命令进行备份即可。 1.1 通过gitlab-rake命令备份gitlabgitlab提供的备份命令为gitlab-rake，备份命令使用如下: 1gitlab-rake gitlab:backup:create 该命令会备份gitlab仓库、数据库、用户、用户组、用户密钥、权限等信息。 备份完成后备份文件会出现在/var/opt/gitlab/backups/ 当然备份的位置可以更换,使用如下命令： 1vim /etc/gitlab/gitlab.rb 修改上图backup_path的值即可，之后使用gitlab-ctl reconfigure使得配置生效 ps：备份文件的名称中1537261122_2018_09_18_9.2.5是此次备份的编号。该编号我们会在后续恢复gitlab数据使用到。 1.2 定时备份gitlab如果要使ｇitlab自动进行备份的话，我们可以通过crontab命令来实现自动备份。强烈建议使用系统crontab命令，而不是用户crontab。 以实现每天凌晨4点进行一次自动备份为例，系统的crontab配置如下: 1vim /etc/crontab 0 4 * * * root /opt/gitlab/bin/gitlab-rake gitlab:backup:create CRON=1 然后重启crontab服务，如下： 1systemctl restart crond 1.3 保留部分备份文件随着时间的推移gitlab备份文件越来越多，服务器的磁盘空间也不够大。 此时我们就要删除部分旧的备份文件，gitlab也提供了删除旧的备份文件功能。该功能在gitlab的配置文件中，进行配置即可。 在此以保留7天之前的备份文件为例，如下： 1vim /etc/gitlab/gitlab.rb gitlab_rails[‘backup_keep_time’] = 604800 其中backup_keep_time是以秒为单位进行计算的，然后执行命令gitlab-ctl reconfigure即可。 二、gitlab仓库恢复要验证gitlab备份的有效性，我们可以把该备份文件复制到已经安装好gitlab服务器的/var/opt/gitlab/backups/目录下。然后进行数据恢复，最后访问并查看其数据完整性即可。 通过gitlab备份文件可以恢复gitlab所有的信息，包括仓库、数据库、用户、用户组、用户密钥、权限等信息。 ps：新服务器上的gitlab的版本号必须与创建备份时的gitlab版本号相同。 gitlab数据恢复比较简单，具体步骤如下： 2.1 停止相关数据连接服务在gitlab服务器上停止相关数据连接服务，命令如下： 12gitlab-ctl stop unicorngitlab-ctl stop sidekiq 2.2 恢复gitlab仓库现在我们要从1537261122_2018_09_18_9.2.5这个备份编号中，恢复数据，命令如下： 1gitlab-rake gitlab:backup:restore BACKUP=1537261122_2018_09_18_9.2.5 如果出现多个done的信息，说明整个gitlab数据就已经正常恢复完毕。 2.3 启动gitlab服务恢复完毕以后，我们现在来启动gitlab，使用以下命令： 1gitlab-ctl start 强烈建议：重启该新服务器。 三、References: gitlab的备份与恢复]]></content>
+      <categories>
+        <category>GitLab</category>
+      </categories>
+      <tags>
+        <tag>GitLab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[使用pipenv管理python项目]]></title>
     <url>%2F2018%2F11%2F19%2F%E4%BD%BF%E7%94%A8pipenv%E7%AE%A1%E7%90%86python%E9%A1%B9%E7%9B%AE%2F</url>
     <content type="text"><![CDATA[安装pipenv1pip install pipenv 进入你的project目录，并install12cd your_projectpipenv install pipenv install将在项目目录中创建两个新文件Pipfile和Pipfile.lock，如果项目不存在，则为项目创建一个新的虚拟环境。 如果你添加–two或–three标志到上面的最后一个命令，它分别使用Python 2或3来初始化你的项目。 否则将使用默认版本的Python。 ps:有可能会出现如下错误，应该是pyenv造成的 1234... File &quot;/usr/lib/python3.7/site-packages/pipenv/vendor/pythonfinder/models/python.py&quot;, line 70, in get_version_order version_order = [versions[v] for v in parse_pyenv_version_order()]TypeError: &apos;NoneType&apos; object is not iterable 这时可以使用下面的命令解决: 1pyenv global 3.7.1 3.7.1换成你用pyenv安装过的环境 管理Python依赖关系Pipfile包含关于项目的依赖包的信息，并取代通常在Python项目中使用的requirements.txt文件。 如果你在具有requirements.txt文件的项目中启动了Pipenv，则在把它从项目中删除之前，应该使用Pipenv安装该文件中列出的所有依赖包。 要为你的项目安装Python包，请使用install关键字。 例如， pipenv install requests将安装当前版本的requests包。 可以使用uninstall关键字以类似的方式删除包; pipenv uninstall requests将安装当前版本的requests包。 可以通过更新Pipfile.lock来冻结软件包名称及其版本以及其自己的依赖关系的列表。 这是使用lock关键字完成的; pipenv lock如果另一个用户克隆存储库，可以添加Pipfiles到你的Git存储库， 这样他们只需要在他们的系统中安装Pipenv，然后键入pipenv installPipenv会自动找到Pipfiles，创建一个新的虚拟环境，并安装必要的软件包。 管理你的开发环境通常有一些Python包只在你的开发环境中需要，而不是在你的生产环境中，例如单元测试包。 Pipenv将使用–dev标志保持两个环境分开。 例如， pipenv install --dev ipython将安装ipython，但也将其关联为只在你的开发环境中需要的软件包。 这很有用，因为现在，如果你要在你的生产环境中安装你的项目， pipenv install默认情况下不会安装ipython包。 但是，如果另一个开发人员将你的项目克隆到自己的开发环境中，他们可以使用–dev标志， pipenv install –dev安装所有依赖项，包括开发包。 激活开发环境pipenv shell 总结pipenv使得开发和管理项目包的过程变成的简单，让我们尽早使用起来吧。]]></content>
