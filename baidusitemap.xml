@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.breakering.com/2018/11/19/PostgreSQL%E5%85%81%E8%AE%B8%E8%A2%AB%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</loc>
+    <lastmod>2018-11-19T06:04:22.422Z</lastmod>
+  </url>  <url>
     <loc>http://blog.breakering.com/2018/11/16/django-celery%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</loc>
     <lastmod>2018-11-16T09:28:52.974Z</lastmod>
   </url>  <url>
