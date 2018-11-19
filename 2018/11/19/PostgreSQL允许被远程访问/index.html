@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Jacob Blog">
 <meta property="og:description" content="PostgreSQL允许被远程访问">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-19T06:04:22.422Z">
+<meta property="og:updated_time" content="2018-11-19T06:06:25.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PostgreSQL允许被远程访问">
 <meta name="twitter:description" content="PostgreSQL允许被远程访问">
@@ -294,15 +294,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <ol>
-<li>修改postgresql.conf</li>
-</ol>
-<p><code>postgresql.conf</code>存放位置在<code>/etc/postgresql/9.x/main</code>下，这里的<code>x</code>取决于你安装PostgreSQL的版本号，编辑或添加下面一行，使PostgreSQL可以接受来自任意IP的连接请求。</p>
+        <h2 id="1-修改postgresql-conf"><a href="#1-修改postgresql-conf" class="headerlink" title="1.修改postgresql.conf"></a>1.修改postgresql.conf</h2><p><code>postgresql.conf</code>存放位置在<code>/etc/postgresql/9.x/main</code>下，这里的<code>x</code>取决于你安装PostgreSQL的版本号，编辑或添加下面一行，使PostgreSQL可以接受来自任意IP的连接请求。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listen_addresses = &apos;*&apos;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>修改pg_hba.conf</li>
-</ol>
-<p><code>修改pg_hba.conf</code>位置与<code>postgresql.conf</code>相同，虽然上面配置允许任意地址连接PostgreSQL，但是这在pg中还不够，我们还需在<code>pg_hba.conf</code>中配置服务端允许的认证方式。任意编辑器打开该文件，编辑或添加下面一行。</p>
+<h2 id="2-修改pg-hba-conf"><a href="#2-修改pg-hba-conf" class="headerlink" title="2.修改pg_hba.conf"></a>2.修改pg_hba.conf</h2><p><code>修改pg_hba.conf</code>位置与<code>postgresql.conf</code>相同，虽然上面配置允许任意地址连接PostgreSQL，但是这在pg中还不够，我们还需在<code>pg_hba.conf</code>中配置服务端允许的认证方式。任意编辑器打开该文件，编辑或添加下面一行。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># TYPE  DATABASE  USER  CIDR-ADDRESS  METHOD</span><br><span class="line">host  all  all 0.0.0.0/0 md5</span><br></pre></td></tr></table></figure>
 <p>默认pg只允许本机通过密码认证登录，修改为上面内容后即可以对任意IP访问进行密码验证。对照上面的注释可以很容易搞明白每列的含义，具体的支持项可以查阅文末参考引用。</p>
 <p>完成上两项配置后执行<code>sudo service postgresql restart</code>重启PostgreSQL服务后，允许外网访问的配置就算生效了。</p>
@@ -364,7 +358,7 @@
         <p><span>本文标题:</span><a href="/2018/11/19/PostgreSQL允许被远程访问/">PostgreSQL允许被远程访问</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Jacob 的个人博客">Jacob</a></p>
         <p><span>发布时间:</span>2018年11月19日 - 14时00分</p>
-        <p><span>最后更新:</span>2018年11月19日 - 14时04分</p>
+        <p><span>最后更新:</span>2018年11月19日 - 14时06分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/11/19/PostgreSQL允许被远程访问/" title="PostgreSQL允许被远程访问">http://blog.breakering.com/2018/11/19/PostgreSQL允许被远程访问/</a>
             <span class="copy-path" data-clipboard-text="原文: http://blog.breakering.com/2018/11/19/PostgreSQL允许被远程访问/　　作者: Jacob" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -393,7 +387,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-修改postgresql-conf"><span class="toc-number">1.</span> <span class="toc-text">1.修改postgresql.conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-修改pg-hba-conf"><span class="toc-number">2.</span> <span class="toc-text">2.修改pg_hba.conf</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
