@@ -26,6 +26,7 @@ favicon: images/j-32x32.ico
 ## https://github.com/hexojs/hexo-generator-feed
 subnav:
   github: "https://github.com/Breakering"
+  pinboard: "https://pinboard.in/u:Breakering/"
   weibo: "https://weibo.com/6787574457/profile"
   mail: "mailto:lingxuzhizun@outlook.com"
   zhihu: "https://www.zhihu.com/people/ling-xu-zhi-zun-19/activities"
@@ -40,7 +41,6 @@ subnav:
   # pinterest: "#"
   # QQ: "1079614505"
   # wechat: "#"
-  # pinboard: "#"
   # segmentfault: "#"
 
 # >>> Conments 评论系统 <<<
