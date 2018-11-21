@@ -31,7 +31,9 @@ subnav:
   zhihu: "https://www.zhihu.com/people/ling-xu-zhi-zun-19/activities"
   douban: "https://www.douban.com/people/breakering"
   facebook: "https://www.facebook.com/jacob.zhao.93"
+  Instagram: "https://www.instagram.com/breakering731/"
   google: "https://plus.google.com/u/0/115719921647293432856"
+  stackoverflow: "https://stackoverflow.com/users/story/10683236"
   rss: /atom.xml
   # twitter: "#"
   # linkedin: "#"
@@ -39,8 +41,6 @@ subnav:
   # QQ: "1079614505"
   # wechat: "#"
   # pinboard: "#"
-  # stackoverflow: "#"
-  # Instagram: "#"
   # segmentfault: "#"
 
 # >>> Conments 评论系统 <<<
