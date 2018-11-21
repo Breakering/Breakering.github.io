@@ -26,7 +26,6 @@ favicon: images/j-32x32.ico
 ## https://github.com/hexojs/hexo-generator-feed
 subnav:
   github: "https://github.com/Breakering"
-  pinboard: "https://pinboard.in/u:Breakering/"
   weibo: "https://weibo.com/6787574457/profile"
   mail: "mailto:lingxuzhizun@outlook.com"
   zhihu: "https://www.zhihu.com/people/ling-xu-zhi-zun-19/activities"
@@ -36,6 +35,7 @@ subnav:
   google: "https://plus.google.com/u/0/115719921647293432856"
   stackoverflow: "https://stackoverflow.com/users/story/10683236"
   rss: /atom.xml
+  pinboard: "https://pinboard.in/u:Breakering/"
   # twitter: "#"
   # linkedin: "#"
   # pinterest: "#"
