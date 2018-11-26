@@ -5,6 +5,7 @@
 ## Tags Cloud Page: `hexo new page tags`
 menu:
   博客首页: /
+  我的pinboard: /pinboard/index.html
   标签: /tags/index.html
   相册: /photo/index.html
   归档: /archives/index.html
@@ -35,7 +36,7 @@ subnav:
   google: "https://plus.google.com/u/0/115719921647293432856"
   stackoverflow: "https://stackoverflow.com/users/story/10683236"
   rss: /atom.xml
-  pinboard: "https://pinboard.in/u:Breakering/"
+  #  pinboard: "https://pinboard.in/u:Breakering/"
   # twitter: "#"
   # linkedin: "#"
   # pinterest: "#"
