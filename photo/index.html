@@ -5,23 +5,18 @@
   
   <title>Jacob个人技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="* {         padding: 0;         margin: 0;     }      .clearfix:after,     .clearfix:before {         content: &quot; &quot;;         display: table;     }      .clearfix:after {         clear: both;     }">
+  <meta name="description" content="body, div, img, ul, li {         margin: 0;         padding: 0;     }      body {         font-size: 12px;         background-color: #DDD;         min-width: 1200px;     }      ul, ul li {">
 <meta name="keywords" content="blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jacob个人技术博客">
 <meta property="og:url" content="http://blog.breakering.com/photo/index.html">
 <meta property="og:site_name" content="Jacob个人技术博客">
-<meta property="og:description" content="* {         padding: 0;         margin: 0;     }      .clearfix:after,     .clearfix:before {         content: &quot; &quot;;         display: table;     }      .clearfix:after {         clear: both;     }">
+<meta property="og:description" content="body, div, img, ul, li {         margin: 0;         padding: 0;     }      body {         font-size: 12px;         background-color: #DDD;         min-width: 1200px;     }      ul, ul li {">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://blog.breakering.com/images/wallpaper/1.jpg">
-<meta property="og:image" content="http://blog.breakering.com/images/wallpaper/2.jpg">
-<meta property="og:image" content="http://blog.breakering.com/images/wallpaper/3.jpg">
-<meta property="og:image" content="http://blog.breakering.com/images/wallpaper/4.jpg">
-<meta property="og:updated_time" content="2018-11-26T07:57:17.928Z">
+<meta property="og:updated_time" content="2018-11-26T08:04:35.926Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jacob个人技术博客">
-<meta name="twitter:description" content="* {         padding: 0;         margin: 0;     }      .clearfix:after,     .clearfix:before {         content: &quot; &quot;;         display: table;     }      .clearfix:after {         clear: both;     }">
-<meta name="twitter:image" content="http://blog.breakering.com/images/wallpaper/1.jpg">
+<meta name="twitter:description" content="body, div, img, ul, li {         margin: 0;         padding: 0;     }      body {         font-size: 12px;         background-color: #DDD;         min-width: 1200px;     }      ul, ul li {">
   
     <link rel="alternative" href="/atom.xml" title="Jacob个人技术博客" type="application/atom+xml">
   
@@ -275,7 +270,7 @@
   
     <div class="article-meta">
       <a href="/photo/index.html" class="article-date">
-      <time datetime="2018-11-26T07:57:17.976Z" itemprop="datePublished">2018-11-26</time>
+      <time datetime="2018-11-26T08:04:35.966Z" itemprop="datePublished">2018-11-26</time>
 </a>
     </div>
   
@@ -322,62 +317,163 @@
 
 
           
-        <style>
-    * {
-        padding: 0;
+        <style type="text/css">
+    body, div, img, ul, li {
         margin: 0;
+        padding: 0;
     }
 
-    .clearfix:after,
-    .clearfix:before {
-        content: " ";
-        display: table;
+    body {
+        font-size: 12px;
+        background-color: #DDD;
+        min-width: 1200px;
     }
 
-    .clearfix:after {
+    ul, ul li {
+        list-style: none;
+    }
+
+    .clear {
         clear: both;
     }
 
-    .main {
-        position: relative;
-        width: 800px;
-        -webkit-column-width: 210px;
-        -moz-column-width: 210px;
-        -webkit-column-gap: 5px;
-        -moz-column-gap: 5px;
-    }
-
     .box {
+        position: relative;
+        width: 630px;
+        margin: 100px auto;
+    }
+
+    .lineF, .lineS {
+        position: absolute;
+        visibility: hidden;
+    }
+
+    .lineS {
+        top: 182px;
+        left: 105px;
+    }
+
+    .boxF, .boxS, .boxT, .overlay {
+        width: 200px;
+        height: 250px;
+        overflow: hidden;
+    }
+
+    .boxF, .boxS {
+        visibility: hidden;
+    }
+
+    .boxF {
+        transform: rotate(120deg);
         float: left;
-        padding: 15px 0 0 15px;
+        margin-left: 10px;
+        -ms-transform: rotate(120deg);
+        -moz-transform: rotate(120deg);
+        -webkit-transform: rotate(120deg);
     }
 
-    .box .pic {
-        width: 180px;
-        height: auto;
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 0 0 5px #cccccc;
-        border: 1px solid #cccccc;
+    .boxS {
+        transform: rotate(-60deg);
+        -ms-transform: rotate(-60deg);
+        -moz-transform: rotate(-60deg);
+        -webkit-transform: rotate(-60deg);
     }
 
-    .box .pic img {
+    .boxT {
+        transform: rotate(-60deg);
+        background: no-repeat 50% center;
+        background-size: 125% auto;
+        -ms-transform: rotate(-60deg);
+        -moz-transform: rotate(-60deg);
+        -webkit-transform: rotate(-60deg);
+        visibility: visible;
+    }
+
+    .overlay {
+        transition: all 250ms ease-in-out 0s;
+        display: none;
+        position: relative;
+    }
+
+    .overlay:hover {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .boxT:hover .overlay {
         display: block;
-        width: 100%;
+    }
+
+    .overlay a {
+        display: inline-block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -16px 0 0 -16px;
+        border-radius: 3px;
+        background-color: #d3b850;
+        text-align: center;
+        line-height: 32px;
+        width: 32px;
+        height: 32px;
+        text-decoration: none;
+        color: White;
+        font-size: 18px;
+        font-weight: bolder;
     }
 </style>
-<div class="main clearfix" id="main">
-    <div class="box">
-        <div class="pic"><img src="/images/wallpaper/1.jpg"></div>
+<h1 class="article-title" itemprop="name">我的相册</h1>
+<div class="box">
+    <!--第一行(lineFirst)-->
+    <div class="lineF">
+        <div class="boxF">
+            <div class="boxS">
+                <div class="boxT" style="background-image: url(/images/wallpaper/1.jpg);">
+                    <div class="overlay">
+                        <a href="#">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="boxF">
+            <div class="boxS">
+                <div class="boxT" style="background-image: url(/images/wallpaper/2.jpg);">
+                    <div class="overlay">
+                        <a href="#">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="boxF">
+            <div class="boxS">
+                <div class="boxT" style="background-image: url(/images/wallpaper/3.jpg);">
+                    <div class="overlay">
+                        <a href="#">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="box">
-        <div class="pic"><img src="/images/wallpaper/2.jpg"></div>
-    </div>
-    <div class="box">
-        <div class="pic"><img src="/images/wallpaper/3.jpg"></div>
-    </div>
-    <div class="box">
-        <div class="pic"><img src="/images/wallpaper/4.jpg"></div>
+    <!--第二行(lineSecond)-->
+    <div class="lineS">
+        <div class="boxF">
+            <div class="boxS">
+                <div class="boxT" style="background-image: url(/images/wallpaper/4.jpg);">
+                    <div class="overlay">
+                        <a href="#">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="boxF">
+            <div class="boxS">
+                <div class="boxT" style="background-image: url(img/5.jpg);">
+                    <div class="overlay">
+                        <a href="#">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
       
