@@ -52,12 +52,12 @@ python manage.py migrate
 ```python
 from celery import task
 
-@task(name='send_msg')
+@task()
 def send_msg(msg):
     print(msg)
 ```
 
-> 注意：task装饰器的`name`参数最好和函数名一致或者干脆不指定。
+> 注意：task装饰器的`name`参数最好和函数名一致或者干脆不指定;最好不指定，这样下方分发任务时好统一处理。
 
 ## 创建定时任务
 
@@ -77,3 +77,42 @@ python manage.py celery beat
 ```
 
 之后就可以观察日志了，另外可以使用`supervisor`来管理这两个进程。
+
+## 利用queue分发任务
+
+在settings中增加如下配置:
+
+```reStructuredText
+# 定义任务对应的queue
+class TasksRouter(object):
+    @classmethod
+    def route_for_task(cls, task, args=None, kwargs=None):
+        task_routes = {
+            'algorithm.product.tasks.*': {'queue': 'product'},
+            'algorithm.material.tasks.*': {'queue': 'material'},
+        }
+        for route_key in task_routes:
+            if re.search(route_key, task):
+                return task_routes[route_key]
+
+
+CELERY_ROUTES = (TasksRouter(), )
+```
+
+配置完成之后，启动beat和worker
+
+```
+python manage.py celery beat
+```
+
+beat会实时检测任务的变化，在django admin界面对任务进行操作，均会刷新该进程，使得分派任务变得非常简单。
+
+```reStructuredText
+python manage.py celery worker -Q product
+```
+
+上述命令启动的worker只会监测并执行`product`这个queue中的任务，即只执行`algorithm.product.tasks`下面的任务。同理`python manage.py celery worker -Q material`只执行`algorithm.material.tasks`下面的任务。
+
+另外queue可以添加多个,例如`python manage.py celery worker -Q product,material`。
+
+若要不区分queue执行所有任务，只需`python manage.py celery worker`即可,但不推荐,开启任务分发之后，最好分开执行，日志方面也更好排查。

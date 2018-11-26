@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.breakering.com/2018/11/16/django-celery%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</loc>
+    <lastmod>2018-11-26T07:01:24.675Z</lastmod>
+  </url>  <url>
     <loc>http://blog.breakering.com/2018/11/26/jupyter%E7%BE%8E%E5%8C%96/</loc>
     <lastmod>2018-11-26T02:28:36.922Z</lastmod>
   </url>  <url>
@@ -18,9 +21,6 @@
   </url>  <url>
     <loc>http://blog.breakering.com/2018/09/28/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8Ffrp/</loc>
     <lastmod>2018-11-19T07:27:42.664Z</lastmod>
-  </url>  <url>
-    <loc>http://blog.breakering.com/2018/11/16/django-celery%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</loc>
-    <lastmod>2018-11-19T07:27:42.624Z</lastmod>
   </url>  <url>
     <loc>http://blog.breakering.com/2018/11/19/PostgreSQL%E5%85%81%E8%AE%B8%E8%A2%AB%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</loc>
     <lastmod>2018-11-19T07:27:42.588Z</lastmod>
