@@ -14,7 +14,7 @@
   <entry>
     <title><![CDATA[ubuntu 中 Typora 安装]]></title>
     <url>%2F2018%2F11%2F26%2Fubuntu-%E4%B8%AD-Typora-%E5%AE%89%E8%A3%85%2F</url>
-    <content type="text"><![CDATA[12345678910111213# optional, but recommendedsudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE# add Typora&apos;s repositorysudo add-apt-repository &apos;deb http://typora.io linux/&apos;sudo apt-get update# install typorasudo apt-get install typora]]></content>
+    <content type="text"><![CDATA[12345678910111213# optional, but recommendedsudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE# add Typora&apos;s repositorysudo add-apt-repository &apos;deb http://typora.io linux/&apos;sudo apt-get update# install typorasudo apt-get install typora 另外推荐安装下Vue的theme，地址:https://theme.typora.io/theme/Vue/]]></content>
       <categories>
         <category>Ubuntu</category>
       </categories>
