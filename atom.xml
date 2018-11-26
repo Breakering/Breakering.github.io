@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.breakering.com/"/>
-  <updated>2018-11-26T01:54:50.660Z</updated>
+  <updated>2018-11-26T02:28:36.922Z</updated>
   <id>http://blog.breakering.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>jupyter美化</title>
+    <link href="http://blog.breakering.com/2018/11/26/jupyter%E7%BE%8E%E5%8C%96/"/>
+    <id>http://blog.breakering.com/2018/11/26/jupyter美化/</id>
+    <published>2018-11-26T02:17:10.000Z</published>
+    <updated>2018-11-26T02:28:36.922Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="jupyterthemes"><a href="#jupyterthemes" class="headerlink" title="jupyterthemes"></a>jupyterthemes</h1><h2 id="安装jupyter主题"><a href="#安装jupyter主题" class="headerlink" title="安装jupyter主题"></a>安装jupyter主题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># install jupyterthemes</span><br><span class="line">pip install jupyterthemes</span><br><span class="line"></span><br><span class="line"># upgrade to latest version</span><br><span class="line">pip install --upgrade jupyterthemes</span><br></pre></td></tr></table></figure><h2 id="使用主题"><a href="#使用主题" class="headerlink" title="使用主题"></a>使用主题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jt -t monokai -fs 95 -altp -tfs 11 -nfs 115 -cellw 88% -N -T</span><br></pre></td></tr></table></figure><h2 id="更多主题设置"><a href="#更多主题设置" class="headerlink" title="更多主题设置"></a>更多主题设置</h2><p><a href="https://github.com/dunovank/jupyter-themes" target="_blank" rel="noopener">jupyterthemes</a></p><h1 id="jupyter-contrib-nbextensions"><a href="#jupyter-contrib-nbextensions" class="headerlink" title="jupyter_contrib_nbextensions"></a>jupyter_contrib_nbextensions</h1><h2 id="安装jupyter-contrib-nbextensions"><a href="#安装jupyter-contrib-nbextensions" class="headerlink" title="安装jupyter_contrib_nbextensions"></a>安装jupyter_contrib_nbextensions</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install jupyter_contrib_nbextensions</span><br></pre></td></tr></table></figure><h2 id="安装js和css文件"><a href="#安装js和css文件" class="headerlink" title="安装js和css文件"></a>安装js和css文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter contrib nbextension install --user</span><br></pre></td></tr></table></figure><h2 id="扩展选用"><a href="#扩展选用" class="headerlink" title="扩展选用"></a>扩展选用</h2><p><img src="/images/2018-11-26/1543199245282.png" alt="1543199245282"></p><h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2>]]></content>
+    
+    <summary type="html">
+    
+      jupyter美化
+    
+    </summary>
+    
+      <category term="jupyter" scheme="http://blog.breakering.com/categories/jupyter/"/>
+    
+    
+      <category term="jupyter" scheme="http://blog.breakering.com/tags/jupyter/"/>
+    
+  </entry>
   
   <entry>
     <title>ubuntu 中 Typora 安装</title>
@@ -238,8 +260,8 @@
   
   <entry>
     <title>Hexo初识</title>
-    <link href="http://blog.breakering.com/2018/09/28/hello-world/"/>
-    <id>http://blog.breakering.com/2018/09/28/hello-world/</id>
+    <link href="http://blog.breakering.com/2018/09/28/Hexo%E5%88%9D%E8%AF%86/"/>
+    <id>http://blog.breakering.com/2018/09/28/Hexo初识/</id>
     <published>2018-09-28T12:58:27.000Z</published>
     <updated>2018-11-19T09:01:03.573Z</updated>
     
