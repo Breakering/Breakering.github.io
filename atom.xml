@@ -43,7 +43,7 @@
     <link href="http://blog.breakering.com/2018/11/26/ubuntu-%E4%B8%AD-Typora-%E5%AE%89%E8%A3%85/"/>
     <id>http://blog.breakering.com/2018/11/26/ubuntu-中-Typora-安装/</id>
     <published>2018-11-26T01:53:19.000Z</published>
-    <updated>2018-11-26T07:17:16.372Z</updated>
+    <updated>2018-11-26T07:18:00.176Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># optional, but recommended</span><br><span class="line"></span><br><span class="line">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE</span><br><span class="line"></span><br><span class="line"># add Typora&apos;s repository</span><br><span class="line"></span><br><span class="line">sudo add-apt-repository &apos;deb http://typora.io linux/&apos;</span><br><span class="line"></span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line"># install typora</span><br><span class="line"></span><br><span class="line">sudo apt-get install typora</span><br></pre></td></tr></table></figure><blockquote><p>  另外推荐安装下Vue的theme，地址:<a href="https://theme.typora.io/theme/Vue/" target="_blank" rel="noopener">https://theme.typora.io/theme/Vue/</a></p></blockquote>]]></content>
     
@@ -53,10 +53,10 @@
     
     </summary>
     
-      <category term="Ubuntu" scheme="http://blog.breakering.com/categories/Ubuntu/"/>
+      <category term="Ubuntu 工具" scheme="http://blog.breakering.com/categories/Ubuntu-%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="Ubuntu" scheme="http://blog.breakering.com/tags/Ubuntu/"/>
+      <category term="Ubuntu 工具" scheme="http://blog.breakering.com/tags/Ubuntu-%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
