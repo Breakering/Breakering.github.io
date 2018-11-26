@@ -3,8 +3,12 @@ title: ubuntu 中 Typora 安装
 original: false
 date: 2018-11-26 09:53:19
 description: ubuntu 中 Typora 安装
-tags: Ubuntu 工具
-categories: Ubuntu 工具
+tags: 
+- Ubuntu
+- 工具
+categories:
+- Ubuntu
+- 工具
 photos:
 ---
 
