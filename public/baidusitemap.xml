@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.breakering.com/2018/11/26/ubuntu-%E4%B8%AD-Typora-%E5%AE%89%E8%A3%85/</loc>
+    <lastmod>2018-11-26T01:54:50.660Z</lastmod>
+  </url>  <url>
+    <loc>http://blog.breakering.com/2018/09/28/hello-world/</loc>
+    <lastmod>2018-11-19T09:01:03.573Z</lastmod>
+  </url>  <url>
     <loc>http://blog.breakering.com/2018/11/19/GitLab%E5%8D%87%E7%BA%A7/</loc>
     <lastmod>2018-11-19T08:20:28.233Z</lastmod>
   </url>  <url>
@@ -21,9 +27,6 @@
   </url>  <url>
     <loc>http://blog.breakering.com/2018/11/19/%E4%BD%BF%E7%94%A8pipenv%E7%AE%A1%E7%90%86python%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2018-11-19T07:27:42.520Z</lastmod>
-  </url>  <url>
-    <loc>http://blog.breakering.com/2018/09/28/hello-world/</loc>
-    <lastmod>2018-11-19T07:27:42.488Z</lastmod>
   </url>  <url>
     <loc>http://blog.breakering.com/2018/11/19/Django%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
     <lastmod>2018-11-19T07:27:42.452Z</lastmod>
