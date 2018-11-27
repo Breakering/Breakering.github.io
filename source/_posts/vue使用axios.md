@@ -20,7 +20,8 @@ npm install --save axios vue-axios
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
- 
+
+axios.defaults.baseURL='http://localhost:8000';  // 可以设置baseURL
 Vue.use(VueAxios, axios)
 ```
 
