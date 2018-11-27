@@ -42,3 +42,5 @@ getNewsList(){
 [vue全局使用axios的方法](https://segmentfault.com/a/1190000013128858)
 
 [vue-axios](https://www.npmjs.com/package/vue-axios)
+
+[vue添加axios，并且指定baseurl](https://blog.csdn.net/wild46cat/article/details/78006280)
