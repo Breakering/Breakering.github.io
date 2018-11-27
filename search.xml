@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[vue使用axios]]></title>
     <url>%2F2018%2F11%2F27%2Fvue%E4%BD%BF%E7%94%A8axios%2F</url>
-    <content type="text"><![CDATA[安装1npm install --save axios vue-axios 引入123456import Vue from &apos;vue&apos;import axios from &apos;axios&apos;import VueAxios from &apos;vue-axios&apos;axios.defaults.baseURL=&apos;http://localhost:8000&apos;; // 可以设置baseURLVue.use(VueAxios, axios) 使用1234567getNewsList()&#123; this.axios.get(&apos;api/getNewsList&apos;).then((response)=&gt;&#123; this.newsList=response.data.data; &#125;).catch((response)=&gt;&#123; console.log(response); &#125;)&#125; 参考vue全局使用axios的方法 vue-axios]]></content>
+    <content type="text"><![CDATA[安装1npm install --save axios vue-axios 引入123456import Vue from &apos;vue&apos;import axios from &apos;axios&apos;import VueAxios from &apos;vue-axios&apos;axios.defaults.baseURL=&apos;http://localhost:8000&apos;; // 可以设置baseURLVue.use(VueAxios, axios) 使用1234567getNewsList()&#123; this.axios.get(&apos;api/getNewsList&apos;).then((response)=&gt;&#123; this.newsList=response.data.data; &#125;).catch((response)=&gt;&#123; console.log(response); &#125;)&#125; 参考vue全局使用axios的方法 vue-axios vue添加axios，并且指定baseurl]]></content>
       <categories>
         <category>vue</category>
       </categories>
