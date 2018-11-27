@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[vue使用axios]]></title>
+    <url>%2F2018%2F11%2F27%2Fvue%E4%BD%BF%E7%94%A8axios%2F</url>
+    <content type="text"><![CDATA[安装1npm install --save axios vue-axios 引入12345import Vue from &apos;vue&apos;import axios from &apos;axios&apos;import VueAxios from &apos;vue-axios&apos; Vue.use(VueAxios, axios) 使用1234567getNewsList()&#123; this.axios.get(&apos;api/getNewsList&apos;).then((response)=&gt;&#123; this.newsList=response.data.data; &#125;).catch((response)=&gt;&#123; console.log(response); &#125;)&#125; 参考vue全局使用axios的方法 vue-axios]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[jupyter美化]]></title>
     <url>%2F2018%2F11%2F26%2Fjupyter%E7%BE%8E%E5%8C%96%2F</url>
     <content type="text"><![CDATA[jupyterthemes安装jupyter主题12345# install jupyterthemespip install jupyterthemes# upgrade to latest versionpip install --upgrade jupyterthemes 使用主题1jt -t monokai -fs 95 -altp -tfs 11 -nfs 115 -cellw 88% -N -T 更多主题设置jupyterthemes jupyter_contrib_nbextensions安装jupyter_contrib_nbextensions1pip install jupyter_contrib_nbextensions 安装js和css文件1jupyter contrib nbextension install --user 扩展选用 完成]]></content>
