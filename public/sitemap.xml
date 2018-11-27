@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.breakering.com/2018/11/27/vue%E4%BD%BF%E7%94%A8axios/</loc>
+    
+    <lastmod>2018-11-27T02:28:42.095Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.breakering.com/2018/11/16/django-celery%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</loc>
+    
+    <lastmod>2018-11-26T10:28:53.863Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.breakering.com/pinboard/index.html</loc>
     
     <lastmod>2018-11-26T09:55:17.747Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>http://blog.breakering.com/2018/11/26/ubuntu-%E4%B8%AD-Typora-%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2018-11-26T07:20:16.742Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/2018/11/16/django-celery%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</loc>
-    
-    <lastmod>2018-11-26T07:01:24.675Z</lastmod>
     
   </url>
   
