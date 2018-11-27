@@ -39,6 +39,6 @@ getNewsList(){
 
 ## 参考
 
-[[vue全局使用axios的方法](https://segmentfault.com/a/1190000013128858)](https://segmentfault.com/a/1190000013128858)
+[vue全局使用axios的方法](https://segmentfault.com/a/1190000013128858)
 
 [vue-axios](https://www.npmjs.com/package/vue-axios)
