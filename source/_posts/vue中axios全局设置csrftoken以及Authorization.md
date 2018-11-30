@@ -91,12 +91,16 @@ export default new Vuex.Store({
 
 ### 封装进api
 
--   创建api文件夹,其中创建两个文件`config.js`和`api.js`
--   编辑`config.js`
+-   创建api文件夹,其中创建一个`api.js`
+-   编辑plugins下的`axios.js`
 
 ```js
 import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import store from '../store'
+
+Vue.use(VueAxios, axios);
 
 // base url
 // Vue.axios.defaults.baseURL = 'http://127.0.0.1:9001';
@@ -117,6 +121,7 @@ Vue.axios.interceptors.request.use(
         if (csrftoken) {
             config.headers['X-CSRFTOKEN'] = csrftoken;
         }
+        console.log(token, csrftoken);
         return config
     },
     error => {
@@ -152,16 +157,16 @@ export const getNews = params => Vue.axios.get(
 );
 ```
 
--   修改`main.js`
+-   我的`main.js`
 
 ```js
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './plugins/axios.js'
+import './plugins/element.js'
 import './plugins/cookies.js'
-import './api/config'
+import './plugins/axios.js'
 
 
 .....
