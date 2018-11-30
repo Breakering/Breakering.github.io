@@ -87,4 +87,111 @@ export default new Vuex.Store({
 
 
 
+## 考虑封装axios
+
+### 封装进api
+
+-   创建api文件夹,其中创建两个文件`config.js`和`api.js`
+-   编辑`config.js`
+
+```js
+import Vue from 'vue'
+import store from '../store'
+
+// base url
+// Vue.axios.defaults.baseURL = 'http://127.0.0.1:9001';
+
+// 请求超时时间
+Vue.axios.defaults.timeout = 10000;
+
+// 请求拦截器
+Vue.axios.interceptors.request.use(
+    config => {
+        // 设置登录验证token
+        const token = store.state.userInfo.Authorization;
+        if (token) {
+            config.headers.Authorization = token;
+        }
+        // 设置csrftoken
+        const csrftoken = Vue.cookies.get('csrftoken');
+        if (csrftoken) {
+            config.headers['X-CSRFTOKEN'] = csrftoken;
+        }
+        return config
+    },
+    error => {
+        return Promise.reject(error)
+    });
+
+
+// 响应拦截器
+Vue.axios.interceptors.response.use(
+    // 请求成功
+    res => Promise.resolve(res),
+    // 请求失败
+    error => {
+        // 请求已发出，但是不在2xx的范围
+        console.log(error);  // 这儿可以用UI插件做个弹窗提醒
+        return Promise.reject(error);
+    });
+```
+
+-   编辑`api.js`
+
+```js
+import Vue from 'vue'
+
+// 登录接口
+export const login = data => Vue.axios.post(
+    '/api/xxxx/login/', data
+);
+
+// 获取新闻列表接口
+export const getNews = params => Vue.axios.get(
+    '/api/xxxx/newsflashmaterial/?ordering=-create_time', params
+);
+```
+
+-   修改`main.js`
+
+```js
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import './plugins/axios.js'
+import './plugins/cookies.js'
+import './api/config'
+
+
+.....
+```
+
+-   使用
+
+```js
+<script>
+    import {login} from "../api/api"
+
+    export default {
+        name: "Login",
+        data() {
+            return {
+                formLabelAlign: {
+                    username: '',
+                    password: ''
+                }
+            }
+        },
+        methods: {
+            submitForm() {
+                login(this.formLabelAlign).then((response) => {
+                    // 登录成功之后的操作
+                })
+            },
+        }
+    }
+</script>
+```
+
 ## 完成
