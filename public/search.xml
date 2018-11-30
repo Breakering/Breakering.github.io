@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[vue部署之后nginx相关配置]]></title>
+    <url>%2F2018%2F11%2F30%2Fvue%E9%83%A8%E7%BD%B2%E4%B9%8B%E5%90%8Enginx%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[12345678910111213141516171819server &#123; listen 80; server_name www.breakering.com; # 你的域名 location / &#123; index index.html; root /home/jacob/study/licaishi_pc/dist; # vue buil之后dist文件夹位置 try_files $uri $uri/ /index.html; # 可以让浏览器在子页面也能刷新，主要是vue-router的路径不是真实路径导致 &#125; # 用/api来访问其他网站的接口，实现跨域 location /api &#123; # 下面三个是跨域的一些设置 add_header Access-Control-Allow-Origin *; add_header Access-Control-Allow-Methods 'GET, POST, PUT, PATCH, DELETE, OPTIONS'; # Access-Control-Allow-Headers需要注意，会屏蔽一些headers，部署时需要注意 add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,X-CSRFTOKEN'; proxy_pass https://xxxx.xxxxxxxxxx.com/api; # 其他网站的接口 &#125;&#125;]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[vue中axios全局设置csrftoken以及Authorization]]></title>
     <url>%2F2018%2F11%2F29%2Fvue%E4%B8%ADaxios%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AEcsrftoken%E4%BB%A5%E5%8F%8AAuthorization%2F</url>
     <content type="text"><![CDATA[说在前面我们都知道，用django做后端服务时，对于post请求提交表单时总是需要csrftoken的验证，那么我们如何在vue中使用axios发起请求时全局在headers里面设置csrftoken呢？以及全局设置Authorization? 设置其实非常简单，在main.js中设置下即可，示例代码如下: 123456789101112131415161718192021222324252627282930313233343536import Vue from 'vue'import App from './App.vue'import router from './router'import store from './store'import './plugins/axios.js'import './plugins/cookies.js'Vue.config.productionTip = false;new Vue(&#123; router, store, render: h =&gt; h(App), //进入页面时 created() &#123; // 拦截axios请求 this.axios.interceptors.request.use( config =&gt; &#123; // 设置登录验证token const token = this.$store.state.userInfo.Authorization; if (token) &#123; config.headers.Authorization = token; &#125; // 设置csrftoken const csrftoken = this.$cookies.get('csrftoken'); if (csrftoken) &#123; config.headers['X-CSRFTOKEN'] = csrftoken; &#125; return config &#125;, error =&gt; &#123; return Promise.reject(error) &#125;); &#125;&#125;).$mount('#app'); 另外贴下我的store.js: 12345678910111213141516171819202122232425import Vue from 'vue'import Vuex from 'vuex'Vue.use(Vuex);export default new Vuex.Store(&#123; state: &#123; userInfo: &#123; username: "", // 用户名 Authorization: "", // 用户登录的验证Token &#125;, &#125;, mutations: &#123; // 更新用户信息 updateUserInfo(state, userInfo) &#123; state.userInfo.Authorization = userInfo.Authorization; state.userInfo.username = userInfo.username; &#125; &#125;, actions: &#123; updateUserInfo(&#123;commit&#125;, userInfo) &#123; commit('updateUserInfo', userInfo) &#125; &#125;,&#125;) 完成]]></content>
