@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>vue部署之后nginx相关配置 | Jacob个人技术博客</title>
+  <title>vue跨域配置 | Jacob个人技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="vue部署之后nginx相关配置">
+  <meta name="description" content="vue跨域配置">
 <meta name="keywords" content="vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue部署之后nginx相关配置">
-<meta property="og:url" content="http://blog.breakering.com/2018/11/30/vue部署之后nginx相关配置/index.html">
+<meta property="og:title" content="vue跨域配置">
+<meta property="og:url" content="http://blog.breakering.com/2018/11/30/vue跨域配置/index.html">
 <meta property="og:site_name" content="Jacob个人技术博客">
-<meta property="og:description" content="vue部署之后nginx相关配置">
+<meta property="og:description" content="vue跨域配置">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-30T07:21:05.983Z">
+<meta property="og:updated_time" content="2018-12-03T11:13:11.028Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue部署之后nginx相关配置">
-<meta name="twitter:description" content="vue部署之后nginx相关配置">
+<meta name="twitter:title" content="vue跨域配置">
+<meta name="twitter:description" content="vue跨域配置">
   
     <link rel="alternative" href="/atom.xml" title="Jacob个人技术博客" type="application/atom+xml">
   
@@ -266,10 +266,10 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-vue部署之后nginx相关配置" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-vue跨域配置" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/11/30/vue部署之后nginx相关配置/" class="article-date">
+      <a href="/2018/11/30/vue跨域配置/" class="article-date">
       <time datetime="2018-11-30T07:16:11.000Z" itemprop="datePublished">2018-11-30</time>
 </a>
     </div>
@@ -283,7 +283,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      vue部署之后nginx相关配置
+      vue跨域配置
     </h1>
   
 
@@ -308,7 +308,17 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">   <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">   <span class="attribute">server_name</span> www.breakering.com;  <span class="comment"># 你的域名</span></span><br><span class="line">   <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">index</span> index.html;</span><br><span class="line">        <span class="attribute">root</span> /home/jacob/study/licaishi_pc/dist;  <span class="comment"># vue buil之后dist文件夹位置</span></span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;  <span class="comment"># 可以让浏览器在子页面也能刷新，主要是vue-router的路径不是真实路径导致</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment"># 用/api来访问其他网站的接口，实现跨域</span></span><br><span class="line">   <span class="attribute">location</span> /api &#123;</span><br><span class="line">        <span class="comment"># 下面三个是跨域的一些设置</span></span><br><span class="line">        <span class="attribute">add_header</span> Access-Control-Allow-Origin *;</span><br><span class="line">        <span class="attribute">add_header</span> Access-Control-Allow-Methods <span class="string">'GET, POST, PUT, PATCH, DELETE, OPTIONS'</span>;</span><br><span class="line">        <span class="comment"># Access-Control-Allow-Headers需要注意，会屏蔽一些headers，部署时需要注意</span></span><br><span class="line">        <span class="attribute">add_header</span> Access-Control-Allow-Headers <span class="string">'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,X-CSRFTOKEN'</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span> https://xxxx.xxxxxxxxxx.com/api;  <span class="comment"># 其他网站的接口</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p><strong>如果你使用的是vue-cli3的话，则可按如下配置</strong></p>
+<ul>
+<li>在你的项目根目录创建<code>vue.config.js</code>文件</li>
+<li>在文件中写入如下配置信息:</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置proxy</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: &#123;</span><br><span class="line">                target: <span class="string">'https://xxxx.xxxxxxxxxx.com'</span>,</span><br><span class="line">                ws: <span class="literal">true</span>,</span><br><span class="line">                changeOrigin: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>  参考<a href="https://cli.vuejs.org/zh/config/#devserver-proxy" target="_blank" rel="noopener">devserver-proxy</a></p>
+</blockquote>
+<h2 id="线上环境"><a href="#线上环境" class="headerlink" title="线上环境"></a>线上环境</h2><p><strong>线上通过nginx代理,实现跨域</strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">   <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">   <span class="attribute">server_name</span> www.breakering.com;  <span class="comment"># 你的域名</span></span><br><span class="line">   <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">index</span> index.html;</span><br><span class="line">        <span class="attribute">root</span> /home/jacob/study/licaishi_pc/dist;  <span class="comment"># vue buil之后dist文件夹位置</span></span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;  <span class="comment"># 可以让浏览器在子页面也能刷新，主要是vue-router的路径不是真实路径导致</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment"># 用/api来访问其他网站的接口，实现跨域</span></span><br><span class="line">   <span class="attribute">location</span> /api &#123;</span><br><span class="line">        <span class="comment"># 下面三个是跨域的一些设置</span></span><br><span class="line">        <span class="attribute">add_header</span> Access-Control-Allow-Origin *;</span><br><span class="line">        <span class="attribute">add_header</span> Access-Control-Allow-Methods <span class="string">'GET, POST, PUT, PATCH, DELETE, OPTIONS'</span>;</span><br><span class="line">        <span class="comment"># Access-Control-Allow-Headers需要注意，会屏蔽一些headers，部署时需要注意</span></span><br><span class="line">        <span class="attribute">add_header</span> Access-Control-Allow-Headers <span class="string">'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,X-CSRFTOKEN'</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span> https://xxxx.xxxxxxxxxx.com/api;  <span class="comment"># 其他网站的接口</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
       
@@ -364,13 +374,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/11/30/vue部署之后nginx相关配置/">vue部署之后nginx相关配置</a></p>
+        <p><span>本文标题:</span><a href="/2018/11/30/vue跨域配置/">vue跨域配置</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Jacob 的个人博客">Jacob</a></p>
         <p><span>发布时间:</span>2018年11月30日 - 15时16分</p>
-        <p><span>最后更新:</span>2018年11月30日 - 15时21分</p>
+        <p><span>最后更新:</span>2018年12月03日 - 19时13分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/11/30/vue部署之后nginx相关配置/" title="vue部署之后nginx相关配置">http://blog.breakering.com/2018/11/30/vue部署之后nginx相关配置/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.breakering.com/2018/11/30/vue部署之后nginx相关配置/　　作者: Jacob" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/11/30/vue跨域配置/" title="vue跨域配置">http://blog.breakering.com/2018/11/30/vue跨域配置/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.breakering.com/2018/11/30/vue跨域配置/　　作者: Jacob" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -396,7 +406,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#开发环境"><span class="toc-number">1.</span> <span class="toc-text">开发环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线上环境"><span class="toc-number">2.</span> <span class="toc-text">线上环境</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -472,7 +482,7 @@
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/11/30/vue部署之后nginx相关配置/">vue部署之后nginx相关配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/29/vue中axios全局设置csrftoken以及Authorization/">vue中axios全局设置csrftoken以及Authorization</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/vue使用axios/">vue使用axios</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/jupyter美化/">jupyter美化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/ubuntu-中-Typora-安装/">ubuntu 中 Typora 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/GitLab升级/">GitLab升级</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/GitLab备份与恢复/">GitLab备份与恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/使用pipenv管理python项目/">使用pipenv管理python项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/Django常见错误解决办法/">Django常见错误解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/PostgreSQL允许被远程访问/">PostgreSQL允许被远程访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-celery实现定时任务/">django-celery实现定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/Linux在局域网如何通过hostname获取其ip/">Linux在局域网如何通过hostname获取其ip</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/在Django中实现queryset级别缓存/">在Django中实现queryset级别缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/Hexo同步/">Hexo同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/Hexo初识/">Hexo初识</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/内网穿透frp/">内网穿透frp</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/11/30/vue跨域配置/">vue跨域配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/29/vue中axios全局设置csrftoken以及Authorization/">vue中axios全局设置csrftoken以及Authorization</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/vue使用axios/">vue使用axios</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/jupyter美化/">jupyter美化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/ubuntu-中-Typora-安装/">ubuntu 中 Typora 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/GitLab升级/">GitLab升级</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/GitLab备份与恢复/">GitLab备份与恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/使用pipenv管理python项目/">使用pipenv管理python项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/Django常见错误解决办法/">Django常见错误解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/PostgreSQL允许被远程访问/">PostgreSQL允许被远程访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-celery实现定时任务/">django-celery实现定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/Linux在局域网如何通过hostname获取其ip/">Linux在局域网如何通过hostname获取其ip</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/在Django中实现queryset级别缓存/">在Django中实现queryset级别缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/Hexo同步/">Hexo同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/Hexo初识/">Hexo初识</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/内网穿透frp/">内网穿透frp</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");

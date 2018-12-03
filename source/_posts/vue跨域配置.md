@@ -1,12 +1,40 @@
 ---
-title: vue部署之后nginx相关配置
+title: vue跨域配置
 original: true
 date: 2018-11-30 15:16:11
-description: vue部署之后nginx相关配置
+description: vue跨域配置
 tags: vue
 categories: vue
 photos:
 ---
+
+## 开发环境
+
+**如果你使用的是vue-cli3的话，则可按如下配置**
+
+-   在你的项目根目录创建`vue.config.js`文件
+-   在文件中写入如下配置信息:
+
+```js
+// 配置proxy
+module.exports = {
+    devServer: {
+        proxy: {
+            '/api': {
+                target: 'https://xxxx.xxxxxxxxxx.com',
+                ws: true,
+                changeOrigin: true
+            },
+        }
+    }
+};
+```
+
+>   参考[devserver-proxy](https://cli.vuejs.org/zh/config/#devserver-proxy)
+
+## 线上环境
+
+**线上通过nginx代理,实现跨域**
 
 ```nginx
 server {
@@ -29,4 +57,6 @@ server {
    }
 }
 ```
+
+
 
