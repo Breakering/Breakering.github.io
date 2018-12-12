@@ -21,3 +21,4 @@ LINE 1: SELECT cache_key, value, expires FROM "default_cache_table" WHERE ca...
 ```text
 python manage.py createcachetable
 ```
+

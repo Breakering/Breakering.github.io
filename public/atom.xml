@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.breakering.com/"/>
-  <updated>2018-12-12T06:50:10.936Z</updated>
+  <updated>2018-12-12T10:45:00.169Z</updated>
   <id>http://blog.breakering.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>django修改request对象</title>
+    <link href="http://blog.breakering.com/2018/12/12/django-modify-request/"/>
+    <id>http://blog.breakering.com/2018/12/12/django-modify-request/</id>
+    <published>2018-12-12T10:43:17.000Z</published>
+    <updated>2018-12-12T10:45:00.169Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>Remove immutability:</strong></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> request.GET._mutable:</span><br><span class="line">   request.GET._mutable = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># now you can spoil it</span></span><br><span class="line">request.GET[<span class="string">'pwd'</span>] = <span class="string">'iloveyou'</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      django修改request对象
+    
+    </summary>
+    
+      <category term="Django" scheme="http://blog.breakering.com/categories/Django/"/>
+    
+    
+      <category term="Django" scheme="http://blog.breakering.com/tags/Django/"/>
+    
+  </entry>
   
   <entry>
     <title>vue跨域配置</title>
@@ -201,7 +223,7 @@
     <link href="http://blog.breakering.com/2018/11/19/django-errors/"/>
     <id>http://blog.breakering.com/2018/11/19/django-errors/</id>
     <published>2018-11-19T06:10:51.000Z</published>
-    <updated>2018-12-12T06:46:59.977Z</updated>
+    <updated>2018-12-12T10:42:07.247Z</updated>
     
     <content type="html"><![CDATA[<ol><li>ProgrammingError: relation “default_cache_table” does not exist</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">django.db.utils.ProgrammingError: relation &quot;default_cache_table&quot; does not exist</span><br><span class="line">LINE 1: SELECT cache_key, value, expires FROM &quot;default_cache_table&quot; WHERE ca...</span><br></pre></td></tr></table></figure><p>类似上述这种错误，可以用下面这句命令解决:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py createcachetable</span><br></pre></td></tr></table></figure>]]></content>
     
