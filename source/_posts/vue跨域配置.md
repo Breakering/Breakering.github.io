@@ -1,5 +1,6 @@
 ---
 title: vue跨域配置
+subtitle: vue-cross-domain
 original: true
 date: 2018-11-30 15:16:11
 description: vue跨域配置

@@ -1,5 +1,6 @@
 ---
 title: Linux在局域网如何通过hostname获取其ip
+subtitle: linux-hostname_to_ip
 date: 2018-11-16 17:02:52
 description: Linux在局域网如何通过hostname获取其ip
 tags: Linux

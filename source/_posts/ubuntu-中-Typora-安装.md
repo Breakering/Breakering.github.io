@@ -1,5 +1,6 @@
 ---
 title: ubuntu 中 Typora 安装
+subtitle: ubuntu-typora
 original: false
 date: 2018-11-26 09:53:19
 description: ubuntu 中 Typora 安装

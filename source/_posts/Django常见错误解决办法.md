@@ -1,5 +1,6 @@
 ---
 title: Django常见错误解决办法
+subtitle: django-errors
 date: 2018-11-19 14:10:51
 description: Django常见错误解决办法
 tags: Django

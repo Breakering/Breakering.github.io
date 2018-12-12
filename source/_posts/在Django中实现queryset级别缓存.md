@@ -1,5 +1,6 @@
 ---
 title: 在Django中实现queryset级别缓存
+subtitle: django-queryset-cache
 date: 2018-11-16 11:50:19
 description: django中实现queryset级别缓存
 tags: Django

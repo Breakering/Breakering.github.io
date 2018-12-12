@@ -1,5 +1,6 @@
 ---
 title: jupyter美化
+subtitle: jupyter-beauty
 original: true
 date: 2018-11-26 10:17:10
 description: jupyter美化

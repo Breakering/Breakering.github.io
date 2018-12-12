@@ -1,5 +1,6 @@
 ---
 title: PostgreSQL允许被远程访问
+subtitle: postgresql-remote
 date: 2018-11-19 14:00:41
 description: PostgreSQL允许被远程访问
 tags: PostgreSQL

@@ -1,5 +1,6 @@
 ---
 title: django-celery实现定时任务
+subtitle: django-celery
 date: 2018-11-16 17:11:53
 description: 使用django-celery实现定时任务，可以不用重启celery beat进程
 tags: Django

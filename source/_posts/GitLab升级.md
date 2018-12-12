@@ -1,5 +1,6 @@
 ---
 title: GitLab升级
+subtitle: gitlab-update
 original: true
 date: 2018-11-19 16:18:49
 description: GitLab升级
