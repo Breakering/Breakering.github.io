@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[django修改request对象]]></title>
+    <url>%2F2018%2F12%2F12%2Fdjango-modify-request%2F</url>
+    <content type="text"><![CDATA[Remove immutability: 12345if not request.GET._mutable: request.GET._mutable = True# now you can spoil itrequest.GET['pwd'] = 'iloveyou']]></content>
+      <categories>
+        <category>Django</category>
+      </categories>
+      <tags>
+        <tag>Django</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[vue跨域配置]]></title>
     <url>%2F2018%2F11%2F30%2Fvue-cross-domain%2F</url>
     <content type="text"><![CDATA[开发环境如果你使用的是vue-cli3的话，则可按如下配置 在你的项目根目录创建vue.config.js文件 在文件中写入如下配置信息: 123456789101112// 配置proxymodule.exports = &#123; devServer: &#123; proxy: &#123; '/api': &#123; target: 'https://xxxx.xxxxxxxxxx.com', ws: true, changeOrigin: true &#125;, &#125; &#125;&#125;; 参考devserver-proxy 线上环境线上通过nginx代理,实现跨域 12345678910111213141516171819server &#123; listen 80; server_name www.breakering.com; # 你的域名 location / &#123; index index.html; root /home/jacob/study/licaishi_pc/dist; # vue buil之后dist文件夹位置 try_files $uri $uri/ /index.html; # 可以让浏览器在子页面也能刷新，主要是vue-router的路径不是真实路径导致 &#125; # 用/api来访问其他网站的接口，实现跨域 location /api &#123; # 下面三个是跨域的一些设置 add_header Access-Control-Allow-Origin *; add_header Access-Control-Allow-Methods 'GET, POST, PUT, PATCH, DELETE, OPTIONS'; # Access-Control-Allow-Headers需要注意，会屏蔽一些headers，部署时需要注意 add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,X-CSRFTOKEN'; proxy_pass https://xxxx.xxxxxxxxxx.com/api; # 其他网站的接口 &#125;&#125;]]></content>

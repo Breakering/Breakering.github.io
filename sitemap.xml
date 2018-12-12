@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.breakering.com/2018/12/12/django-modify-request/</loc>
+    
+    <lastmod>2018-12-12T10:45:00.169Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.breakering.com/2018/11/19/django-errors/</loc>
+    
+    <lastmod>2018-12-12T10:42:07.247Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.breakering.com/2018/09/28/frp/</loc>
     
     <lastmod>2018-12-12T06:50:10.972Z</lastmod>
@@ -82,13 +96,6 @@
     <loc>http://blog.breakering.com/2018/11/19/gitlab-backup/</loc>
     
     <lastmod>2018-12-12T06:47:00.029Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/2018/11/19/django-errors/</loc>
-    
-    <lastmod>2018-12-12T06:46:59.977Z</lastmod>
     
   </url>
   
