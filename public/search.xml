@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title><![CDATA[django修改request对象]]></title>
-    <url>%2F2018%2F12%2F12%2Fdjango-modify-request%2F</url>
+    <url>%2F2018%2F12%2F12%2Fmodify-request%2F</url>
     <content type="text"><![CDATA[Remove immutability: 12345if not request.GET._mutable: request.GET._mutable = True# now you can spoil itrequest.GET['pwd'] = 'iloveyou']]></content>
       <categories>
         <category>Django</category>

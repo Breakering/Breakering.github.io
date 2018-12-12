@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.breakering.com/"/>
-  <updated>2018-12-12T10:45:00.169Z</updated>
+  <updated>2018-12-12T11:00:59.232Z</updated>
   <id>http://blog.breakering.com/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>django修改request对象</title>
-    <link href="http://blog.breakering.com/2018/12/12/django-modify-request/"/>
-    <id>http://blog.breakering.com/2018/12/12/django-modify-request/</id>
+    <link href="http://blog.breakering.com/2018/12/12/modify-request/"/>
+    <id>http://blog.breakering.com/2018/12/12/modify-request/</id>
     <published>2018-12-12T10:43:17.000Z</published>
-    <updated>2018-12-12T10:45:00.169Z</updated>
+    <updated>2018-12-12T11:00:59.232Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Remove immutability:</strong></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> request.GET._mutable:</span><br><span class="line">   request.GET._mutable = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># now you can spoil it</span></span><br><span class="line">request.GET[<span class="string">'pwd'</span>] = <span class="string">'iloveyou'</span></span><br></pre></td></tr></table></figure>]]></content>
     
