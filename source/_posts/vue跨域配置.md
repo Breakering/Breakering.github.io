@@ -44,7 +44,7 @@ server {
    location / {
         index index.html;
         root /home/jacob/study/licaishi_pc/dist;  # vue buil之后dist文件夹位置
-        try_files $uri $uri/ /index.html;  # 可以让浏览器在子页面也能刷新，主要是vue-router的路径不是真实路径导致
+        try_files $uri $uri/ /index.html =404;  # 可以让浏览器在子页面也能刷新，主要是vue-router的路径不是真实路径导致
    }
 
    # 用/api来访问其他网站的接口，实现跨域

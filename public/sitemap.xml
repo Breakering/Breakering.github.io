@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.breakering.com/2018/11/30/vue-cross-domain/</loc>
+    
+    <lastmod>2018-12-13T03:30:40.410Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.breakering.com/2018/12/12/modify-request/</loc>
     
     <lastmod>2018-12-12T11:00:59.232Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://blog.breakering.com/2018/09/28/frp/</loc>
     
     <lastmod>2018-12-12T06:50:10.972Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/2018/11/30/vue-cross-domain/</loc>
-    
-    <lastmod>2018-12-12T06:50:10.936Z</lastmod>
     
   </url>
   
