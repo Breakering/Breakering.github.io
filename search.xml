@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Linux安装supervisor]]></title>
+    <url>%2F2019%2F01%2F27%2Finstall-supervisor%2F</url>
+    <content type="text"><![CDATA[介绍Supervisor 是一个用 Python 写的进程管理工具，可以很方便的对进程进行启动、停止、重启等操作。 安装For Ubuntu安装命令 1$ sudo apt-get install supervisor 安装成功后，会在/etc/supervisor目录下，生成supervisord.conf配置文件。 进程配置会读取/etc/supervisor/conf.d目录下的*.conf配置文件，我们在此目录下创建一个product_celeryd.conf进程配置文件： 12345678910[program:product_celeryd]directory = /webapps/product/command = /webapps/product/env/bin/celery -A licaishi worker -Q productuser = rootstdout_logfile = /webapps/product/logs/product_celeryd.logstderr_logfile = /webapps/product/logs/product_celeryd.logautostart = trueautorestart = truestartsecs = 10stopwaitsecs = 600 接着就可以启动 Supervisord 了： 1$ supervisord supervisorctl 常用命令： 命令 说明 supervisorctl stop program_name 停止某个进程 supervisorctl start program_name 启动某个进程 supervisorctl restart program_name 重启某个进程 supervisorctl stop all 停止全部进程 supervisorctl reload 载入最新的配置文件，停止原有进程并按新的配置启动、管理所有进程 supervisorctl update 根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启 For Centos 安装 12# yum install python-setuptools# easy_install supervisor 创建配置文件(supervisord.conf） 使用root身份创建一个全局配置文件 12# echo_supervisord_conf &gt; /etc/supervisord.conf# supervisord -c /etc/supervisord.conf 修改配置文件(supervisord.conf） 如果修改了 /etc/supervisord.conf ,需要执行# supervisorctl reload来重新加载配置文件，否则不会生效 12# supervisord 是启动supervisor # supervisorctl 是控制supervisord 打开supervisord.conf 的 [include] 引入 files的配置. 12[include]files = /etc/supervisor/conf.d/*.conf 12[include]files = /etc/supervisor/conf.d/*.conf 需要创建/etc/supervisor/conf.d/ 运行命令 1# supervisorctl reload]]></content>
+      <categories>
+        <category>supervisor</category>
+      </categories>
+      <tags>
+        <tag>supervisor</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[django修改request对象]]></title>
     <url>%2F2018%2F12%2F12%2Fmodify-request%2F</url>
     <content type="text"><![CDATA[Remove immutability: 12345if not request.GET._mutable: request.GET._mutable = True# now you can spoil itrequest.GET['pwd'] = 'iloveyou']]></content>
