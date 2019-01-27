@@ -5,9 +5,9 @@
 ## Tags Cloud Page: `hexo new page tags`
 menu:
   博客首页: /
-  我的pinboard: /pinboard/index.html
+  # 我的pinboard: /pinboard/index.html
   # 标签: /tags/index.html
-  相册: /photo/index.html
+  # 相册: /photo/index.html
   归档: /archives/index.html
   关于: /about/index.html
 # 静心阅读: /tags
