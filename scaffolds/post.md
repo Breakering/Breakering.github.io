@@ -7,4 +7,5 @@ tags:
 categories: 
 photos: 
 original: true
+comments: true
 ---
