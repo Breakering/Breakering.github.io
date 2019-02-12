@@ -86,3 +86,11 @@ var searchFunc = function(path, search_id, content_id) {
         }
     })
 }
+
+var inputArea = document.querySelector("#local-search-input");
+var getSearchFile = function(){
+    var path = "/search.xml";
+    searchFunc(path, 'local-search-input', 'local-search-result');
+}
+
+inputArea.onfocus = function(){ getSearchFile() }
