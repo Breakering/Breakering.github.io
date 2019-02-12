@@ -36,7 +36,7 @@
 }
 
 /*搜索结果区*/
-#local-search-result {
+.local-search-result {
   font-size: 0.9em;
   text-align: left;
   word-break: break-all;

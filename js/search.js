@@ -10,6 +10,7 @@ var searchFunc = function(path, search_id, content_id) {
         url: path,
         dataType: "xml",
         success: function( xmlResponse ) {
+            $("#"+content_id).addClass("local-search-result");
             // get the contents from search data
             var datas = $( "entry", xmlResponse ).map(function() {
                 return {
@@ -25,7 +26,7 @@ var searchFunc = function(path, search_id, content_id) {
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length <= 0) {
-                    $("#" + content_id).slideUp(350);
+                    $(".local-search-result").slideUp(350);
                     return;
                 }
                 // perform local searching
@@ -82,7 +83,7 @@ var searchFunc = function(path, search_id, content_id) {
                         }
                     }
                 });
-                $("#"+content_id).slideDown(320);
+                $(".local-search-result").slideDown(320);
                 $resultContent.innerHTML = str;
             })
         }
