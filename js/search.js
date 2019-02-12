@@ -25,7 +25,7 @@ var searchFunc = function(path, search_id, content_id) {
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
                 $resultContent.innerHTML = "";
                 if (this.value.trim().length <= 0) {
-                    $("#" + content_id).slideDown(320);
+                    $("#" + content_id).slideUp(350);
                     return;
                 }
                 // perform local searching
@@ -82,7 +82,7 @@ var searchFunc = function(path, search_id, content_id) {
                         }
                     }
                 });
-                $("#"+content_id).slideUp(350);
+                $("#"+content_id).slideDown(320);
                 $resultContent.innerHTML = str;
             })
         }
