@@ -72,6 +72,13 @@
         <p class="header-subtitle">Python is cool!</p>
         
         
+            <form id="search-form"> <!-- 搜索框相关 -->
+                <input type="text" id="local-search-input" name="q" results="0" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off"/>
+                <i class="fa fa-times" onclick="resetSearch()"></i> <!-- 清空/重置搜索框 -->
+            </form>
+            <div id="local-search-result"></div> <!-- 搜索结果区 -->
+            <p class='no-result'>No results found </p> <!-- 无匹配时显示，注意请在 CSS 中设置默认隐藏 -->
+        
         
             <div id="switch-btn" class="switch-btn">
                 <div class="icon">
@@ -96,7 +103,7 @@
                         </div>
                         
                     </div>
-                    
+
                 </div>
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
@@ -154,7 +161,7 @@
                         </ul>
                     </nav>
                 </section>
-                
+
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
@@ -162,7 +169,7 @@
                     </div>
                 </section>
                 
-                
+
                 
                 <section class="switch-part switch-part3">
                     <div id="js-friends">
@@ -196,7 +203,7 @@
                 
             </div>
         </div>
-    </header>                
+    </header>
 </div>
     </div>
     <div class="mid-col">
@@ -611,6 +618,10 @@ ga('send', 'pageview');
     });
 </script>
 
+
+    <!-- 本地搜索 -->
+    <script src="/js/search.js"></script>
+    <link href="/css/search.css" rel="stylesheet" />
 
   </div>
 </body>
