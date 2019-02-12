@@ -38,6 +38,9 @@
   <!-- 加载特效 -->
     <script src="/js/pace.js"></script>
     <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+    <!-- 本地搜索 -->
+    <script src="/js/search.js"></script>
+    <link href="/css/search.css" rel="stylesheet" />
   <script>
       var yiliaConfig = {
           rootUrl: '/',
@@ -72,6 +75,13 @@
         <p class="header-subtitle">Python is cool!</p>
         
         
+            <form id="search-form"> <!-- 搜索框相关 -->
+                <input type="text" id="local-search-input" name="q" results="0" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off"/>
+                <i class="fa fa-times" onclick="resetSearch()"></i> <!-- 清空/重置搜索框 -->
+            </form>
+            <div id="local-search-result"></div> <!-- 搜索结果区 -->
+            <p class='no-result'>No results found </p> <!-- 无匹配时显示，注意请在 CSS 中设置默认隐藏 -->
+        
         
             <div id="switch-btn" class="switch-btn">
                 <div class="icon">
@@ -96,7 +106,7 @@
                         </div>
                         
                     </div>
-                    
+
                 </div>
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
@@ -154,7 +164,7 @@
                         </ul>
                     </nav>
                 </section>
-                
+
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
@@ -162,7 +172,7 @@
                     </div>
                 </section>
                 
-                
+
                 
                 <section class="switch-part switch-part3">
                     <div id="js-friends">
@@ -196,7 +206,7 @@
                 
             </div>
         </div>
-    </header>                
+    </header>
 </div>
     </div>
     <div class="mid-col">
@@ -1021,6 +1031,23 @@ ga('send', 'pageview');
     });
 </script>
 
+
+    <script type="text/javascript">
+      window.onload = function(){
+        document.getElementById("search").onclick = function(){
+            console.log("search")
+            search();
+        }
+      }
+      function search(){
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+        (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+        e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','A1Pz-LKMXbrzcFg2FWi6','2.0.0');
+      }
+    </script>
 
   </div>
 </body>

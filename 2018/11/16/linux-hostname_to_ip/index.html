@@ -38,6 +38,9 @@
   <!-- 加载特效 -->
     <script src="/js/pace.js"></script>
     <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+    <!-- 本地搜索 -->
+    <script src="/js/search.js"></script>
+    <link href="/css/search.css" rel="stylesheet" />
   <script>
       var yiliaConfig = {
           rootUrl: '/',
@@ -72,6 +75,13 @@
         <p class="header-subtitle">Python is cool!</p>
         
         
+            <form id="search-form"> <!-- 搜索框相关 -->
+                <input type="text" id="local-search-input" name="q" results="0" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off"/>
+                <i class="fa fa-times" onclick="resetSearch()"></i> <!-- 清空/重置搜索框 -->
+            </form>
+            <div id="local-search-result"></div> <!-- 搜索结果区 -->
+            <p class='no-result'>No results found </p> <!-- 无匹配时显示，注意请在 CSS 中设置默认隐藏 -->
+        
         
             <div id="switch-btn" class="switch-btn">
                 <div class="icon">
@@ -96,7 +106,7 @@
                         </div>
                         
                     </div>
-                    
+
                 </div>
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
@@ -154,7 +164,7 @@
                         </ul>
                     </nav>
                 </section>
-                
+
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
@@ -162,7 +172,7 @@
                     </div>
                 </section>
                 
-                
+
                 
                 <section class="switch-part switch-part3">
                     <div id="js-friends">
@@ -196,7 +206,7 @@
                 
             </div>
         </div>
-    </header>                
+    </header>
 </div>
     </div>
     <div class="mid-col">
@@ -495,7 +505,7 @@
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/01/27/install-supervisor/">Linux安装supervisor</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/modify-request/">django修改request对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/30/vue-cross-domain/">vue跨域配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/29/vue-axios-set/">vue中axios全局设置csrftoken以及Authorization</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/vue-use-axios/">vue使用axios</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/jupyter-beauty/">jupyter美化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/ubuntu-typora/">ubuntu 中 Typora 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-update/">GitLab升级</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-backup/">GitLab备份与恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/pipenv/">使用pipenv管理python项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/django-errors/">Django常见错误解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/postgresql-remote/">PostgreSQL允许被远程访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-celery/">django-celery实现定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/linux-hostname_to_ip/">Linux在局域网如何通过hostname获取其ip</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-queryset-cache/">在Django中实现queryset级别缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/hexo-sync/">Hexo同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/hexo-start/">Hexo初识</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/frp/">内网穿透frp</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/01/27/install-supervisor/">Linux安装supervisor</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/modify-request/">django修改request对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/30/vue-cross-domain/">vue跨域配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/29/vue-axios-set/">vue中axios全局设置csrftoken以及Authorization</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/vue-use-axios/">vue使用axios</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/jupyter-beauty/">jupyter美化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/ubuntu-typora/">ubuntu 中 Typora 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-update/">GitLab升级</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-backup/">GitLab备份与恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/pipenv/">使用pipenv管理python项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/django-errors/">Django常见错误解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/postgresql-remote/">PostgreSQL允许被远程访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-celery/">django-celery实现定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/linux-hostname_to_ip/">Linux在局域网如何通过hostname获取其ip</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-queryset-cache/">在Django中实现queryset级别缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/hexo-sync/">Hexo同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/frp/">内网穿透frp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/hexo-start/">Hexo初识</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
@@ -606,6 +616,23 @@ ga('send', 'pageview');
     });
 </script>
 
+
+    <script type="text/javascript">
+      window.onload = function(){
+        document.getElementById("search").onclick = function(){
+            console.log("search")
+            search();
+        }
+      }
+      function search(){
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+        (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+        e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','A1Pz-LKMXbrzcFg2FWi6','2.0.0');
+      }
+    </script>
 
   </div>
 </body>
