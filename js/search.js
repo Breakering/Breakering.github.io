@@ -10,7 +10,6 @@ var searchFunc = function(path, search_id, content_id) {
         url: path,
         dataType: "xml",
         success: function( xmlResponse ) {
-            $("#"+content_id).addClass("local-search-result");
             // get the contents from search data
             var datas = $( "entry", xmlResponse ).map(function() {
                 return {
@@ -83,6 +82,7 @@ var searchFunc = function(path, search_id, content_id) {
                         }
                     }
                 });
+                $("#"+content_id).addClass("local-search-result");
                 $(".local-search-result").slideDown(320);
                 $resultContent.innerHTML = str;
             })
