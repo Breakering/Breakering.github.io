@@ -37,12 +37,23 @@
 
 /*搜索结果区*/
 #local-search-result {
-  position: fixed;
   font-size: 0.9em;
   text-align: left;
   word-break: break-all;
-  background: #02030e;
   z-index: 100;
+  position: fixed;
+  width: 256px;
+  left: 0;
+  top: 250px;
+  color: #999;
+  bottom: .7em;
+  padding: 10px;
+  margin-left: 0;
+  margin: 20px 10px 10px 10px;
+  background: #3f3f3f;
+  border: 1px solid #080808;
+  overflow: auto;
+  -webkit-border-radius: 2.8%;
 }
 
 #local-search-result ul.search-result-list li:hover {
