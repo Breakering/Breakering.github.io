@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.breakering.com/2018/11/19/pipenv/</loc>
+    
+    <lastmod>2019-02-21T10:15:22.150Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.breakering.com/2019/01/27/install-supervisor/</loc>
     
     <lastmod>2019-01-27T07:29:58.846Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>http://blog.breakering.com/2018/09/28/frp/</loc>
     
     <lastmod>2018-12-12T06:50:10.972Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/2018/11/19/pipenv/</loc>
-    
-    <lastmod>2018-12-12T06:50:10.896Z</lastmod>
     
   </url>
   

@@ -14,16 +14,92 @@ original: false
 pip install pipenv
 ```
 
-## 进入你的project目录，并install
+## 项目初始化
 
 ```text
 cd your_project
-pipenv install
+PIPENV_VENV_IN_PROJECT=true pipenv --python=3.6
 ```
 
-`pipenv install`将在项目目录中创建两个新文件Pipfile和Pipfile.lock，如果项目不存在，则为项目创建一个新的虚拟环境。 如果你添加--two或--three标志到上面的最后一个命令，它分别使用Python 2或3来初始化你的项目。 否则将使用默认版本的Python。
+将在项目目录中创建新文件`Pipfile`和一个虚拟环境`.venv`, `--python=3.6`则是使用`python3.6`来创建虚拟环境,`PIPENV_VENV_IN_PROJECT=true`则是让虚拟环境创建在该项目目录下，方便管理。
 
-ps:有可能会出现如下错误，应该是pyenv造成的
+ 如果你添加--two或--three标志到上面的最后一个命令，它分别使用Python 2或3来初始化你的项目。 否则将使用默认版本的Python。
+
+## 激活开发环境
+
+`pipenv shell`
+
+## 使用说明(`pipenv -h`)
+```bash
+Usage: pipenv [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --where             Output project home information.
+  --venv              Output virtualenv information.
+  --py                Output Python interpreter information.
+  --envs              Output Environment Variable options.
+  --rm                Remove the virtualenv.
+  --bare              Minimal output.
+  --completion        Output completion (to be eval'd).
+  --man               Display manpage.
+  --support           Output diagnostic information for use in GitHub issues.
+  --site-packages     Enable site-packages for the virtualenv.
+  --python TEXT       Specify which version of Python virtualenv should use.
+  --three / --two     Use Python 3/2 when creating virtualenv.
+  --clear             Clears caches (pipenv, pip, and pip-tools).
+  -v, --verbose       Verbose mode.
+  --pypi-mirror TEXT  Specify a PyPI mirror.
+  --version           Show the version and exit.
+  -h, --help          Show this message and exit.
+
+
+Usage Examples:
+   Create a new project using Python 3.7, specifically:
+   $ pipenv --python 3.7
+
+   Remove project virtualenv (inferred from current directory):
+   $ pipenv --rm
+
+   Install all dependencies for a project (including dev):
+   $ pipenv install --dev
+
+   Create a lockfile containing pre-releases:
+   $ pipenv lock --pre
+
+   Show a graph of your installed dependencies:
+   $ pipenv graph
+
+   Check your installed dependencies for security vulnerabilities:
+   $ pipenv check
+
+   Install a local setup.py into your virtual environment/Pipfile:
+   $ pipenv install -e .
+
+   Use a lower-level pip command:
+   $ pipenv run pip freeze
+
+Commands:
+  check      Checks for security vulnerabilities and against PEP 508 markers
+             provided in Pipfile.
+  clean      Uninstalls all packages not specified in Pipfile.lock.
+  graph      Displays currently-installed dependency graph information.
+  install    Installs provided packages and adds them to Pipfile, or (if no
+             packages are given), installs all packages from Pipfile.
+  lock       Generates Pipfile.lock.
+  open       View a given module in your editor.
+  run        Spawns a command installed into the virtualenv.
+  shell      Spawns a shell within the virtualenv.
+  sync       Installs all packages specified in Pipfile.lock.
+  uninstall  Un-installs a provided package and removes it from Pipfile.
+  update     Runs lock, then sync.
+```
+
+## 总结
+
+`pipenv`使得开发和管理项目包的过程变成的简单，让我们尽早使用起来吧。
+
+
+## 一些错误
 
 ```text
 ...
@@ -37,37 +113,4 @@ TypeError: 'NoneType' object is not iterable
 ```text
 pyenv global 3.7.1
 ```
-
 > `3.7.1换成你用pyenv安装过的环境`
-
-## 管理Python依赖关系
-
-Pipfile包含关于项目的依赖包的信息，并取代通常在Python项目中使用的requirements.txt文件。 如果你在具有requirements.txt文件的项目中启动了Pipenv，则在把它从项目中删除之前，应该使用Pipenv安装该文件中列出的所有依赖包。
-
-要为你的项目安装Python包，请使用install关键字。 例如，
-
-`pipenv install requests`将安装当前版本的`requests`包。 可以使用uninstall关键字以类似的方式删除包;
-
-`pipenv uninstall requests`将安装当前版本的`requests`包。 可以通过更新Pipfile.lock来冻结软件包名称及其版本以及其自己的依赖关系的列表。 这是使用lock关键字完成的;
-
-`pipenv lock`如果另一个用户克隆存储库，可以添加Pipfiles到你的Git存储库，
-
-这样他们只需要在他们的系统中安装Pipenv，然后键入`pipenv install`Pipenv会自动找到Pipfiles，创建一个新的虚拟环境，并安装必要的软件包。
-
-## 管理你的开发环境
-
-通常有一些Python包只在你的开发环境中需要，而不是在你的生产环境中，例如单元测试包。 Pipenv将使用--dev标志保持两个环境分开。 例如，
-
-`pipenv install --dev ipython`将安装ipython，但也将其关联为只在你的开发环境中需要的软件包。 这很有用，因为现在，如果你要在你的生产环境中安装你的项目，
-
-`pipenv install`默认情况下不会安装ipython包。 但是，如果另一个开发人员将你的项目克隆到自己的开发环境中，他们可以使用--dev标志，
-
-`pipenv install –dev`安装所有依赖项，包括开发包。
-
-## 激活开发环境
-
-`pipenv shell`
-
-## 总结
-
-`pipenv`使得开发和管理项目包的过程变成的简单，让我们尽早使用起来吧。
