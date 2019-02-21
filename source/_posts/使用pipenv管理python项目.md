@@ -27,7 +27,9 @@ PIPENV_VENV_IN_PROJECT=true pipenv --python=3.6
 
 ## 激活开发环境
 
-`pipenv shell`
+```bash
+pipenv shell
+```
 
 ## 使用说明(`pipenv -h`)
 ```bash
