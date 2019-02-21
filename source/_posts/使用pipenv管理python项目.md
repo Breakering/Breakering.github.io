@@ -10,13 +10,13 @@ original: false
 ---
 ## 安装pipenv
 
-```text
+```bash
 pip install pipenv
 ```
 
 ## 项目初始化
 
-```text
+```bash
 cd your_project
 PIPENV_VENV_IN_PROJECT=true pipenv --python=3.6
 ```
@@ -29,6 +29,12 @@ PIPENV_VENV_IN_PROJECT=true pipenv --python=3.6
 
 ```bash
 pipenv shell
+```
+
+## 退出开发环境
+
+```bash
+exit
 ```
 
 ## 使用说明(`pipenv -h`)
