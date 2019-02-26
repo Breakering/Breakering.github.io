@@ -132,14 +132,15 @@ tagcloud: true
 # Blogroll, Link exchange | 友情链接
 # friends: false
 friends:
+  花教授: http://www.profhua.com/
   强哥: https://me.csdn.net/julystroy
+  吴松: http://blog.busyboy.cn
   博客园: http://www.cnblogs.com/breakering/
   金角大王: https://www.cnblogs.com/alex3714/
   银角大王: https://www.cnblogs.com/wupeiqi/
   导师刘又源: https://www.cnblogs.com/zingp/
   赵凡: https://www.cnblogs.com/zhaof/
   luuman: https://luuman.github.io/
-  小松松的个人博客: http://blog.busyboy.cn
 
 # 打赏
 # 请在需要打赏的文章的md文件头部，设置属性reward: true
