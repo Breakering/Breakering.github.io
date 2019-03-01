@@ -334,13 +334,15 @@
           
         <p>Markdown的基础语法这里就不介绍了，比较简单，下面介绍的都是些能玩出花样的小技巧。</p>
 <blockquote>
-<p>  ps：如下技巧大多是利用 Markdown 兼容部分 HTML 标签的特性来完成，不一定在所有网站和软件里都完全支持，主要以 GitHub 支持为准。</p>
+<p>ps：如下技巧大多是利用 Markdown 兼容部分 HTML 标签的特性来完成，不一定在所有网站和软件里都完全支持，主要以 GitHub 支持为准。</p>
 </blockquote>
-<h2 id="目录自动生成"><a href="#目录自动生成" class="headerlink" title="目录自动生成"></a>目录自动生成</h2><p>示例代码：</p>
+<h2 id="目录自动生成">目录自动生成</h2>
+<p>示例代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[TOC]</span><br></pre></td></tr></table></figure>
 <p>示例效果:</p>
 <p>[TOC]</p>
-<h2 id="在表格单元格里换行"><a href="#在表格单元格里换行" class="headerlink" title="在表格单元格里换行"></a>在表格单元格里换行</h2><p>借助于 HTML 里的 <code>&lt;br /&gt;</code> 实现。</p>
+<h2 id="在表格单元格里换行">在表格单元格里换行</h2>
+<p>借助于 HTML 里的 <code>&lt;br /&gt;</code> 实现。</p>
 <p>示例代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">| Header1 | Header2                          |</span><br><span class="line">|---------|----------------------------------|</span><br><span class="line">| item 1  | 1. one&lt;br/&gt;2. two&lt;br/&gt;3. three |</span><br></pre></td></tr></table></figure>
 <p>示例效果：</p>
@@ -358,7 +360,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="控制图片大小和位置"><a href="#控制图片大小和位置" class="headerlink" title="控制图片大小和位置"></a>控制图片大小和位置</h2><p>标准的 Markdown 图片标记 <code>![]()</code> 无法指定图片的大小和位置，只能依赖默认的图片大小，默认居左。</p>
+<h2 id="控制图片大小和位置">控制图片大小和位置</h2>
+<p>标准的 Markdown 图片标记 <code>![]()</code> 无法指定图片的大小和位置，只能依赖默认的图片大小，默认居左。</p>
 <p>而有时候源图太大想要缩小一点，或者想将图片居中，就仍需要借助 HTML 的标签来实现了。图片居中可以使用 <code>&lt;div&gt;</code> 标签加 <code>align</code> 属性来控制，图片宽高则用 <code>width</code> 和 <code>height</code> 来控制。</p>
 <p>示例代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">**图片默认显示效果：**</span><br><span class="line"></span><br><span class="line">![](http://blog.breakering.com/images/avatar/Breakering.jpg)</span><br><span class="line"></span><br><span class="line">**加以控制后的效果：**</span><br><span class="line"></span><br><span class="line">&lt;div align=&quot;left&quot;&gt;&lt;img width=&quot;65&quot; height=&quot;75&quot; src=&quot;http://blog.breakering.com/images/avatar/Breakering.jpg&quot;/&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
@@ -367,48 +370,60 @@
 <p><img src="http://blog.breakering.com/images/avatar/Breakering.jpg" alt=""></p>
 <p><strong>加以控制后的效果：</strong></p>
 <div align="left"><img width="90" height="75" src="http://blog.breakering.com/images/avatar/Breakering.jpg"></div>
-
-<h2 id="使用-Emoji"><a href="#使用-Emoji" class="headerlink" title="使用 Emoji"></a>使用 Emoji</h2><p>这个是 GitHub 对标准 Markdown 标记之外的扩展了，用得好能让文字生动一些。</p>
+<h2 id="使用-emoji">使用 Emoji</h2>
+<p>这个是 GitHub 对标准 Markdown 标记之外的扩展了，用得好能让文字生动一些。</p>
 <p>示例代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我和我的小伙伴们都笑了。:smile:</span><br></pre></td></tr></table></figure>
 <p>示例效果：</p>
-<p>我和我的小伙伴们都笑了。:smile:</p>
+<p>我和我的小伙伴们都笑了。😄</p>
 <p>更多可用 Emoji 代码参见 <a href="https://www.webpagefx.com/tools/emoji-cheat-sheet/" target="_blank" rel="noopener">https://www.webpagefx.com/tools/emoji-cheat-sheet/</a>。</p>
-<h2 id="行首缩进"><a href="#行首缩进" class="headerlink" title="行首缩进"></a>行首缩进</h2><p>直接在 Markdown 里用空格和 Tab 键缩进在渲染后会被忽略掉，需要借助 HTML 转义字符在行首添加空格来实现，<code>&amp;ensp;</code> 代表半角空格，<code>&amp;emsp;</code> 代表全角空格。</p>
+<h2 id="行首缩进">行首缩进</h2>
+<p>直接在 Markdown 里用空格和 Tab 键缩进在渲染后会被忽略掉，需要借助 HTML 转义字符在行首添加空格来实现，<code>&amp;ensp;</code> 代表半角空格，<code>&amp;emsp;</code> 代表全角空格。</p>
 <p>示例代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;emsp;&amp;emsp;春天来了，又到了万物复苏的季节。</span><br></pre></td></tr></table></figure>
 <p>示例效果：</p>
-<p>&emsp;&emsp;春天来了，又到了万物复苏的季节。</p>
-<h2 id="展示数学公式"><a href="#展示数学公式" class="headerlink" title="展示数学公式"></a>展示数学公式</h2><p>如果是在 GitHub 项目的 README 等地方，目前我能找到的方案只能是贴图了，以下是一种比较方便的贴图方案：</p>
+<p>  春天来了，又到了万物复苏的季节。</p>
+<h2 id="展示数学公式">展示数学公式</h2>
+<p>如果是在 GitHub 项目的 README 等地方，目前我能找到的方案只能是贴图了，以下是一种比较方便的贴图方案：</p>
 <ol>
-<li><p>在 <a href="https://www.codecogs.com/latex/eqneditor.php" target="_blank" rel="noopener">https://www.codecogs.com/latex/eqneditor.php</a> 网页上部的输入框里输入 LaTeX 公式，比如 <code>$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$</code>；</p>
+<li>
+<p>在 <a href="https://www.codecogs.com/latex/eqneditor.php" target="_blank" rel="noopener">https://www.codecogs.com/latex/eqneditor.php</a> 网页上部的输入框里输入 LaTeX 公式，比如 <code>$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$</code>；</p>
 </li>
-<li><p>在网页下部拷贝 URL Encoded 的内容，比如以上公式生成的是 <code>https://latex.codecogs.com/png.latex?%24%24x%3D%5Cfrac%7B-b%5Cpm%5Csqrt%7Bb%5E2-4ac%7D%7D%7B2a%7D%24%24</code>；</p>
+<li>
+<p>在网页下部拷贝 URL Encoded 的内容，比如以上公式生成的是 <code>https://latex.codecogs.com/png.latex?%24%24x%3D%5Cfrac%7B-b%5Cpm%5Csqrt%7Bb%5E2-4ac%7D%7D%7B2a%7D%24%24</code>；</p>
 </li>
-<li><p>在文档需要的地方使用以上 URL 贴图，比如</p>
+<li>
+<p>在文档需要的地方使用以上 URL 贴图，比如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://latex.codecogs.com/png.latex?%24%24x%3D%5Cfrac%7B-b%5Cpm%5Csqrt%7Bb%5E2-4ac%7D%7D%7B2a%7D%24%24)</span><br></pre></td></tr></table></figure>
 <p>示例效果：</p>
 <p><img src="https://latex.codecogs.com/png.latex?%24%24x%3D%5Cfrac%7B-b%5Cpm%5Csqrt%7Bb%5E2-4ac%7D%7D%7B2a%7D%24%24" alt="img"></p>
 </li>
 </ol>
-<h2 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h2><p>在 GitHub 和 GitLab 等网站，除了可以使用有序列表和无序列表外，还可以使用任务列表，很适合要列出一些清单的场景。</p>
+<h2 id="任务列表">任务列表</h2>
+<p>在 GitHub 和 GitLab 等网站，除了可以使用有序列表和无序列表外，还可以使用任务列表，很适合要列出一些清单的场景。</p>
 <p>示例代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">**购物清单**</span><br><span class="line"></span><br><span class="line">- [ ] 一次性水杯</span><br><span class="line">- [x] 西瓜</span><br><span class="line">- [ ] 豆浆</span><br><span class="line">- [x] 可口可乐</span><br><span class="line">- [ ] 小茗同学</span><br></pre></td></tr></table></figure>
 <p>示例效果：</p>
 <p><strong>购物清单</strong></p>
 <ul>
-<li><p>[ ] 一次性水杯</p>
+<li>
+<p>[ ] 一次性水杯</p>
 </li>
-<li><p>[x] 西瓜</p>
+<li>
+<p>[x] 西瓜</p>
 </li>
-<li><p>[ ] 豆浆</p>
+<li>
+<p>[ ] 豆浆</p>
 </li>
-<li><p>[x] 可口可乐</p>
+<li>
+<p>[x] 可口可乐</p>
 </li>
-<li><p>[ ] 小茗同学</p>
+<li>
+<p>[ ] 小茗同学</p>
 </li>
 </ul>
-<h2 id="待续…"><a href="#待续…" class="headerlink" title="待续….."></a>待续…..</h2>
+<h2 id="待续">待续…</h2>
+
       
       
         <div class="page-reward">
@@ -479,7 +494,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录自动生成"><span class="toc-number">1.</span> <span class="toc-text">目录自动生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在表格单元格里换行"><span class="toc-number">2.</span> <span class="toc-text">在表格单元格里换行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控制图片大小和位置"><span class="toc-number">3.</span> <span class="toc-text">控制图片大小和位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Emoji"><span class="toc-number">4.</span> <span class="toc-text">使用 Emoji</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行首缩进"><span class="toc-number">5.</span> <span class="toc-text">行首缩进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#展示数学公式"><span class="toc-number">6.</span> <span class="toc-text">展示数学公式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任务列表"><span class="toc-number">7.</span> <span class="toc-text">任务列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#待续…"><span class="toc-number">8.</span> <span class="toc-text">待续…..</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录自动生成"><span class="toc-number">1.</span> <span class="toc-text">目录自动生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在表格单元格里换行"><span class="toc-number">2.</span> <span class="toc-text">在表格单元格里换行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控制图片大小和位置"><span class="toc-number">3.</span> <span class="toc-text">控制图片大小和位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-emoji"><span class="toc-number">4.</span> <span class="toc-text">使用 Emoji</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行首缩进"><span class="toc-number">5.</span> <span class="toc-text">行首缩进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#展示数学公式"><span class="toc-number">6.</span> <span class="toc-text">展示数学公式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任务列表"><span class="toc-number">7.</span> <span class="toc-text">任务列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#待续"><span class="toc-number">8.</span> <span class="toc-text">待续…</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -554,7 +569,7 @@
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/markdown-tips/">Markdown奇淫技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/ubuntu-boot-script/">ubuntu18.04设置开机启动脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/27/install-supervisor/">Linux安装supervisor</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/modify-request/">django修改request对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/30/vue-cross-domain/">vue跨域配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/29/vue-axios-set/">vue中axios全局设置csrftoken以及Authorization</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/vue-use-axios/">vue使用axios</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/jupyter-beauty/">jupyter美化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/ubuntu-typora/">ubuntu 中 Typora 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-update/">GitLab升级</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-backup/">GitLab备份与恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/pipenv/">使用pipenv管理python项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/django-errors/">Django常见错误解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/postgresql-remote/">PostgreSQL允许被远程访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-celery/">django-celery实现定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/linux-hostname_to_ip/">Linux在局域网如何通过hostname获取其ip</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-queryset-cache/">在Django中实现queryset级别缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/hexo-sync/">Hexo同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/frp/">内网穿透frp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/hexo-start/">Hexo初识</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/markdown-tips/">Markdown奇淫技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/ubuntu-boot-script/">ubuntu18.04设置开机启动脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/27/install-supervisor/">Linux安装supervisor</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/modify-request/">django修改request对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/30/vue-cross-domain/">vue跨域配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/29/vue-axios-set/">vue中axios全局设置csrftoken以及Authorization</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/vue-use-axios/">vue使用axios</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/jupyter-beauty/">jupyter美化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/ubuntu-typora/">ubuntu 中 Typora 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-update/">GitLab升级</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-backup/">GitLab备份与恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/pipenv/">使用pipenv管理python项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/django-errors/">Django常见错误解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/postgresql-remote/">PostgreSQL允许被远程访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-celery/">django-celery实现定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/linux-hostname_to_ip/">Linux在局域网如何通过hostname获取其ip</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-queryset-cache/">在Django中实现queryset级别缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/hexo-sync/">Hexo同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/hexo-start/">Hexo初识</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/frp/">内网穿透frp</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
