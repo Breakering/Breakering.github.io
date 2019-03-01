@@ -331,19 +331,24 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="更新-GitLab"><a href="#更新-GitLab" class="headerlink" title="更新 GitLab"></a>更新 GitLab</h1><blockquote>
-<p>我们用的是 GitLab Omnibus 7.10.5 版本，查到<a href="http://docs.gitlab.com/omnibus/update/README.html" target="_blank" rel="noopener">Doc</a>（6.x.x 等低版本区别对待，详见文档）。<br>按照文档：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># To update to a newer GitLab version, all you have to do is:</span><br><span class="line"># Debian/Ubuntu</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install gitlab-ce</span><br><span class="line"># Centos/RHEL</span><br><span class="line">sudo yum install gitlab-ce</span><br></pre></td></tr></table></figure></p>
+        <h1>更新 GitLab</h1>
+<blockquote>
+<p>我们用的是 GitLab Omnibus 7.10.5 版本，查到<a href="http://docs.gitlab.com/omnibus/update/README.html" target="_blank" rel="noopener">Doc</a>（6.x.x 等低版本区别对待，详见文档）。<br>
+按照文档：</p>
 </blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># To update to a newer GitLab version, all you have to do is:</span><br><span class="line"># Debian/Ubuntu</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install gitlab-ce</span><br><span class="line"># Centos/RHEL</span><br><span class="line">sudo yum install gitlab-ce</span><br></pre></td></tr></table></figure>
 <p>看起来太简单了！事实上，也就是这么简单。</p>
-<p>但是，问题来了，<code>sudo apt-get install gilab-ce</code> 默认所用的源是 <em>packages-gitlab-com.s3.amazonaws.com</em>，然后你懂的，被墙了！</p>
+<p>但是，问题来了，<code>sudo apt-get install gilab-ce</code> 默认所用的源是 <em><a href="http://packages-gitlab-com.s3.amazonaws.com" target="_blank" rel="noopener">packages-gitlab-com.s3.amazonaws.com</a></em>，然后你懂的，被墙了！</p>
 <p>解决办法有两个：</p>
 <ol>
 <li>给 apt 加代理；</li>
 <li>换源。</li>
 </ol>
-<h2 id="1-给-apt-加代理"><a href="#1-给-apt-加代理" class="headerlink" title="1). 给 apt 加代理"></a>1). 给 apt 加代理</h2><p>考虑到换源可能产生其他的依赖问题，先尝试 加代理。结果是加了代理还是不行！原因可能是代理连接速度问题，总是超时。</p>
+<h2 id="1-给-apt-加代理">1). 给 apt 加代理</h2>
+<p>考虑到换源可能产生其他的依赖问题，先尝试 加代理。结果是加了代理还是不行！原因可能是代理连接速度问题，总是超时。</p>
 <p>这里参考的是 <a href="http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/" target="_blank" rel="noopener">打造Linux 终端翻墙环境</a>  使用 <code>shadowsocks + privoxy</code> 。</p>
-<h2 id="2-换源解决！"><a href="#2-换源解决！" class="headerlink" title="2). 换源解决！"></a>2). 换源解决！</h2><p>Docs 里已经有声明其实：</p>
+<h2 id="2-换源解决">2). 换源解决！</h2>
+<p>Docs 里已经有声明其实：</p>
 <p><img src="/images/2018-11-19/3.png" alt=""></p>
 <ul>
 <li>首先，添加信任 GitLab 里的 GPG 公钥：</li>
@@ -364,18 +369,23 @@
 </blockquote>
 </blockquote>
 </blockquote>
-<h1 id="对于更新版本跨度较大的情况"><a href="#对于更新版本跨度较大的情况" class="headerlink" title="对于更新版本跨度较大的情况"></a>对于更新版本跨度较大的情况</h1><h2 id="1-关闭部分gitlab服务"><a href="#1-关闭部分gitlab服务" class="headerlink" title="1). 关闭部分gitlab服务"></a>1). 关闭部分gitlab服务</h2><p>升级之前，我们首先要关闭gitlab部分服务，如下：</p>
+<h1>对于更新版本跨度较大的情况</h1>
+<h2 id="1-关闭部分gitlab服务">1). 关闭部分gitlab服务</h2>
+<p>升级之前，我们首先要关闭gitlab部分服务，如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl stop unicorn</span><br><span class="line">gitlab-ctl stop sidekiq</span><br><span class="line">gitlab-ctl stop nginx</span><br></pre></td></tr></table></figure>
-<h2 id="2-选择要升级的版本"><a href="#2-选择要升级的版本" class="headerlink" title="2). 选择要升级的版本"></a>2). 选择要升级的版本</h2><p><a href="https://packages.gitlab.com/gitlab/gitlab-ce?filter=debs" target="_blank" rel="noopener">版本查看地址</a></p>
+<h2 id="2-选择要升级的版本">2). 选择要升级的版本</h2>
+<p><a href="https://packages.gitlab.com/gitlab/gitlab-ce?filter=debs" target="_blank" rel="noopener">版本查看地址</a></p>
 <p>然后执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install gitlab-ce=11.0.3-ce.0</span><br></pre></td></tr></table></figure>
 <p>其中<code>11.0.3</code>替换为你要升级的版本号。</p>
 <p><strong>ps:版本跨度过大，请务必一个小版本一个小版本的更新</strong></p>
 <p>另外，附上一次成功的更新过程对应的版本号：</p>
 <p><code>9.2.5--&gt;9.5.6--&gt;10.0.6--&gt;10.8.5--&gt;11.0.3</code></p>
-<h2 id="3-重启gitlab"><a href="#3-重启gitlab" class="headerlink" title="3). 重启gitlab"></a>3). 重启gitlab</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl reconfigure</span><br><span class="line">gitlab-ctl restart</span><br></pre></td></tr></table></figure>
-<h1 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h1><ol>
-<li><a href="http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/" target="_blank" rel="noopener">http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/</a></li>
+<h2 id="3-重启gitlab">3). 重启gitlab</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl reconfigure</span><br><span class="line">gitlab-ctl restart</span><br></pre></td></tr></table></figure>
+<h1>References:</h1>
+<ol>
+<li><a href="http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/" target="_blank" rel="noopener">http://www.a-ho.com/2016/01/16/打造Linux-终端翻墙环境/</a></li>
 <li><a href="https://about.gitlab.com/downloads/#ubuntu1404" target="_blank" rel="noopener">https://about.gitlab.com/downloads/#ubuntu1404</a></li>
 <li><a href="https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/" target="_blank" rel="noopener">https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/</a></li>
 <li><a href="http://docs.gitlab.com/omnibus/update/README.html" target="_blank" rel="noopener">http://docs.gitlab.com/omnibus/update/README.html</a></li>
@@ -480,7 +490,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#更新-GitLab"><span class="toc-number">1.</span> <span class="toc-text">更新 GitLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-给-apt-加代理"><span class="toc-number">1.1.</span> <span class="toc-text">1). 给 apt 加代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-换源解决！"><span class="toc-number">1.2.</span> <span class="toc-text">2). 换源解决！</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对于更新版本跨度较大的情况"><span class="toc-number">2.</span> <span class="toc-text">对于更新版本跨度较大的情况</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-关闭部分gitlab服务"><span class="toc-number">2.1.</span> <span class="toc-text">1). 关闭部分gitlab服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-选择要升级的版本"><span class="toc-number">2.2.</span> <span class="toc-text">2). 选择要升级的版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-重启gitlab"><span class="toc-number">2.3.</span> <span class="toc-text">3). 重启gitlab</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">3.</span> <span class="toc-text">References:</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">更新 GitLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-给-apt-加代理"><span class="toc-number">1.1.</span> <span class="toc-text">1). 给 apt 加代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-换源解决"><span class="toc-number">1.2.</span> <span class="toc-text">2). 换源解决！</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">对于更新版本跨度较大的情况</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-关闭部分gitlab服务"><span class="toc-number">2.1.</span> <span class="toc-text">1). 关闭部分gitlab服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-选择要升级的版本"><span class="toc-number">2.2.</span> <span class="toc-text">2). 选择要升级的版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-重启gitlab"><span class="toc-number">2.3.</span> <span class="toc-text">3). 重启gitlab</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">References:</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -557,7 +567,7 @@
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/markdown-tips/">Markdown奇淫技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/ubuntu-boot-script/">ubuntu18.04设置开机启动脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/27/install-supervisor/">Linux安装supervisor</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/modify-request/">django修改request对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/30/vue-cross-domain/">vue跨域配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/29/vue-axios-set/">vue中axios全局设置csrftoken以及Authorization</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/vue-use-axios/">vue使用axios</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/jupyter-beauty/">jupyter美化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/ubuntu-typora/">ubuntu 中 Typora 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-update/">GitLab升级</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-backup/">GitLab备份与恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/pipenv/">使用pipenv管理python项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/django-errors/">Django常见错误解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/postgresql-remote/">PostgreSQL允许被远程访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-celery/">django-celery实现定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/linux-hostname_to_ip/">Linux在局域网如何通过hostname获取其ip</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-queryset-cache/">在Django中实现queryset级别缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/hexo-sync/">Hexo同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/frp/">内网穿透frp</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/hexo-start/">Hexo初识</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/01/markdown-tips/">Markdown奇淫技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/ubuntu-boot-script/">ubuntu18.04设置开机启动脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/27/install-supervisor/">Linux安装supervisor</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/modify-request/">django修改request对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/30/vue-cross-domain/">vue跨域配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/29/vue-axios-set/">vue中axios全局设置csrftoken以及Authorization</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/vue-use-axios/">vue使用axios</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/jupyter-beauty/">jupyter美化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/ubuntu-typora/">ubuntu 中 Typora 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-update/">GitLab升级</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/gitlab-backup/">GitLab备份与恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/pipenv/">使用pipenv管理python项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/django-errors/">Django常见错误解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/postgresql-remote/">PostgreSQL允许被远程访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-celery/">django-celery实现定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/linux-hostname_to_ip/">Linux在局域网如何通过hostname获取其ip</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/16/django-queryset-cache/">在Django中实现queryset级别缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/hexo-sync/">Hexo同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/hexo-start/">Hexo初识</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/28/frp/">内网穿透frp</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
