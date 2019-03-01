@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Markdown奇淫技巧]]></title>
+    <url>%2F2019%2F03%2F01%2Fmarkdown-tips%2F</url>
+    <content type="text"><![CDATA[Markdown的基础语法这里就不介绍了，比较简单，下面介绍的都是些能玩出花样的小技巧。 ps：如下技巧大多是利用 Markdown 兼容部分 HTML 标签的特性来完成，不一定在所有网站和软件里都完全支持，主要以 GitHub 支持为准。 目录自动生成示例代码： 1[TOC] 示例效果: [TOC] 在表格单元格里换行借助于 HTML 里的 &lt;br /&gt; 实现。 示例代码： 123| Header1 | Header2 ||---------|----------------------------------|| item 1 | 1. one&lt;br/&gt;2. two&lt;br/&gt;3. three | 示例效果： Header1 Header2 item 1 1. one2. two3. three 控制图片大小和位置标准的 Markdown 图片标记 ![]() 无法指定图片的大小和位置，只能依赖默认的图片大小，默认居左。 而有时候源图太大想要缩小一点，或者想将图片居中，就仍需要借助 HTML 的标签来实现了。图片居中可以使用 &lt;div&gt; 标签加 align 属性来控制，图片宽高则用 width 和 height 来控制。 示例代码： 1234567**图片默认显示效果：**![](http://blog.breakering.com/images/avatar/Breakering.jpg)**加以控制后的效果：**&lt;div align=&quot;left&quot;&gt;&lt;img width=&quot;65&quot; height=&quot;75&quot; src=&quot;http://blog.breakering.com/images/avatar/Breakering.jpg&quot;/&gt;&lt;/div&gt; 示例效果： 图片默认显示效果： 加以控制后的效果： 使用 Emoji这个是 GitHub 对标准 Markdown 标记之外的扩展了，用得好能让文字生动一些。 示例代码： 1我和我的小伙伴们都笑了。:smile: 示例效果： 我和我的小伙伴们都笑了。:smile: 更多可用 Emoji 代码参见 https://www.webpagefx.com/tools/emoji-cheat-sheet/。 行首缩进直接在 Markdown 里用空格和 Tab 键缩进在渲染后会被忽略掉，需要借助 HTML 转义字符在行首添加空格来实现，&amp;ensp; 代表半角空格，&amp;emsp; 代表全角空格。 示例代码： 1&amp;emsp;&amp;emsp;春天来了，又到了万物复苏的季节。 示例效果： &emsp;&emsp;春天来了，又到了万物复苏的季节。 展示数学公式如果是在 GitHub 项目的 README 等地方，目前我能找到的方案只能是贴图了，以下是一种比较方便的贴图方案： 在 https://www.codecogs.com/latex/eqneditor.php 网页上部的输入框里输入 LaTeX 公式，比如 $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$； 在网页下部拷贝 URL Encoded 的内容，比如以上公式生成的是 https://latex.codecogs.com/png.latex?%24%24x%3D%5Cfrac%7B-b%5Cpm%5Csqrt%7Bb%5E2-4ac%7D%7D%7B2a%7D%24%24； 在文档需要的地方使用以上 URL 贴图，比如 1![](https://latex.codecogs.com/png.latex?%24%24x%3D%5Cfrac%7B-b%5Cpm%5Csqrt%7Bb%5E2-4ac%7D%7D%7B2a%7D%24%24) 示例效果： 任务列表在 GitHub 和 GitLab 等网站，除了可以使用有序列表和无序列表外，还可以使用任务列表，很适合要列出一些清单的场景。 示例代码： 1234567**购物清单**- [ ] 一次性水杯- [x] 西瓜- [ ] 豆浆- [x] 可口可乐- [ ] 小茗同学 示例效果： 购物清单 [ ] 一次性水杯 [x] 西瓜 [ ] 豆浆 [x] 可口可乐 [ ] 小茗同学 待续…..]]></content>
+      <categories>
+        <category>Markdown</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ubuntu18.04设置开机启动脚本]]></title>
     <url>%2F2019%2F02%2F28%2Fubuntu-boot-script%2F</url>
     <content type="text"><![CDATA[一、建立rc-local.service文件1sudo vi /etc/systemd/system/rc-local.service 二、将下列内容复制进rc-local.service文件1234567891011121314[Unit]Description=/etc/rc.local CompatibilityConditionPathExists=/etc/rc.local [Service]Type=forkingExecStart=/etc/rc.local startTimeoutSec=0StandardOutput=ttyRemainAfterExit=yesSysVStartPriority=99 [Install]WantedBy=multi-user.target 三、创建文件rc.local1sudo vi /etc/rc.local 四、将下列内容复制进rc.local文件1234567891011121314#!/bin/sh -e## rc.local## This script is executed at the end of each multiuser runlevel.# Make sure that the script will &quot;exit 0&quot; on success or any other# value on error.## In order to enable or disable this script just change the execution# bits.## By default this script does nothing.echo &quot;看到这行字，说明添加自启动脚本成功。&quot; &gt; /usr/local/test.logexit 0 五、给rc.local加上权限,启用服务12sudo chmod +x /etc/rc.localsudo systemctl enable rc-local 六、启动服务并检查状态12sudo systemctl start rc-local.servicesudo systemctl status rc-local.service 七、重启并检查test.log文件1cat /usr/local/test.log PS:ubuntu16.04直接编辑/etc/rc.local文件即可]]></content>
