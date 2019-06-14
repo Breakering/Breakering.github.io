@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://blog.breakering.com/2019/03/01/markdown-tips/</loc>
-    <lastmod>2019-03-01T09:27:33.591Z</lastmod>
+    <loc>http://blog.breakering.com/2018/09/28/frp/</loc>
+    <lastmod>2019-06-14T07:05:01.780Z</lastmod>
   </url>  <url>
     <loc>http://blog.breakering.com/2019/02/28/ubuntu-boot-script/</loc>
     <lastmod>2019-02-28T05:22:46.172Z</lastmod>
@@ -21,9 +21,6 @@
   </url>  <url>
     <loc>http://blog.breakering.com/2018/11/19/django-errors/</loc>
     <lastmod>2018-12-12T10:42:07.247Z</lastmod>
-  </url>  <url>
-    <loc>http://blog.breakering.com/2018/09/28/frp/</loc>
-    <lastmod>2018-12-12T06:50:10.972Z</lastmod>
   </url>  <url>
     <loc>http://blog.breakering.com/2018/11/16/django-queryset-cache/</loc>
     <lastmod>2018-12-12T06:50:10.860Z</lastmod>
