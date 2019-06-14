@@ -111,20 +111,10 @@ privilege_token = cc23*********************d072734
 
 [gitlab]
 type = http
-local_port = 8080
+local_port = 80
 subdomain = gitlab  # 这样只要访问http://gitlab.xxxx.com:8080即可访问到该客户端的gitlab服务
 use_gzip = true
 
-[gitlab_static_file]
-type = tcp
-remote_port = 8082
-plugin = static_file
-# 要对外暴露的文件目录
-plugin_local_path = /opt/gitlab/embedded/service/gitlab-rails/public/assets/
-# 访问 url 中会被去除的前缀，保留的内容即为要访问的文件路径
-plugin_strip_prefix = assets
-#plugin_http_user = abc
-#plugin_http_passwd = abc
 
 [gitlab_ssh]
 type = tcp 
@@ -148,33 +138,30 @@ remote_port = 8081
 # 六、GitLab通过frp代理
 通过上述配置，确实可以通过 http://gitlab.xxxx.com:8080 访问gitlab服务,但是你会发现缺少静态文件,因为gitlab的静态文件是nginx代理的，走的tcp协议,需要一种解决方案。
 
-## 方案一、使用frp的static_file的插件
-虽然可以成功，通过 http://127.0.0.1:8082 即可访问gitlab的静态文件，并且也可以通过nginx反向代理到gitlab.xxxx.com这个域名上，但是速度会很慢很慢,nginx配置如下:
+**经测试可以在gitlab服务器配置如下nginx解决**
 
-```
-server {                                                                                                                                                                                                    
-    listen  80; 
-    server_name  gitlab.xxxx.com;
-    location / { 
-        proxy_pass http://gitlab.xxxx.com:8080;
-    }   
+```nginx
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+    }
+
     location /assets {
-        proxy_pass http://127.0.0.1:8082;
-    }   
+        alias /opt/gitlab/embedded/service/gitlab-rails/public/assets;
+    }
 }
 ```
 
-## 方案二、将gitlab静态文件移至服务器上，用nginx代理
-gitlab静态文件在如下位置`/opt/gitlab/embedded/service/gitlab-rails/public/assets/`放至服务器，并配置nginx如下:
-```
-server {                                                                                                                                                                                                    
+**公网服务器nginx如下设置**
+
+```nginx
+server {
     listen  80;
     server_name  gitlab.xxxx.com;
     location / {
-        proxy_pass http://gitlab.xxxx.com:8080;
-    }
-    location /assets {
-        alias /webapps/gitlab/public/assets;
+        proxy_pass http://gitlab.geekfinancer.com:8080;
     }
 }
 ```
