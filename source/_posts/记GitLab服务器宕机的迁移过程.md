@@ -56,7 +56,7 @@ tar -zcvf repositories.tar.gz repositories/
 scp repositories.tar.gz 新服务器用户@新服务器的IP地址:~/
 ```
 
-#### 3.2 将数据解压，并修改权限，移动到新服务器的**/var/opt/gitlab/git-data/**下面。
+#### 3.2 将数据解压，并修改权限，移动到新服务器的/var/opt/gitlab/git-data/下面。
 
 ```
 # 解压包
@@ -101,7 +101,7 @@ sudo cp -rp data /var/opt/gitlab/postgresql/
 
 ```
 cd /etc/gitlab
-tar gitlab.rb 新服务器的用户@新服务器的IP地址:~/
+scp gitlab.rb 新服务器的用户@新服务器的IP地址:~/
 ```
 新服务器上:
 ```
