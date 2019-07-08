@@ -1,0 +1,72 @@
+baseURL = "http://blog.breakering.com"
+languageCode = "zh-CN"
+title = "Jacob个人技术博客"
+keywords = "Jacob,Blog,Python"
+## 保持分类的原始名字（false会做转小写处理）
+preserveTaxonomyNames = true
+## 是否禁止URL Path转小写
+disablePathToLower = true
+## GA分析统计
+googleAnalytics = "UA-130599767-1"
+theme = "maupassant"
+
+[author]
+  name = "Jacob"
+
+[params]
+  busuanzi = true
+
+[taxonomies]
+  tag = "tags"
+  series = "series"
+  category = "categories"
+
+[menu]
+  [[menu.main]]
+    identifier = "archives"
+    name = "归档"
+    url = "/archives/"
+    weight = 3
+
+[[params.links]]
+  title = "花教授"
+  name = "花教授"
+  url = "http://www.profhua.com/"
+[[params.links]]
+  title = "强哥"
+  name = "强哥"
+  url = "https://me.csdn.net/julystroy"
+[[params.links]]
+  title = "吴松"
+  name = "吴松"
+  url = "http://blog.busyboy.cn"
+[[params.links]]
+  title = "博客园"
+  name = "博客园"
+  url = "http://www.cnblogs.com/breakering/"
+[[params.links]]
+  title = "金角大王"
+  name = "金角大王"
+  url = "https://www.cnblogs.com/alex3714/"
+[[params.links]]
+  title = "银角大王"
+  name = "银角大王"
+  url = "https://www.cnblogs.com/wupeiqi/"
+[[params.links]]
+  title = "导师刘又源"
+  name = "导师刘又源"
+  url = "https://www.cnblogs.com/zingp/"
+[[params.links]]
+  title = "赵凡"
+  name = "赵凡"
+  url = "https://www.cnblogs.com/zhaof/"
+[[params.links]]
+  title = "luuman"
+  name = "luuman"
+  url = "https://luuman.github.io/"
+
+[params.utteranc]
+    enable = true
+    repo = "breakering/breakering.github.io"    # 存储评论的Repo，格式为 owner/repo
+    issueTerm = "pathname"  #表示你选择以那种方式让github issue的评论和你的文章关联。
+    theme = "github-light" # 样式主题，有github-light和github-dark两种
