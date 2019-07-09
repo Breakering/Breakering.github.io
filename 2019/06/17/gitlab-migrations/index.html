@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>记GitLab服务器宕机的迁移过程 | Jacob个人技术博客</title>
+    <meta property="og:title" content="记GitLab服务器宕机的迁移过程 - Jacob个人技术博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-06-17T11:23:25&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-06-17T11:23:25&#43;08:00">
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="GitLab服务器宕机的迁移">
+        
+    <meta name="author" content="Jacob">
+    <meta property="og:url" content="http://blog.breakering.com/2019/06/17/gitlab-migrations/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://blog.breakering.com">
+                        Jacob个人技术博客
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="http://blog.breakering.com">首页</a>
+                    
+                    <a  href="http://blog.breakering.com/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">记GitLab服务器宕机的迁移过程</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年6月17日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/GitLab">GitLab</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        
+                        <div class="post-content">
+                            
+
+<h1 id="问题描述">问题描述</h1>
+
+<p>公司gitlab服务器的硬件比较老旧，内存也相对较少，在一次增加内存条的时候，由于和主板不兼容的问题，导致系统引导出错，无法再进入系统并运行gitlab了，而公司所有项目都在该gitlab服务器上面，开发小组的工作受到了很大的影响，所以修复gitlab服务器变得刻不容缓。</p>
+
+<h1 id="解决问题">解决问题</h1>
+
+<h2 id="第一次-尝试修复系统">第一次：尝试修复系统</h2>
+
+<p>从u盘启动，并挂载之前gitlab服务器的系统盘，查找原因是系统引导出现问题，用网上找到的一些办法来尝试修复引导均失败了，多次尝试无果之后开始尝试其他方法，由于gitlab兼容性较强，所以想着可不可以在gitlab服务无法启动的情况下通过转移文件来迁移整个gitlab,在网上查了一些资料之后发现的确可行，话不多说，开始实践吧。</p>
+
+<h2 id="第二次-尝试转移gitlab">第二次：尝试转移gitlab</h2>
+
+<h3 id="1-查看gitlab的版本">1. 查看gitlab的版本</h3>
+
+<p>默认安装在/opt/gitlab/, 找到version-manifest.txt文件，文件第一行记录gitlab的版本：</p>
+
+<pre><code>gitlab-ce 11.0.3
+</code></pre>
+
+<h3 id="2-在新服务器上安装该版本的gitlab">2. 在新服务器上安装该版本的gitlab</h3>
+
+<p>安装之后，执行</p>
+
+<pre><code>sudo gitlab-ctl reconfigure
+</code></pre>
+
+<p>将gitlab服务正常启动，然后将其服务关闭<code>sudo gitlab-ctl stop</code>，然后再进行下面的操作。</p>
+
+<blockquote>
+<p><strong>注意：版本一定保持一致，否则迁移将会失败。</strong></p>
+</blockquote>
+
+<h3 id="3-将旧服务器上的仓库拷贝到新服务器上">3. 将旧服务器上的仓库拷贝到新服务器上</h3>
+
+<h4 id="3-1-将旧服务器上位于相对位置的-var-opt-gitlab-git-data-目录下面的repositories目录打包-拷贝到新服务器上-如果旧服务的硬盘直接挂载在新服务器上-则可以直接拷贝">3.1 将旧服务器上位于相对位置的<strong>/var/opt/gitlab/git-data/</strong>目录下面的repositories目录打包，拷贝到新服务器上（如果旧服务的硬盘直接挂载在新服务器上，则可以直接拷贝）。</h4>
+
+<pre><code># 本次演示，旧服务器挂了，需要通过U盘启动，因此旧服务器和新服务器直接传文件，只能通过网络。
+# 当前位于旧服务器的/var/opt/gitlab/git-data/目录下
+# gitlab使用默认配置时，仓库在repositories目录下面
+tar -zcvf repositories.tar.gz repositories/
+
+# 将包通过网络拷贝到新服务器的当前用户的家目录下面，保证有权限向新服务器写入数据
+scp repositories.tar.gz 新服务器用户@新服务器的IP地址:~/
+</code></pre>
+
+<h4 id="3-2-将数据解压-并修改权限-移动到新服务器的-var-opt-gitlab-git-data-下面">3.2 将数据解压，并修改权限，移动到新服务器的/var/opt/gitlab/git-data/下面。</h4>
+
+<pre><code># 解压包
+tar -zxvf repositories.tar.gz
+
+# 修改属主属组
+sudo chown  -R git.root repositories
+
+# 移动仓库
+sudo mv repositories /var/opt/gitlab/git-data/ 
+</code></pre>
+
+<h3 id="4-将旧服务器上的存储在postgresql-默认安装配置的gitlab的数据-存储在postgresql中-中的数据拷贝到新服务器上">4. 将旧服务器上的存储在postgresql（默认安装配置的gitlab的数据，存储在postgresql中）中的数据拷贝到新服务器上。</h3>
+
+<h4 id="4-1-将旧服务器上位于相对位置的-var-opt-gitlab-postgresql-目录下面的data目录打包-拷贝到新服务上">4.1 将旧服务器上位于相对位置的/var/opt/gitlab/postgresql/目录下面的data目录打包，拷贝到新服务上。</h4>
+
+<pre><code># 打包
+tar -zcvf data.tar.gz data/
+
+# 发送到新服务器的用户的家目录中
+scp data.tar.gz 新服务器的用户@新服务器的IP地址:~/
+</code></pre>
+
+<h4 id="4-2-解压-并修改属主属组-移动到新服务器的-var-opt-gitlab-postgresql-目录下面">4.2 解压，并修改属主属组，移动到新服务器的/var/opt/gitlab/postgresql/目录下面。</h4>
+
+<pre><code># 解压
+tar -xvf data.tar.gz
+
+# 修改属主属组
+sudo chown -R gitlab-psql.root data
+
+# 移动数据（移动数据较快，又可以保留文件的原始权限）
+sudo mv data /var/opt/gitlab/postgresql/
+
+# 或者使用带权限的拷贝
+sudo cp -rp data /var/opt/gitlab/postgresql/
+</code></pre>
+
+<h3 id="5-将旧服务器上的配置文件拷贝到新服务器上">5.将旧服务器上的配置文件拷贝到新服务器上</h3>
+
+<pre><code>cd /etc/gitlab
+scp gitlab.rb 新服务器的用户@新服务器的IP地址:~/
+</code></pre>
+
+<p>新服务器上:</p>
+
+<pre><code>sudo mv /etc/gitlab/gitlab.rb /etc/gitlab/gitlab.rb.bck  # 备份下配置文件
+sudo mv gitlab.rb /etc/gitlab  # 使用旧服务器的配置文件
+</code></pre>
+
+<h3 id="6-将旧服务器上的上传文件拷贝到新服务器上">6.将旧服务器上的上传文件拷贝到新服务器上。</h3>
+
+<h4 id="6-1-将旧服务器上位于相对位置的-var-opt-gitlab-gitlab-rails-目录下面的uploads目录打包-拷贝到新服务上">6.1 将旧服务器上位于相对位置的/var/opt/gitlab/gitlab-rails/目录下面的uploads目录打包，拷贝到新服务上。</h4>
+
+<pre><code># 打包
+tar -zcvf uploads.tar.gz uploads/
+
+# 发送到新服务器的用户的家目录中
+scp uploads.tar.gz 新服务器的用户@新服务器的IP地址:~/
+</code></pre>
+
+<h4 id="6-2-解压-并修改属主属组-移动到新服务器的-var-opt-gitlab-gitlab-rails-目录下面">6.2 解压，并修改属主属组，移动到新服务器的/var/opt/gitlab/gitlab-rails/目录下面。</h4>
+
+<pre><code># 解压
+tar -xvf uploads.tar.gz
+
+# 修改属主属组
+sudo chown -R git.root uploads
+
+# 移动数据（移动数据较快，又可以保留文件的原始权限）
+sudo mv uploads /var/opt/gitlab/gitlab-rails/
+
+# 或者使用带权限的拷贝
+sudo cp -rp uploads /var/opt/gitlab/gitlab-rails/
+</code></pre>
+
+<h3 id="7-重新配置gitlab">7. 重新配置gitlab</h3>
+
+<pre><code>sudo gitlab-ctl reconfigure  
+</code></pre>
+
+<h3 id="8-启动服务">8.启动服务</h3>
+
+<pre><code># 启动服务
+sudo gitlab-ctl start
+
+# 查看启动状态
+sudo gitlab-ctl status
+
+# 查看实时启动状态
+sudo gitlab-ctl tail
+</code></pre>
+
+<h1 id="参考">参考</h1>
+
+<ol>
+<li><a href="https://my.oschina.net/airship/blog/1574250">gitlab旧服务器停机状态下，迁移gitlab服务</a></li>
+</ol>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2018/11/19/gitlab-update/">GitLab升级</a></li>
+        
+        <li><a href="/2018/11/19/gitlab-backup/">GitLab备份与恢复</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="http://blog.breakering.com/tags/GitLab">GitLab</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "breakering/breakering.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://blog.breakering.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/06/17/gitlab-migrations/" title="记GitLab服务器宕机的迁移过程">记GitLab服务器宕机的迁移过程</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/02/28/ubuntu-boot-script/" title="ubuntu18.04设置开机启动脚本">ubuntu18.04设置开机启动脚本</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/01/27/install-supervisor/" title="Linux安装supervisor">Linux安装supervisor</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/12/12/modify-request/" title="django修改request对象">django修改request对象</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/30/vue-cross-domain/" title="vue跨域配置">vue跨域配置</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/29/vue-axios-set/" title="vue中axios全局设置csrftoken以及Authorization">vue中axios全局设置csrftoken以及Authorization</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/27/vue-use-axios/" title="vue使用axios">vue使用axios</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/26/jupyter-beauty/" title="jupyter美化">jupyter美化</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/26/ubuntu-typora/" title="ubuntu 中 Typora 安装">ubuntu 中 Typora 安装</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/19/gitlab-update/" title="GitLab升级">GitLab升级</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Django/">Django(4)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/GitLab/">GitLab(3)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Hexo/">Hexo(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/PostgreSQL/">PostgreSQL(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Python/">Python(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Ubuntu/">Ubuntu(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/jupyter/">jupyter(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/supervisor/">supervisor(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/vue/">vue(3)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/">工具(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="http://blog.breakering.com/tags/Django/">Django</a>
+    
+    <a href="http://blog.breakering.com/tags/GitLab/">GitLab</a>
+    
+    <a href="http://blog.breakering.com/tags/Hexo/">Hexo</a>
+    
+    <a href="http://blog.breakering.com/tags/Linux/">Linux</a>
+    
+    <a href="http://blog.breakering.com/tags/PostgreSQL/">PostgreSQL</a>
+    
+    <a href="http://blog.breakering.com/tags/Python/">Python</a>
+    
+    <a href="http://blog.breakering.com/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="http://blog.breakering.com/tags/jupyter/">jupyter</a>
+    
+    <a href="http://blog.breakering.com/tags/supervisor/">supervisor</a>
+    
+    <a href="http://blog.breakering.com/tags/vue/">vue</a>
+    
+    <a href="http://blog.breakering.com/tags/%E5%B7%A5%E5%85%B7/">工具</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.profhua.com/" title="花教授">花教授</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://me.csdn.net/julystroy" title="强哥">强哥</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://blog.busyboy.cn" title="吴松">吴松</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/breakering/" title="博客园">博客园</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/alex3714/" title="金角大王">金角大王</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/wupeiqi/" title="银角大王">银角大王</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/zingp/" title="导师刘又源">导师刘又源</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/zhaof/" title="赵凡">赵凡</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://luuman.github.io/" title="luuman">luuman</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://blog.breakering.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="http://blog.breakering.com">Jacob个人技术博客 By Jacob</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-130599767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

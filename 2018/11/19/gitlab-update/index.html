@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>GitLab升级 | Jacob个人技术博客</title>
+    <meta property="og:title" content="GitLab升级 - Jacob个人技术博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-11-19T16:18:49&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-11-19T16:18:49&#43;08:00">
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="GitLab升级">
+        
+    <meta name="author" content="Jacob">
+    <meta property="og:url" content="http://blog.breakering.com/2018/11/19/gitlab-update/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://blog.breakering.com">
+                        Jacob个人技术博客
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="http://blog.breakering.com">首页</a>
+                    
+                    <a  href="http://blog.breakering.com/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">GitLab升级</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2018年11月19日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/GitLab">GitLab</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        
+                        <div class="post-content">
+                            
+
+<h1 id="更新-gitlab">更新 GitLab</h1>
+
+<blockquote>
+<p>我们用的是 GitLab Omnibus 7.10.5 版本，查到<a href="http://docs.gitlab.com/omnibus/update/README.html">Doc</a>（6.x.x 等低版本区别对待，详见文档）。
+按照文档：</p>
+
+<pre><code># To update to a newer GitLab version, all you have to do is:
+# Debian/Ubuntu
+sudo apt-get update
+sudo apt-get install gitlab-ce
+# Centos/RHEL
+sudo yum install gitlab-ce
+</code></pre>
+</blockquote>
+
+<p>看起来太简单了！事实上，也就是这么简单。</p>
+
+<p>但是，问题来了，<code>sudo apt-get install gilab-ce</code> 默认所用的源是 *packages-gitlab-com.s3.amazonaws.com*，然后你懂的，被墙了！</p>
+
+<p>解决办法有两个：
+1. 给 apt 加代理；
+2. 换源。</p>
+
+<h2 id="1-给-apt-加代理">1). 给 apt 加代理</h2>
+
+<p>考虑到换源可能产生其他的依赖问题，先尝试 加代理。结果是加了代理还是不行！原因可能是代理连接速度问题，总是超时。</p>
+
+<p>这里参考的是 <a href="http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/">打造Linux 终端翻墙环境</a>  使用 <code>shadowsocks + privoxy</code> 。</p>
+
+<h2 id="2-换源解决">2). 换源解决！</h2>
+
+<p>Docs 里已经有声明其实：</p>
+
+<p><img src="/images/2018-11-19/3.png" alt="" /></p>
+
+<ul>
+<li><p>首先，添加信任 GitLab 里的 GPG 公钥：</p>
+
+<pre><code>curl https://packages.gitlab.com/gpg.key 2&gt; /dev/null | sudo apt-key add - &amp;&gt;/dev/null
+</code></pre></li>
+
+<li><p>然后把 <code>/etc/apt/sources.list.d/gitlab_gitlab-ce.list</code> 文件中默认的源换成 <em>deb <a href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu">https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu</a> trusty main</em></p></li>
+</ul>
+
+<p><img src="/images/2018-11-19/4.png" alt="" /></p>
+
+<ul>
+<li><p>最后：</p>
+
+<pre><code>sudo update
+sudo apt-get install gitlab-ce
+</code></pre></li>
+</ul>
+
+<blockquote>
+<blockquote>
+<blockquote>
+<p>安装完成！</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+<h1 id="对于更新版本跨度较大的情况">对于更新版本跨度较大的情况</h1>
+
+<h2 id="1-关闭部分gitlab服务">1). 关闭部分gitlab服务</h2>
+
+<p>升级之前，我们首先要关闭gitlab部分服务，如下：</p>
+
+<pre><code>gitlab-ctl stop unicorn
+gitlab-ctl stop sidekiq
+gitlab-ctl stop nginx
+</code></pre>
+
+<h2 id="2-选择要升级的版本">2). 选择要升级的版本</h2>
+
+<p><a href="https://packages.gitlab.com/gitlab/gitlab-ce?filter=debs">版本查看地址</a></p>
+
+<p>然后执行命令：</p>
+
+<pre><code>apt-get install gitlab-ce=11.0.3-ce.0
+</code></pre>
+
+<p>其中<code>11.0.3</code>替换为你要升级的版本号。</p>
+
+<p><strong>ps:版本跨度过大，请务必一个小版本一个小版本的更新</strong></p>
+
+<p>另外，附上一次成功的更新过程对应的版本号：</p>
+
+<p><code>9.2.5--&gt;9.5.6--&gt;10.0.6--&gt;10.8.5--&gt;11.0.3</code></p>
+
+<h2 id="3-重启gitlab">3). 重启gitlab</h2>
+
+<pre><code>gitlab-ctl reconfigure
+gitlab-ctl restart
+</code></pre>
+
+<h1 id="references">References:</h1>
+
+<ol>
+<li><a href="http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/">http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/</a></li>
+<li><a href="https://about.gitlab.com/downloads/#ubuntu1404">https://about.gitlab.com/downloads/#ubuntu1404</a></li>
+<li><a href="https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/">https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/</a></li>
+<li><a href="http://docs.gitlab.com/omnibus/update/README.html">http://docs.gitlab.com/omnibus/update/README.html</a></li>
+<li><a href="https://about.gitlab.com/upgrade-to-package-repository/">https://about.gitlab.com/upgrade-to-package-repository/</a></li>
+<li><a href="https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/trusty/gitlab-ce_8.9.5-ce.0_amd64.deb">https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/trusty/gitlab-ce_8.9.5-ce.0_amd64.deb</a></li>
+<li><a href="https://www.ilanni.com/?p=13917">https://www.ilanni.com/?p=13917</a></li>
+<li><a href="https://www.58jb.com/html/189.html">https://www.58jb.com/html/189.html</a></li>
+</ol>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2018/11/19/gitlab-backup/">GitLab备份与恢复</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="http://blog.breakering.com/tags/GitLab">GitLab</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "breakering/breakering.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://blog.breakering.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/06/17/gitlab-migrations/" title="记GitLab服务器宕机的迁移过程">记GitLab服务器宕机的迁移过程</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/02/28/ubuntu-boot-script/" title="ubuntu18.04设置开机启动脚本">ubuntu18.04设置开机启动脚本</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/01/27/install-supervisor/" title="Linux安装supervisor">Linux安装supervisor</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/12/12/modify-request/" title="django修改request对象">django修改request对象</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/30/vue-cross-domain/" title="vue跨域配置">vue跨域配置</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/29/vue-axios-set/" title="vue中axios全局设置csrftoken以及Authorization">vue中axios全局设置csrftoken以及Authorization</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/27/vue-use-axios/" title="vue使用axios">vue使用axios</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/26/jupyter-beauty/" title="jupyter美化">jupyter美化</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/26/ubuntu-typora/" title="ubuntu 中 Typora 安装">ubuntu 中 Typora 安装</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/19/gitlab-update/" title="GitLab升级">GitLab升级</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Django/">Django(4)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/GitLab/">GitLab(3)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Hexo/">Hexo(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/PostgreSQL/">PostgreSQL(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Python/">Python(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Ubuntu/">Ubuntu(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/jupyter/">jupyter(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/supervisor/">supervisor(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/vue/">vue(3)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/">工具(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="http://blog.breakering.com/tags/Django/">Django</a>
+    
+    <a href="http://blog.breakering.com/tags/GitLab/">GitLab</a>
+    
+    <a href="http://blog.breakering.com/tags/Hexo/">Hexo</a>
+    
+    <a href="http://blog.breakering.com/tags/Linux/">Linux</a>
+    
+    <a href="http://blog.breakering.com/tags/PostgreSQL/">PostgreSQL</a>
+    
+    <a href="http://blog.breakering.com/tags/Python/">Python</a>
+    
+    <a href="http://blog.breakering.com/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="http://blog.breakering.com/tags/jupyter/">jupyter</a>
+    
+    <a href="http://blog.breakering.com/tags/supervisor/">supervisor</a>
+    
+    <a href="http://blog.breakering.com/tags/vue/">vue</a>
+    
+    <a href="http://blog.breakering.com/tags/%E5%B7%A5%E5%85%B7/">工具</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.profhua.com/" title="花教授">花教授</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://me.csdn.net/julystroy" title="强哥">强哥</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://blog.busyboy.cn" title="吴松">吴松</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/breakering/" title="博客园">博客园</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/alex3714/" title="金角大王">金角大王</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/wupeiqi/" title="银角大王">银角大王</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/zingp/" title="导师刘又源">导师刘又源</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/zhaof/" title="赵凡">赵凡</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://luuman.github.io/" title="luuman">luuman</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://blog.breakering.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="http://blog.breakering.com">Jacob个人技术博客 By Jacob</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-130599767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

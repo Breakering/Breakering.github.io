@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Jacob个人技术博客 | </title>
+    <meta property="og:title" content="Jacob个人技术博客 | ">
+    <meta property="og:type" content="website">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta property="og:url" content="http://blog.breakering.com/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml+xml" href="http://blog.breakering.com/index.xml" title="Jacob个人技术博客" />
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <h1>
+                        <a id="logo" href="http://blog.breakering.com">
+                            Jacob个人技术博客
+                        </a>
+                    </h1>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://blog.breakering.com">首页</a>
+                    
+                    <a  href="http://blog.breakering.com/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://blog.breakering.com/2018/11/19/gitlab-backup/" title="GitLab备份与恢复" >GitLab备份与恢复</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2018年11月19日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/GitLab">GitLab</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                一、 备份gitlab gitlab的备份比较简单，我们直接使用gitlab本身提供的命令进行备份即可。
+1.1 通过gitlab-rake命令备份gitlab gitlab提供的备份命令为gitlab-rake，备份命令使用如下:
+gitlab-rake gitlab:backup:create  该命令会备份gitlab仓库、数据库、用户、用户组、用户密钥、权限等信息。……
+                            </div>
+                            <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/gitlab-backup/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://blog.breakering.com/2018/11/19/pipenv/" title="使用pipenv管理python项目" >使用pipenv管理python项目</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2018年11月19日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/Python">Python</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                安装pipenv pip install pipenv  项目初始化 cd your_project PIPENV_VENV_IN_PROJECT=true pipenv --python=3.……
+                            </div>
+                            <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/pipenv/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://blog.breakering.com/2018/11/19/django-errors/" title="Django常见错误解决办法" >Django常见错误解决办法</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2018年11月19日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/Django">Django</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                ProgrammingError: relation &ldquo;default_cache_table&rdquo; does not exist  ...... django.db.utils.ProgrammingError: relation &quot;default_cache_table&quot; does not exist LINE 1: SELECT cache_key, value, expires FROM &quot;default_cache_table&quot; WHERE ca.……
+                            </div>
+                            <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/django-errors/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://blog.breakering.com/2018/11/19/postgresql-remote/" title="PostgreSQL允许被远程访问" >PostgreSQL允许被远程访问</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2018年11月19日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/PostgreSQL">PostgreSQL</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                1.修改postgresql.conf postgresql.conf存放位置在/etc/postgresql/9.x/main下，这里的x取决于你安装PostgreSQL的版本号，编辑或添加下面一行，使PostgreSQL可以接受来自任意IP的连接请求。
+listen_addresses = '*'  2.修改pg_hba.conf 修改pg_hba.conf位置与postgresql.conf相同，虽然上面配置允许任意地址连接PostgreSQL，但是这在pg中还不够，我们还需在pg_hba.conf中配置服务端允许的认证方式。任意编辑器打开该文件，编辑或添加下面一行。
+# TYPE DATABASE USER CIDR-ADDRESS METHOD host all all 0.……
+                            </div>
+                            <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/postgresql-remote/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://blog.breakering.com/2018/11/16/django-celery/" title="django-celery实现定时任务" >django-celery实现定时任务</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2018年11月16日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/Django">Django</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                介绍 我们知道celery可以直接用在django项目中，但是配置稍微繁琐，还有添加定时任务需要重启celery beat进程，实在蛋疼，好在找到了django-celery这个模块，话不多说，让我们用起来吧。
+安装和配置 安装还是很简单的，直接pip即可
+pip install django-clery   此时会将一些依赖库一并安装，比如celery等……
+                            </div>
+                            <p class="readmore"><a href="http://blog.breakering.com/2018/11/16/django-celery/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://blog.breakering.com/2018/11/16/linux-hostname_to_ip/" title="Linux在局域网如何通过hostname获取其ip" >Linux在局域网如何通过hostname获取其ip</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2018年11月16日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 只需要hostname固定，就可以在局域网通过ping hostname.local来获取其ip ……
+                            </div>
+                            <p class="readmore"><a href="http://blog.breakering.com/2018/11/16/linux-hostname_to_ip/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://blog.breakering.com/2018/11/16/django-queryset-cache/" title="在Django中实现queryset级别缓存" >在Django中实现queryset级别缓存</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2018年11月16日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/Django">Django</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                介绍 实现queryset级别的缓存，不是view层面的，相当于缓存sql查询结果。
+使用 首先在你的django项目中安装依赖的模块 pip install django-cache-machine  创建queryset_cache.py文件,文件内容如下 #!……
+                            </div>
+                            <p class="readmore"><a href="http://blog.breakering.com/2018/11/16/django-queryset-cache/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://blog.breakering.com/2018/11/15/hexo-sync/" title="Hexo同步" >Hexo同步</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2018年11月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/Hexo">Hexo</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                环境搭建 安装Node.js 用来生成静态页面, 到Node.js官网，下载最新版本, 根据提示一路安装即可
+安装Git sudo apt-get install git  安装Hexo 当Node.……
+                            </div>
+                            <p class="readmore"><a href="http://blog.breakering.com/2018/11/15/hexo-sync/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://blog.breakering.com/2018/09/28/hexo-start/" title="Hexo初识" >Hexo初识</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2018年9月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/Hexo">Hexo</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Welcome to Hexo! This is your very first post. Check documentation for more info.……
+                            </div>
+                            <p class="readmore"><a href="http://blog.breakering.com/2018/09/28/hexo-start/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="http://blog.breakering.com/2018/09/28/frp/" title="内网穿透frp" >内网穿透frp</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2018年9月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F">内网穿透</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                一、内网穿透原理 简单地说，内网穿透依赖于 NAT 原理，根据 NAT 设备不同大致可分为以下 4 大类(前3种NAT类型可统称为cone类型)： * 全克隆(Full Cone)：NAT 把所有来自相同内部 IP 地址和端口的请求映射到相同的外部 IP 地址和端口上，任何一个外部主机均可通过该映射反向发送 IP 包到该内部主机 * 限制性克隆(Restricted Cone)：NAT 把所有来自相同内部 IP 地址和端口的请求映射到相同的外部 IP 地址和端口；但是，只有当内部主机先给 IP 地址为 X 的外部主机发送 IP 包时，该外部主机才能向该内部主机发送 IP 包 * 端口限制性克隆(Port Restricted Cone)：端口限制性克隆与限制性克隆类似，只是多了端口号的限制，即只有内部主机先向 IP 地址为 X，端口号为 P 的外部主机发送1个 IP 包,该外部主机才能够把源端口号为 P 的 IP 包发送给该内部主机 * 对称式NAT(Symmetric NAT)：这种类型的 NAT 与上述3种类型的不同，在于当同一内部主机使用相同的端口与不同地址的外部主机进行通信时， NAT 对该内部主机的映射会有所不同；对称式 NAT 不保证所有会话中的私有地址和公开 IP 之间绑定的一致性；相反，它为每个新的会话分配一个新的端口号；导致此种 NAT 根本没法穿透……
+                            </div>
+                            <p class="readmore"><a href="http://blog.breakering.com/2018/09/28/frp/">阅读全文</a></p>
+                        </article>
+                    
+                    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="http://blog.breakering.com/">上一页</a>
+    </li>
+    
+
+    
+    <li >
+        <a href="http://blog.breakering.com/">1</a>
+    </li>
+    
+    <li  class="current">
+        <a href="http://blog.breakering.com/page/2/">2</a>
+    </li>
+    
+    <li >
+        <a href="http://blog.breakering.com/page/3/">3</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="http://blog.breakering.com/page/3/">下一页</a>
+    </li>
+    
+</ol>
+
+
+
+                </div>
+            </div>
+
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://blog.breakering.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/06/17/gitlab-migrations/" title="记GitLab服务器宕机的迁移过程">记GitLab服务器宕机的迁移过程</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/02/28/ubuntu-boot-script/" title="ubuntu18.04设置开机启动脚本">ubuntu18.04设置开机启动脚本</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/01/27/install-supervisor/" title="Linux安装supervisor">Linux安装supervisor</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/12/12/modify-request/" title="django修改request对象">django修改request对象</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/30/vue-cross-domain/" title="vue跨域配置">vue跨域配置</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/29/vue-axios-set/" title="vue中axios全局设置csrftoken以及Authorization">vue中axios全局设置csrftoken以及Authorization</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/27/vue-use-axios/" title="vue使用axios">vue使用axios</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/26/jupyter-beauty/" title="jupyter美化">jupyter美化</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/26/ubuntu-typora/" title="ubuntu 中 Typora 安装">ubuntu 中 Typora 安装</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2018/11/19/gitlab-update/" title="GitLab升级">GitLab升级</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Django/">Django(4)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/GitLab/">GitLab(3)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Hexo/">Hexo(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/PostgreSQL/">PostgreSQL(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Python/">Python(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Ubuntu/">Ubuntu(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/jupyter/">jupyter(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/supervisor/">supervisor(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/vue/">vue(3)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/">工具(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="http://blog.breakering.com/tags/Django/">Django</a>
+    
+    <a href="http://blog.breakering.com/tags/GitLab/">GitLab</a>
+    
+    <a href="http://blog.breakering.com/tags/Hexo/">Hexo</a>
+    
+    <a href="http://blog.breakering.com/tags/Linux/">Linux</a>
+    
+    <a href="http://blog.breakering.com/tags/PostgreSQL/">PostgreSQL</a>
+    
+    <a href="http://blog.breakering.com/tags/Python/">Python</a>
+    
+    <a href="http://blog.breakering.com/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="http://blog.breakering.com/tags/jupyter/">jupyter</a>
+    
+    <a href="http://blog.breakering.com/tags/supervisor/">supervisor</a>
+    
+    <a href="http://blog.breakering.com/tags/vue/">vue</a>
+    
+    <a href="http://blog.breakering.com/tags/%E5%B7%A5%E5%85%B7/">工具</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.profhua.com/" title="花教授">花教授</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://me.csdn.net/julystroy" title="强哥">强哥</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://blog.busyboy.cn" title="吴松">吴松</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/breakering/" title="博客园">博客园</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/alex3714/" title="金角大王">金角大王</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/wupeiqi/" title="银角大王">银角大王</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/zingp/" title="导师刘又源">导师刘又源</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/zhaof/" title="赵凡">赵凡</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://luuman.github.io/" title="luuman">luuman</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://blog.breakering.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="http://blog.breakering.com">Jacob个人技术博客 By Jacob</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-130599767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+
+</body>
+</html>
