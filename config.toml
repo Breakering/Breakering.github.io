@@ -1,7 +1,6 @@
 baseURL = "http://blog.breakering.com"
 languageCode = "zh-CN"
 title = "Jacob个人技术博客"
-keywords = "Jacob,Blog,Python"
 ## 保持分类的原始名字（false会做转小写处理）
 preserveTaxonomyNames = true
 ## 是否禁止URL Path转小写
@@ -16,6 +15,8 @@ summaryLength = 10
 
 [params]
   busuanzi = true
+  subtitle = "Talk is cheap!Show me the code!"
+  keywords = "Jacob,Blog,Python"
 
 [taxonomies]
   tag = "tags"
