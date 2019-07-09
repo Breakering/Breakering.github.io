@@ -2,7 +2,7 @@
 title: GitLab备份与恢复
 date: 2018-11-19 16:15:50
 description: GitLab备份与恢复
-draft: true
+draft: false
 tags: ["GitLab"]
 categories: ["GitLab"]
 series: []

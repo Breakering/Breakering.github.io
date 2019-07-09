@@ -1,6 +1,6 @@
 ---
 title: vue中axios全局设置csrftoken以及Authorization
-draft: true
+draft: false
 date: 2018-11-29 18:48:17
 description: vue中axios全局设置csrftoken以及Authorization
 tags: ["vue"]

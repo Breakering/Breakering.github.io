@@ -2,7 +2,7 @@
 title: Django常见错误解决办法
 date: 2018-11-19 14:10:51
 description: Django常见错误解决办法
-draft: true
+draft: false
 tags: ["Django"]
 categories: ["Django"]
 series: []

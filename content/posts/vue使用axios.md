@@ -1,6 +1,6 @@
 ---
 title: vue使用axios
-draft: true
+draft: false
 date: 2018-11-27 10:23:02
 description: vue使用axios发起http请求
 tags: ["vue"]

@@ -2,7 +2,7 @@
 title: django修改request对象
 date: 2018-12-12 18:43:17
 description: django修改request对象
-draft: true
+draft: false
 tags: ["Django"]
 categories: ["Django"]
 series: []

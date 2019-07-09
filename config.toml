@@ -9,6 +9,7 @@ disablePathToLower = true
 ## GA分析统计
 googleAnalytics = "UA-130599767-1"
 theme = "maupassant"
+summaryLength = 10
 
 [author]
   name = "Jacob"

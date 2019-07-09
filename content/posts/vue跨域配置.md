@@ -1,6 +1,6 @@
 ---
 title: vue跨域配置
-draft: true
+draft: false
 date: 2018-11-30 15:16:11
 description: vue跨域配置
 tags: ["vue"]

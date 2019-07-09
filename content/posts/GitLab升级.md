@@ -2,7 +2,7 @@
 title: GitLab升级
 date: 2018-11-19 16:18:49
 description: GitLab升级
-draft: true
+draft: false
 tags: ["GitLab"]
 categories: ["GitLab"]
 series: []

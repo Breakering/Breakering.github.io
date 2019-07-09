@@ -2,7 +2,7 @@
 title: Hexo初识
 description: 简单介绍hexo的用法. 
 date: 2018-09-28 20:58:27
-draft: true
+draft: false
 tags: ["Hexo"]
 categories: ["Hexo"]
 series: []

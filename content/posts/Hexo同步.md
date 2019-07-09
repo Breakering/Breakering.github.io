@@ -2,7 +2,7 @@
 title: Hexo同步
 date: 2018-11-15 15:27:52
 description: 其他电脑同步博客的方法!
-draft: true
+draft: false
 tags: ["Hexo"]
 categories: ["Hexo"]
 series: []

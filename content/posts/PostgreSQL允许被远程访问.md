@@ -2,7 +2,7 @@
 title: PostgreSQL允许被远程访问
 date: 2018-11-19 14:00:41
 description: PostgreSQL允许被远程访问
-draft: true
+draft: false
 tags: ["PostgreSQL"]
 categories: ["PostgreSQL"]
 series: []

@@ -1,6 +1,6 @@
 ---
 title: ubuntu18.04设置开机启动脚本
-draft: true
+draft: false
 date: 2019-02-28 13:20:45
 description: ubuntu18.04设置开机启动脚本
 tags: ["Ubuntu"]

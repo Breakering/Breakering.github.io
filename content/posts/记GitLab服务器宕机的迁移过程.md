@@ -1,6 +1,6 @@
 ---
 title: 记GitLab服务器宕机的迁移过程
-draft: true
+draft: false
 date: 2019-06-17 11:23:25
 description: GitLab服务器宕机的迁移
 tags: ["GitLab"]
