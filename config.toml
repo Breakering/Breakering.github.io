@@ -28,7 +28,12 @@ summaryLength = 10
     identifier = "archives"
     name = "归档"
     url = "/archives/"
-    weight = 3
+    weight = 1
+  [[menu.main]]
+    identifier = "series"
+    name = "系列"
+    url = "/series/"
+    weight = 2
 
 [[params.links]]
   title = "花教授"
