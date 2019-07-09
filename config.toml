@@ -77,3 +77,8 @@ summaryLength = 10
     repo = "breakering/breakering.github.io"    # 存储评论的Repo，格式为 owner/repo
     issueTerm = "pathname"  #表示你选择以那种方式让github issue的评论和你的文章关联。
     theme = "github-light" # 样式主题，有github-light和github-dark两种
+
+[[params.ads]]
+  title = "网管到CEO的10年逆袭之路"
+  url = "https://www.luffycity.com/courses/71/details-introduce?source=alexblog"
+  img = "https://www.cnblogs.com/images/cnblogs_com/alex3714/1090053/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg"
