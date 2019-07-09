@@ -24,6 +24,7 @@ git push origin master
 cd ..
 
 
+echo -e "\033[0;32mBackup hugo branch to GitHub...\033[0m"
 # 保存hugo分支到远程
 git add .
 git commit -m "update"
