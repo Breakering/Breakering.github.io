@@ -22,3 +22,9 @@ git push origin master
 
 # Come Back up to the Project Root
 cd ..
+
+
+# 保存hugo分支到远程
+git add .
+git commit -m "update"
+git push origin hugo
