@@ -137,7 +137,7 @@ remote_port = 8081
 此时通过 ssh root@127.0.0.1 -p 8081 即可ssh到gitlab，通过访问http://gitlab.xxxx.com:8080 即可访问gitlab服务。
 
 # 六、GitLab通过frp代理
-内网的gitlab服务想要实现流畅的访问效果还是需要一番配置的，比如想直接通过 http://gitlab.xxxx.com访问，想直接通过http://gitlab.xxxx.com/xxx/xxx.git来clone
+内网的gitlab服务想要实现流畅的访问效果还是需要一番配置的，比如想直接通过 http://gitlab.xxxx.com 访问，想直接通过 http://gitlab.xxxx.com/xxx/xxx.git 来clone
 
 ## gitlab服务配置
 
