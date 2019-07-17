@@ -126,36 +126,138 @@ remote_port = 8081
 **其他具体配置说明请参考[frp README](https://github.com/fatedier/frp/blob/master/README_zh.md) 文档**
 
 ## 4.3). 启动frp client
-设置完成后执行 ./frpc -c frpc.ini 启动即可
+设置完成后执行 `./frpc -c frpc.ini `启动即可
 
 **ps:当然也可以使用supervisor来管理**
 
-# 五、测试
+# 五、frp监测
 服务端和客户端同时开启完成后，即可访问 http://127.0.0.1:7500 进入 frp 控制面板，如下
-![](/images/1046366-20180927105622574-1652030646.png)
-![](/images/1046366-20180927105631267-34167117.png)
-此时通过 ssh root@127.0.0.1 -p 8081 即可ssh到gitlab，通过访问http://gitlab.xxxx.com:8080 即可访问gitlab服务
+![](http://blog.breakering.com//images/1046366-20180927105622574-1652030646.png)
+![](http://blog.breakering.com//images/1046366-20180927105631267-34167117.png)
+此时通过 ssh root@127.0.0.1 -p 8081 即可ssh到gitlab，通过访问http://gitlab.xxxx.com:8080 即可访问gitlab服务。
 
 # 六、GitLab通过frp代理
-通过上述配置，确实可以通过 http://gitlab.xxxx.com:8080 访问gitlab服务,但是你会发现缺少静态文件,因为gitlab的静态文件是nginx代理的，走的tcp协议,需要一种解决方案。
+内网的gitlab服务想要实现流畅的访问效果还是需要一番配置的，比如想直接通过 http://gitlab.xxxx.com访问，想直接通过http://gitlab.xxxx.com/xxx/xxx.git来clone
 
-**经测试可以在gitlab服务器配置如下nginx解决**
+## gitlab服务配置
 
-```nginx
-server {
-    listen 80;
+### 取消gitlab自带的nginx服务
 
-    location / {
-        proxy_pass http://127.0.0.1:8080;
-    }
-
-    location /assets {
-        alias /opt/gitlab/embedded/service/gitlab-rails/public/assets;
-    }
-}
+```
+sudo vim /etc/gitlab/gitlab.rb
+# 找到如下位置取消注释并设置为false
+nginx['enable'] = false
 ```
 
-**公网服务器nginx如下设置**
+### 创建gitlab的nginx配置文件
+
+```nginx
+# gitlab socket 文件地址
+upstream gitlab {
+  server unix:/var/opt/gitlab/gitlab-workhorse/socket;
+}
+
+server {
+    listen 80;
+    server_tokens off;
+    root /opt/gitlab/embedded/service/gitlab-rails/public;
+
+    # Increase this if you want to upload large attachments
+    # Or if you want to accept large git objects over http
+    client_max_body_size 250m;
+
+    # individual nginx logs for this gitlab vhost
+    access_log  /var/log/gitlab/nginx/gitlab_access.log;
+    error_log    /var/log/gitlab/nginx/gitlab_error.log;
+
+
+    location / {
+      # serve static files from defined root folder;.
+      # @gitlab is a named location for the upstream fallback, see below
+      try_files $uri $uri/index.html $uri.html @gitlab;
+    }
+
+    # if a file, which is not found in the root folder is requested,
+    # then the proxy pass the request to the upsteam (gitlab unicorn)
+    location @gitlab {
+      # If you use https make sure you disable gzip compression 
+      # to be safe against BREACH attack
+
+      proxy_read_timeout 300; # Some requests take more than 30 seconds.
+      proxy_connect_timeout 300; # Some requests take more than 30 seconds.
+      proxy_redirect     off;
+
+      proxy_set_header   X-Forwarded-Proto $scheme;
+      proxy_set_header   Host              $http_host;
+      proxy_set_header   X-Real-IP         $remote_addr;
+      proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+      proxy_set_header   X-Frame-Options   SAMEORIGIN;
+
+      proxy_pass http://gitlab;
+    }
+    
+    # Enable gzip compression as per rails guide: http://guides.rubyonrails.org/asset_pipeline.html#gzip-compression
+    # WARNING: If you are using relative urls do remove the block below
+    # See config/application.rb under "Relative url support" for the list of
+    # other files that need to be changed for relative url support
+    location ~ ^/(assets)/  {
+      root /opt/gitlab/embedded/service/gitlab-rails/public;
+      # gzip_static on; # to serve pre-gzipped version
+      expires max;
+      add_header Cache-Control public;
+    }
+
+    error_page 502 /502.html;
+}
+
+```
+
+### 确保nginx能够访问`/var/opt/gitlab/gitlab-workhorse/socket`
+
+```
+# 查看nginx的启动用户
+sudo vim /etc/nginx/nginx.conf
+
+# 开头第一句就是
+user www-data;
+```
+
+```
+# 查看/var/opt/gitlab/gitlab-workhorse/socket的用户及用户组
+sudo ls -l /var/opt/gitlab/gitlab-workhorse/
+
+-rw-r----- 1 root git  70 Jul 10 13:14 config.toml
+srwxrwxrwx 1 git  git   0 Jul 17 10:51 socket  # 这个就是我们要查看的
+-rw-r--r-- 1 root root 40 Jul 10 13:14 VERSION
+```
+
+```
+# 将nginx的启动用户加入/var/opt/gitlab/gitlab-workhorse/socket的用户组
+sudo usermod -aG git www-data
+```
+
+**查看gitlab访问日志,可以使用如下命令**
+
+```
+sudo gitlab-ctl tail
+```
+
+**如果还是有权限不足的情况,直接可以更改`nginx`的启动用户为`gitlab-www`即可**
+
+```
+sudo vim /etc/nginx/nginx.conf
+
+# 开头第一句改为
+user gitlab-www gitlab-www;
+```
+
+**重启`nginx`**
+
+```
+sudo service nginx restart
+```
+
+## 公网服务器nginx如下设置
 
 ```nginx
 server {
@@ -166,9 +268,10 @@ server {
     }
 }
 ```
+
 这样即可通过 http://gitlab.xxxx.com 正常访问内网的gitlab了
 
-但是这样还没结束，你会发现外网通过git clone http://gitlab.xxxx.com/zhuqian/licaishi.git ,根本没法正常克隆仓库，那有啥用啊，别急，咋们还可以用ssh方式啊。
+## 接下来就可以愉快的使用gitlab了
 
 上面我们已经配置gitlab的22端口映射到服务器的8081端口了，所以可以这样克隆:
 
@@ -187,7 +290,7 @@ pip install git+ssh://git@gitlab.xxxx.com:8081/zhuqian/algorithm.git
 ```
 
 你以为就这样完了，还没有，我们想要直接能在gitlab项目首页直接能够显示git访问方法，效果如下:
-![](/images/1046366-20180927105727421-1721871308.png)
+![](http://blog.breakering.com/images/1046366-20180927105727421-1721871308.png)
 
 要实现此效果，只需配置下`/etc/gitlab/gitlab.rb`即可：
 
@@ -199,19 +302,18 @@ external_url 'http://gitlab.xxxx.com'
 gitlab_rails['gitlab_shell_ssh_port'] = 8081
 ...
 ```
->> 另外需要注意下`nginx['listen_addresses'] = ['192.168.10.60']`，需要对应到本地的ip地址
-
 配置完之后:
 
 ```
-gitlab-ctl reconfigure
+sudo gitlab-ctl reconfigure
+sudo gitlab-ctl restart
 ```
-然后通过域名访问gitlab即可实现上述效果了，只不过http方式目前还无法解决。
+然后通过域名访问gitlab即可实现上述效果了,当然通过http去clone或者push都是没问题的。
 
 # 七、由mtu引起的无法访问的问题
 如果frp的admin界面一切正常，但是就是无法获取数据
 
-![](/images/1046366-20180927105741148-1074788234.png)
+![](http://blog.breakering.com/images/1046366-20180927105741148-1074788234.png)
 
 那么极有可能是你本地的网络最大分片小于服务器的最大分片，导致数据无法发送出去,解决办法是减小服务器的mtu:
 
@@ -224,3 +326,4 @@ sudo ifconfig eth0 mtu 1000 up
 # 八、References:
 
 1. [利用 frp 进行内网穿透](https://mritd.me/2017/01/21/use-frp-for-internal-network-wear/)
+
