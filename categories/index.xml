@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Jacob个人技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 09 Jul 2019 15:42:32 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 01 Aug 2019 11:20:19 +0800</lastBuildDate>
     
 	<atom:link href="http://blog.breakering.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ssl</title>
+      <link>http://blog.breakering.com/categories/ssl/</link>
+      <pubDate>Thu, 01 Aug 2019 11:20:19 +0800</pubDate>
+      
+      <guid>http://blog.breakering.com/categories/ssl/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Neo4j</title>
