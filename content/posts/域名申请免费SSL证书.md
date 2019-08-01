@@ -26,7 +26,7 @@ url: /2019/08/01/free-ssl/
 
 如上，`certbot-auto`命令会自动下载`Certbot`所需的依赖，并且为`ainizhi.xin`域名申请并生成证书。请更换`--email`和 `-d`后的参数，分别表示自己邮箱和域名。
 
-另外，证书90后就会到期，到时我们只需要使用`certbot-auto renew`命令免费续签即可（建议配合使用linux的crontab机制），可参考官方文档。
+另外，证书90天后就会到期，到时我们只需要使用`certbot-auto renew`命令免费续签即可（建议配合使用linux的crontab机制），可参考官方文档。
 
 ### 3.证书位置
 
