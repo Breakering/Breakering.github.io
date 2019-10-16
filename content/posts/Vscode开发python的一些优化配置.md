@@ -65,11 +65,43 @@ pip install yapf
 
 直接插件库搜索即可，推荐 `Icons Ocean`
 
+### Atom One Dark Theme
+
+![image462b5b7be6d7268b.png](http://images.breakering.com:9080/images/2019/10/16/image462b5b7be6d7268b.png)
+
+### vscode-icons
+
+![image9aaeda3e2eddeff7.png](http://images.breakering.com:9080/images/2019/10/16/image9aaeda3e2eddeff7.png)
+
 ## 额外的辅助插件
 
 ### PostgreSQL
 
 ![imagec58f6d0da4112b1e.png](http://images.breakering.com:9080/images/2019/10/16/imagec58f6d0da4112b1e.png)
+
+### Code Runner
+
+选中代码块运行
+
+### filesize
+
+显示文件大小
+
+### Git History
+
+查看git历史记录
+
+### GitLens
+
+可以看到该行是谁提交的
+
+### Path Autocomplete
+
+自动补全文件路径
+
+### Settings Sync
+
+同步所有插件到github
 
 ## 推荐字体
 
