@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Jacob个人技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 16 Oct 2019 11:55:27 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Mar 2020 13:28:43 +0800</lastBuildDate>
     
 	<atom:link href="http://blog.breakering.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用源码安装go</title>
+      <link>http://blog.breakering.com/2020/03/16/install-go/</link>
+      <pubDate>Mon, 16 Mar 2020 13:28:43 +0800</pubDate>
+      
+      <guid>http://blog.breakering.com/2020/03/16/install-go/</guid>
+      <description>官网下载源码包 官网地址
+获取最新的源码包
+wget https://dl.google.com/go/go1.14.linux-amd64.tar.gz  解压到指定目录 sudo tar zxvf go1.</description>
+    </item>
     
     <item>
       <title>Vscode开发python的一些优化配置</title>
