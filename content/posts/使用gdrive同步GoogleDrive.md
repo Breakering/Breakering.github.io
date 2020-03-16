@@ -17,49 +17,49 @@ gdrive自带的证书认证已经失效，本文是使用自建的own Google cre
 
 ## 创建own Google credential
 
-1.  打开链接 <https://console.developers.google.com/apis/dashboard>登录你的google账号
+-   打开链接 <https://console.developers.google.com/apis/dashboard>登录你的google账号
 
 如果你的账号是第一次打开此链接，你需要同意google的一些条款
 
 ![image.png](http://images.breakering.com:9080/images/2020/03/16/image.png)
 
-2.  创建一个新的项目
+-   创建一个新的项目
 
 ![image6cc8238b67493bf5.png](http://images.breakering.com:9080/images/2020/03/16/image6cc8238b67493bf5.png)
 
-3.  输入项目名并点击创建
+-   输入项目名并点击创建
 
 ![imagebc78c83627a3b14b.png](http://images.breakering.com:9080/images/2020/03/16/imagebc78c83627a3b14b.png)
 
-4.  启用API和服务
+-   启用API和服务
 
 ![image416dad121fb24b89.png](http://images.breakering.com:9080/images/2020/03/16/image416dad121fb24b89.png)
 
-5.  选择*Google Drive API*
+-   选择*Google Drive API*
 
 ![image454fcbd11275bc38.png](http://images.breakering.com:9080/images/2020/03/16/image454fcbd11275bc38.png)
 
-6.  点击启用
+-   点击启用
 
 ![image147d34a3ca59d6ff.png](http://images.breakering.com:9080/images/2020/03/16/image147d34a3ca59d6ff.png)
 
-7.  Configure consent screen
+-   Configure consent screen
 
 ![imagec744f5a49adec90e.png](http://images.breakering.com:9080/images/2020/03/16/imagec744f5a49adec90e.png)
 
-8.  输入项目名并保存
+-   输入项目名并保存
 
 ![imaged420c0a117a2e4c8.png](http://images.breakering.com:9080/images/2020/03/16/imaged420c0a117a2e4c8.png)
 
-9.  创建OAuth客户端ID
+-   创建OAuth客户端ID
 
 ![imagec5ad3743f0a66729.png](http://images.breakering.com:9080/images/2020/03/16/imagec5ad3743f0a66729.png)
 
-10.  选择桌面应用然后加名称创建即可
+-   选择桌面应用然后加名称创建即可
 
 ![imagec090a9e3ce51e388.png](http://images.breakering.com:9080/images/2020/03/16/imagec090a9e3ce51e388.png)
 
-11.  创建成功
+-   创建成功
 
 ![image03911f8f0c2da84b.png](http://images.breakering.com:9080/images/2020/03/16/image03911f8f0c2da84b.png)
 
