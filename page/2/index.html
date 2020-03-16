@@ -68,6 +68,30 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="http://blog.breakering.com/2018/12/12/modify-request/" title="django修改request对象" >django修改request对象</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2018年12月12日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/Django">Django</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Remove immutability:
+if not request.GET._mutable: request.GET._mutable = True # now you can spoil it request.……
+                            </div>
+                            <p class="readmore"><a href="http://blog.breakering.com/2018/12/12/modify-request/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="http://blog.breakering.com/2018/11/30/vue-cross-domain/" title="vue跨域配置" >vue跨域配置</a>
                                 </h1>
                             </header>
@@ -279,31 +303,6 @@ gitlab-rake gitlab:backup:create  该命令会备份gitlab仓库、数据库、�
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/django-errors/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://blog.breakering.com/2018/11/19/postgresql-remote/" title="PostgreSQL允许被远程访问" >PostgreSQL允许被远程访问</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2018年11月19日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="http://blog.breakering.com/categories/PostgreSQL">PostgreSQL</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                1.修改postgresql.conf postgresql.conf存放位置在/etc/postgresql/9.x/main下，这里的x取决于你安装PostgreSQL的版本号，编辑或添加下面一行，使PostgreSQL可以接受来自任意IP的连接请求。
-listen_addresses = '*'  2.修改pg_hba.conf 修改pg_hba.conf位置与postgresql.conf相同，虽然上面配置允许任意地址连接PostgreSQL，但是这在pg中还不够，我们还需在pg_hba.conf中配置服务端允许的认证方式。任意编辑器打开该文件，编辑或添加下面一行。
-# TYPE DATABASE USER CIDR-ADDRESS METHOD host all all 0.……
-                            </div>
-                            <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/postgresql-remote/">阅读全文</a></p>
-                        </article>
-                    
                     
 
 
@@ -356,6 +355,10 @@ listen_addresses = '*'  2.修改pg_hba.conf 修改pg_hba.conf位置与postgresql
 <ul class="widget-list">
     
     <li>
+        <a href="http://blog.breakering.com/2020/03/16/gdrive/" title="使用gdrive同步GoogleDrive">使用gdrive同步GoogleDrive</a>
+    </li>
+    
+    <li>
         <a href="http://blog.breakering.com/2020/03/16/supervisor-encode/" title="Supervisor运行时的编码设置">Supervisor运行时的编码设置</a>
     </li>
     
@@ -389,10 +392,6 @@ listen_addresses = '*'  2.修改pg_hba.conf 修改pg_hba.conf位置与postgresql
     
     <li>
         <a href="http://blog.breakering.com/2019/01/27/install-supervisor/" title="Linux安装supervisor">Linux安装supervisor</a>
-    </li>
-    
-    <li>
-        <a href="http://blog.breakering.com/2018/12/12/modify-request/" title="django修改request对象">django修改request对象</a>
     </li>
     
 </ul>
@@ -429,6 +428,10 @@ listen_addresses = '*'  2.修改pg_hba.conf 修改pg_hba.conf位置与postgresql
     
     <li>
         <a href="http://blog.breakering.com/categories/Go/">Go(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Google/">Google(1)</a>
     </li>
     
     <li>
@@ -499,6 +502,8 @@ listen_addresses = '*'  2.修改pg_hba.conf 修改pg_hba.conf位置与postgresql
     <a href="http://blog.breakering.com/tags/GitLab/">GitLab</a>
     
     <a href="http://blog.breakering.com/tags/Go/">Go</a>
+    
+    <a href="http://blog.breakering.com/tags/Google/">Google</a>
     
     <a href="http://blog.breakering.com/tags/Hexo/">Hexo</a>
     
