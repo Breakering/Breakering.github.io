@@ -6,22 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>vue | Jacob个人技术博客</title>
-    <meta property="og:title" content="vue - Jacob个人技术博客">
+    <title>Supervisor运行时的编码设置 | Jacob个人技术博客</title>
+    <meta property="og:title" content="Supervisor运行时的编码设置 - Jacob个人技术博客">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content="2020-03-16T13:49:44&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2020-03-16T13:49:44&#43;08:00">
         
     <meta name="Keywords" content="Jacob,Blog,Python">
-    <meta name="description" content="vue">
+    <meta name="description" content="Supervisor运行时的编码设置">
         
     <meta name="author" content="Jacob">
-    <meta property="og:url" content="http://blog.breakering.com/categories/vue/">
+    <meta property="og:url" content="http://blog.breakering.com/2020/03/16/supervisor-encode/">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
     
+        <link rel="stylesheet" href="/css/prism.css">
+    
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" type="application/rss+xml+xml" href="http://blog.breakering.com/categories/vue/index.xml" title="Jacob个人技术博客" />
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 
     
@@ -30,7 +35,6 @@
     
     
 </head>
-
 
 <body>
 <header id="header" class="clearfix">
@@ -65,97 +69,93 @@
 
             <div class="col-8" id="main">
                 <div class="res-cons">
-                    
-                    <h3 class="archive-title">
-                        分类
-                        <span class="keyword">vue</span>
-                        中的文章
-                    </h3>
-                    
-
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://blog.breakering.com/2018/11/30/vue-cross-domain/">vue跨域配置</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2018年11月30日
-                            </date>
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Supervisor运行时的编码设置</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2020年3月16日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
                             
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="http://blog.breakering.com/categories/vue">vue</a>
-                                
-                            </div>
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/supervisor">supervisor</a></span>
                             
-                            <div class="post-content">
-                                开发环境 如果你使用的是vue-cli3的话，则可按如下配置
- 在你的项目根目录创建vue.config.js文件 在文件中写入如下配置信息:  // 配置proxy module.exports = { devServer: { proxy: { '/api': { target: 'https://xxxx.……
-                                <p class="readmore"><a href="http://blog.breakering.com/2018/11/30/vue-cross-domain/">阅读全文</a></p>
-                            </div>
-                        </article>
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        
+                        <div class="post-content">
+                            <p>用supervisor运行celery时有时会出现如下错误</p>
+
+<pre><code>UnicodeEncodeError: 'ascii' codec can't encode characters in position 65-66: ordinal not in range(128)
+</code></pre>
+
+<p>这是由于supervisor在运行时没有使用<code>utf-8</code>编码格式</p>
+
+<p>可以在supervisor配置文件<code>supervisord.conf</code>里面增加如下配置</p>
+
+<pre><code>[supervisord]
+environment=LC_ALL='en_US.UTF-8',LANG='en_US.UTF-8'
+</code></pre>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2019/01/27/install-supervisor/">Linux安装supervisor</a></li>
+        
+        <li><a href="/2020/03/16/install-go/">使用源码安装go</a></li>
+        
+        <li><a href="/2019/10/16/vscode-python/">Vscode开发python的一些优化配置</a></li>
+        
+        <li><a href="/2019/09/18/setup-chevereto/">Docker配置Chevereto图床</a></li>
+        
+        <li><a href="/2019/08/01/free-ssl/">域名申请免费SSL证书</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="http://blog.breakering.com/tags/supervisor">supervisor</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://blog.breakering.com/2018/11/29/vue-axios-set/">vue中axios全局设置csrftoken以及Authorization</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2018年11月29日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="http://blog.breakering.com/categories/vue">vue</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                说在前面 我们都知道，用django做后端服务时，对于post请求提交表单时总是需要csrftoken的验证，那么我们如何在vue中使用axios发起请求时全局在headers里面设置csrftoken呢？以及全局设置Authorization?
-设置 其实非常简单，在main.js中设置下即可，示例代码如下:
-import Vue from 'vue' import App from '.……
-                                <p class="readmore"><a href="http://blog.breakering.com/2018/11/29/vue-axios-set/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://blog.breakering.com/2018/11/27/vue-use-axios/">vue使用axios</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2018年11月27日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="http://blog.breakering.com/categories/vue">vue</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                安装 npm install --save axios vue-axios  引入 import Vue from 'vue' import axios from 'axios' import VueAxios from 'vue-axios' axios.……
-                                <p class="readmore"><a href="http://blog.breakering.com/2018/11/27/vue-use-axios/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
+    
 
-                    
-
-
-
-
-
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "breakering/breakering.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
                 </div>
             </div>
-
             <div id="secondary">
     <section class="widget">
         <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
@@ -411,6 +411,22 @@ import Vue from 'vue' import App from '.……
 </footer>
 
 
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
 
@@ -428,7 +444,6 @@ if (!doNotTrack) {
 
 
 <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
 
 
 

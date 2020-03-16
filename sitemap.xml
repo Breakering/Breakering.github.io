@@ -4,7 +4,42 @@
   
   <url>
     <loc>http://blog.breakering.com/categories/</loc>
-    <lastmod>2020-03-16T13:28:43+08:00</lastmod>
+    <lastmod>2020-03-16T13:49:44+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.breakering.com/</loc>
+    <lastmod>2020-03-16T13:49:44+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.breakering.com/posts/</loc>
+    <lastmod>2020-03-16T13:49:44+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.breakering.com/2020/03/16/supervisor-encode/</loc>
+    <lastmod>2020-03-16T13:49:44+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.breakering.com/tags/</loc>
+    <lastmod>2020-03-16T13:49:44+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.breakering.com/categories/supervisor/</loc>
+    <lastmod>2020-03-16T13:49:44+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.breakering.com/tags/supervisor/</loc>
+    <lastmod>2020-03-16T13:49:44+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -16,24 +51,6 @@
   
   <url>
     <loc>http://blog.breakering.com/tags/Go/</loc>
-    <lastmod>2020-03-16T13:28:43+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/</loc>
-    <lastmod>2020-03-16T13:28:43+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/posts/</loc>
-    <lastmod>2020-03-16T13:28:43+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/tags/</loc>
     <lastmod>2020-03-16T13:28:43+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -154,18 +171,6 @@
   <url>
     <loc>http://blog.breakering.com/2019/01/27/install-supervisor/</loc>
     <lastmod>2019-01-27T15:07:49+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/categories/supervisor/</loc>
-    <lastmod>2019-01-27T15:07:49+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/tags/supervisor/</loc>
-    <lastmod>2019-01-27T15:07:49+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

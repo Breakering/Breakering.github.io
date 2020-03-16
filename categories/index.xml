@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Jacob个人技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 16 Mar 2020 13:28:43 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Mar 2020 13:49:44 +0800</lastBuildDate>
     
 	<atom:link href="http://blog.breakering.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>supervisor</title>
+      <link>http://blog.breakering.com/categories/supervisor/</link>
+      <pubDate>Mon, 16 Mar 2020 13:49:44 +0800</pubDate>
+      
+      <guid>http://blog.breakering.com/categories/supervisor/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Go</title>
@@ -71,15 +80,6 @@
       <pubDate>Thu, 28 Feb 2019 13:20:45 +0000</pubDate>
       
       <guid>http://blog.breakering.com/categories/Ubuntu/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>supervisor</title>
-      <link>http://blog.breakering.com/categories/supervisor/</link>
-      <pubDate>Sun, 27 Jan 2019 15:07:49 +0000</pubDate>
-      
-      <guid>http://blog.breakering.com/categories/supervisor/</guid>
       <description></description>
     </item>
     
