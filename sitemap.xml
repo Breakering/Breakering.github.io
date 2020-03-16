@@ -9,13 +9,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/Google/</loc>
+    <loc>http://blog.breakering.com/tags/Google/</loc>
     <lastmod>2020-03-16T16:21:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/Google/</loc>
+    <loc>http://blog.breakering.com/categories/Google/</loc>
     <lastmod>2020-03-16T16:21:36+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -49,25 +49,25 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/supervisor/</loc>
-    <lastmod>2020-03-16T13:49:44+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.breakering.com/tags/supervisor/</loc>
     <lastmod>2020-03-16T13:49:44+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/Go/</loc>
-    <lastmod>2020-03-16T13:28:43+08:00</lastmod>
+    <loc>http://blog.breakering.com/categories/supervisor/</loc>
+    <lastmod>2020-03-16T13:49:44+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://blog.breakering.com/tags/Go/</loc>
+    <lastmod>2020-03-16T13:28:43+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.breakering.com/categories/Go/</loc>
     <lastmod>2020-03-16T13:28:43+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -83,13 +83,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/vscode/</loc>
+    <loc>http://blog.breakering.com/tags/vscode/</loc>
     <lastmod>2019-10-16T11:55:27+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/vscode/</loc>
+    <loc>http://blog.breakering.com/categories/vscode/</loc>
     <lastmod>2019-10-16T11:55:27+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -106,20 +106,14 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/</loc>
-    <lastmod>2019-09-18T13:29:24+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.breakering.com/tags/%E5%9B%BE%E5%BA%8A/</loc>
     <lastmod>2019-09-18T13:29:24+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/ssl/</loc>
-    <lastmod>2019-08-01T11:20:19+08:00</lastmod>
+    <loc>http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/</loc>
+    <lastmod>2019-09-18T13:29:24+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -130,18 +124,24 @@
   </url>
   
   <url>
+    <loc>http://blog.breakering.com/categories/ssl/</loc>
+    <lastmod>2019-08-01T11:20:19+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.breakering.com/2019/08/01/free-ssl/</loc>
     <lastmod>2019-08-01T11:20:19+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/Neo4j/</loc>
+    <loc>http://blog.breakering.com/tags/Neo4j/</loc>
     <lastmod>2019-07-09T15:42:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/Neo4j/</loc>
+    <loc>http://blog.breakering.com/categories/Neo4j/</loc>
     <lastmod>2019-07-09T15:42:32+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -152,13 +152,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/GitLab/</loc>
+    <loc>http://blog.breakering.com/tags/GitLab/</loc>
     <lastmod>2019-06-17T11:23:25+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/GitLab/</loc>
+    <loc>http://blog.breakering.com/categories/GitLab/</loc>
     <lastmod>2019-06-17T11:23:25+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -169,13 +169,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/Ubuntu/</loc>
+    <loc>http://blog.breakering.com/tags/Ubuntu/</loc>
     <lastmod>2019-02-28T13:20:45+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/Ubuntu/</loc>
+    <loc>http://blog.breakering.com/categories/Ubuntu/</loc>
     <lastmod>2019-02-28T13:20:45+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -191,13 +191,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/Django/</loc>
+    <loc>http://blog.breakering.com/tags/Django/</loc>
     <lastmod>2018-12-12T18:43:17+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/Django/</loc>
+    <loc>http://blog.breakering.com/categories/Django/</loc>
     <lastmod>2018-12-12T18:43:17+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -208,13 +208,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/vue/</loc>
+    <loc>http://blog.breakering.com/tags/vue/</loc>
     <lastmod>2018-11-30T15:16:11+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/vue/</loc>
+    <loc>http://blog.breakering.com/categories/vue/</loc>
     <lastmod>2018-11-30T15:16:11+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -235,13 +235,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/jupyter/</loc>
+    <loc>http://blog.breakering.com/tags/jupyter/</loc>
     <lastmod>2018-11-26T10:17:10+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/jupyter/</loc>
+    <loc>http://blog.breakering.com/categories/jupyter/</loc>
     <lastmod>2018-11-26T10:17:10+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -257,13 +257,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>http://blog.breakering.com/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2018-11-26T09:53:19+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2018-11-26T09:53:19+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -279,13 +279,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/Python/</loc>
+    <loc>http://blog.breakering.com/tags/Python/</loc>
     <lastmod>2018-11-19T14:19:10+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/Python/</loc>
+    <loc>http://blog.breakering.com/categories/Python/</loc>
     <lastmod>2018-11-19T14:19:10+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -301,13 +301,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/PostgreSQL/</loc>
+    <loc>http://blog.breakering.com/tags/PostgreSQL/</loc>
     <lastmod>2018-11-19T14:00:41+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/PostgreSQL/</loc>
+    <loc>http://blog.breakering.com/categories/PostgreSQL/</loc>
     <lastmod>2018-11-19T14:00:41+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -323,13 +323,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/Linux/</loc>
+    <loc>http://blog.breakering.com/tags/Linux/</loc>
     <lastmod>2018-11-16T17:02:52+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/Linux/</loc>
+    <loc>http://blog.breakering.com/categories/Linux/</loc>
     <lastmod>2018-11-16T17:02:52+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -345,13 +345,13 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/Hexo/</loc>
+    <loc>http://blog.breakering.com/tags/Hexo/</loc>
     <lastmod>2018-11-15T15:27:52+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/Hexo/</loc>
+    <loc>http://blog.breakering.com/categories/Hexo/</loc>
     <lastmod>2018-11-15T15:27:52+00:00</lastmod>
     <priority>0</priority>
   </url>
