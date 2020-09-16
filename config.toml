@@ -79,6 +79,6 @@ summaryLength = 10
     theme = "github-light" # 样式主题，有github-light和github-dark两种
 
 [[params.ads]]
-  title = "网管到CEO的10年逆袭之路"
-  url = "https://www.luffycity.com/courses/71/details-introduce?source=alexblog"
-  img = "/images/o_封面图.jpg"
+  title = "Give $100, Get $25"
+  url = "https://www.vultr.com/?ref=8682518-6G"
+  img = "https://www.vultr.com/media/banners/banner_800x418.png"
