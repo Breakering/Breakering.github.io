@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>内网穿透frp | Jacob个人技术博客</title>
+    <meta property="og:title" content="内网穿透frp - Jacob个人技术博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-09-28T20:58:27&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-09-28T20:58:27&#43;08:00">
+        
+    <meta name="Keywords" content="Jacob,Blog,Python">
+    <meta name="description" content="简单地说，内网穿透依赖于 NAT 原理，根据 NAT 设备不同大致可分为以下 4 大类(前3种NAT类型可统称为cone类型)">
+        
+    <meta name="author" content="Jacob">
+    <meta property="og:url" content="http://blog.breakering.com/2018/09/28/frp/">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://blog.breakering.com">
+                        Jacob个人技术博客
+                    </a>
+                
+                <p class="description">Talk is cheap!Show me the code!</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="http://blog.breakering.com">首页</a>
+                    
+                    <a  href="http://blog.breakering.com/archives/" title="归档">归档</a>
+                    
+                    <a  href="http://blog.breakering.com/series/" title="系列">系列</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">内网穿透frp</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2018年9月28日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F">内网穿透</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        
+                        <div class="post-content">
+                            <h1 id="一内网穿透原理">一、内网穿透原理</h1>
+<p>简单地说，内网穿透依赖于 NAT 原理，根据 NAT 设备不同大致可分为以下 4 大类(前3种NAT类型可统称为cone类型)：</p>
+<ul>
+<li>全克隆(Full Cone)：NAT 把所有来自相同内部 IP 地址和端口的请求映射到相同的外部 IP 地址和端口上，任何一个外部主机均可通过该映射反向发送 IP 包到该内部主机</li>
+<li>限制性克隆(Restricted Cone)：NAT 把所有来自相同内部 IP 地址和端口的请求映射到相同的外部 IP 地址和端口；但是，只有当内部主机先给 IP 地址为 X 的外部主机发送 IP 包时，该外部主机才能向该内部主机发送 IP 包</li>
+<li>端口限制性克隆(Port Restricted Cone)：端口限制性克隆与限制性克隆类似，只是多了端口号的限制，即只有内部主机先向 IP 地址为 X，端口号为 P 的外部主机发送1个 IP 包,该外部主机才能够把源端口号为 P 的 IP 包发送给该内部主机</li>
+<li>对称式NAT(Symmetric NAT)：这种类型的 NAT 与上述3种类型的不同，在于当同一内部主机使用相同的端口与不同地址的外部主机进行通信时， NAT 对该内部主机的映射会有所不同；对称式 NAT 不保证所有会话中的私有地址和公开 IP 之间绑定的一致性；相反，它为每个新的会话分配一个新的端口号；导致此种 NAT 根本没法穿透</li>
+</ul>
+<p>内网穿透的作用就是利用以上规则，创建一条从外部服务器到内部设备的 “隧道”，具体的 NAT 原理等可参考 内网打洞、网络地址转换NAT原理。</p>
+<h1 id="二环境准备">二、环境准备</h1>
+<p>实际上根据以上 NAT 规则，基本上大部分家用设备和运营商上级路由等都在前三种规则之中，所以只需要借助成熟的内网穿透工具即可，以下为本次穿透环境</p>
+<ul>
+<li>最新版本 frp</li>
+<li>一台公网 VPS 服务器</li>
+<li>内网一台服务器，最好 Linux 系统</li>
+</ul>
+<h1 id="三服务端搭建">三、服务端搭建</h1>
+<p>服务器作为公网访问唯一的固定地址，即作为 server 端；内网客户端作为 client 端，会主动向 server 端创建连接，此时再从 server 端反向发送数据即可实现内网穿透</p>
+<h2 id="31-下载并解压frp">3.1). 下载并解压frp</h2>
+<p>可以查看<a href="https://github.com/fatedier/frp/releases">releases</a>获取最新的版本,选好版本之后使用以下命令:</p>
+<pre><code>wget https://github.com/fatedier/frp/releases/download/v0.21.0/frp_0.21.0_linux_amd64.tar.gz
+tar -zxvf frp_0.21.0_linux_amd64.tar.gz
+cd frp_0.21.0_linux_amd64
+</code></pre><h2 id="32-编辑frpsini">3.2). 编辑frps.ini</h2>
+<pre><code>[common]                                                                                                                                                                                                
+# frp 监听地址
+bind_addr = 0.0.0.0
+bind_port = 7000
+
+# 如果需要代理 web(http) 服务，则开启此端口
+vhost_http_port = 8080
+vhost_https_port = 4443
+
+# frp 控制面板
+dashboard_port = 7500
+dashboard_user = user
+dashboard_pwd = pwd
+
+# 默认日志输出位置(这里输出到标准输出)
+log_file = /tmp/frps.log
+# 日志级别，支持: debug, info, warn, error
+log_level = info
+log_max_days = 3
+
+# 是否开启特权模式(特权模式下，客户端更改配置无需更新服务端)
+privilege_mode = true
+# 授权 token 建议随机生成
+privilege_token = cc23*********************d072734
+# 特权模式下允许分配的端口(避免端口滥用)
+privilege_allow_ports = 4000-50000
+
+# 后端连接池最大连接数量
+max_pool_count = 100
+
+# 口令超时时间
+authentication_timeout = 900
+
+# 子域名(特权模式下将 *.xxxx.com 解析到公网服务器)
+subdomain_host = xxxx.com
+</code></pre><p><strong>其他具体配置说明请参考<a href="https://github.com/fatedier/frp/blob/master/README_zh.md">frp README</a> 文档</strong></p>
+<h2 id="33-启动frp-server">3.3). 启动frp server</h2>
+<p>设置完成后执行 ./frps -c frps.ini 启动即可</p>
+<p><strong>ps:当然也可以使用supervisor来管理</strong></p>
+<h1 id="四客户端配置">四、客户端配置</h1>
+<p>客户端作为发起链接的主动方，只需要正确配置服务器地址，以及要映射客户端的哪些服务端口等即可</p>
+<h2 id="41-下载并解压frp">4.1). 下载并解压frp</h2>
+<pre><code>wget https://github.com/fatedier/frp/releases/download/v0.21.0/frp_0.21.0_linux_amd64.tar.gz
+tar -zxvf frp_0.21.0_linux_amd64.tar.gz
+cd frp_0.21.0_linux_amd64
+</code></pre><h2 id="42-编辑frpcini">4.2). 编辑frpc.ini</h2>
+<pre><code>[common]
+server_addr = 127.0.0.1
+server_port = 7000
+# console or real logFile path like ./frpc.log
+log_file = /tmp/frpc.log
+
+# debug, info, warn, error
+log_level = debug
+
+log_max_days = 3
+
+# 特权模式，要和服务器端的配置一致
+privilege_token = cc23*********************d072734
+
+
+[gitlab]
+type = http
+local_port = 80
+subdomain = gitlab  # 这样只要访问http://gitlab.xxxx.com:8080即可访问到该客户端的gitlab服务
+use_gzip = true
+
+
+[gitlab_ssh]
+type = tcp 
+local_ip = 127.0.0.1
+local_port = 22
+remote_port = 8081
+</code></pre><p><strong>其他具体配置说明请参考<a href="https://github.com/fatedier/frp/blob/master/README_zh.md">frp README</a> 文档</strong></p>
+<h2 id="43-启动frp-client">4.3). 启动frp client</h2>
+<p>设置完成后执行 <code>./frpc -c frpc.ini </code>启动即可</p>
+<p><strong>ps:当然也可以使用supervisor来管理</strong></p>
+<h1 id="五frp监测">五、frp监测</h1>
+<p>服务端和客户端同时开启完成后，即可访问 http://127.0.0.1:7500 进入 frp 控制面板，如下
+<img src="http://blog.breakering.com//images/1046366-20180927105622574-1652030646.png" alt="">
+<img src="http://blog.breakering.com//images/1046366-20180927105631267-34167117.png" alt="">
+此时通过 ssh <a href="mailto:root@127.0.0.1">root@127.0.0.1</a> -p 8081 即可ssh到gitlab，通过访问http://gitlab.xxxx.com:8080 即可访问gitlab服务。</p>
+<h1 id="六gitlab通过frp代理">六、GitLab通过frp代理</h1>
+<p>内网的gitlab服务想要实现流畅的访问效果还是需要一番配置的，比如想直接通过 <a href="http://gitlab.xxxx.com">http://gitlab.xxxx.com</a> 访问，想直接通过 <a href="http://gitlab.xxxx.com/xxx/xxx.git">http://gitlab.xxxx.com/xxx/xxx.git</a> 来clone</p>
+<h2 id="gitlab服务配置">gitlab服务配置</h2>
+<h3 id="取消gitlab自带的nginx服务">取消gitlab自带的nginx服务</h3>
+<pre><code>sudo vim /etc/gitlab/gitlab.rb
+# 找到如下位置取消注释并设置为false
+nginx['enable'] = false
+</code></pre><h3 id="创建gitlab的nginx配置文件">创建gitlab的nginx配置文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#75715e"># gitlab socket 文件地址
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">upstream</span> <span style="color:#e6db74">gitlab</span> {
+  <span style="color:#f92672">server</span> <span style="color:#e6db74">unix:/var/opt/gitlab/gitlab-workhorse/socket</span>;
+}
+
+<span style="color:#66d9ef">server</span> {
+    <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
+    <span style="color:#f92672">server_tokens</span> <span style="color:#66d9ef">off</span>;
+    <span style="color:#f92672">root</span> <span style="color:#e6db74">/opt/gitlab/embedded/service/gitlab-rails/public</span>;
+
+    <span style="color:#75715e"># Increase this if you want to upload large attachments
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># Or if you want to accept large git objects over http
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">client_max_body_size</span> <span style="color:#ae81ff">250m</span>;
+
+    <span style="color:#75715e"># individual nginx logs for this gitlab vhost
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">access_log</span>  <span style="color:#e6db74">/var/log/gitlab/nginx/gitlab_access.log</span>;
+    <span style="color:#f92672">error_log</span>    <span style="color:#e6db74">/var/log/gitlab/nginx/gitlab_error.log</span>;
+
+
+    <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+      <span style="color:#75715e"># serve static files from defined root folder;.
+</span><span style="color:#75715e"></span>      <span style="color:#75715e"># @gitlab is a named location for the upstream fallback, see below
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">try_files</span> $uri $uri/index.html $uri.html <span style="color:#e6db74">@gitlab</span>;
+    }
+
+    <span style="color:#75715e"># if a file, which is not found in the root folder is requested,
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># then the proxy pass the request to the upsteam (gitlab unicorn)
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">location</span> <span style="color:#e6db74">@gitlab</span> {
+      <span style="color:#75715e"># If you use https make sure you disable gzip compression 
+</span><span style="color:#75715e"></span>      <span style="color:#75715e"># to be safe against BREACH attack
+</span><span style="color:#75715e"></span>
+      <span style="color:#f92672">proxy_read_timeout</span> <span style="color:#ae81ff">300</span>; <span style="color:#75715e"># Some requests take more than 30 seconds.
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">proxy_connect_timeout</span> <span style="color:#ae81ff">300</span>; <span style="color:#75715e"># Some requests take more than 30 seconds.
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">proxy_redirect</span>     <span style="color:#66d9ef">off</span>;
+
+      <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">X-Forwarded-Proto</span> $scheme;
+      <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">Host</span>              $http_host;
+      <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">X-Real-IP</span>         $remote_addr;
+      <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">X-Forwarded-For</span>   $proxy_add_x_forwarded_for;
+      <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">X-Frame-Options</span>   <span style="color:#e6db74">SAMEORIGIN</span>;
+
+      <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://gitlab</span>;
+    }
+    
+    <span style="color:#75715e"># Enable gzip compression as per rails guide: http://guides.rubyonrails.org/asset_pipeline.html#gzip-compression
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># WARNING: If you are using relative urls do remove the block below
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># See config/application.rb under &#34;Relative url support&#34; for the list of
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># other files that need to be changed for relative url support
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">location</span> ~ <span style="color:#e6db74">^/(assets)/</span>  {
+      <span style="color:#f92672">root</span> <span style="color:#e6db74">/opt/gitlab/embedded/service/gitlab-rails/public</span>;
+      <span style="color:#75715e"># gzip_static on; # to serve pre-gzipped version
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">expires</span> <span style="color:#e6db74">max</span>;
+      <span style="color:#f92672">add_header</span> <span style="color:#e6db74">Cache-Control</span> <span style="color:#e6db74">public</span>;
+    }
+
+    <span style="color:#f92672">error_page</span> <span style="color:#ae81ff">502</span> <span style="color:#e6db74">/502.html</span>;
+}
+
+</code></pre></div><h3 id="确保nginx能够访问varoptgitlabgitlab-workhorsesocket">确保nginx能够访问<code>/var/opt/gitlab/gitlab-workhorse/socket</code></h3>
+<pre><code># 查看nginx的启动用户
+sudo vim /etc/nginx/nginx.conf
+
+# 开头第一句就是
+user www-data;
+</code></pre><pre><code># 查看/var/opt/gitlab/gitlab-workhorse/socket的用户及用户组
+sudo ls -l /var/opt/gitlab/gitlab-workhorse/
+
+-rw-r----- 1 root git  70 Jul 10 13:14 config.toml
+srwxrwxrwx 1 git  git   0 Jul 17 10:51 socket  # 这个就是我们要查看的
+-rw-r--r-- 1 root root 40 Jul 10 13:14 VERSION
+</code></pre><pre><code># 将nginx的启动用户加入/var/opt/gitlab/gitlab-workhorse/socket的用户组
+sudo usermod -aG git www-data
+</code></pre><p><strong>查看gitlab访问日志,可以使用如下命令</strong></p>
+<pre><code>sudo gitlab-ctl tail
+</code></pre><p><strong>如果还是有权限不足的情况,直接可以更改<code>nginx</code>的启动用户为<code>gitlab-www</code>即可</strong></p>
+<pre><code>sudo vim /etc/nginx/nginx.conf
+
+# 开头第一句改为
+user gitlab-www gitlab-www;
+</code></pre><p><strong>重启<code>nginx</code></strong></p>
+<pre><code>sudo service nginx restart
+</code></pre><h2 id="公网服务器nginx如下设置">公网服务器nginx如下设置</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">server</span> {
+    <span style="color:#f92672">listen</span>  <span style="color:#ae81ff">80</span>;
+    <span style="color:#f92672">server_name</span>  <span style="color:#e6db74">gitlab.xxxx.com</span>;
+    <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+        <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://gitlab.geekfinancer.com:8080</span>;
+    }
+}
+</code></pre></div><p>这样即可通过 <a href="http://gitlab.xxxx.com">http://gitlab.xxxx.com</a> 正常访问内网的gitlab了</p>
+<h2 id="接下来就可以愉快的使用gitlab了">接下来就可以愉快的使用gitlab了</h2>
+<p>上面我们已经配置gitlab的22端口映射到服务器的8081端口了，所以可以这样克隆:</p>
+<pre><code>git clone ssh://git@127.0.0.1:8081/zhuqian/licaishi.git
+# 或者
+git clone ssh://git@gitlab.xxxx.com:8081/zhuqian/licaishi.git
+</code></pre><p>对于pip install的话，可以这样：</p>
+<pre><code>pip install git+ssh://git@127.0.0.1:8081/zhuqian/algorithm.git
+# 或者
+pip install git+ssh://git@gitlab.xxxx.com:8081/zhuqian/algorithm.git
+</code></pre><p>你以为就这样完了，还没有，我们想要直接能在gitlab项目首页直接能够显示git访问方法，效果如下:
+<img src="http://blog.breakering.com/images/1046366-20180927105727421-1721871308.png" alt=""></p>
+<p>要实现此效果，只需配置下<code>/etc/gitlab/gitlab.rb</code>即可：</p>
+<pre><code>...
+external_url 'http://gitlab.xxxx.com'
+...
+
+gitlab_rails['gitlab_shell_ssh_port'] = 8081
+...
+</code></pre><p>配置完之后:</p>
+<pre><code>sudo gitlab-ctl reconfigure
+sudo gitlab-ctl restart
+</code></pre><p>然后通过域名访问gitlab即可实现上述效果了,当然通过http去clone或者push都是没问题的。</p>
+<h1 id="七由mtu引起的无法访问的问题">七、由mtu引起的无法访问的问题</h1>
+<p>如果frp的admin界面一切正常，但是就是无法获取数据</p>
+<p><img src="http://blog.breakering.com/images/1046366-20180927105741148-1074788234.png" alt=""></p>
+<p>那么极有可能是你本地的网络最大分片小于服务器的最大分片，导致数据无法发送出去,解决办法是减小服务器的mtu:</p>
+<pre><code>sudo ifconfig eth0 mtu 1000 up
+</code></pre><p>其他修改mtu的方式请自行google。</p>
+<h1 id="八references">八、References:</h1>
+<ol>
+<li><a href="https://mritd.me/2017/01/21/use-frp-for-internal-network-wear/">利用 frp 进行内网穿透</a></li>
+</ol>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2018/09/28/hexo-start/">Hexo初识</a></li>
+        
+        <li><a href="/archives/">归档</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "breakering/breakering.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://blog.breakering.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.breakering.com/2020/03/16/gdrive/" title="使用gdrive同步GoogleDrive">使用gdrive同步GoogleDrive</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2020/03/16/supervisor-encode/" title="Supervisor运行时的编码设置">Supervisor运行时的编码设置</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2020/03/16/install-go/" title="使用源码安装go">使用源码安装go</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/10/16/vscode-python/" title="Vscode开发python的一些优化配置">Vscode开发python的一些优化配置</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/09/18/setup-chevereto/" title="Docker配置Chevereto图床">Docker配置Chevereto图床</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/08/01/free-ssl/" title="域名申请免费SSL证书">域名申请免费SSL证书</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/07/09/ubuntu-neo4j/" title="Ubuntu安装Neo4j">Ubuntu安装Neo4j</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/06/17/gitlab-migrations/" title="记GitLab服务器宕机的迁移过程">记GitLab服务器宕机的迁移过程</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/02/28/ubuntu-boot-script/" title="ubuntu18.04设置开机启动脚本">ubuntu18.04设置开机启动脚本</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/01/27/install-supervisor/" title="Linux安装supervisor">Linux安装supervisor</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title" style="color:red">福利派送</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
+                
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
+                
+            </a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Django/">Django(4)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/GitLab/">GitLab(3)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Go/">Go(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Google/">Google(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Hexo/">Hexo(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Neo4j/">Neo4j(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/PostgreSQL/">PostgreSQL(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Python/">Python(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Ubuntu/">Ubuntu(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/jupyter/">jupyter(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/ssl/">ssl(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/supervisor/">supervisor(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/vscode/">vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/vue/">vue(3)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/">图床(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/">工具(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="http://blog.breakering.com/tags/Django/">Django</a>
+    
+    <a href="http://blog.breakering.com/tags/GitLab/">GitLab</a>
+    
+    <a href="http://blog.breakering.com/tags/Go/">Go</a>
+    
+    <a href="http://blog.breakering.com/tags/Google/">Google</a>
+    
+    <a href="http://blog.breakering.com/tags/Hexo/">Hexo</a>
+    
+    <a href="http://blog.breakering.com/tags/Linux/">Linux</a>
+    
+    <a href="http://blog.breakering.com/tags/Neo4j/">Neo4j</a>
+    
+    <a href="http://blog.breakering.com/tags/PostgreSQL/">PostgreSQL</a>
+    
+    <a href="http://blog.breakering.com/tags/Python/">Python</a>
+    
+    <a href="http://blog.breakering.com/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="http://blog.breakering.com/tags/chevereto/">chevereto</a>
+    
+    <a href="http://blog.breakering.com/tags/jupyter/">jupyter</a>
+    
+    <a href="http://blog.breakering.com/tags/ssl/">ssl</a>
+    
+    <a href="http://blog.breakering.com/tags/supervisor/">supervisor</a>
+    
+    <a href="http://blog.breakering.com/tags/vscode/">vscode</a>
+    
+    <a href="http://blog.breakering.com/tags/vue/">vue</a>
+    
+    <a href="http://blog.breakering.com/tags/%E5%9B%BE%E5%BA%8A/">图床</a>
+    
+    <a href="http://blog.breakering.com/tags/%E5%B7%A5%E5%85%B7/">工具</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.profhua.com/" title="花教授">花教授</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://me.csdn.net/julystroy" title="强哥">强哥</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://blog.busyboy.cn" title="吴松">吴松</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/breakering/" title="我的博客园">我的博客园</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/alex3714/" title="金角大王">金角大王</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/wupeiqi/" title="银角大王">银角大王</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/zingp/" title="导师刘又源">导师刘又源</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/zhaof/" title="赵凡">赵凡</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://luuman.github.io/" title="luuman">luuman</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://blog.breakering.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2020 <a href="http://blog.breakering.com">Jacob个人技术博客 By Jacob</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-130599767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

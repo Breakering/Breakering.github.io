@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>在Django中实现queryset级别缓存 | Jacob个人技术博客</title>
+    <meta property="og:title" content="在Django中实现queryset级别缓存 - Jacob个人技术博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-11-16T11:50:19&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-11-16T11:50:19&#43;08:00">
+        
+    <meta name="Keywords" content="Jacob,Blog,Python">
+    <meta name="description" content="django中实现queryset级别缓存">
+        
+    <meta name="author" content="Jacob">
+    <meta property="og:url" content="http://blog.breakering.com/2018/11/16/django-queryset-cache/">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://blog.breakering.com">
+                        Jacob个人技术博客
+                    </a>
+                
+                <p class="description">Talk is cheap!Show me the code!</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="http://blog.breakering.com">首页</a>
+                    
+                    <a  href="http://blog.breakering.com/archives/" title="归档">归档</a>
+                    
+                    <a  href="http://blog.breakering.com/series/" title="系列">系列</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">在Django中实现queryset级别缓存</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2018年11月16日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="http://blog.breakering.com/categories/Django">Django</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        
+                        <div class="post-content">
+                            <h2 id="介绍">介绍</h2>
+<p>实现queryset级别的缓存，不是view层面的，相当于缓存sql查询结果。</p>
+<h2 id="使用">使用</h2>
+<h3 id="首先在你的django项目中安装依赖的模块">首先在你的django项目中安装依赖的模块</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pip install django-cache-machine
+</code></pre></div><h3 id="创建queryset_cachepy文件文件内容如下">创建queryset_cache.py文件,文件内容如下</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#! /usr/bin/env python</span>
+<span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#75715e"># __author__ = &#34;Breakering&#34;</span>
+<span style="color:#75715e"># Date: 18-8-29</span>
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">依赖django-cache-machine，并在此基础上实现了轻松切换使用queryset级别缓存以及count等缓存
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+<span style="color:#f92672">import</span> contextlib
+
+<span style="color:#f92672">from</span> caching <span style="color:#f92672">import</span> config
+<span style="color:#f92672">from</span> caching.base <span style="color:#f92672">import</span> CachingQuerySet, cached_with
+<span style="color:#f92672">from</span> django.db.models.sql <span style="color:#f92672">import</span> query
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">queryset_cache_decorator</span>(always_cached<span style="color:#f92672">=</span>True):
+    <span style="color:#e6db74">&#34;&#34;&#34;queryset级别缓存的装饰器，可以使得queryset直接从缓存中获取数据&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(func):
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+            queryset <span style="color:#f92672">=</span> func(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+            <span style="color:#66d9ef">if</span> always_cached:  <span style="color:#75715e"># 此装饰器默认从cache中获取数据</span>
+                queryset <span style="color:#f92672">=</span> queryset<span style="color:#f92672">.</span>from_cache()
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">with</span> contextlib<span style="color:#f92672">.</span>suppress(<span style="color:#a6e22e">Exception</span>):
+                    queryset_cache_time <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>query_params<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;queryset_cache_time&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+                    <span style="color:#66d9ef">if</span> queryset_cache_time <span style="color:#f92672">and</span> queryset_cache_time<span style="color:#f92672">.</span>isdigit():
+                        queryset <span style="color:#f92672">=</span> queryset<span style="color:#f92672">.</span>from_cache(int(queryset_cache_time))
+            <span style="color:#66d9ef">return</span> queryset
+        <span style="color:#66d9ef">return</span> inner
+    <span style="color:#66d9ef">return</span> wrapper
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">queryset_cache_count_decorator</span>(always_cached<span style="color:#f92672">=</span>True):
+    <span style="color:#e6db74">&#34;&#34;&#34;queryset count缓存的装饰器，可以使得queryset直接从缓存中获取count的值&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(func):
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+            queryset <span style="color:#f92672">=</span> func(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+            <span style="color:#66d9ef">if</span> always_cached:  <span style="color:#75715e"># 此装饰器默认从cache中获取数据</span>
+                queryset <span style="color:#f92672">=</span> queryset<span style="color:#f92672">.</span>cache_count()
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">with</span> contextlib<span style="color:#f92672">.</span>suppress(<span style="color:#a6e22e">Exception</span>):
+                    queryset_cache_time <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>query_params<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;queryset_cache_time&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+                    <span style="color:#66d9ef">if</span> queryset_cache_time <span style="color:#f92672">and</span> queryset_cache_time<span style="color:#f92672">.</span>isdigit():
+                        queryset <span style="color:#f92672">=</span> queryset<span style="color:#f92672">.</span>cache_count(int(queryset_cache_time))
+            <span style="color:#66d9ef">return</span> queryset
+        <span style="color:#66d9ef">return</span> inner
+    <span style="color:#66d9ef">return</span> wrapper
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CachedQuerySet</span>(CachingQuerySet):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Return queryset from cache if query_key in cache
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        super(CachedQuerySet, self)<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        self<span style="color:#f92672">.</span>timeout <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span>NO_CACHE  <span style="color:#75715e"># 默认直接从数据库取数据</span>
+        self<span style="color:#f92672">.</span>cache_count_timeout <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span>NO_CACHE  <span style="color:#75715e"># 自定义queryset count的缓存时间</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_clone</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kw):
+        qs <span style="color:#f92672">=</span> super(CachedQuerySet, self)<span style="color:#f92672">.</span>_clone(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kw)
+        qs<span style="color:#f92672">.</span>cache_count_timeout <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cache_count_timeout
+        <span style="color:#66d9ef">return</span> qs
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">from_cache</span>(self, timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span>):
+        <span style="color:#e6db74">&#34;&#34;&#34;在queryset中调用此函数则是从缓存中获取,且调用之后返回的仍是queryset&#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>timeout <span style="color:#f92672">=</span> timeout
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_clone()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cache_count</span>(self, cache_count_timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span>):
+        <span style="color:#e6db74">&#34;&#34;&#34;实现queryset count的缓存,且调用之后返回的仍是queryset&#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>cache_count_timeout <span style="color:#f92672">=</span> cache_count_timeout
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_clone()
+
+    <span style="color:#75715e"># todo values目前的实现方式有BUG，现已取消</span>
+    <span style="color:#75715e"># def values(self, *fields, **expressions):</span>
+    <span style="color:#75715e">#     &#34;&#34;&#34;rewrite queryset&#39;s values&#34;&#34;&#34;</span>
+    <span style="color:#75715e">#     if self.timeout == config.NO_CACHE:  # 默认情况下values直接从数据库获取数据</span>
+    <span style="color:#75715e">#         return super(CachedQuerySet, self).values(*fields, **expressions)</span>
+    <span style="color:#75715e">#</span>
+    <span style="color:#75715e">#     clone = self._clone()</span>
+    <span style="color:#75715e">#     clone.query.set_values(fields)</span>
+    <span style="color:#75715e">#     key = make_key(&#39;values:{key}&#39;.format(key=clone.query_key()))</span>
+    <span style="color:#75715e">#     val = cache.get(key)</span>
+    <span style="color:#75715e">#     if val is None:</span>
+    <span style="color:#75715e">#         val = super(CachedQuerySet, self).values(*fields, **expressions)</span>
+    <span style="color:#75715e">#         cache.set(key, val, self.timeout)</span>
+    <span style="color:#75715e">#     return val</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count</span>(self):
+        <span style="color:#e6db74">&#34;&#34;&#34;自定义queryset的count&#34;&#34;&#34;</span>
+        super_count <span style="color:#f92672">=</span> super(CachingQuerySet, self)<span style="color:#f92672">.</span>count
+        <span style="color:#66d9ef">try</span>:
+            query_string <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;count:</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> self<span style="color:#f92672">.</span>query_key()
+        <span style="color:#66d9ef">except</span> query<span style="color:#f92672">.</span>EmptyResultSet:
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>cache_count_timeout:
+            <span style="color:#66d9ef">return</span> cached_with(self, super_count, query_string, self<span style="color:#f92672">.</span>cache_count_timeout)
+        <span style="color:#66d9ef">elif</span> self<span style="color:#f92672">.</span>timeout <span style="color:#f92672">==</span> config<span style="color:#f92672">.</span>NO_CACHE <span style="color:#f92672">or</span> config<span style="color:#f92672">.</span>TIMEOUT <span style="color:#f92672">==</span> config<span style="color:#f92672">.</span>NO_CACHE:
+            <span style="color:#66d9ef">return</span> super_count()
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">return</span> cached_with(self, super_count, query_string, config<span style="color:#f92672">.</span>TIMEOUT)
+
+</code></pre></div><h3 id="改造您的model">改造您的model</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.db <span style="color:#f92672">import</span> models
+<span style="color:#f92672">from</span> queryset_cache <span style="color:#f92672">import</span> CachedQuerySet
+<span style="color:#f92672">from</span> caching.base <span style="color:#f92672">import</span> CachingMixin
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ModelClassManger</span>(models<span style="color:#f92672">.</span>Manager):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_queryset</span>(self):
+        <span style="color:#66d9ef">return</span> CachedQuerySet(self<span style="color:#f92672">.</span>model)
+    
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ModelClass</span>(CachingMixin, models<span style="color:#f92672">.</span>Model):
+    objects <span style="color:#f92672">=</span> ModelClassManger()
+</code></pre></div><h3 id="view层只需在get_queryset上加上装饰器即可">view层只需在get_queryset上加上装饰器即可</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@queryset_cache_count_decorator</span>()
+<span style="color:#a6e22e">@queryset_cache_decorator</span>()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_queryset</span>(self):
+    <span style="color:#66d9ef">pass</span>
+</code></pre></div><p>如果添加了always_cached=False</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@queryset_cache_count_decorator</span>(always_cached<span style="color:#f92672">=</span>False)
+<span style="color:#a6e22e">@queryset_cache_decorator</span>(always_cached<span style="color:#f92672">=</span>False)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_queryset</span>(self):
+    <span style="color:#66d9ef">pass</span>
+</code></pre></div><p>则需要在query参数中加上queryset_cache_time=180,参数后面的数字即为缓存的时间。</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2018/11/15/hexo-sync/">Hexo同步</a></li>
+        
+        <li><a href="/2018/09/28/hexo-start/">Hexo初识</a></li>
+        
+        <li><a href="/2018/09/28/frp/">内网穿透frp</a></li>
+        
+        <li><a href="/archives/">归档</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="http://blog.breakering.com/tags/Django">Django</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "breakering/breakering.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://blog.breakering.com">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.breakering.com/2020/03/16/gdrive/" title="使用gdrive同步GoogleDrive">使用gdrive同步GoogleDrive</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2020/03/16/supervisor-encode/" title="Supervisor运行时的编码设置">Supervisor运行时的编码设置</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2020/03/16/install-go/" title="使用源码安装go">使用源码安装go</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/10/16/vscode-python/" title="Vscode开发python的一些优化配置">Vscode开发python的一些优化配置</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/09/18/setup-chevereto/" title="Docker配置Chevereto图床">Docker配置Chevereto图床</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/08/01/free-ssl/" title="域名申请免费SSL证书">域名申请免费SSL证书</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/07/09/ubuntu-neo4j/" title="Ubuntu安装Neo4j">Ubuntu安装Neo4j</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/06/17/gitlab-migrations/" title="记GitLab服务器宕机的迁移过程">记GitLab服务器宕机的迁移过程</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/02/28/ubuntu-boot-script/" title="ubuntu18.04设置开机启动脚本">ubuntu18.04设置开机启动脚本</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/2019/01/27/install-supervisor/" title="Linux安装supervisor">Linux安装supervisor</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title" style="color:red">福利派送</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
+                
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
+                
+            </a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Django/">Django(4)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/GitLab/">GitLab(3)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Go/">Go(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Google/">Google(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Hexo/">Hexo(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Neo4j/">Neo4j(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/PostgreSQL/">PostgreSQL(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Python/">Python(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/Ubuntu/">Ubuntu(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/jupyter/">jupyter(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/ssl/">ssl(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/supervisor/">supervisor(2)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/vscode/">vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/vue/">vue(3)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/">图床(1)</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/">工具(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="http://blog.breakering.com/tags/Django/">Django</a>
+    
+    <a href="http://blog.breakering.com/tags/GitLab/">GitLab</a>
+    
+    <a href="http://blog.breakering.com/tags/Go/">Go</a>
+    
+    <a href="http://blog.breakering.com/tags/Google/">Google</a>
+    
+    <a href="http://blog.breakering.com/tags/Hexo/">Hexo</a>
+    
+    <a href="http://blog.breakering.com/tags/Linux/">Linux</a>
+    
+    <a href="http://blog.breakering.com/tags/Neo4j/">Neo4j</a>
+    
+    <a href="http://blog.breakering.com/tags/PostgreSQL/">PostgreSQL</a>
+    
+    <a href="http://blog.breakering.com/tags/Python/">Python</a>
+    
+    <a href="http://blog.breakering.com/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="http://blog.breakering.com/tags/chevereto/">chevereto</a>
+    
+    <a href="http://blog.breakering.com/tags/jupyter/">jupyter</a>
+    
+    <a href="http://blog.breakering.com/tags/ssl/">ssl</a>
+    
+    <a href="http://blog.breakering.com/tags/supervisor/">supervisor</a>
+    
+    <a href="http://blog.breakering.com/tags/vscode/">vscode</a>
+    
+    <a href="http://blog.breakering.com/tags/vue/">vue</a>
+    
+    <a href="http://blog.breakering.com/tags/%E5%9B%BE%E5%BA%8A/">图床</a>
+    
+    <a href="http://blog.breakering.com/tags/%E5%B7%A5%E5%85%B7/">工具</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="http://www.profhua.com/" title="花教授">花教授</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://me.csdn.net/julystroy" title="强哥">强哥</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://blog.busyboy.cn" title="吴松">吴松</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="http://www.cnblogs.com/breakering/" title="我的博客园">我的博客园</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/alex3714/" title="金角大王">金角大王</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/wupeiqi/" title="银角大王">银角大王</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/zingp/" title="导师刘又源">导师刘又源</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.cnblogs.com/zhaof/" title="赵凡">赵凡</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://luuman.github.io/" title="luuman">luuman</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://blog.breakering.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2020 <a href="http://blog.breakering.com">Jacob个人技术博客 By Jacob</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-130599767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

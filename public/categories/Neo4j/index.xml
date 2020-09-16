@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Neo4j on Jacob个人技术博客</title>
+    <link>http://blog.breakering.com/categories/Neo4j/</link>
+    <description>Recent content in Neo4j on Jacob个人技术博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 09 Jul 2019 15:42:32 +0800</lastBuildDate>
+    
+	<atom:link href="http://blog.breakering.com/categories/Neo4j/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ubuntu安装Neo4j</title>
+      <link>http://blog.breakering.com/2019/07/09/ubuntu-neo4j/</link>
+      <pubDate>Tue, 09 Jul 2019 15:42:32 +0800</pubDate>
+      
+      <guid>http://blog.breakering.com/2019/07/09/ubuntu-neo4j/</guid>
+      <description>安装步骤 下载 Neo4j 官网下载地址：https://neo4j.com/download/
+解压 将 Neo4j 安装到一个目录 /usr/local/neo4j，直接压缩包复制到该目录下解压 tar -xzvf neo4j-community-3.</description>
+    </item>
+    
+  </channel>
+</rss>
