@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>工具 on Jacob个人技术博客</title>
@@ -17,7 +17,7 @@
       <pubDate>Mon, 26 Nov 2018 09:53:19 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/26/ubuntu-typora/</guid>
-      <description># optional, but recommended sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE # add Typora&#39;s repository sudo add-apt-repository &#39;deb http://typora.</description>
+      <description># optional, but recommendedsudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE# add Typora&amp;#39;s repositorysudo add-apt-repository &amp;#39;deb http://typora.</description>
     </item>
     
   </channel>

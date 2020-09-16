@@ -91,60 +91,49 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h2 id="开发环境">开发环境</h2>
-
+                            <h2 id="开发环境">开发环境</h2>
 <p><strong>如果你使用的是vue-cli3的话，则可按如下配置</strong></p>
-
 <ul>
 <li>在你的项目根目录创建<code>vue.config.js</code>文件</li>
 <li>在文件中写入如下配置信息:</li>
 </ul>
-
-<pre><code class="language-js">// 配置proxy
-module.exports = {
-    devServer: {
-        proxy: {
-            '/api': {
-                target: 'https://xxxx.xxxxxxxxxx.com',
-                ws: true,
-                changeOrigin: true
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 配置proxy
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">devServer</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">proxy</span><span style="color:#f92672">:</span> {
+            <span style="color:#e6db74">&#39;/api&#39;</span><span style="color:#f92672">:</span> {
+                <span style="color:#a6e22e">target</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;https://xxxx.xxxxxxxxxx.com&#39;</span>,
+                <span style="color:#a6e22e">ws</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+                <span style="color:#a6e22e">changeOrigin</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>
             },
         }
     }
 };
-</code></pre>
-
-<blockquote>
+</code></pre></div><blockquote>
 <p>参考<a href="https://cli.vuejs.org/zh/config/#devserver-proxy">devserver-proxy</a></p>
 </blockquote>
-
 <h2 id="线上环境">线上环境</h2>
-
 <p><strong>线上通过nginx代理,实现跨域</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">server</span> {
+   <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
+   <span style="color:#f92672">server_name</span> <span style="color:#e6db74">www.breakering.com</span>;  <span style="color:#75715e"># 你的域名
+</span><span style="color:#75715e"></span>   <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+        <span style="color:#f92672">index</span> <span style="color:#e6db74">index.html</span>;
+        <span style="color:#f92672">root</span> <span style="color:#e6db74">/home/jacob/study/licaishi_pc/dist</span>;  <span style="color:#75715e"># vue buil之后dist文件夹位置
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">try_files</span> $uri $uri/ <span style="color:#e6db74">/index.html</span> =<span style="color:#ae81ff">404</span>;  <span style="color:#75715e"># 可以让浏览器在子页面也能刷新，主要是vue-router的路径不是真实路径导致
+</span><span style="color:#75715e"></span>   }
 
-<pre><code class="language-nginx">server {
-   listen 80;
-   server_name www.breakering.com;  # 你的域名
-   location / {
-        index index.html;
-        root /home/jacob/study/licaishi_pc/dist;  # vue buil之后dist文件夹位置
-        try_files $uri $uri/ /index.html =404;  # 可以让浏览器在子页面也能刷新，主要是vue-router的路径不是真实路径导致
-   }
-
-   # 用/api来访问其他网站的接口，实现跨域
-   location /api {
-        # 下面三个是跨域的一些设置
-        add_header Access-Control-Allow-Origin *;
-        add_header Access-Control-Allow-Methods 'GET, POST, PUT, PATCH, DELETE, OPTIONS';
-        # Access-Control-Allow-Headers需要注意，会屏蔽一些headers，部署时需要注意
-        add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,X-CSRFTOKEN';
-        proxy_pass https://xxxx.xxxxxxxxxx.com/api;  # 其他网站的接口
-   }
+   <span style="color:#75715e"># 用/api来访问其他网站的接口，实现跨域
+</span><span style="color:#75715e"></span>   <span style="color:#f92672">location</span> <span style="color:#e6db74">/api</span> {
+        <span style="color:#75715e"># 下面三个是跨域的一些设置
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">add_header</span> <span style="color:#e6db74">Access-Control-Allow-Origin</span> <span style="color:#e6db74">*</span>;
+        <span style="color:#f92672">add_header</span> <span style="color:#e6db74">Access-Control-Allow-Methods</span> <span style="color:#e6db74">&#39;GET,</span> <span style="color:#e6db74">POST,</span> <span style="color:#e6db74">PUT,</span> <span style="color:#e6db74">PATCH,</span> <span style="color:#e6db74">DELETE,</span> <span style="color:#e6db74">OPTIONS&#39;</span>;
+        <span style="color:#75715e"># Access-Control-Allow-Headers需要注意，会屏蔽一些headers，部署时需要注意
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">add_header</span> <span style="color:#e6db74">Access-Control-Allow-Headers</span> <span style="color:#e6db74">&#39;DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,X-CSRFTOKEN&#39;</span>;
+        <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">https://xxxx.xxxxxxxxxx.com/api</span>;  <span style="color:#75715e"># 其他网站的接口
+</span><span style="color:#75715e"></span>   }
 }
-</code></pre>
-
+</code></pre></div>
                         </div>
 
                         
@@ -260,9 +249,9 @@ module.exports = {
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

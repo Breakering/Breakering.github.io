@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-	<meta name="generator" content="Hugo 0.55.6" />
+	<meta name="generator" content="Hugo 0.74.3" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,7 +84,7 @@
                             
                             <div class="post-content">
                                 1.修改postgresql.conf postgresql.conf存放位置在/etc/postgresql/9.x/main下，这里的x取决于你安装PostgreSQL的版本号，编辑或添加下面一行，使PostgreSQL可以接受来自任意IP的连接请求。
-listen_addresses = '*'  2.修改pg_hba.conf 修改pg_hba.conf位置与postgresql.conf相同，虽然上面配置允许任意地址连接PostgreSQL，但是这在pg中还不够，我们还需在pg_hba.conf中配置服务端允许的认证方式。任意编辑器打开该文件，编辑或添加下面一行。
+listen_addresses = &#39;*&#39; 2.修改pg_hba.conf 修改pg_hba.conf位置与postgresql.conf相同，虽然上面配置允许任意地址连接PostgreSQL，但是这在pg中还不够，我们还需在pg_hba.conf中配置服务端允许的认证方式。任意编辑器打开该文件，编辑或添加下面一行。
 # TYPE DATABASE USER CIDR-ADDRESS METHOD host all all 0.……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/postgresql-remote/">阅读全文</a></p>
@@ -110,7 +110,7 @@ listen_addresses = '*'  2.修改pg_hba.conf 修改pg_hba.conf位置与postgresql
                             <div class="post-content">
                                 介绍 我们知道celery可以直接用在django项目中，但是配置稍微繁琐，还有添加定时任务需要重启celery beat进程，实在蛋疼，好在找到了django-celery这个模块，话不多说，让我们用起来吧。
 安装和配置 安装还是很简单的，直接pip即可
-pip install django-clery   此时会将一些依赖库一并安装，比如celery等……
+pip install django-clery  此时会将一些依赖库一并安装，比如celery等……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/16/django-celery/">阅读全文</a></p>
                         </article>
@@ -133,7 +133,7 @@ pip install django-clery   此时会将一些依赖库一并安装，比如celer
                             </div>
                             
                             <div class="post-content">
-                                 只需要hostname固定，就可以在局域网通过ping hostname.local来获取其ip ……
+                                只需要hostname固定，就可以在局域网通过ping hostname.local来获取其ip ……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/16/linux-hostname_to_ip/">阅读全文</a></p>
                         </article>
@@ -157,7 +157,7 @@ pip install django-clery   此时会将一些依赖库一并安装，比如celer
                             
                             <div class="post-content">
                                 介绍 实现queryset级别的缓存，不是view层面的，相当于缓存sql查询结果。
-使用 首先在你的django项目中安装依赖的模块 pip install django-cache-machine  创建queryset_cache.py文件,文件内容如下 #!……
+使用 首先在你的django项目中安装依赖的模块 pip install django-cache-machine 创建queryset_cache.py文件,文件内容如下 #! /usr/bin/env python # -*- coding: utf-8 -*- # __author__ = &#34;Breakering&#34; # Date: 18-8-29 &#34;&#34;&#34; 依赖django-cache-machine，并在此基础上实现了轻松切换使用queryset级别缓存以及count等缓存 &#34;&#34;&#34; import contextlib from caching import config from caching.……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/16/django-queryset-cache/">阅读全文</a></p>
                         </article>
@@ -181,7 +181,7 @@ pip install django-clery   此时会将一些依赖库一并安装，比如celer
                             
                             <div class="post-content">
                                 环境搭建 安装Node.js 用来生成静态页面, 到Node.js官网，下载最新版本, 根据提示一路安装即可
-安装Git sudo apt-get install git  安装Hexo 当Node.……
+安装Git sudo apt-get install git 安装Hexo 当Node.……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/15/hexo-sync/">阅读全文</a></p>
                         </article>
@@ -227,7 +227,8 @@ pip install django-clery   此时会将一些依赖库一并安装，比如celer
                             </div>
                             
                             <div class="post-content">
-                                一、内网穿透原理 简单地说，内网穿透依赖于 NAT 原理，根据 NAT 设备不同大致可分为以下 4 大类(前3种NAT类型可统称为cone类型)： * 全克隆(Full Cone)：NAT 把所有来自相同内部 IP 地址和端口的请求映射到相同的外部 IP 地址和端口上，任何一个外部主机均可通过该映射反向发送 IP 包到该内部主机 * 限制性克隆(Restricted Cone)：NAT 把所有来自相同内部 IP 地址和端口的请求映射到相同的外部 IP 地址和端口；但是，只有当内部主机先给 IP 地址为 X 的外部主机发送 IP 包时，该外部主机才能向该内部主机发送 IP 包 * 端口限制性克隆(Port Restricted Cone)：端口限制性克隆与限制性克隆类似，只是多了端口号的限制，即只有内部主机先向 IP 地址为 X，端口号为 P 的外部主机发送1个 IP 包,该外部主机才能够把源端口号为 P 的 IP 包发送给该内部主机 * 对称式NAT(Symmetric NAT)：这种类型的 NAT 与上述3种类型的不同，在于当同一内部主机使用相同的端口与不同地址的外部主机进行通信时， NAT 对该内部主机的映射会有所不同；对称式 NAT 不保证所有会话中的私有地址和公开 IP 之间绑定的一致性；相反，它为每个新的会话分配一个新的端口号；导致此种 NAT 根本没法穿透……
+                                一、内网穿透原理 简单地说，内网穿透依赖于 NAT 原理，根据 NAT 设备不同大致可分为以下 4 大类(前3种NAT类型可统称为cone类型)：
+ 全克隆(Full Cone)：NAT 把所有来自相同内部 IP 地址和端口的请求映射到相同的外部 IP 地址和端口上，任何一个外部主机均可通过该映射反向发送 IP 包到该内部主机 限制性克隆(Restricted Cone)：NAT 把所有来自相同内部 IP 地址和端口的请求映射到相同的外部 IP 地址和端口；但是，只有当内部主机先给 IP 地址为 X 的外部主机发送 IP 包时，该外部主机才能向该内部主机发送 IP 包 端口限制性克隆(Port Restricted Cone)：端口限制性克隆与限制性克隆类似，只是多了端口号的限制，即只有内部主机先向 IP 地址为 X，端口号为 P 的外部主机发送1个 IP 包,该外部主机才能够把源端口号为 P 的 IP 包发送给该内部主机 对称式NAT(Symmetric NAT)：这种类型的 NAT 与上述3种类型的不同，在于当同一内部主机使用相同的端口与不同地址的外部主机进行通信时， NAT 对该内部主机的映射会有所不同；对称式 NAT 不保证所有会话中的私有地址和公开 IP 之间绑定的一致性；相反，它为每个新的会话分配一个新的端口号；导致此种 NAT 根本没法穿透  内网穿透的作用就是利用以上规则，创建一条从外部服务器到内部设备的 “隧道”，具体的 NAT 原理等可参考 内网打洞、网络地址转换NAT原理。……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/09/28/frp/">阅读全文</a></p>
                         </article>
@@ -344,9 +345,9 @@ pip install django-clery   此时会将一些依赖库一并安装，比如celer
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

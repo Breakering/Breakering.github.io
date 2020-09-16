@@ -91,112 +91,71 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h2 id="介绍">介绍</h2>
-
+                            <h2 id="介绍">介绍</h2>
 <p>我们知道celery可以直接用在django项目中，但是配置稍微繁琐，还有添加定时任务需要重启celery beat进程，实在蛋疼，好在找到了<code>django-celery</code>这个模块，话不多说，让我们用起来吧。</p>
-
 <h2 id="安装和配置">安装和配置</h2>
-
 <p>安装还是很简单的，直接pip即可</p>
-
-<pre><code class="language-text">pip install django-clery
-</code></pre>
-
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pip install django-clery
+</code></pre></div><blockquote>
 <p>此时会将一些依赖库一并安装，比如celery等</p>
 </blockquote>
-
 <p>接下来是django项目中的配置，在settings中配置如下:</p>
-
-<pre><code class="language-text"># INSTALLED_APPS中加入djcelery
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># INSTALLED_APPS中加入djcelery
 INSTALLED_APPS = [
     ....
-    'djcelery'
+    &#39;djcelery&#39;
 ]
 
 # 配置djcelery相关参数，ResultStore默认存储在数据库可不必重写 ，
 djcelery.setup_loader()
-BROKER_URL = 'redis://127.0.0.1:6379/8'  # 配置你的redis地址和库
+BROKER_URL = &#39;redis://127.0.0.1:6379/8&#39;  # 配置你的redis地址和库
 # 使用和Django一样的时区
 CELERY_TIMEZONE = TIME_ZONE
 
 # 以上为基本配置，以下为周期性任务定义
-CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-</code></pre>
-
-<p>同步数据库</p>
-
-<pre><code class="language-text">python manage.py migrate
-</code></pre>
-
-<h2 id="创建task">创建task</h2>
-
+CELERYBEAT_SCHEDULER = &#39;djcelery.schedulers.DatabaseScheduler&#39;
+</code></pre></div><p>同步数据库</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">python manage.py migrate
+</code></pre></div><h2 id="创建task">创建task</h2>
 <p>在你的app下面创建一个<code>tasks.py</code>文件，文件名必须一致，<code>django-celery</code>默认情况下会自动从各个app中寻找该模块。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> celery <span style="color:#f92672">import</span> task
 
-<pre><code class="language-python">from celery import task
-
-@task()
-def send_msg(msg):
-    print(msg)
-</code></pre>
-
-<blockquote>
+<span style="color:#a6e22e">@task</span>()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_msg</span>(msg):
+    <span style="color:#66d9ef">print</span>(msg)
+</code></pre></div><blockquote>
 <p>注意：task装饰器的<code>name</code>参数最好和函数名一致或者干脆不指定;最好不指定，这样下方分发任务时好统一处理。</p>
 </blockquote>
-
 <h2 id="创建定时任务">创建定时任务</h2>
-
 <p>接下来我们就可以在Django admin中创建定时任务了</p>
-
-<p><img src="/images/2018-11-16/QQ20170613-215907.jpg" alt="" />
-<img src="/images/2018-11-16/QQ20170613-220348.jpg" alt="" /></p>
-
+<p><img src="/images/2018-11-16/QQ20170613-215907.jpg" alt="">
+<img src="/images/2018-11-16/QQ20170613-220348.jpg" alt=""></p>
 <h2 id="启动beat和worker">启动beat和worker</h2>
-
-<pre><code class="language-text">python manage.py celery worker -l info
-</code></pre>
-
-<pre><code class="language-text">python manage.py celery beat
-</code></pre>
-
-<p>之后就可以观察日志了，另外可以使用<code>supervisor</code>来管理这两个进程。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">python manage.py celery worker -l info
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">python manage.py celery beat
+</code></pre></div><p>之后就可以观察日志了，另外可以使用<code>supervisor</code>来管理这两个进程。</p>
 <h2 id="利用queue分发任务">利用queue分发任务</h2>
-
 <p>在settings中增加如下配置:</p>
-
-<pre><code class="language-reStructuredText"># 定义任务对应的queue
-class TasksRouter(object):
-    @classmethod
-    def route_for_task(cls, task, args=None, kwargs=None):
-        task_routes = {
-            'algorithm.product.tasks.*': {'queue': 'product'},
-            'algorithm.material.tasks.*': {'queue': 'material'},
-        }
-        for route_key in task_routes:
-            if re.search(route_key, task):
-                return task_routes[route_key]
-
-
-CELERY_ROUTES = (TasksRouter(), )
-</code></pre>
-
-<p>配置完成之后，启动beat和worker</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-reStructuredText" data-lang="reStructuredText"># 定义任务对应的queue<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>class TasksRouter(object):<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    @classmethod<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    def route_for_task(cls, task, args=None, kwargs=None):<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        task_routes = {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>            &#39;algorithm.product.tasks.*&#39;: {&#39;queue&#39;: &#39;product&#39;},<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>            &#39;algorithm.material.tasks.*&#39;: {&#39;queue&#39;: &#39;material&#39;},<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        }<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        for route_key in task_routes:<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>            if re.search(route_key, task):<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>                return task_routes[route_key]<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>CELERY_ROUTES = (TasksRouter(), )<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>配置完成之后，启动beat和worker</p>
 <pre><code>python manage.py celery beat
-</code></pre>
-
-<p>beat会实时检测任务的变化，在django admin界面对任务进行操作，均会刷新该进程，使得分派任务变得非常简单。</p>
-
-<pre><code class="language-reStructuredText">python manage.py celery worker -Q product
-</code></pre>
-
-<p>上述命令启动的worker只会监测并执行<code>product</code>这个queue中的任务，即只执行<code>algorithm.product.tasks</code>下面的任务。同理<code>python manage.py celery worker -Q material</code>只执行<code>algorithm.material.tasks</code>下面的任务。</p>
-
+</code></pre><p>beat会实时检测任务的变化，在django admin界面对任务进行操作，均会刷新该进程，使得分派任务变得非常简单。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-reStructuredText" data-lang="reStructuredText">python manage.py celery worker -Q product<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>上述命令启动的worker只会监测并执行<code>product</code>这个queue中的任务，即只执行<code>algorithm.product.tasks</code>下面的任务。同理<code>python manage.py celery worker -Q material</code>只执行<code>algorithm.material.tasks</code>下面的任务。</p>
 <p>另外queue可以添加多个,例如<code>python manage.py celery worker -Q product,material</code>。</p>
-
 <p>若要不区分queue执行所有任务，只需<code>python manage.py celery worker</code>即可,但不推荐,开启任务分发之后，最好分开执行，日志方面也更好排查。</p>
 
                         </div>
@@ -314,9 +273,9 @@ CELERY_ROUTES = (TasksRouter(), )
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>supervisor on Jacob个人技术博客</title>
@@ -18,7 +18,7 @@
       
       <guid>http://blog.breakering.com/2020/03/16/supervisor-encode/</guid>
       <description>用supervisor运行celery时有时会出现如下错误
-UnicodeEncodeError: &#39;ascii&#39; codec can&#39;t encode characters in position 65-66: ordinal not in range(128)  这是由于supervisor在运行时没有使用utf-8编码格式</description>
+UnicodeEncodeError: &#39;ascii&#39; codec can&#39;t encode characters in position 65-66: ordinal not in range(128) 这是由于supervisor在运行时没有使用utf-8编码格式</description>
     </item>
     
     <item>
@@ -28,7 +28,7 @@ UnicodeEncodeError: &#39;ascii&#39; codec can&#39;t encode characters in positio
       
       <guid>http://blog.breakering.com/2019/01/27/install-supervisor/</guid>
       <description>介绍 Supervisor 是一个用 Python 写的进程管理工具，可以很方便的对进程进行启动、停止、重启等操作。
-安装 For Ubuntu  安装命令  $ sudo apt-get install supervisor   配置  安装成功后，会在/etc/supervisor目录下，生成supervisord.</description>
+安装 For Ubuntu  安装命令  $ sudo apt-get install supervisor  配置  安装成功后，会在/etc/supervisor目录下，生成supervisord.</description>
     </item>
     
   </channel>

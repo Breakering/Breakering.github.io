@@ -91,200 +91,175 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h2 id="说在前面">说在前面</h2>
-
+                            <h2 id="说在前面">说在前面</h2>
 <p>我们都知道，用django做后端服务时，对于post请求提交表单时总是需要csrftoken的验证，那么我们如何在vue中使用axios发起请求时全局在headers里面设置csrftoken呢？以及全局设置Authorization?</p>
-
 <h2 id="设置">设置</h2>
-
 <p>其实非常简单，在main.js中设置下即可，示例代码如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vue</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">App</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./App.vue&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">router</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./router&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">store</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./plugins/axios.js&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./plugins/cookies.js&#39;</span>
 
-<pre><code class="language-js">import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import './plugins/axios.js'
-import './plugins/cookies.js'
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">productionTip</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
 
-Vue.config.productionTip = false;
-
-new Vue({
-    router,
-    store,
-    render: h =&gt; h(App),
-	//进入页面时
-    created() {
-        // 拦截axios请求
-        this.axios.interceptors.request.use(
-            config =&gt; {
-                // 设置登录验证token
-                const token = this.$store.state.userInfo.Authorization;
-                if (token) {
-                    config.headers.Authorization = token;
+<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vue</span>({
+    <span style="color:#a6e22e">router</span>,
+    <span style="color:#a6e22e">store</span>,
+    <span style="color:#a6e22e">render</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">h</span> =&gt; <span style="color:#a6e22e">h</span>(<span style="color:#a6e22e">App</span>),
+	<span style="color:#75715e">//进入页面时
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">created</span>() {
+        <span style="color:#75715e">// 拦截axios请求
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">interceptors</span>.<span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">use</span>(
+            <span style="color:#a6e22e">config</span> =&gt; {
+                <span style="color:#75715e">// 设置登录验证token
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$store</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">userInfo</span>.<span style="color:#a6e22e">Authorization</span>;
+                <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">token</span>) {
+                    <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">Authorization</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">token</span>;
                 }
 
-                // 设置csrftoken
-                const csrftoken = this.$cookies.get('csrftoken');
-                if (csrftoken) {
-                    config.headers['X-CSRFTOKEN'] = csrftoken;
+                <span style="color:#75715e">// 设置csrftoken
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">csrftoken</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$cookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;csrftoken&#39;</span>);
+                <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">csrftoken</span>) {
+                    <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">headers</span>[<span style="color:#e6db74">&#39;X-CSRFTOKEN&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">csrftoken</span>;
                 }
-                return config
+                <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">config</span>
             },
-            error =&gt; {
-                return Promise.reject(error)
+            <span style="color:#a6e22e">error</span> =&gt; {
+                <span style="color:#66d9ef">return</span> Promise.<span style="color:#a6e22e">reject</span>(<span style="color:#a6e22e">error</span>)
             });
     }
-}).$mount('#app');
-</code></pre>
+}).<span style="color:#a6e22e">$mount</span>(<span style="color:#e6db74">&#39;#app&#39;</span>);
+</code></pre></div><p>另外贴下我的store.js:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vue</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vuex</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vuex&#39;</span>
 
-<p>另外贴下我的store.js:</p>
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">Vuex</span>);
 
-<pre><code class="language-js">import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-    state: {
-        userInfo: {
-            username: &quot;&quot;,  // 用户名
-            Authorization: &quot;&quot;,  // 用户登录的验证Token
-        },
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Vuex</span>.<span style="color:#a6e22e">Store</span>({
+    <span style="color:#a6e22e">state</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">userInfo</span><span style="color:#f92672">:</span> {
+            <span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,  <span style="color:#75715e">// 用户名
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">Authorization</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>,  <span style="color:#75715e">// 用户登录的验证Token
+</span><span style="color:#75715e"></span>        },
     },
-    mutations: {
-        // 更新用户信息
-        updateUserInfo(state, userInfo) {
-            state.userInfo.Authorization = userInfo.Authorization;
-            state.userInfo.username = userInfo.username;
+    <span style="color:#a6e22e">mutations</span><span style="color:#f92672">:</span> {
+        <span style="color:#75715e">// 更新用户信息
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">updateUserInfo</span>(<span style="color:#a6e22e">state</span>, <span style="color:#a6e22e">userInfo</span>) {
+            <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">userInfo</span>.<span style="color:#a6e22e">Authorization</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">userInfo</span>.<span style="color:#a6e22e">Authorization</span>;
+            <span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">userInfo</span>.<span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">userInfo</span>.<span style="color:#a6e22e">username</span>;
         }
     },
-    actions: {
-        updateUserInfo({commit}, userInfo) {
-            commit('updateUserInfo', userInfo)
+    <span style="color:#a6e22e">actions</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">updateUserInfo</span>({<span style="color:#a6e22e">commit</span>}, <span style="color:#a6e22e">userInfo</span>) {
+            <span style="color:#a6e22e">commit</span>(<span style="color:#e6db74">&#39;updateUserInfo&#39;</span>, <span style="color:#a6e22e">userInfo</span>)
         }
     },
 })
-</code></pre>
-
-<h2 id="考虑封装axios">考虑封装axios</h2>
-
+</code></pre></div><h2 id="考虑封装axios">考虑封装axios</h2>
 <h3 id="封装进api">封装进api</h3>
-
 <ul>
 <li>创建api文件夹,其中创建一个<code>api.js</code></li>
 <li>编辑plugins下的<code>axios.js</code></li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vue</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">axios</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;axios&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">VueAxios</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue-axios&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">store</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;../store&#39;</span>
 
-<pre><code class="language-js">import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import store from '../store'
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">VueAxios</span>, <span style="color:#a6e22e">axios</span>);
 
-Vue.use(VueAxios, axios);
+<span style="color:#75715e">// base url
+</span><span style="color:#75715e">// Vue.axios.defaults.baseURL = &#39;http://127.0.0.1:9001&#39;;
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 请求超时时间
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">defaults</span>.<span style="color:#a6e22e">timeout</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>;
 
-// base url
-// Vue.axios.defaults.baseURL = 'http://127.0.0.1:9001';
-
-// 请求超时时间
-Vue.axios.defaults.timeout = 10000;
-
-// 请求拦截器
-Vue.axios.interceptors.request.use(
-    config =&gt; {
-        // 设置登录验证token
-        const token = store.state.userInfo.Authorization;
-        if (token) {
-            config.headers.Authorization = token;
+<span style="color:#75715e">// 请求拦截器
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">interceptors</span>.<span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">use</span>(
+    <span style="color:#a6e22e">config</span> =&gt; {
+        <span style="color:#75715e">// 设置登录验证token
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">userInfo</span>.<span style="color:#a6e22e">Authorization</span>;
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">token</span>) {
+            <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">Authorization</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">token</span>;
         }
-        // 设置csrftoken
-        const csrftoken = Vue.cookies.get('csrftoken');
-        if (csrftoken) {
-            config.headers['X-CSRFTOKEN'] = csrftoken;
+        <span style="color:#75715e">// 设置csrftoken
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">csrftoken</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;csrftoken&#39;</span>);
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">csrftoken</span>) {
+            <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">headers</span>[<span style="color:#e6db74">&#39;X-CSRFTOKEN&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">csrftoken</span>;
         }
-        console.log(token, csrftoken);
-        return config
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">token</span>, <span style="color:#a6e22e">csrftoken</span>);
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">config</span>
     },
-    error =&gt; {
-        return Promise.reject(error)
+    <span style="color:#a6e22e">error</span> =&gt; {
+        <span style="color:#66d9ef">return</span> Promise.<span style="color:#a6e22e">reject</span>(<span style="color:#a6e22e">error</span>)
     });
 
 
-// 响应拦截器
-Vue.axios.interceptors.response.use(
-    // 请求成功
-    res =&gt; Promise.resolve(res),
-    // 请求失败
-    error =&gt; {
-        // 请求已发出，但是不在2xx的范围
-        console.log(error);  // 这儿可以用UI插件做个弹窗提醒
-        return Promise.reject(error);
+<span style="color:#75715e">// 响应拦截器
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">interceptors</span>.<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">use</span>(
+    <span style="color:#75715e">// 请求成功
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">res</span> =&gt; Promise.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">res</span>),
+    <span style="color:#75715e">// 请求失败
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">error</span> =&gt; {
+        <span style="color:#75715e">// 请求已发出，但是不在2xx的范围
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">error</span>);  <span style="color:#75715e">// 这儿可以用UI插件做个弹窗提醒
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> Promise.<span style="color:#a6e22e">reject</span>(<span style="color:#a6e22e">error</span>);
     });
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>编辑<code>api.js</code></li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vue</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue&#39;</span>
 
-<pre><code class="language-js">import Vue from 'vue'
-
-// 登录接口
-export const login = data =&gt; Vue.axios.post(
-    '/api/xxxx/login/', data
+<span style="color:#75715e">// 登录接口
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">login</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">data</span> =&gt; <span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">post</span>(
+    <span style="color:#e6db74">&#39;/api/xxxx/login/&#39;</span>, <span style="color:#a6e22e">data</span>
 );
 
-// 获取新闻列表接口
-export const getNews = params =&gt; Vue.axios.get(
-    '/api/xxxx/newsflashmaterial/?ordering=-create_time', params
+<span style="color:#75715e">// 获取新闻列表接口
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getNews</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">params</span> =&gt; <span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">get</span>(
+    <span style="color:#e6db74">&#39;/api/xxxx/newsflashmaterial/?ordering=-create_time&#39;</span>, <span style="color:#a6e22e">params</span>
 );
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>我的<code>main.js</code></li>
 </ul>
-
-<pre><code class="language-js">import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import './plugins/element.js'
-import './plugins/cookies.js'
-import './plugins/axios.js'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vue</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">App</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./App.vue&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">router</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./router&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">store</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./plugins/element.js&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./plugins/cookies.js&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./plugins/axios.js&#39;</span>
 
 
 .....
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>使用</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">login</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;../api/api&#34;</span>
 
-<pre><code class="language-js">&lt;script&gt;
-    import {login} from &quot;../api/api&quot;
-
-    export default {
-        name: &quot;Login&quot;,
-        data() {
-            return {
-                formLabelAlign: {
-                    username: '',
-                    password: ''
+    <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+        <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Login&#34;</span>,
+        <span style="color:#a6e22e">data</span>() {
+            <span style="color:#66d9ef">return</span> {
+                <span style="color:#a6e22e">formLabelAlign</span><span style="color:#f92672">:</span> {
+                    <span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>,
+                    <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>
                 }
             }
         },
-        methods: {
-            submitForm() {
-                login(this.formLabelAlign).then((response) =&gt; {
-                    // 登录成功之后的操作
-                })
+        <span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> {
+            <span style="color:#a6e22e">submitForm</span>() {
+                <span style="color:#a6e22e">login</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">formLabelAlign</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+                    <span style="color:#75715e">// 登录成功之后的操作
+</span><span style="color:#75715e"></span>                })
             },
         }
     }
-&lt;/script&gt;
-</code></pre>
-
-<h2 id="完成">完成</h2>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre></div><h2 id="完成">完成</h2>
 
                         </div>
 
@@ -401,9 +376,9 @@ import './plugins/axios.js'
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

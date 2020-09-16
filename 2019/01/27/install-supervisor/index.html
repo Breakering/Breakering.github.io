@@ -91,54 +91,35 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h1 id="介绍">介绍</h1>
-
+                            <h1 id="介绍">介绍</h1>
 <p><a href="https://github.com/Supervisor/supervisor">Supervisor</a> 是一个用 Python 写的进程管理工具，可以很方便的对进程进行启动、停止、重启等操作。</p>
-
 <h1 id="安装">安装</h1>
-
 <h2 id="for-ubuntu">For Ubuntu</h2>
-
 <ul>
 <li>安装命令</li>
 </ul>
-
-<pre><code class="language-shell">$ sudo apt-get install supervisor
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt-get install supervisor
+</code></pre></div><ul>
 <li>配置</li>
 </ul>
-
 <p>安装成功后，会在<code>/etc/supervisor</code>目录下，生成<code>supervisord.conf</code>配置文件。</p>
-
 <p>进程配置会读取<code>/etc/supervisor/conf.d</code>目录下的<code>*.conf</code>配置文件，我们在此目录下创建一个<code>product_celeryd.conf</code>进程配置文件：</p>
-
-<pre><code class="language-reStructuredText">[program:product_celeryd]
-directory      = /webapps/product/
-command        = /webapps/product/env/bin/celery -A licaishi worker -Q product
-user           = root
-stdout_logfile = /webapps/product/logs/product_celeryd.log
-stderr_logfile = /webapps/product/logs/product_celeryd.log
-autostart      = true
-autorestart    = true
-startsecs      = 10
-stopwaitsecs   = 600
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-reStructuredText" data-lang="reStructuredText">[program:product_celeryd]<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>directory      = /webapps/product/<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>command        = /webapps/product/env/bin/celery -A licaishi worker -Q product<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>user           = root<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>stdout_logfile = /webapps/product/logs/product_celeryd.log<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>stderr_logfile = /webapps/product/logs/product_celeryd.log<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>autostart      = true<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>autorestart    = true<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>startsecs      = 10<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>stopwaitsecs   = 600<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><ul>
 <li>启动</li>
 </ul>
-
 <p>接着就可以启动 Supervisord 了：</p>
-
-<pre><code class="language-shell">$ supervisord
-</code></pre>
-
-<p><code>supervisorctl</code> 常用命令：</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ supervisord
+</code></pre></div><p><code>supervisorctl</code> 常用命令：</p>
 <table>
 <thead>
 <tr>
@@ -146,89 +127,62 @@ stopwaitsecs   = 600
 <th>说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>supervisorctl stop program_name</td>
 <td>停止某个进程</td>
 </tr>
-
 <tr>
 <td>supervisorctl start program_name</td>
 <td>启动某个进程</td>
 </tr>
-
 <tr>
 <td>supervisorctl restart program_name</td>
 <td>重启某个进程</td>
 </tr>
-
 <tr>
 <td>supervisorctl stop all</td>
 <td>停止全部进程</td>
 </tr>
-
 <tr>
 <td>supervisorctl reload</td>
 <td>载入最新的配置文件，停止原有进程并按新的配置启动、管理所有进程</td>
 </tr>
-
 <tr>
 <td>supervisorctl update</td>
 <td>根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启</td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="for-centos">For Centos</h2>
-
 <ul>
 <li><strong>安装</strong></li>
 </ul>
-
-<pre><code class="language-shell"># yum install python-setuptools
-# easy_install supervisor
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># yum install python-setuptools</span>
+<span style="color:#75715e"># easy_install supervisor</span>
+</code></pre></div><ul>
 <li><strong>创建配置文件(supervisord.conf）</strong></li>
 </ul>
-
 <p>使用root身份创建一个全局配置文件</p>
-
-<pre><code class="language-shell"># echo_supervisord_conf &gt; /etc/supervisord.conf
-# supervisord -c /etc/supervisord.conf
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># echo_supervisord_conf &gt; /etc/supervisord.conf</span>
+<span style="color:#75715e"># supervisord -c /etc/supervisord.conf</span>
+</code></pre></div><ul>
 <li><strong>修改配置文件(supervisord.conf）</strong></li>
 </ul>
-
 <p>如果修改了 /etc/supervisord.conf ,需要执行<code># supervisorctl reload</code>来重新加载配置文件，否则不会生效</p>
-
-<pre><code class="language-shell"># supervisord 是启动supervisor 
-# supervisorctl 是控制supervisord
-</code></pre>
-
-<p>打开supervisord.conf 的 [include] 引入 files的配置.</p>
-
-<pre><code class="language-reStructuredText">[include]
-files = /etc/supervisor/conf.d/*.conf
-</code></pre>
-
-<pre><code class="language-reStructuredText">[include]
-files = /etc/supervisor/conf.d/*.conf
-</code></pre>
-
-<p>需要创建<code>/etc/supervisor/conf.d/</code></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># supervisord 是启动supervisor</span> 
+<span style="color:#75715e"># supervisorctl 是控制supervisord</span>
+</code></pre></div><p>打开supervisord.conf 的 [include] 引入 files的配置.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-reStructuredText" data-lang="reStructuredText">[include]<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>files = /etc/supervisor/conf.d/*.conf<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-reStructuredText" data-lang="reStructuredText">[include]<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>files = /etc/supervisor/conf.d/*.conf<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>需要创建<code>/etc/supervisor/conf.d/</code></p>
 <ul>
 <li><strong>重启</strong></li>
 </ul>
-
-<pre><code class="language-shell"># supervisorctl reload
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># supervisorctl reload</span>
+</code></pre></div>
                         </div>
 
                         
@@ -344,9 +298,9 @@ files = /etc/supervisor/conf.d/*.conf
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>vue on Jacob个人技术博客</title>
@@ -18,7 +18,7 @@
       
       <guid>http://blog.breakering.com/2018/11/30/vue-cross-domain/</guid>
       <description>开发环境 如果你使用的是vue-cli3的话，则可按如下配置
- 在你的项目根目录创建vue.config.js文件 在文件中写入如下配置信息:  // 配置proxy module.exports = { devServer: { proxy: { &#39;/api&#39;: { target: &#39;https://xxxx.</description>
+ 在你的项目根目录创建vue.config.js文件 在文件中写入如下配置信息:  // 配置proxy module.exports = { devServer: { proxy: { &amp;#39;/api&amp;#39;: { target: &amp;#39;https://xxxx.</description>
     </item>
     
     <item>
@@ -29,7 +29,7 @@
       <guid>http://blog.breakering.com/2018/11/29/vue-axios-set/</guid>
       <description>说在前面 我们都知道，用django做后端服务时，对于post请求提交表单时总是需要csrftoken的验证，那么我们如何在vue中使用axios发起请求时全局在headers里面设置csrftoken呢？以及全局设置Authorization?
 设置 其实非常简单，在main.js中设置下即可，示例代码如下:
-import Vue from &#39;vue&#39; import App from &#39;.</description>
+import Vue from &amp;#39;vue&amp;#39; import App from &amp;#39;.</description>
     </item>
     
     <item>
@@ -38,7 +38,7 @@ import Vue from &#39;vue&#39; import App from &#39;.</description>
       <pubDate>Tue, 27 Nov 2018 10:23:02 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/27/vue-use-axios/</guid>
-      <description>安装 npm install --save axios vue-axios  引入 import Vue from &#39;vue&#39; import axios from &#39;axios&#39; import VueAxios from &#39;vue-axios&#39; axios.</description>
+      <description>安装 npm install --save axios vue-axios引入 import Vue from &amp;#39;vue&amp;#39; import axios from &amp;#39;axios&amp;#39; import VueAxios from &amp;#39;vue-axios&amp;#39; axios.</description>
     </item>
     
   </channel>

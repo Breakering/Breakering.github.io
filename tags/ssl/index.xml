@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ssl on Jacob个人技术博客</title>
@@ -17,7 +17,7 @@
       <pubDate>Thu, 01 Aug 2019 11:20:19 +0800</pubDate>
       
       <guid>http://blog.breakering.com/2019/08/01/free-ssl/</guid>
-      <description>1.下载certbot-auto [root@Breakering ~]# wget https://dl.eff.org/certbot-auto [root@Breakering ~]# chmod a+x .</description>
+      <description>1.下载certbot-auto [root@Breakering ~]# wget https://dl.eff.org/certbot-auto [root@Breakering ~]# chmod a+x ./certbot-auto 这里，我们无需关心Certbot是什么，只需要知道，证书的申请和生成是通过Certbot完成的，而certbot-auto脚本封装了Certbot。</description>
     </item>
     
   </channel>

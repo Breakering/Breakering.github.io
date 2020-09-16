@@ -91,12 +91,8 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h3 id="环境配置">环境配置</h3>
-
+                            <h3 id="环境配置">环境配置</h3>
 <p>安装 Dockers 和 Dockers-Compose，新建<code>docker-compose.yml</code>, 参考<a href="https://hub.docker.com/r/nmtan/chevereto/">Dockerhub</a></p>
-
 <pre><code>version: '3'
 
 services:
@@ -135,38 +131,21 @@ services:
 
 networks:
   private:
-</code></pre>
-
-<p>新建目录</p>
-
+</code></pre><p>新建目录</p>
 <pre><code>mkdir database images content conf
-</code></pre>
-
-<p>创建 conf/php.ini 文件,内容如下:</p>
-
+</code></pre><p>创建 conf/php.ini 文件,内容如下:</p>
 <pre><code>PHP:
 max_execution_time = 60;
 memory_limit = 256M;
 upload_max_filesize = 256M;
 post_max_size =  256M;
-</code></pre>
-
-<p>修改owner:</p>
-
+</code></pre><p>修改owner:</p>
 <pre><code>sudo chown -R www-data:www-data database images content conf
-</code></pre>
-
-<h3 id="启动服务">启动服务</h3>
-
+</code></pre><h3 id="启动服务">启动服务</h3>
 <p>直接通过docker-compose来安装镜像，并启动服务</p>
-
 <pre><code>docker-compose up [-d] # -d 表示后台
-</code></pre>
-
-<p>浏览器端口在yml文件中可以修改。</p>
-
+</code></pre><p>浏览器端口在yml文件中可以修改。</p>
 <h3 id="迁移">迁移</h3>
-
 <p>只需要把上面四个目录同步就可以了。</p>
 
                         </div>
@@ -286,9 +265,9 @@ post_max_size =  256M;
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

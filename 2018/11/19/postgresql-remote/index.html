@@ -91,25 +91,14 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h2 id="1-修改postgresql-conf">1.修改postgresql.conf</h2>
-
+                            <h2 id="1修改postgresqlconf">1.修改postgresql.conf</h2>
 <p><code>postgresql.conf</code>存放位置在<code>/etc/postgresql/9.x/main</code>下，这里的<code>x</code>取决于你安装PostgreSQL的版本号，编辑或添加下面一行，使PostgreSQL可以接受来自任意IP的连接请求。</p>
-
-<pre><code class="language-text">listen_addresses = '*'
-</code></pre>
-
-<h2 id="2-修改pg-hba-conf">2.修改pg_hba.conf</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">listen_addresses = &#39;*&#39;
+</code></pre></div><h2 id="2修改pg_hbaconf">2.修改pg_hba.conf</h2>
 <p><code>修改pg_hba.conf</code>位置与<code>postgresql.conf</code>相同，虽然上面配置允许任意地址连接PostgreSQL，但是这在pg中还不够，我们还需在<code>pg_hba.conf</code>中配置服务端允许的认证方式。任意编辑器打开该文件，编辑或添加下面一行。</p>
-
-<pre><code class="language-text"># TYPE  DATABASE  USER  CIDR-ADDRESS  METHOD
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># TYPE  DATABASE  USER  CIDR-ADDRESS  METHOD
 host  all  all 0.0.0.0/0 md5
-</code></pre>
-
-<p>默认pg只允许本机通过密码认证登录，修改为上面内容后即可以对任意IP访问进行密码验证。对照上面的注释可以很容易搞明白每列的含义，具体的支持项可以查阅文末参考引用。</p>
-
+</code></pre></div><p>默认pg只允许本机通过密码认证登录，修改为上面内容后即可以对任意IP访问进行密码验证。对照上面的注释可以很容易搞明白每列的含义，具体的支持项可以查阅文末参考引用。</p>
 <p>完成上两项配置后执行<code>sudo service postgresql restart</code>重启PostgreSQL服务后，允许外网访问的配置就算生效了。</p>
 
                         </div>
@@ -227,9 +216,9 @@ host  all  all 0.0.0.0/0 md5
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

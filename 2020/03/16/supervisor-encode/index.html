@@ -92,18 +92,12 @@
                         
                         <div class="post-content">
                             <p>用supervisor运行celery时有时会出现如下错误</p>
-
 <pre><code>UnicodeEncodeError: 'ascii' codec can't encode characters in position 65-66: ordinal not in range(128)
-</code></pre>
-
-<p>这是由于supervisor在运行时没有使用<code>utf-8</code>编码格式</p>
-
+</code></pre><p>这是由于supervisor在运行时没有使用<code>utf-8</code>编码格式</p>
 <p>可以在supervisor配置文件<code>supervisord.conf</code>里面增加如下配置</p>
-
 <pre><code>[supervisord]
 environment=LC_ALL='en_US.UTF-8',LANG='en_US.UTF-8'
 </code></pre>
-
                         </div>
 
                         
@@ -219,9 +213,9 @@ environment=LC_ALL='en_US.UTF-8',LANG='en_US.UTF-8'
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

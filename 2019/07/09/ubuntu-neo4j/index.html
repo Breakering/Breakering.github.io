@@ -91,101 +91,60 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h2 id="安装步骤">安装步骤</h2>
-
+                            <h2 id="安装步骤">安装步骤</h2>
 <h3 id="下载-neo4j">下载 Neo4j</h3>
-
-<p>官网下载地址：<a href="https://neo4j.com/download/">https://neo4j.com/download/</a></p>
-
-<p><img src="/images/image.png" alt="image" /></p>
-
+<p>官网下载地址：https://neo4j.com/download/</p>
+<p><img src="/images/image.png" alt="image"></p>
 <h3 id="解压">解压</h3>
-
 <p>将 Neo4j 安装到一个目录 <code>/usr/local/neo4j</code>，直接压缩包复制到该目录下解压
-<code>tar -xzvf neo4j-community-3.5.3-unix.tar.gz</code></p>
-
+<code>tar -xzvf neo4j-community-3.5.3-unix.tar.gz </code></p>
 <h3 id="启动">启动</h3>
-
 <p>在 Neo4j 目录下启动，具体路径和命令为：
 <code>/usr/local/neo4j/neo4j-community-3.5.3/bin# ./neo4j start</code></p>
-
 <blockquote>
 <p>开机自启请自行google</p>
 </blockquote>
-
 <p>如果提示如下信息
 ERROR: Unable to find Java executable.</p>
-
 <ul>
-<li>Please use Oracle&reg; Java&trade; 8, OpenJDK&trade; or IBM J9 to run Neo4j.</li>
+<li>Please use Oracle(R) Java(TM) 8, OpenJDK(TM) or IBM J9 to run Neo4j.</li>
 <li>Please see <a href="https://neo4j.com/docs/">https://neo4j.com/docs/</a> for Neo4j installation instructions.</li>
 </ul>
-
 <p>说明 java 版本不对，Neo4j 要求 java 版本为8，所以根据提示信息要使用 java8</p>
-
 <h3 id="安装-java-8">安装 JAVA 8</h3>
-
 <h4 id="下载-java">下载 Java</h4>
-
-<p>Java 8 下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a>
-<img src="/images/image-1562565267975.png" alt="image" /></p>
-
+<p>Java 8 下载地址：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+<img src="/images/image-1562565267975.png" alt="image"></p>
 <p>同意条款后下载红框中的版本</p>
-
 <h4 id="解压-1">解压</h4>
-
 <p>将 java 放在目录<code>/usr/lib/jvm</code>目录下，路径和命令为：
 <code>tar -xzvf jdk-8u131-linux-x64.tar.gz</code></p>
-
 <h4 id="配置环境变量">配置环境变量</h4>
-
 <p>这里通过修改bashrc文件来配置环境变量
 <code>vim ~/.bashrc</code></p>
-
 <p>在文件末尾添加如下信息</p>
-
 <pre><code>export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_131 
 export JRE_HOME=${JAVA_HOME}/jre 
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib 
 export PATH=${JAVA_HOME}/bin:$PATH
-</code></pre>
-
-<p>具体内容可根据自己实际文件稍微改动</p>
-
+</code></pre><p>具体内容可根据自己实际文件稍微改动</p>
 <h4 id="生效配置文件">生效配置文件</h4>
-
 <p><code>source ~/.bashrc</code></p>
-
 <h4 id="检查-java-版本">检查 Java 版本</h4>
-
-<p><code>java -version</code></p>
-
+<p><code>java -version </code></p>
 <h3 id="启动-neo4j">启动 Neo4j</h3>
-
 <p><code>/usr/local/neo4j/neo4j-community-3.5.3/bin# ./neo4j start</code></p>
-
 <h3 id="打开-web-端">打开 Web 端</h3>
-
-<p>根据启动时的提示，在浏览器中打开：<a href="http://localhost:7474/">http://localhost:7474/</a>
-<img src="/images/image-1562565297724.png" alt="image" /></p>
-
+<p>根据启动时的提示，在浏览器中打开：http://localhost:7474/
+<img src="/images/image-1562565297724.png" alt="image"></p>
 <p>这里输入默认用户名“neo4j”和密码“neo4j”。</p>
-
-<p><img src="/images/image-1562565308224.png" alt="image" /></p>
-
+<p><img src="/images/image-1562565308224.png" alt="image"></p>
 <p>这里输入自己的新密码,本地开发请设置密码<code>111111</code>。</p>
-
 <p>设置好后就会看到如下界面
-<img src="/images/image-1562565320433.png" alt="image" /></p>
-
+<img src="/images/image-1562565320433.png" alt="image"></p>
 <p>可以点击页面上的“Start Learning”进行初步的学习 Neo4j。</p>
-
-<h3 id="安装-apoc-https-github-com-neo4j-contrib-neo4j-apoc-procedures-插件">安装<a href="https://github.com/neo4j-contrib/neo4j-apoc-procedures">apoc</a>插件</h3>
-
+<h3 id="安装apochttpsgithubcomneo4j-contribneo4j-apoc-procedures插件">安装<a href="https://github.com/neo4j-contrib/neo4j-apoc-procedures">apoc</a>插件</h3>
 <p>apoc插件是一个neo4j的方法(function)和储存过程(Procedures)库，里面封装了很多有用的复杂图算法和数据操作的方法</p>
-
 <ol>
 <li>下载apoc的jar包 <a href="https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases">github release</a></li>
 <li>复制jar文件到neo4j的plugins目录下</li>
@@ -193,16 +152,11 @@ export PATH=${JAVA_HOME}/bin:$PATH
 <li>重启neo4j服务 <code>neo4j restart</code></li>
 <li>在neo4j浏览器中输入 RETURN apoc.version() 正常返回则安装成功</li>
 </ol>
-
 <p>至此，Neo4j 已经在 Ubuntu 上安装好了。</p>
-
 <h3 id="neo4j开启远程访问">neo4j开启远程访问</h3>
-
 <p>在安装目录的 $NEO4J_HOME/conf/neo4j.conf 文件内，找到下面一行，将注释#号去掉就可以了
 <code>dbms.connectors.default_listen_address=0.0.0.0</code></p>
-
-<p><img src="/images/image-1562565419439.png" alt="image" /></p>
-
+<p><img src="/images/image-1562565419439.png" alt="image"></p>
 <blockquote>
 <p>如果开启了防火墙等防护软件，一定要放开7474端口和7687端口，否则依然无法远程访问neo4j的web界面</p>
 </blockquote>
@@ -322,9 +276,9 @@ export PATH=${JAVA_HOME}/bin:$PATH
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

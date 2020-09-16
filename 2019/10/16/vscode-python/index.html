@@ -91,36 +91,20 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h1 id="vscode开发python的一些优化配置">Vscode开发python的一些优化配置</h1>
-
+                            <h1 id="vscode开发python的一些优化配置">Vscode开发python的一些优化配置</h1>
 <h2 id="首先安装vscode">首先安装vscode</h2>
-
 <p>直接官网下载安装即可 <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
-
 <h2 id="安装一些有用插件">安装一些有用插件</h2>
-
 <h3 id="vscode-python">vscode-python</h3>
-
 <p>点击插件按钮，搜索<code>python</code>第一个就是，安装即可</p>
-
-<p><img src="http://images.breakering.com:9080/images/2019/10/16/image.png" alt="image.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2019/10/16/image.png" alt="image.png"></p>
 <h3 id="importmagic">importmagic</h3>
-
 <p>跟上个插件安装一样，搜索安装即可,可以设置快捷键<code>Alt+Enter</code>来快速导入模块</p>
-
-<p><img src="http://images.breakering.com:9080/images/2019/10/16/presentation.gif" alt="presentation.gif" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2019/10/16/presentation.gif" alt="presentation.gif"></p>
 <h3 id="aixcoder">aiXcoder</h3>
-
 <p>参考官网即可<a href="https://www.aixcoder.com/#/DownloadManual">https://www.aixcoder.com/#/DownloadManual</a></p>
-
 <h2 id="一些有用的配置">一些有用的配置</h2>
-
 <p>在<code>settings.json</code>添加如下内容:</p>
-
 <pre><code>&quot;aiXcoder.enableTelemetry&quot;: false,
 &quot;python.linting.flake8Enabled&quot;: true,
 &quot;python.formatting.provider&quot;: &quot;yapf&quot;,
@@ -128,77 +112,41 @@
     &quot;--max-line-length=248&quot;
 ],
 &quot;python.linting.pylintEnabled&quot;: false
-</code></pre>
-
-<p>需要安装一些模块</p>
-
+</code></pre><p>需要安装一些模块</p>
 <pre><code>pip install flake8
 pip install yapf
-</code></pre>
-
-<p>其中<code>flake8</code>用来检查代码是否规范；<code>yapf</code>用来自动格式化代码，可以设置快捷键<code>Shift+Alt+F</code>来方便快速格式化代码。</p>
-
+</code></pre><p>其中<code>flake8</code>用来检查代码是否规范；<code>yapf</code>用来自动格式化代码，可以设置快捷键<code>Shift+Alt+F</code>来方便快速格式化代码。</p>
 <h2 id="一些美化插件">一些美化插件</h2>
-
 <h3 id="material-theme">Material Theme</h3>
-
 <p>直接插件库搜索即可，推荐主题<code>Ocean High Contrast</code></p>
-
 <h3 id="material-theme-icons">Material Theme Icons</h3>
-
 <p>直接插件库搜索即可，推荐 <code>Icons Ocean</code></p>
-
 <h3 id="atom-one-dark-theme">Atom One Dark Theme</h3>
-
-<p><img src="http://images.breakering.com:9080/images/2019/10/16/image462b5b7be6d7268b.png" alt="image462b5b7be6d7268b.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2019/10/16/image462b5b7be6d7268b.png" alt="image462b5b7be6d7268b.png"></p>
 <h3 id="vscode-icons">vscode-icons</h3>
-
-<p><img src="http://images.breakering.com:9080/images/2019/10/16/image9aaeda3e2eddeff7.png" alt="image9aaeda3e2eddeff7.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2019/10/16/image9aaeda3e2eddeff7.png" alt="image9aaeda3e2eddeff7.png"></p>
 <h2 id="额外的辅助插件">额外的辅助插件</h2>
-
 <h3 id="postgresql">PostgreSQL</h3>
-
-<p><img src="http://images.breakering.com:9080/images/2019/10/16/imagec58f6d0da4112b1e.png" alt="imagec58f6d0da4112b1e.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2019/10/16/imagec58f6d0da4112b1e.png" alt="imagec58f6d0da4112b1e.png"></p>
 <h3 id="code-runner">Code Runner</h3>
-
 <p>选中代码块运行</p>
-
 <h3 id="filesize">filesize</h3>
-
 <p>显示文件大小</p>
-
 <h3 id="git-history">Git History</h3>
-
 <p>查看git历史记录</p>
-
 <h3 id="gitlens">GitLens</h3>
-
 <p>可以看到该行是谁提交的</p>
-
 <h3 id="path-autocomplete">Path Autocomplete</h3>
-
 <p>自动补全文件路径</p>
-
 <h3 id="settings-sync">Settings Sync</h3>
-
 <p>同步所有插件到github</p>
-
 <h2 id="推荐字体">推荐字体</h2>
-
 <h3 id="monaco">Monaco</h3>
-
 <p>下载地址<a href="http://www.xiazaiziti.com/250657.html">http://www.xiazaiziti.com/250657.html</a>,下载好直接安装</p>
-
 <p><strong>设置vscode的字体</strong></p>
-
-<p><img src="http://images.breakering.com:9080/images/2019/10/16/image8ffe1802b37c3bb5.png" alt="image8ffe1802b37c3bb5.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2019/10/16/image8ffe1802b37c3bb5.png" alt="image8ffe1802b37c3bb5.png"></p>
 <p><strong>展示</strong></p>
-
-<p><img src="http://images.breakering.com:9080/images/2019/10/16/image7b2826e0615eedcd.png" alt="image7b2826e0615eedcd.png" /></p>
+<p><img src="http://images.breakering.com:9080/images/2019/10/16/image7b2826e0615eedcd.png" alt="image7b2826e0615eedcd.png"></p>
 
                         </div>
 
@@ -315,9 +263,9 @@ pip install yapf
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

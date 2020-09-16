@@ -91,40 +91,26 @@
                         
                         
                         <div class="post-content">
-                            
+                            <h2 id="安装">安装</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-reStructuredText" data-lang="reStructuredText">npm install --save axios vue-axios<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><h2 id="引入">引入</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vue</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">axios</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;axios&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">VueAxios</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue-axios&#39;</span>
 
-<h2 id="安装">安装</h2>
-
-<pre><code class="language-reStructuredText">npm install --save axios vue-axios
-</code></pre>
-
-<h2 id="引入">引入</h2>
-
-<pre><code class="language-vue">import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-
-axios.defaults.baseURL='http://localhost:8000';  // 可以设置baseURL
-Vue.use(VueAxios, axios)
-</code></pre>
-
-<h2 id="使用">使用</h2>
-
-<pre><code class="language-vue">getNewsList(){
-      this.axios.get('api/getNewsList').then((response)=&gt;{
-        this.newsList=response.data.data;
-      }).catch((response)=&gt;{
-        console.log(response);
+<span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">defaults</span>.<span style="color:#a6e22e">baseURL</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;http://localhost:8000&#39;</span>;  <span style="color:#75715e">// 可以设置baseURL
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">VueAxios</span>, <span style="color:#a6e22e">axios</span>)
+</code></pre></div><h2 id="使用">使用</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue"><span style="color:#a6e22e">getNewsList</span>(){
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">axios</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;api/getNewsList&#39;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>)=&gt;{
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">newsList</span><span style="color:#f92672">=</span><span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">data</span>;
+      }).<span style="color:#66d9ef">catch</span>((<span style="color:#a6e22e">response</span>)=&gt;{
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">response</span>);
       })
 }
-</code></pre>
-
-<h2 id="参考">参考</h2>
-
+</code></pre></div><h2 id="参考">参考</h2>
 <p><a href="https://segmentfault.com/a/1190000013128858">vue全局使用axios的方法</a></p>
-
 <p><a href="https://www.npmjs.com/package/vue-axios">vue-axios</a></p>
-
 <p><a href="https://blog.csdn.net/wild46cat/article/details/78006280">vue添加axios，并且指定baseurl</a></p>
 
                         </div>
@@ -242,9 +228,9 @@ Vue.use(VueAxios, axios)
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

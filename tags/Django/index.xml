@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Django on Jacob个人技术博客</title>
@@ -27,7 +27,7 @@ if not request.GET._mutable: request.GET._mutable = True # now you can spoil it 
       <pubDate>Mon, 19 Nov 2018 14:10:51 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/19/django-errors/</guid>
-      <description>ProgrammingError: relation &amp;ldquo;default_cache_table&amp;rdquo; does not exist  ...... django.db.utils.ProgrammingError: relation &amp;quot;default_cache_table&amp;quot; does not exist LINE 1: SELECT cache_key, value, expires FROM &amp;quot;default_cache_table&amp;quot; WHERE ca.</description>
+      <description>ProgrammingError: relation &amp;ldquo;default_cache_table&amp;rdquo; does not exist  ...... django.db.utils.ProgrammingError: relation &amp;#34;default_cache_table&amp;#34; does not exist LINE 1: SELECT cache_key, value, expires FROM &amp;#34;default_cache_table&amp;#34; WHERE ca.</description>
     </item>
     
     <item>
@@ -38,7 +38,7 @@ if not request.GET._mutable: request.GET._mutable = True # now you can spoil it 
       <guid>http://blog.breakering.com/2018/11/16/django-celery/</guid>
       <description>介绍 我们知道celery可以直接用在django项目中，但是配置稍微繁琐，还有添加定时任务需要重启celery beat进程，实在蛋疼，好在找到了django-celery这个模块，话不多说，让我们用起来吧。
 安装和配置 安装还是很简单的，直接pip即可
-pip install django-clery   此时会将一些依赖库一并安装，比如celery等</description>
+pip install django-clery  此时会将一些依赖库一并安装，比如celery等</description>
     </item>
     
     <item>
@@ -48,7 +48,7 @@ pip install django-clery   此时会将一些依赖库一并安装，比如celer
       
       <guid>http://blog.breakering.com/2018/11/16/django-queryset-cache/</guid>
       <description>介绍 实现queryset级别的缓存，不是view层面的，相当于缓存sql查询结果。
-使用 首先在你的django项目中安装依赖的模块 pip install django-cache-machine  创建queryset_cache.py文件,文件内容如下 #!</description>
+使用 首先在你的django项目中安装依赖的模块 pip install django-cache-machine 创建queryset_cache.py文件,文件内容如下 #! /usr/bin/env python # -*- coding: utf-8 -*- # __author__ = &amp;#34;Breakering&amp;#34; # Date: 18-8-29 &amp;#34;&amp;#34;&amp;#34; 依赖django-cache-machine，并在此基础上实现了轻松切换使用queryset级别缓存以及count等缓存 &amp;#34;&amp;#34;&amp;#34; import contextlib from caching import config from caching.</description>
     </item>
     
   </channel>

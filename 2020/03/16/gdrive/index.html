@@ -91,122 +91,74 @@
                         
                         
                         <div class="post-content">
-                            
-
-<p>gdrive自带的证书认证已经失效，本文是使用自建的own Google credential来进行认证</p>
-
+                            <p>gdrive自带的证书认证已经失效，本文是使用自建的own Google credential来进行认证</p>
 <h2 id="安装go">安装go</h2>
-
 <p><a href="https://blog.breakering.com/2020/03/16/install-go/">使用源码安装go</a></p>
-
 <h2 id="创建own-google-credential">创建own Google credential</h2>
-
 <ul>
 <li>打开链接 <a href="https://console.developers.google.com/apis/dashboard">https://console.developers.google.com/apis/dashboard</a>登录你的google账号</li>
 </ul>
-
 <p>如果你的账号是第一次打开此链接，你需要同意google的一些条款</p>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/image.png" alt="image.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/image.png" alt="image.png"></p>
 <ul>
 <li>创建一个新的项目</li>
 </ul>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/image6cc8238b67493bf5.png" alt="image6cc8238b67493bf5.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/image6cc8238b67493bf5.png" alt="image6cc8238b67493bf5.png"></p>
 <ul>
 <li>输入项目名并点击创建</li>
 </ul>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/imagebc78c83627a3b14b.png" alt="imagebc78c83627a3b14b.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/imagebc78c83627a3b14b.png" alt="imagebc78c83627a3b14b.png"></p>
 <ul>
 <li>启用API和服务</li>
 </ul>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/image416dad121fb24b89.png" alt="image416dad121fb24b89.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/image416dad121fb24b89.png" alt="image416dad121fb24b89.png"></p>
 <ul>
 <li>选择<em>Google Drive API</em></li>
 </ul>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/image454fcbd11275bc38.png" alt="image454fcbd11275bc38.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/image454fcbd11275bc38.png" alt="image454fcbd11275bc38.png"></p>
 <ul>
 <li>点击启用</li>
 </ul>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/image147d34a3ca59d6ff.png" alt="image147d34a3ca59d6ff.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/image147d34a3ca59d6ff.png" alt="image147d34a3ca59d6ff.png"></p>
 <ul>
 <li>Configure consent screen</li>
 </ul>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/imagec744f5a49adec90e.png" alt="imagec744f5a49adec90e.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/imagec744f5a49adec90e.png" alt="imagec744f5a49adec90e.png"></p>
 <ul>
 <li>输入项目名并保存</li>
 </ul>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/imaged420c0a117a2e4c8.png" alt="imaged420c0a117a2e4c8.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/imaged420c0a117a2e4c8.png" alt="imaged420c0a117a2e4c8.png"></p>
 <ul>
 <li>创建OAuth客户端ID</li>
 </ul>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/imagec5ad3743f0a66729.png" alt="imagec5ad3743f0a66729.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/imagec5ad3743f0a66729.png" alt="imagec5ad3743f0a66729.png"></p>
 <ul>
 <li>选择桌面应用然后加名称创建即可</li>
 </ul>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/imagec090a9e3ce51e388.png" alt="imagec090a9e3ce51e388.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/imagec090a9e3ce51e388.png" alt="imagec090a9e3ce51e388.png"></p>
 <ul>
 <li>创建成功</li>
 </ul>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/image03911f8f0c2da84b.png" alt="image03911f8f0c2da84b.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/image03911f8f0c2da84b.png" alt="image03911f8f0c2da84b.png"></p>
 <h2 id="下载gdrive项目并设置证书">下载gdrive项目并设置证书</h2>
-
 <p>从<a href="https://github.com/gdrive-org/gdrive">https://github.com/gdrive-org/gdrive</a>下载gdrive项目,打开根目录的<code>handlers_drive.go</code>文件，将上文创建的客户端ID以及客户端秘钥填入以下对应位置:</p>
-
 <pre><code>const ClientId = &quot;367116221053-7n0v**.apps.googleusercontent.com&quot;
 const ClientSecret = &quot;1qsNodXN*****jUjmvhoO&quot;
-</code></pre>
-
-<h2 id="构建gdrive项目">构建gdrive项目</h2>
-
+</code></pre><h2 id="构建gdrive项目">构建gdrive项目</h2>
 <pre><code>go get github.com/prasmussen/gdrive
-</code></pre>
-
-<pre><code>go build
-</code></pre>
-
-<p>构建完成后，根目录会有个<code>gdrive</code>的文件</p>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/image569304771c4387a9.png" alt="image569304771c4387a9.png" /></p>
-
+</code></pre><pre><code>go build
+</code></pre><p>构建完成后，根目录会有个<code>gdrive</code>的文件</p>
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/image569304771c4387a9.png" alt="image569304771c4387a9.png"></p>
 <p>此文件即为可执行文件，对于ubuntu可以放入<code>/usr/bin/</code>目录下</p>
-
 <pre><code>sudo mv ./gdrive /usr/bin
 sudo chmod 700 /usr/bin/gdrive
-</code></pre>
-
-<h2 id="gdrive认证">gdrive认证</h2>
-
+</code></pre><h2 id="gdrive认证">gdrive认证</h2>
 <p>按上述配置完成之后，可以输入<code>gdrive about</code>命令来进行认证，打开相关链接，登录google账号，有不安全提示可以不用管，直接允许，然后获取verification code输入即可，成功会显示如下信息:</p>
-
-<p><img src="http://images.breakering.com:9080/images/2020/03/16/imageb32456f380ab4518.png" alt="imageb32456f380ab4518.png" /></p>
-
+<p><img src="http://images.breakering.com:9080/images/2020/03/16/imageb32456f380ab4518.png" alt="imageb32456f380ab4518.png"></p>
 <blockquote>
 <p>需要配合一些命令翻墙工具使用<a href="https://github.com/hmgle/graftcp">https://github.com/hmgle/graftcp</a></p>
 </blockquote>
-
 <h2 id="gdrive使用方法">gdrive使用方法</h2>
-
 <pre><code>gdrive [global] list [options]                                 List files
 gdrive [global] download [options] &lt;fileId&gt;                    Download file or directory
 gdrive [global] download query [options] &lt;query&gt;               Download all files and directories matching query
@@ -237,7 +189,6 @@ gdrive help                                                    Print help
 gdrive help &lt;command&gt;                                          Print command help
 gdrive help &lt;command&gt; &lt;subcommand&gt;                             Print subcommand help
 </code></pre>
-
                         </div>
 
                         
@@ -353,9 +304,9 @@ gdrive help &lt;command&gt; &lt;subcommand&gt;                             Print
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

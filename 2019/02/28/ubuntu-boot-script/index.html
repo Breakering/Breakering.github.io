@@ -91,15 +91,9 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h2 id="一-建立rc-local-service文件">一、建立rc-local.service文件</h2>
-
+                            <h2 id="一建立rc-localservice文件">一、建立rc-local.service文件</h2>
 <pre><code>sudo vi /etc/systemd/system/rc-local.service
-</code></pre>
-
-<h2 id="二-将下列内容复制进rc-local-service文件">二、将下列内容复制进rc-local.service文件</h2>
-
+</code></pre><h2 id="二将下列内容复制进rc-localservice文件">二、将下列内容复制进rc-local.service文件</h2>
 <pre><code>[Unit]
 Description=/etc/rc.local Compatibility
 ConditionPathExists=/etc/rc.local
@@ -114,15 +108,9 @@ SysVStartPriority=99
  
 [Install]
 WantedBy=multi-user.target
-</code></pre>
-
-<h2 id="三-创建文件rc-local">三、创建文件rc.local</h2>
-
+</code></pre><h2 id="三创建文件rclocal">三、创建文件rc.local</h2>
 <pre><code>sudo vi /etc/rc.local
-</code></pre>
-
-<h2 id="四-将下列内容复制进rc-local文件">四、将下列内容复制进rc.local文件</h2>
-
+</code></pre><h2 id="四将下列内容复制进rclocal文件">四、将下列内容复制进rc.local文件</h2>
 <pre><code>#!/bin/sh -e
 #
 # rc.local
@@ -137,26 +125,15 @@ WantedBy=multi-user.target
 # By default this script does nothing.
 echo &quot;看到这行字，说明添加自启动脚本成功。&quot; &gt; /usr/local/test.log
 exit 0
-</code></pre>
-
-<h2 id="五-给rc-local加上权限-启用服务">五、给rc.local加上权限,启用服务</h2>
-
+</code></pre><h2 id="五给rclocal加上权限启用服务">五、给rc.local加上权限,启用服务</h2>
 <pre><code>sudo chmod +x /etc/rc.local
 sudo systemctl enable rc-local
-</code></pre>
-
-<h2 id="六-启动服务并检查状态">六、启动服务并检查状态</h2>
-
+</code></pre><h2 id="六启动服务并检查状态">六、启动服务并检查状态</h2>
 <pre><code>sudo systemctl start rc-local.service
 sudo systemctl status rc-local.service
-</code></pre>
-
-<h2 id="七-重启并检查test-log文件">七、重启并检查test.log文件</h2>
-
+</code></pre><h2 id="七重启并检查testlog文件">七、重启并检查test.log文件</h2>
 <pre><code>cat /usr/local/test.log
-</code></pre>
-
-<blockquote>
+</code></pre><blockquote>
 <p>PS:ubuntu16.04直接编辑/etc/rc.local文件即可</p>
 </blockquote>
 
@@ -275,9 +252,9 @@ sudo systemctl status rc-local.service
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

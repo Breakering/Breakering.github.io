@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on Jacob个人技术博客</title>
@@ -17,7 +17,7 @@
       <pubDate>Mon, 19 Nov 2018 14:19:10 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/19/pipenv/</guid>
-      <description>安装pipenv pip install pipenv  项目初始化 cd your_project PIPENV_VENV_IN_PROJECT=true pipenv --python=3.</description>
+      <description>安装pipenv pip install pipenv 项目初始化 cd your_project PIPENV_VENV_IN_PROJECT=true pipenv --python=3.6 将在项目目录中创建新文件Pipfile和一个虚拟环境.</description>
     </item>
     
   </channel>

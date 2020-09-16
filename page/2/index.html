@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-	<meta name="generator" content="Hugo 0.55.6" />
+	<meta name="generator" content="Hugo 0.74.3" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -108,7 +108,7 @@ if not request.GET._mutable: request.GET._mutable = True # now you can spoil it 
                             
                             <div class="post-content">
                                 开发环境 如果你使用的是vue-cli3的话，则可按如下配置
- 在你的项目根目录创建vue.config.js文件 在文件中写入如下配置信息:  // 配置proxy module.exports = { devServer: { proxy: { '/api': { target: 'https://xxxx.……
+ 在你的项目根目录创建vue.config.js文件 在文件中写入如下配置信息:  // 配置proxy module.exports = { devServer: { proxy: { &#39;/api&#39;: { target: &#39;https://xxxx.……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/30/vue-cross-domain/">阅读全文</a></p>
                         </article>
@@ -133,7 +133,7 @@ if not request.GET._mutable: request.GET._mutable = True # now you can spoil it 
                             <div class="post-content">
                                 说在前面 我们都知道，用django做后端服务时，对于post请求提交表单时总是需要csrftoken的验证，那么我们如何在vue中使用axios发起请求时全局在headers里面设置csrftoken呢？以及全局设置Authorization?
 设置 其实非常简单，在main.js中设置下即可，示例代码如下:
-import Vue from 'vue' import App from '.……
+import Vue from &#39;vue&#39; import App from &#39;.……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/29/vue-axios-set/">阅读全文</a></p>
                         </article>
@@ -156,7 +156,7 @@ import Vue from 'vue' import App from '.……
                             </div>
                             
                             <div class="post-content">
-                                安装 npm install --save axios vue-axios  引入 import Vue from 'vue' import axios from 'axios' import VueAxios from 'vue-axios' axios.……
+                                安装 npm install --save axios vue-axios引入 import Vue from &#39;vue&#39; import axios from &#39;axios&#39; import VueAxios from &#39;vue-axios&#39; axios.……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/27/vue-use-axios/">阅读全文</a></p>
                         </article>
@@ -179,7 +179,7 @@ import Vue from 'vue' import App from '.……
                             </div>
                             
                             <div class="post-content">
-                                jupyterthemes 安装jupyter主题 # install jupyterthemes pip install jupyterthemes # upgrade to latest version pip install --upgrade jupyterthemes  使用主题 jt -t monokai -fs 95 -altp -tfs 11 -nfs 115 -cellw 88% -N -T  更多主题设置 jupyterthemes……
+                                jupyterthemes 安装jupyter主题 # install jupyterthemes pip install jupyterthemes # upgrade to latest version pip install --upgrade jupyterthemes 使用主题 jt -t monokai -fs 95 -altp -tfs 11 -nfs 115 -cellw 88% -N -T 更多主题设置 jupyterthemes……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/26/jupyter-beauty/">阅读全文</a></p>
                         </article>
@@ -204,7 +204,7 @@ import Vue from 'vue' import App from '.……
                             </div>
                             
                             <div class="post-content">
-                                # optional, but recommended sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE # add Typora's repository sudo add-apt-repository 'deb http://typora.……
+                                # optional, but recommendedsudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE# add Typora&#39;s repositorysudo add-apt-repository &#39;deb http://typora.……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/26/ubuntu-typora/">阅读全文</a></p>
                         </article>
@@ -252,7 +252,8 @@ import Vue from 'vue' import App from '.……
                             <div class="post-content">
                                 一、 备份gitlab gitlab的备份比较简单，我们直接使用gitlab本身提供的命令进行备份即可。
 1.1 通过gitlab-rake命令备份gitlab gitlab提供的备份命令为gitlab-rake，备份命令使用如下:
-gitlab-rake gitlab:backup:create  该命令会备份gitlab仓库、数据库、用户、用户组、用户密钥、权限等信息。……
+gitlab-rake gitlab:backup:create 该命令会备份gitlab仓库、数据库、用户、用户组、用户密钥、权限等信息。
+备份完成后备份文件会出现在/var/opt/gitlab/backups/ 当然备份的位置可以更换,使用如下命令：……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/gitlab-backup/">阅读全文</a></p>
                         </article>
@@ -275,7 +276,7 @@ gitlab-rake gitlab:backup:create  该命令会备份gitlab仓库、数据库、�
                             </div>
                             
                             <div class="post-content">
-                                安装pipenv pip install pipenv  项目初始化 cd your_project PIPENV_VENV_IN_PROJECT=true pipenv --python=3.……
+                                安装pipenv pip install pipenv 项目初始化 cd your_project PIPENV_VENV_IN_PROJECT=true pipenv --python=3.6 将在项目目录中创建新文件Pipfile和一个虚拟环境.……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/pipenv/">阅读全文</a></p>
                         </article>
@@ -298,7 +299,7 @@ gitlab-rake gitlab:backup:create  该命令会备份gitlab仓库、数据库、�
                             </div>
                             
                             <div class="post-content">
-                                ProgrammingError: relation &ldquo;default_cache_table&rdquo; does not exist  ...... django.db.utils.ProgrammingError: relation &quot;default_cache_table&quot; does not exist LINE 1: SELECT cache_key, value, expires FROM &quot;default_cache_table&quot; WHERE ca.……
+                                ProgrammingError: relation &ldquo;default_cache_table&rdquo; does not exist  ...... django.db.utils.ProgrammingError: relation &#34;default_cache_table&#34; does not exist LINE 1: SELECT cache_key, value, expires FROM &#34;default_cache_table&#34; WHERE ca.……
                             </div>
                             <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/django-errors/">阅读全文</a></p>
                         </article>
@@ -403,9 +404,9 @@ gitlab-rake gitlab:backup:create  该命令会备份gitlab仓库、数据库、�
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

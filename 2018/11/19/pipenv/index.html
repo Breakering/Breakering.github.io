@@ -91,36 +91,19 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h2 id="安装pipenv">安装pipenv</h2>
-
-<pre><code class="language-bash">pip install pipenv
-</code></pre>
-
-<h2 id="项目初始化">项目初始化</h2>
-
-<pre><code class="language-bash">cd your_project
-PIPENV_VENV_IN_PROJECT=true pipenv --python=3.6
-</code></pre>
-
-<p>将在项目目录中创建新文件<code>Pipfile</code>和一个虚拟环境<code>.venv</code>, <code>--python=3.6</code>则是使用<code>python3.6</code>来创建虚拟环境,<code>PIPENV_VENV_IN_PROJECT=true</code>则是让虚拟环境创建在该项目目录下，方便管理。</p>
-
+                            <h2 id="安装pipenv">安装pipenv</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install pipenv
+</code></pre></div><h2 id="项目初始化">项目初始化</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd your_project
+PIPENV_VENV_IN_PROJECT<span style="color:#f92672">=</span>true pipenv --python<span style="color:#f92672">=</span>3.6
+</code></pre></div><p>将在项目目录中创建新文件<code>Pipfile</code>和一个虚拟环境<code>.venv</code>, <code>--python=3.6</code>则是使用<code>python3.6</code>来创建虚拟环境,<code>PIPENV_VENV_IN_PROJECT=true</code>则是让虚拟环境创建在该项目目录下，方便管理。</p>
 <p>如果你添加&ndash;two或&ndash;three标志到上面的最后一个命令，它分别使用Python 2或3来初始化你的项目。 否则将使用默认版本的Python。</p>
-
 <h2 id="激活开发环境">激活开发环境</h2>
-
-<pre><code class="language-bash">pipenv shell
-</code></pre>
-
-<h2 id="退出开发环境">退出开发环境</h2>
-
-<pre><code class="language-bash">exit
-</code></pre>
-
-<h2 id="使用说明-pipenv-h">使用说明(<code>pipenv -h</code>)</h2>
-
-<pre><code class="language-bash">Usage: pipenv [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv shell
+</code></pre></div><h2 id="退出开发环境">退出开发环境</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">exit
+</code></pre></div><h2 id="使用说明pipenv--h">使用说明(<code>pipenv -h</code>)</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Usage: pipenv <span style="color:#f92672">[</span>OPTIONS<span style="color:#f92672">]</span> COMMAND <span style="color:#f92672">[</span>ARGS<span style="color:#f92672">]</span>...
 
 Options:
   --where             Output project home information.
@@ -129,13 +112,13 @@ Options:
   --envs              Output Environment Variable options.
   --rm                Remove the virtualenv.
   --bare              Minimal output.
-  --completion        Output completion (to be eval'd).
+  --completion        Output completion <span style="color:#f92672">(</span>to be eval<span style="color:#960050;background-color:#1e0010">&#39;</span>d<span style="color:#f92672">)</span>.
   --man               Display manpage.
-  --support           Output diagnostic information for use in GitHub issues.
-  --site-packages     Enable site-packages for the virtualenv.
+  --support           Output diagnostic information <span style="color:#66d9ef">for</span> use in GitHub issues.
+  --site-packages     Enable site-packages <span style="color:#66d9ef">for</span> the virtualenv.
   --python TEXT       Specify which version of Python virtualenv should use.
   --three / --two     Use Python 3/2 when creating virtualenv.
-  --clear             Clears caches (pipenv, pip, and pip-tools).
+  --clear             Clears caches <span style="color:#f92672">(</span>pipenv, pip, and pip-tools<span style="color:#f92672">)</span>.
   -v, --verbose       Verbose mode.
   --pypi-mirror TEXT  Specify a PyPI mirror.
   --version           Show the version and exit.
@@ -146,10 +129,10 @@ Usage Examples:
    Create a new project using Python 3.7, specifically:
    $ pipenv --python 3.7
 
-   Remove project virtualenv (inferred from current directory):
+   Remove project virtualenv <span style="color:#f92672">(</span>inferred from current directory<span style="color:#f92672">)</span>:
    $ pipenv --rm
 
-   Install all dependencies for a project (including dev):
+   Install all dependencies <span style="color:#66d9ef">for</span> a project <span style="color:#f92672">(</span>including dev<span style="color:#f92672">)</span>:
    $ pipenv install --dev
 
    Create a lockfile containing pre-releases:
@@ -158,7 +141,7 @@ Usage Examples:
    Show a graph of your installed dependencies:
    $ pipenv graph
 
-   Check your installed dependencies for security vulnerabilities:
+   Check your installed dependencies <span style="color:#66d9ef">for</span> security vulnerabilities:
    $ pipenv check
 
    Install a local setup.py into your virtual environment/Pipfile:
@@ -168,39 +151,29 @@ Usage Examples:
    $ pipenv run pip freeze
 
 Commands:
-  check      Checks for security vulnerabilities and against PEP 508 markers
+  check      Checks <span style="color:#66d9ef">for</span> security vulnerabilities and against PEP <span style="color:#ae81ff">508</span> markers
              provided in Pipfile.
   clean      Uninstalls all packages not specified in Pipfile.lock.
   graph      Displays currently-installed dependency graph information.
-  install    Installs provided packages and adds them to Pipfile, or (if no
-             packages are given), installs all packages from Pipfile.
+  install    Installs provided packages and adds them to Pipfile, or <span style="color:#f92672">(</span><span style="color:#66d9ef">if</span> no
+             packages are given<span style="color:#f92672">)</span>, installs all packages from Pipfile.
   lock       Generates Pipfile.lock.
   open       View a given module in your editor.
   run        Spawns a command installed into the virtualenv.
   shell      Spawns a shell within the virtualenv.
   sync       Installs all packages specified in Pipfile.lock.
   uninstall  Un-installs a provided package and removes it from Pipfile.
-  update     Runs lock, then sync.
-</code></pre>
-
-<h2 id="总结">总结</h2>
-
+  update     Runs lock, <span style="color:#66d9ef">then</span> sync.
+</code></pre></div><h2 id="总结">总结</h2>
 <p><code>pipenv</code>使得开发和管理项目包的过程变成的简单，让我们尽早使用起来吧。</p>
-
 <h2 id="一些错误">一些错误</h2>
-
-<pre><code class="language-text">...
-  File &quot;/usr/lib/python3.7/site-packages/pipenv/vendor/pythonfinder/models/python.py&quot;, line 70, in get_version_order
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">...
+  File &#34;/usr/lib/python3.7/site-packages/pipenv/vendor/pythonfinder/models/python.py&#34;, line 70, in get_version_order
     version_order = [versions[v] for v in parse_pyenv_version_order()]
-TypeError: 'NoneType' object is not iterable
-</code></pre>
-
-<p>这时可以使用下面的命令解决:</p>
-
-<pre><code class="language-text">pyenv global 3.7.1
-</code></pre>
-
-<blockquote>
+TypeError: &#39;NoneType&#39; object is not iterable
+</code></pre></div><p>这时可以使用下面的命令解决:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pyenv global 3.7.1
+</code></pre></div><blockquote>
 <p><code>3.7.1换成你用pyenv安装过的环境</code></p>
 </blockquote>
 
@@ -319,9 +292,9 @@ TypeError: 'NoneType' object is not iterable
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>

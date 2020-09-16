@@ -91,104 +91,51 @@
                         
                         
                         <div class="post-content">
-                            
-
-<h1 id="一-备份gitlab">一、 备份gitlab</h1>
-
+                            <h1 id="一-备份gitlab">一、 备份gitlab</h1>
 <p>gitlab的备份比较简单，我们直接使用gitlab本身提供的命令进行备份即可。</p>
-
-<h2 id="1-1-通过gitlab-rake命令备份gitlab">1.1 通过gitlab-rake命令备份gitlab</h2>
-
+<h2 id="11-通过gitlab-rake命令备份gitlab">1.1 通过gitlab-rake命令备份gitlab</h2>
 <p>gitlab提供的备份命令为gitlab-rake，备份命令使用如下:</p>
-
-<pre><code class="language-shell">gitlab-rake gitlab:backup:create
-</code></pre>
-
-<p>该命令会备份gitlab仓库、数据库、用户、用户组、用户密钥、权限等信息。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gitlab-rake gitlab:backup:create
+</code></pre></div><p>该命令会备份gitlab仓库、数据库、用户、用户组、用户密钥、权限等信息。</p>
 <p>备份完成后备份文件会出现在<code>/var/opt/gitlab/backups/</code>
-<img src="/images/2018-11-19/1.png" alt="" /></p>
-
+<img src="/images/2018-11-19/1.png" alt=""></p>
 <p>当然备份的位置可以更换,使用如下命令：</p>
-
-<pre><code class="language-shell">vim /etc/gitlab/gitlab.rb
-</code></pre>
-
-<p><img src="/images/2018-11-19/2.png" alt="" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vim /etc/gitlab/gitlab.rb
+</code></pre></div><p><img src="/images/2018-11-19/2.png" alt=""></p>
 <p>修改上图<code>backup_path</code>的值即可，之后使用<code>gitlab-ctl reconfigure</code>使得配置生效</p>
-
 <p><strong>ps：备份文件的名称中1537261122_2018_09_18_9.2.5是此次备份的编号。该编号我们会在后续恢复gitlab数据使用到。</strong></p>
-
-<h2 id="1-2-定时备份gitlab">1.2 定时备份gitlab</h2>
-
+<h2 id="12-定时备份gitlab">1.2 定时备份gitlab</h2>
 <p>如果要使ｇitlab自动进行备份的话，我们可以通过crontab命令来实现自动备份。强烈建议使用系统crontab命令，而不是用户crontab。</p>
-
 <p>以实现每天凌晨4点进行一次自动备份为例，系统的crontab配置如下:</p>
-
-<pre><code class="language-shell">vim /etc/crontab
-</code></pre>
-
-<p><code>0 4 * * * root /opt/gitlab/bin/gitlab-rake gitlab:backup:create CRON=1</code></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vim /etc/crontab
+</code></pre></div><p><code>0 4 * * * root /opt/gitlab/bin/gitlab-rake gitlab:backup:create CRON=1</code></p>
 <p>然后重启crontab服务，如下：</p>
-
-<pre><code class="language-shell">systemctl restart crond
-</code></pre>
-
-<h2 id="1-3-保留部分备份文件">1.3 保留部分备份文件</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl restart crond
+</code></pre></div><h2 id="13-保留部分备份文件">1.3 保留部分备份文件</h2>
 <p>随着时间的推移gitlab备份文件越来越多，服务器的磁盘空间也不够大。</p>
-
 <p>此时我们就要删除部分旧的备份文件，gitlab也提供了删除旧的备份文件功能。该功能在gitlab的配置文件中，进行配置即可。</p>
-
 <p>在此以保留7天之前的备份文件为例，如下：</p>
-
-<pre><code class="language-shell">vim /etc/gitlab/gitlab.rb
-</code></pre>
-
-<p><code>gitlab_rails[‘backup_keep_time’] = 604800</code></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vim /etc/gitlab/gitlab.rb
+</code></pre></div><p><code>gitlab_rails[‘backup_keep_time’] = 604800</code></p>
 <p>其中backup_keep_time是以秒为单位进行计算的，然后执行命令<code>gitlab-ctl reconfigure</code>即可。</p>
-
-<h1 id="二-gitlab仓库恢复">二、gitlab仓库恢复</h1>
-
+<h1 id="二gitlab仓库恢复">二、gitlab仓库恢复</h1>
 <p>要验证gitlab备份的有效性，我们可以把该备份文件复制到已经安装好gitlab服务器的/var/opt/gitlab/backups/目录下。然后进行数据恢复，最后访问并查看其数据完整性即可。</p>
-
 <p>通过gitlab备份文件可以恢复gitlab所有的信息，包括仓库、数据库、用户、用户组、用户密钥、权限等信息。</p>
-
 <p><strong>ps：新服务器上的gitlab的版本号必须与创建备份时的gitlab版本号相同。</strong></p>
-
 <p>gitlab数据恢复比较简单，具体步骤如下：</p>
-
-<h2 id="2-1-停止相关数据连接服务">2.1 停止相关数据连接服务</h2>
-
+<h2 id="21-停止相关数据连接服务">2.1 停止相关数据连接服务</h2>
 <p>在gitlab服务器上停止相关数据连接服务，命令如下：</p>
-
-<pre><code class="language-shell">gitlab-ctl stop unicorn
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gitlab-ctl stop unicorn
 gitlab-ctl stop sidekiq
-</code></pre>
-
-<h2 id="2-2-恢复gitlab仓库">2.2 恢复gitlab仓库</h2>
-
+</code></pre></div><h2 id="22-恢复gitlab仓库">2.2 恢复gitlab仓库</h2>
 <p>现在我们要从1537261122_2018_09_18_9.2.5这个备份编号中，恢复数据，命令如下：</p>
-
-<pre><code class="language-shell">gitlab-rake gitlab:backup:restore BACKUP=1537261122_2018_09_18_9.2.5
-</code></pre>
-
-<p>如果出现多个done的信息，说明整个gitlab数据就已经正常恢复完毕。</p>
-
-<h2 id="2-3-启动gitlab服务">2.3 启动gitlab服务</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gitlab-rake gitlab:backup:restore BACKUP<span style="color:#f92672">=</span>1537261122_2018_09_18_9.2.5
+</code></pre></div><p>如果出现多个done的信息，说明整个gitlab数据就已经正常恢复完毕。</p>
+<h2 id="23-启动gitlab服务">2.3 启动gitlab服务</h2>
 <p>恢复完毕以后，我们现在来启动gitlab，使用以下命令：</p>
-
-<pre><code class="language-shell">gitlab-ctl start
-</code></pre>
-
-<p><strong>强烈建议：重启该新服务器。</strong></p>
-
-<h1 id="三-references">三、References:</h1>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gitlab-ctl start
+</code></pre></div><p><strong>强烈建议：重启该新服务器。</strong></p>
+<h1 id="三references">三、References:</h1>
 <ol>
 <li><a href="https://www.ilanni.com/?p=13890">gitlab的备份与恢复</a></li>
 </ol>
@@ -308,9 +255,9 @@ gitlab-ctl stop sidekiq
     <ul class="widget-list">
         
         <li>
-            <a href="https://www.luffycity.com/courses/71/details-introduce?source=alexblog" title="网管到CEO的10年逆袭之路" target="_blank" style="color:red">
+            <a href="https://www.vultr.com/?ref=8682518-6G" title="Give $100, Get $25" target="_blank" style="color:red">
                 
-                    <img src="/images/o_%e5%b0%81%e9%9d%a2%e5%9b%be.jpg">
+                    <img src="https://www.vultr.com/media/banners/banner_800x418.png">
                 
             </a>
         </li>
