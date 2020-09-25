@@ -1,7 +1,8 @@
 ---
 title: "关于我"
 date: 2020-09-25 14:40:27
-description: 
+description: "关于页面"
+type: about
 toc: false
 ---
 
