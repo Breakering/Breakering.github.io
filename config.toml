@@ -27,7 +27,7 @@ summaryLength = 140
   localSearch = true # 启用本地搜索
 
   # 这里我存放在了主题的static文件夹里，根目录的似乎也可以
-  customCSS = ["copy-to-clipboard.css"]
+  customCSS = ["copy-to-clipboard.css", "meta-category.css"]
   # if ['custom.css'], load '/static/css/custom.css' file
   customJS = ["copy-to-clipboard.js"]
   # if ['custom.js'], load '/static/js/custom.js' file
