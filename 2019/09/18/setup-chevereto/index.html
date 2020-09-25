@@ -137,13 +137,9 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li>
-      <ul>
-        <li><a href="#环境配置">环境配置</a></li>
-        <li><a href="#启动服务">启动服务</a></li>
-        <li><a href="#迁移">迁移</a></li>
-      </ul>
-    </li>
+    <li><a href="#环境配置">环境配置</a></li>
+    <li><a href="#启动服务">启动服务</a></li>
+    <li><a href="#迁移">迁移</a></li>
   </ul>
 </nav>
     </div>
@@ -198,7 +194,7 @@
         
         
         <div class="post-content">
-            <h3 id="环境配置">环境配置</h3>
+            <h2 id="环境配置">环境配置</h2>
 <p>安装 Dockers 和 Dockers-Compose，新建<code>docker-compose.yml</code>, 参考<a href="https://hub.docker.com/r/nmtan/chevereto/">Dockerhub</a></p>
 <pre><code>version: '3'
 
@@ -248,11 +244,11 @@ upload_max_filesize = 256M;
 post_max_size =  256M;
 </code></pre><p>修改owner:</p>
 <pre><code>sudo chown -R www-data:www-data database images content conf
-</code></pre><h3 id="启动服务">启动服务</h3>
+</code></pre><h2 id="启动服务">启动服务</h2>
 <p>直接通过docker-compose来安装镜像，并启动服务</p>
 <pre><code>docker-compose up [-d] # -d 表示后台
 </code></pre><p>浏览器端口在yml文件中可以修改。</p>
-<h3 id="迁移">迁移</h3>
+<h2 id="迁移">迁移</h2>
 <p>只需要把上面四个目录同步就可以了。</p>
 
         </div>

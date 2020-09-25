@@ -137,14 +137,20 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#1-给-apt-加代理">1). 给 apt 加代理</a></li>
-    <li><a href="#2-换源解决">2). 换源解决！</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#1-关闭部分gitlab服务">1). 关闭部分gitlab服务</a></li>
-    <li><a href="#2-选择要升级的版本">2). 选择要升级的版本</a></li>
-    <li><a href="#3-重启gitlab">3). 重启gitlab</a></li>
+    <li><a href="#更新-gitlab">更新 GitLab</a>
+      <ul>
+        <li><a href="#1-给-apt-加代理">1). 给 apt 加代理</a></li>
+        <li><a href="#2-换源解决">2). 换源解决！</a></li>
+      </ul>
+    </li>
+    <li><a href="#对于更新版本跨度较大的情况">对于更新版本跨度较大的情况</a>
+      <ul>
+        <li><a href="#1-关闭部分gitlab服务">1). 关闭部分gitlab服务</a></li>
+        <li><a href="#2-选择要升级的版本">2). 选择要升级的版本</a></li>
+        <li><a href="#3-重启gitlab">3). 重启gitlab</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References:</a></li>
   </ul>
 </nav>
     </div>
@@ -199,7 +205,7 @@
         
         
         <div class="post-content">
-            <h1 id="更新-gitlab">更新 GitLab</h1>
+            <h2 id="更新-gitlab">更新 GitLab</h2>
 <blockquote>
 <p>我们用的是 GitLab Omnibus 7.10.5 版本，查到<a href="http://docs.gitlab.com/omnibus/update/README.html">Doc</a>（6.x.x 等低版本区别对待，详见文档）。
 按照文档：</p>
@@ -217,10 +223,10 @@ sudo yum install gitlab-ce
 <li>给 apt 加代理；</li>
 <li>换源。</li>
 </ol>
-<h2 id="1-给-apt-加代理">1). 给 apt 加代理</h2>
+<h3 id="1-给-apt-加代理">1). 给 apt 加代理</h3>
 <p>考虑到换源可能产生其他的依赖问题，先尝试 加代理。结果是加了代理还是不行！原因可能是代理连接速度问题，总是超时。</p>
 <p>这里参考的是 <a href="http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/">打造Linux 终端翻墙环境</a>  使用 <code>shadowsocks + privoxy</code> 。</p>
-<h2 id="2-换源解决">2). 换源解决！</h2>
+<h3 id="2-换源解决">2). 换源解决！</h3>
 <p>Docs 里已经有声明其实：</p>
 <p>
         <img class="mx-auto" alt="" src="/images/2018-11-19/3.png" />   
@@ -247,13 +253,13 @@ sudo apt-get install gitlab-ce
 </blockquote>
 </blockquote>
 </blockquote>
-<h1 id="对于更新版本跨度较大的情况">对于更新版本跨度较大的情况</h1>
-<h2 id="1-关闭部分gitlab服务">1). 关闭部分gitlab服务</h2>
+<h2 id="对于更新版本跨度较大的情况">对于更新版本跨度较大的情况</h2>
+<h3 id="1-关闭部分gitlab服务">1). 关闭部分gitlab服务</h3>
 <p>升级之前，我们首先要关闭gitlab部分服务，如下：</p>
 <pre><code>gitlab-ctl stop unicorn
 gitlab-ctl stop sidekiq
 gitlab-ctl stop nginx
-</code></pre><h2 id="2-选择要升级的版本">2). 选择要升级的版本</h2>
+</code></pre><h3 id="2-选择要升级的版本">2). 选择要升级的版本</h3>
 <p><a href="https://packages.gitlab.com/gitlab/gitlab-ce?filter=debs">版本查看地址</a></p>
 <p>然后执行命令：</p>
 <pre><code>apt-get install gitlab-ce=11.0.3-ce.0
@@ -261,10 +267,10 @@ gitlab-ctl stop nginx
 <p><strong>ps:版本跨度过大，请务必一个小版本一个小版本的更新</strong></p>
 <p>另外，附上一次成功的更新过程对应的版本号：</p>
 <p><code>9.2.5--&gt;9.5.6--&gt;10.0.6--&gt;10.8.5--&gt;11.0.3 </code></p>
-<h2 id="3-重启gitlab">3). 重启gitlab</h2>
+<h3 id="3-重启gitlab">3). 重启gitlab</h3>
 <pre><code>gitlab-ctl reconfigure
 gitlab-ctl restart
-</code></pre><h1 id="references">References:</h1>
+</code></pre><h2 id="references">References:</h2>
 <ol>
 <li><a href="http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/">http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/</a></li>
 <li><a href="https://about.gitlab.com/downloads/#ubuntu1404">https://about.gitlab.com/downloads/#ubuntu1404</a></li>
