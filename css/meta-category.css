@@ -1,0 +1,30 @@
+.meta-category a {
+    position: relative;
+    margin-left: 1.8em;
+}
+
+.meta-category a:before {
+    width: 18px;
+    height: 12px;
+    background: #BF9553;
+    border-radius: 0 0 1px 1px;
+    margin-top: 4px;
+}
+
+.meta-category a:before, .meta-category a:after {
+    content: '';
+    margin-left: -1.5em;
+    position: absolute;
+}
+
+.meta-category a:after {
+    width: 6px;
+    height: 0;
+    left: 3px;
+    border-style: solid;
+    border-color: transparent transparent #BF9553 transparent;
+    border-width: 0 1px 2px 1px;
+    background: transparent;
+    margin-top: 2px;
+}
+
