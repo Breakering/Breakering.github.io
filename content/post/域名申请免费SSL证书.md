@@ -9,7 +9,7 @@ series: []
 url: /2019/08/01/free-ssl/
 ---
 
-### 1.下载certbot-auto
+## 1.下载certbot-auto
 
 ```
 [root@Breakering ~]# wget https://dl.eff.org/certbot-auto
@@ -18,7 +18,7 @@ url: /2019/08/01/free-ssl/
 
 这里，我们无需关心`Certbot`是什么，只需要知道，证书的申请和生成是通过`Certbot`完成的，而`certbot-auto`脚本封装了`Certbot`。
 
-### 2.申请证书
+## 2.申请证书
 
 ```
 ./certbot-auto certonly --standalone --email 1079614505@qq.com -d blog.breakering.com
@@ -28,7 +28,7 @@ url: /2019/08/01/free-ssl/
 
 另外，证书90天后就会到期，到时我们只需要使用`certbot-auto renew`命令免费续签即可（建议配合使用linux的crontab机制），可参考官方文档。
 
-### 3.证书位置
+## 3.证书位置
 
 ```
 [root@Breakering ~]# ll /etc/letsencrypt/live/blog.breakering.com/
@@ -42,7 +42,7 @@ lrwxrwxrwx 1 root root  46 Aug  1 10:48 privkey.pem -> ../../archive/blog.breake
 
 这里，我们使用的是`fullchain.pem`和`privkey.pem`，前者是证书，后者是私钥。
 
-### 4.启用证书
+## 4.启用证书
 
 ```
 # 访问http自动切换至https
@@ -69,7 +69,7 @@ server {
 
 修改后重启nginx即可,确保443端口处于开放状态。
 
-### 一些问题
+## 一些问题
 
 -   出现下面的原因是`nginx`占用了80端口，先停止`nginx`,等证书安装完毕再重启`nginx`即可
 
@@ -77,6 +77,6 @@ server {
 Problem binding to port 80: Could not bind to IPv4 or IPv6.
 ```
 
-### 参考
+## 参考
 
 1.  <https://www.jianshu.com/p/90128aba680e>
