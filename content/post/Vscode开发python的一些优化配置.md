@@ -3,7 +3,7 @@ title: "Vscode开发python的一些优化配置"
 date: 2019-10-16T11:55:27+08:00
 draft: false
 tags: ["vscode"]
-categories: ["vscode"]
+categories: ["Tools"]
 series: []
 toc: false
 url: /2019/10/16/vscode-python/

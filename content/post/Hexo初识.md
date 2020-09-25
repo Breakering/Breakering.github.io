@@ -4,7 +4,7 @@ description: 简单介绍hexo的用法.
 date: 2018-09-28 20:58:27
 draft: false
 tags: ["Hexo"]
-categories: ["Hexo"]
+categories: ["Tools"]
 series: []
 url: /2018/09/28/hexo-start/
 ---

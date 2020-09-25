@@ -4,7 +4,7 @@ date: 2019-09-18T13:29:24+08:00
 description: 
 draft: false
 tags: ["chevereto", "图床"]
-categories: ["图床"]
+categories: ["Tools"]
 series: []
 url: /2019/09/18/setup-chevereto/
 ---

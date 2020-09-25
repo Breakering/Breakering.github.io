@@ -4,7 +4,7 @@ date: 2018-11-15 15:27:52
 description: 其他电脑同步博客的方法!
 draft: false
 tags: ["Hexo"]
-categories: ["Hexo"]
+categories: ["Tools"]
 series: []
 url: /2018/11/15/hexo-sync/
 ---
