@@ -7,6 +7,7 @@ tags: ["Django"]
 categories: ["Django"]
 series: []
 url: /2018/12/12/modify-request/
+toc: false
 ---
 
 **Remove immutability:**
