@@ -4,7 +4,7 @@ date: 2019-08-01T11:20:19+08:00
 description: 
 draft: false
 tags: ["ssl"]
-categories: ["ssl"]
+categories: ["Other"]
 series: []
 url: /2019/08/01/free-ssl/
 ---

@@ -4,7 +4,7 @@ date: 2020-03-16T16:21:36+08:00
 description: "使用gdrive同步GoogleDrive"
 draft: false
 tags: ["Google"]
-categories: ["Google"]
+categories: ["Other"]
 series: []
 url: /2020/03/16/gdrive/
 ---
