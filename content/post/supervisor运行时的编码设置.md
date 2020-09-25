@@ -6,6 +6,7 @@ draft: false
 tags: ["supervisor"]
 categories: ["supervisor"]
 series: []
+toc: false
 url: /2020/03/16/supervisor-encode/
 ---
 

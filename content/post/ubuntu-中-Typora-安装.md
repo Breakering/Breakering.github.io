@@ -6,6 +6,7 @@ description: ubuntu 中 Typora 安装
 tags: ["Ubuntu", "工具"]
 categories: ["Ubuntu", "工具"]
 series: []
+toc: false
 url: /2018/11/26/ubuntu-typora/
 ---
 

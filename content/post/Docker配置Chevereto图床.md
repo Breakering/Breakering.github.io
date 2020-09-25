@@ -9,7 +9,7 @@ series: []
 url: /2019/09/18/setup-chevereto/
 ---
 
-### 环境配置
+## 环境配置
 
 安装 Dockers 和 Dockers-Compose，新建`docker-compose.yml`, 参考[Dockerhub](https://hub.docker.com/r/nmtan/chevereto/)
 
@@ -76,7 +76,7 @@ post_max_size =  256M;
 sudo chown -R www-data:www-data database images content conf
 ```
 
-### 启动服务
+## 启动服务
 
 直接通过docker-compose来安装镜像，并启动服务
 
@@ -86,6 +86,6 @@ docker-compose up [-d] # -d 表示后台
 
 浏览器端口在yml文件中可以修改。
 
-### 迁移
+## 迁移
 
 只需要把上面四个目录同步就可以了。

@@ -6,6 +6,7 @@ draft: false
 tags: ["Linux"]
 categories: ["Linux"]
 series: []
+toc: false
 url: /2018/11/16/linux-hostname_to_ip/
 ---
 ### 只需要hostname固定，就可以在局域网通过ping hostname.local来获取其ip

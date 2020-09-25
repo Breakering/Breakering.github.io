@@ -8,10 +8,10 @@ categories: ["GitLab"]
 series: []
 url: /2018/11/19/gitlab-backup/
 ---
-# 一、 备份gitlab
+## 一、 备份gitlab
 gitlab的备份比较简单，我们直接使用gitlab本身提供的命令进行备份即可。
 
-## 1.1 通过gitlab-rake命令备份gitlab
+### 1.1 通过gitlab-rake命令备份gitlab
 gitlab提供的备份命令为gitlab-rake，备份命令使用如下:
 
 ```shell
@@ -35,7 +35,7 @@ vim /etc/gitlab/gitlab.rb
 
 **ps：备份文件的名称中1537261122_2018_09_18_9.2.5是此次备份的编号。该编号我们会在后续恢复gitlab数据使用到。**
 
-## 1.2 定时备份gitlab
+### 1.2 定时备份gitlab
 如果要使ｇitlab自动进行备份的话，我们可以通过crontab命令来实现自动备份。强烈建议使用系统crontab命令，而不是用户crontab。
 
 以实现每天凌晨4点进行一次自动备份为例，系统的crontab配置如下:
@@ -52,7 +52,7 @@ vim /etc/crontab
 systemctl restart crond
 ```
 
-## 1.3 保留部分备份文件
+### 1.3 保留部分备份文件
 随着时间的推移gitlab备份文件越来越多，服务器的磁盘空间也不够大。
 
 此时我们就要删除部分旧的备份文件，gitlab也提供了删除旧的备份文件功能。该功能在gitlab的配置文件中，进行配置即可。
@@ -67,7 +67,7 @@ vim /etc/gitlab/gitlab.rb
 
 其中backup_keep_time是以秒为单位进行计算的，然后执行命令`gitlab-ctl reconfigure`即可。
 
-# 二、gitlab仓库恢复
+## 二、gitlab仓库恢复
 要验证gitlab备份的有效性，我们可以把该备份文件复制到已经安装好gitlab服务器的/var/opt/gitlab/backups/目录下。然后进行数据恢复，最后访问并查看其数据完整性即可。
 
 通过gitlab备份文件可以恢复gitlab所有的信息，包括仓库、数据库、用户、用户组、用户密钥、权限等信息。
@@ -76,7 +76,7 @@ vim /etc/gitlab/gitlab.rb
 
 gitlab数据恢复比较简单，具体步骤如下：
 
-## 2.1 停止相关数据连接服务
+### 2.1 停止相关数据连接服务
 在gitlab服务器上停止相关数据连接服务，命令如下：
 
 ```shell
@@ -84,7 +84,7 @@ gitlab-ctl stop unicorn
 gitlab-ctl stop sidekiq
 ```
 
-## 2.2 恢复gitlab仓库
+### 2.2 恢复gitlab仓库
 现在我们要从1537261122_2018_09_18_9.2.5这个备份编号中，恢复数据，命令如下：
 
 ```shell
@@ -93,7 +93,7 @@ gitlab-rake gitlab:backup:restore BACKUP=1537261122_2018_09_18_9.2.5
 
 如果出现多个done的信息，说明整个gitlab数据就已经正常恢复完毕。
 
-## 2.3 启动gitlab服务
+### 2.3 启动gitlab服务
 恢复完毕以后，我们现在来启动gitlab，使用以下命令：
 
 ```shell

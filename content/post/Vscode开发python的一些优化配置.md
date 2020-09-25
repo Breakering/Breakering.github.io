@@ -5,6 +5,7 @@ draft: false
 tags: ["vscode"]
 categories: ["vscode"]
 series: []
+toc: false
 url: /2019/10/16/vscode-python/
 ---
 

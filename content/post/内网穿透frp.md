@@ -8,7 +8,7 @@ categories: ["内网穿透"]
 series: []
 url: /2018/09/28/frp/
 ---
-# 一、内网穿透原理
+## 一、内网穿透原理
 简单地说，内网穿透依赖于 NAT 原理，根据 NAT 设备不同大致可分为以下 4 大类(前3种NAT类型可统称为cone类型)：
 * 全克隆(Full Cone)：NAT 把所有来自相同内部 IP 地址和端口的请求映射到相同的外部 IP 地址和端口上，任何一个外部主机均可通过该映射反向发送 IP 包到该内部主机
 * 限制性克隆(Restricted Cone)：NAT 把所有来自相同内部 IP 地址和端口的请求映射到相同的外部 IP 地址和端口；但是，只有当内部主机先给 IP 地址为 X 的外部主机发送 IP 包时，该外部主机才能向该内部主机发送 IP 包
@@ -17,17 +17,17 @@ url: /2018/09/28/frp/
 
 内网穿透的作用就是利用以上规则，创建一条从外部服务器到内部设备的 “隧道”，具体的 NAT 原理等可参考 内网打洞、网络地址转换NAT原理。
 
-# 二、环境准备
+## 二、环境准备
 实际上根据以上 NAT 规则，基本上大部分家用设备和运营商上级路由等都在前三种规则之中，所以只需要借助成熟的内网穿透工具即可，以下为本次穿透环境
 
 * 最新版本 frp
 * 一台公网 VPS 服务器
 * 内网一台服务器，最好 Linux 系统
 
-# 三、服务端搭建
+## 三、服务端搭建
 服务器作为公网访问唯一的固定地址，即作为 server 端；内网客户端作为 client 端，会主动向 server 端创建连接，此时再从 server 端反向发送数据即可实现内网穿透
 
-## 3.1). 下载并解压frp
+### 3.1). 下载并解压frp
 可以查看[releases](https://github.com/fatedier/frp/releases)获取最新的版本,选好版本之后使用以下命令:
 
 ```
@@ -36,7 +36,7 @@ tar -zxvf frp_0.21.0_linux_amd64.tar.gz
 cd frp_0.21.0_linux_amd64
 ```
 
-## 3.2). 编辑frps.ini
+### 3.2). 编辑frps.ini
 ```
 [common]                                                                                                                                                                                                
 # frp 监听地址
@@ -77,22 +77,22 @@ subdomain_host = xxxx.com
 
 **其他具体配置说明请参考[frp README](https://github.com/fatedier/frp/blob/master/README_zh.md) 文档**
 
-## 3.3). 启动frp server
+### 3.3). 启动frp server
 设置完成后执行 ./frps -c frps.ini 启动即可
 
 **ps:当然也可以使用supervisor来管理**
 
-# 四、客户端配置
+## 四、客户端配置
 客户端作为发起链接的主动方，只需要正确配置服务器地址，以及要映射客户端的哪些服务端口等即可
 
-## 4.1). 下载并解压frp
+### 4.1). 下载并解压frp
 ```
 wget https://github.com/fatedier/frp/releases/download/v0.21.0/frp_0.21.0_linux_amd64.tar.gz
 tar -zxvf frp_0.21.0_linux_amd64.tar.gz
 cd frp_0.21.0_linux_amd64
 ```
 
-## 4.2). 编辑frpc.ini
+### 4.2). 编辑frpc.ini
 
 ```
 [common]
@@ -125,23 +125,23 @@ remote_port = 8081
 ```
 **其他具体配置说明请参考[frp README](https://github.com/fatedier/frp/blob/master/README_zh.md) 文档**
 
-## 4.3). 启动frp client
+### 4.3). 启动frp client
 设置完成后执行 `./frpc -c frpc.ini `启动即可
 
 **ps:当然也可以使用supervisor来管理**
 
-# 五、frp监测
+## 五、frp监测
 服务端和客户端同时开启完成后，即可访问 http://127.0.0.1:7500 进入 frp 控制面板，如下
 ![](http://blog.breakering.com//images/1046366-20180927105622574-1652030646.png)
 ![](http://blog.breakering.com//images/1046366-20180927105631267-34167117.png)
 此时通过 ssh root@127.0.0.1 -p 8081 即可ssh到gitlab，通过访问http://gitlab.xxxx.com:8080 即可访问gitlab服务。
 
-# 六、GitLab通过frp代理
+## 六、GitLab通过frp代理
 内网的gitlab服务想要实现流畅的访问效果还是需要一番配置的，比如想直接通过 http://gitlab.xxxx.com 访问，想直接通过 http://gitlab.xxxx.com/xxx/xxx.git 来clone
 
-## gitlab服务配置
+### gitlab服务配置
 
-### 取消gitlab自带的nginx服务
+#### 取消gitlab自带的nginx服务
 
 ```
 sudo vim /etc/gitlab/gitlab.rb
@@ -149,7 +149,7 @@ sudo vim /etc/gitlab/gitlab.rb
 nginx['enable'] = false
 ```
 
-### 创建gitlab的nginx配置文件
+#### 创建gitlab的nginx配置文件
 
 ```nginx
 # gitlab socket 文件地址
@@ -212,7 +212,7 @@ server {
 
 ```
 
-### 确保nginx能够访问`/var/opt/gitlab/gitlab-workhorse/socket`
+#### 确保nginx能够访问`/var/opt/gitlab/gitlab-workhorse/socket`
 
 ```
 # 查看nginx的启动用户
@@ -257,7 +257,7 @@ user gitlab-www gitlab-www;
 sudo service nginx restart
 ```
 
-## 公网服务器nginx如下设置
+### 公网服务器nginx如下设置
 
 ```nginx
 server {
@@ -271,7 +271,7 @@ server {
 
 这样即可通过 http://gitlab.xxxx.com 正常访问内网的gitlab了
 
-## 接下来就可以愉快的使用gitlab了
+### 接下来就可以愉快的使用gitlab了
 
 上面我们已经配置gitlab的22端口映射到服务器的8081端口了，所以可以这样克隆:
 
@@ -310,7 +310,7 @@ sudo gitlab-ctl restart
 ```
 然后通过域名访问gitlab即可实现上述效果了,当然通过http去clone或者push都是没问题的。
 
-# 七、由mtu引起的无法访问的问题
+## 七、由mtu引起的无法访问的问题
 如果frp的admin界面一切正常，但是就是无法获取数据
 
 ![](http://blog.breakering.com/images/1046366-20180927105741148-1074788234.png)
@@ -323,7 +323,7 @@ sudo ifconfig eth0 mtu 1000 up
 
 其他修改mtu的方式请自行google。
 
-# 八、References:
+## 八、References:
 
 1. [利用 frp 进行内网穿透](https://mritd.me/2017/01/21/use-frp-for-internal-network-wear/)
 

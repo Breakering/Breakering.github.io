@@ -8,7 +8,7 @@ categories: ["GitLab"]
 series: []
 url: /2018/11/19/gitlab-update/
 ---
-# 更新 GitLab
+## 更新 GitLab
 > 我们用的是 GitLab Omnibus 7.10.5 版本，查到[Doc](http://docs.gitlab.com/omnibus/update/README.html)（6.x.x 等低版本区别对待，详见文档）。
 按照文档：
 ```
@@ -28,13 +28,13 @@ sudo yum install gitlab-ce
 1. 给 apt 加代理；
 2. 换源。
 
-## 1). 给 apt 加代理
+### 1). 给 apt 加代理
 考虑到换源可能产生其他的依赖问题，先尝试 加代理。结果是加了代理还是不行！原因可能是代理连接速度问题，总是超时。
 
 
 这里参考的是 [打造Linux 终端翻墙环境](http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/)  使用 `shadowsocks + privoxy` 。
 
-## 2). 换源解决！
+### 2). 换源解决！
 
 Docs 里已经有声明其实：
 
@@ -59,9 +59,9 @@ sudo apt-get install gitlab-ce
 
 >>> 安装完成！
 
-# 对于更新版本跨度较大的情况
+## 对于更新版本跨度较大的情况
 
-## 1). 关闭部分gitlab服务
+### 1). 关闭部分gitlab服务
 升级之前，我们首先要关闭gitlab部分服务，如下：
 
 ```
@@ -70,7 +70,7 @@ gitlab-ctl stop sidekiq
 gitlab-ctl stop nginx
 ```
 
-## 2). 选择要升级的版本
+### 2). 选择要升级的版本
 [版本查看地址](https://packages.gitlab.com/gitlab/gitlab-ce?filter=debs)
 
 然后执行命令：
@@ -87,13 +87,13 @@ apt-get install gitlab-ce=11.0.3-ce.0
 
 `9.2.5-->9.5.6-->10.0.6-->10.8.5-->11.0.3 `
 
-## 3). 重启gitlab
+### 3). 重启gitlab
 ```
 gitlab-ctl reconfigure
 gitlab-ctl restart
 ```
 
-# References:
+## References:
 1. http://www.a-ho.com/2016/01/16/%E6%89%93%E9%80%A0Linux-%E7%BB%88%E7%AB%AF%E7%BF%BB%E5%A2%99%E7%8E%AF%E5%A2%83/
 2. https://about.gitlab.com/downloads/#ubuntu1404
 3. https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/

@@ -6,6 +6,7 @@ draft: false
 tags: ["Django"]
 categories: ["Django"]
 series: []
+toc: false
 url: /2018/11/19/django-errors/
 ---
 1. ProgrammingError: relation "default_cache_table" does not exist
