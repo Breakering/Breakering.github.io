@@ -6,6 +6,7 @@ description: GitLab服务器宕机的迁移
 tags: ["GitLab"]
 categories: ["GitLab"]
 series: []
+toc: true
 url: /2019/06/17/gitlab-migrations/
 ---
 
