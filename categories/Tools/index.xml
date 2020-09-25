@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tools on Jacob个人技术博客</title>
+    <link>http://blog.breakering.com/categories/Tools/</link>
+    <description>Recent content in Tools on Jacob个人技术博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 16 Oct 2019 11:55:27 +0800</lastBuildDate>
+    
+	<atom:link href="http://blog.breakering.com/categories/Tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Vscode开发python的一些优化配置</title>
+      <link>http://blog.breakering.com/2019/10/16/vscode-python/</link>
+      <pubDate>Wed, 16 Oct 2019 11:55:27 +0800</pubDate>
+      
+      <guid>http://blog.breakering.com/2019/10/16/vscode-python/</guid>
+      <description>Vscode开发python的一些优化配置 首先安装vscode 直接官网下载安装即可 https://code.visualstudio.com/ 安装一些有用插件 vscode-python 点击插件按钮，搜索python第一个就是，安装即可 importmagic 跟上个插件安装一样，搜索安装即可,可以设置快捷键Alt+Enter来快速导入模块 aiXcoder 参考官网即可https://www.aixc</description>
+    </item>
+    
+    <item>
+      <title>Docker配置Chevereto图床</title>
+      <link>http://blog.breakering.com/2019/09/18/setup-chevereto/</link>
+      <pubDate>Wed, 18 Sep 2019 13:29:24 +0800</pubDate>
+      
+      <guid>http://blog.breakering.com/2019/09/18/setup-chevereto/</guid>
+      <description>环境配置 安装 Dockers 和 Dockers-Compose，新建docker-compose.yml, 参考Dockerhub version: &#39;3&#39; services: db: image: mariadb volumes: - ./database:/var/lib/mysql:rw restart: always networks: - private environment: MYSQL_ROOT_PASSWORD: chevereto_root MYSQL_DATABASE: chevereto MYSQL_USER: chevereto MYSQL_PASSWORD: chevereto chevereto: depends_on: - db image: nmtan/chevereto restart: always networks: - private environment: CHEVERETO_DB_HOST: db CHEVERETO_DB_USERNAME: chevereto CHEVERETO_DB_PASSWORD: chevereto CHEVERETO_DB_NAME: chevereto CHEVERETO_DB_PREFIX: chv_ volumes: - ./images:/var/www/html/images:rw - ./content:/var/www/html/content - ./conf/php.ini:/usr/local/etc/php/conf.d/php.ini ports: - 63080:80 networks: private: 新建目录 mkdir database images content conf 创建 conf/php.ini 文件,内容如下: PHP: max_execution_time = 60; memory_limit = 256M;</description>
+    </item>
+    
+    <item>
+      <title>jupyter美化</title>
+      <link>http://blog.breakering.com/2018/11/26/jupyter-beauty/</link>
+      <pubDate>Mon, 26 Nov 2018 10:17:10 +0000</pubDate>
+      
+      <guid>http://blog.breakering.com/2018/11/26/jupyter-beauty/</guid>
+      <description>jupyterthemes 安装jupyter主题 1 2 3 4 5 # install jupyterthemes pip install jupyterthemes # upgrade to latest version pip install --upgrade jupyterthemes 使用主题 jt -t monokai -fs 95 -altp -tfs 11 -nfs 115 -cellw 88% -N -T 更多主题设置 jupyterthemes jupyter_contrib_nbextensions 安装jupyter_contrib_nbextensions 1 pip install jupyter_contrib_nbextensions 安装js和css文件 1 jupyter contrib nbextension install --user 扩展选用 完成</description>
+    </item>
+    
+    <item>
+      <title>ubuntu 中 Typora 安装</title>
+      <link>http://blog.breakering.com/2018/11/26/ubuntu-typora/</link>
+      <pubDate>Mon, 26 Nov 2018 09:53:19 +0000</pubDate>
+      
+      <guid>http://blog.breakering.com/2018/11/26/ubuntu-typora/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 # optional, but recommendedsudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE# add Typora&amp;#39;s repositorysudo add-apt-repository &amp;#39;deb http://typora.io linux/&amp;#39;sudo apt-get update# install typorasudo apt-get install typora 另外推荐安装下Vue的theme，地址:https://theme.typora.io/theme/Vue/</description>
+    </item>
+    
+    <item>
+      <title>Hexo同步</title>
+      <link>http://blog.breakering.com/2018/11/15/hexo-sync/</link>
+      <pubDate>Thu, 15 Nov 2018 15:27:52 +0000</pubDate>
+      
+      <guid>http://blog.breakering.com/2018/11/15/hexo-sync/</guid>
+      <description>环境搭建 安装Node.js 用来生成静态页面, 到Node.js官网，下载最新版本, 根据提示一路安装即可 安装Git sudo apt-get install git 安装Hexo 当Node.js和Git都安装好后就可以正式安装Hexo了，终端执行如下命令： sudo npm install -g hexo 克隆hexo分支 git clone -b hexo https://github.com/Breakering/breakering.github.io.git 进入breakering.githu</description>
+    </item>
+    
+    <item>
+      <title>Hexo初识</title>
+      <link>http://blog.breakering.com/2018/09/28/hexo-start/</link>
+      <pubDate>Fri, 28 Sep 2018 20:58:27 +0000</pubDate>
+      
+      <guid>http://blog.breakering.com/2018/09/28/hexo-start/</guid>
+      <description>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick Start Create a new post 1 $ hexo new &amp;#34;My New Post&amp;#34; More info: Writing Run server 1 $ hexo server More info: Server Generate static files 1 $ hexo generate More info: Generating Deploy to remote sites 1 $ hexo deploy More info: Deployment</description>
+    </item>
+    
+  </channel>
+</rss>

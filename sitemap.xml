@@ -73,12 +73,12 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/tags/vscode/</loc>
+    <loc>http://blog.breakering.com/categories/Tools/</loc>
     <lastmod>2019-10-16T11:55:27+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/vscode/</loc>
+    <loc>http://blog.breakering.com/tags/vscode/</loc>
     <lastmod>2019-10-16T11:55:27+08:00</lastmod>
   </url>
   
@@ -99,11 +99,6 @@
   
   <url>
     <loc>http://blog.breakering.com/tags/%E5%9B%BE%E5%BA%8A/</loc>
-    <lastmod>2019-09-18T13:29:24+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/</loc>
     <lastmod>2019-09-18T13:29:24+08:00</lastmod>
   </url>
   
@@ -218,11 +213,6 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/jupyter/</loc>
-    <lastmod>2018-11-26T10:17:10+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.breakering.com/2018/11/26/jupyter-beauty/</loc>
     <lastmod>2018-11-26T10:17:10+00:00</lastmod>
   </url>
@@ -234,11 +224,6 @@
   
   <url>
     <loc>http://blog.breakering.com/tags/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2018-11-26T09:53:19+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2018-11-26T09:53:19+00:00</lastmod>
   </url>
   
@@ -309,11 +294,6 @@
   
   <url>
     <loc>http://blog.breakering.com/tags/Hexo/</loc>
-    <lastmod>2018-11-15T15:27:52+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/categories/Hexo/</loc>
     <lastmod>2018-11-15T15:27:52+00:00</lastmod>
   </url>
   

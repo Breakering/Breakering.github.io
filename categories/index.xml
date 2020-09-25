@@ -39,20 +39,11 @@
     </item>
     
     <item>
-      <title>vscode</title>
-      <link>http://blog.breakering.com/categories/vscode/</link>
+      <title>Tools</title>
+      <link>http://blog.breakering.com/categories/Tools/</link>
       <pubDate>Wed, 16 Oct 2019 11:55:27 +0800</pubDate>
       
-      <guid>http://blog.breakering.com/categories/vscode/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>图床</title>
-      <link>http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/</link>
-      <pubDate>Wed, 18 Sep 2019 13:29:24 +0800</pubDate>
-      
-      <guid>http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/</guid>
+      <guid>http://blog.breakering.com/categories/Tools/</guid>
       <description></description>
     </item>
     
@@ -111,24 +102,6 @@
     </item>
     
     <item>
-      <title>jupyter</title>
-      <link>http://blog.breakering.com/categories/jupyter/</link>
-      <pubDate>Mon, 26 Nov 2018 10:17:10 +0000</pubDate>
-      
-      <guid>http://blog.breakering.com/categories/jupyter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>工具</title>
-      <link>http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/</link>
-      <pubDate>Mon, 26 Nov 2018 09:53:19 +0000</pubDate>
-      
-      <guid>http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Python</title>
       <link>http://blog.breakering.com/categories/Python/</link>
       <pubDate>Mon, 19 Nov 2018 14:19:10 +0000</pubDate>
@@ -152,15 +125,6 @@
       <pubDate>Fri, 16 Nov 2018 17:02:52 +0000</pubDate>
       
       <guid>http://blog.breakering.com/categories/Linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hexo</title>
-      <link>http://blog.breakering.com/categories/Hexo/</link>
-      <pubDate>Thu, 15 Nov 2018 15:27:52 +0000</pubDate>
-      
-      <guid>http://blog.breakering.com/categories/Hexo/</guid>
       <description></description>
     </item>
     

@@ -20,14 +20,5 @@
       <description>一、建立rc-local.service文件 sudo vi /etc/systemd/system/rc-local.service 二、将下列内容复制进rc-local.service文件 [Unit] Description=/etc/rc.local Compatibility ConditionPathExists=/etc/rc.local [Service] Type=forking ExecStart=/etc/rc.local start TimeoutSec=0 StandardOutput=tty RemainAfterExit=yes SysVStartPriority=99 [Install] WantedBy=multi-user.target 三、创建文件rc.local sudo vi /etc/rc.local 四、将下列内容复制进rc.local文件 #!/bin/sh -e # # rc.local # # This script is executed at the end of each multiuser runlevel. # Make sure that the script will &amp;quot;exit 0&amp;quot; on success or any other # value on error.</description>
     </item>
     
-    <item>
-      <title>ubuntu 中 Typora 安装</title>
-      <link>http://blog.breakering.com/2018/11/26/ubuntu-typora/</link>
-      <pubDate>Mon, 26 Nov 2018 09:53:19 +0000</pubDate>
-      
-      <guid>http://blog.breakering.com/2018/11/26/ubuntu-typora/</guid>
-      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 # optional, but recommendedsudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE# add Typora&amp;#39;s repositorysudo add-apt-repository &amp;#39;deb http://typora.io linux/&amp;#39;sudo apt-get update# install typorasudo apt-get install typora 另外推荐安装下Vue的theme，地址:https://theme.typora.io/theme/Vue/</description>
-    </item>
-    
   </channel>
 </rss>
