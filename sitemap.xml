@@ -23,7 +23,7 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/posts/</loc>
+    <loc>http://blog.breakering.com/post/</loc>
     <lastmod>2020-03-16T16:21:36+08:00</lastmod>
   </url>
   
@@ -338,11 +338,16 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/series/</loc>
+    <loc>http://blog.breakering.com/about/</loc>
+    <lastmod>2015-03-10T00:13:27+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://blog.breakering.com/archives/</loc>
+  </url>
+  
+  <url>
+    <loc>http://blog.breakering.com/search/</loc>
   </url>
   
 </urlset>

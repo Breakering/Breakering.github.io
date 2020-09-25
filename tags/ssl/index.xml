@@ -17,7 +17,7 @@
       <pubDate>Thu, 01 Aug 2019 11:20:19 +0800</pubDate>
       
       <guid>http://blog.breakering.com/2019/08/01/free-ssl/</guid>
-      <description>1.下载certbot-auto [root@Breakering ~]# wget https://dl.eff.org/certbot-auto [root@Breakering ~]# chmod a+x ./certbot-auto 这里，我们无需关心Certbot是什么，只需要知道，证书的申请和生成是通过Certbot完成的，而certbot-auto脚本封装了Certbot。</description>
+      <description>1.下载certbot-auto [root@Breakering ~]# wget https://dl.eff.org/certbot-auto [root@Breakering ~]# chmod a+x ./certbot-auto 这里，我们无需关心Certbot是什么，只需要知道，证书的申请和生成是通过Certbot完成的，而certbot-auto脚本封装了Certbot。 2.申请证书 ./certbot-auto certonly --standalone --email 1079614505@qq.com -d blog.breakering.com 如上，certbot-auto命令会自动下载Certbo</description>
     </item>
     
   </channel>

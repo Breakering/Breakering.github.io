@@ -17,9 +17,7 @@
       <pubDate>Mon, 17 Jun 2019 11:23:25 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2019/06/17/gitlab-migrations/</guid>
-      <description>问题描述 公司gitlab服务器的硬件比较老旧，内存也相对较少，在一次增加内存条的时候，由于和主板不兼容的问题，导致系统引导出错，无法再进入系统并运行gitlab了，而公司所有项目都在该gitlab服务器上面，开发小组的工作受到了很大的影响，所以修复gitlab服务器变得刻不容缓。
-解决问题 第一次：尝试修复系统 从u盘启动，并挂载之前gitlab服务器的系统盘，查找原因是系统引导出现问题，用网上找到的一些办法来尝试修复引导均失败了，多次尝试无果之后开始尝试其他方法，由于gitlab兼容性较强，所以想着可不可以在gitlab服务无法启动的情况下通过转移文件来迁移整个gitlab,在网上查了一些资料之后发现的确可行，话不多说，开始实践吧。
-第二次：尝试转移gitlab 1. 查看gitlab的版本 默认安装在/opt/gitlab/, 找到version-manifest.txt文件，文件第一行记录gitlab的版本：</description>
+      <description>问题描述 公司gitlab服务器的硬件比较老旧，内存也相对较少，在一次增加内存条的时候，由于和主板不兼容的问题，导致系统引导出错，无法再进入系统并运行gitlab了，而公司所有项目都在该gitlab服务器上面，开发小组的工作受到了很大的影响，所以修复gitlab服务器变得刻不容缓。</description>
     </item>
     
     <item>
@@ -28,7 +26,7 @@
       <pubDate>Mon, 19 Nov 2018 16:18:49 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/19/gitlab-update/</guid>
-      <description>更新 GitLab  我们用的是 GitLab Omnibus 7.10.5 版本，查到Doc（6.x.x 等低版本区别对待，详见文档）。 按照文档：</description>
+      <description>更新 GitLab 我们用的是 GitLab Omnibus 7.10.5 版本，查到Doc（6.x.x 等低版本区别对待，详见文档）。 按照文档： # To update to a newer GitLab version, all you have to do is: # Debian/Ubuntu sudo apt-get update sudo apt-get install gitlab-ce # Centos/RHEL sudo yum install gitlab-ce 看起来太简单了！事实上，也就是这么简单。 但是，问题来了，sudo apt-get install gilab-ce 默认所用的源是 packages-gitlab-com.s3.a</description>
     </item>
     
     <item>
@@ -37,10 +35,7 @@
       <pubDate>Mon, 19 Nov 2018 16:15:50 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/19/gitlab-backup/</guid>
-      <description>一、 备份gitlab gitlab的备份比较简单，我们直接使用gitlab本身提供的命令进行备份即可。
-1.1 通过gitlab-rake命令备份gitlab gitlab提供的备份命令为gitlab-rake，备份命令使用如下:
-gitlab-rake gitlab:backup:create 该命令会备份gitlab仓库、数据库、用户、用户组、用户密钥、权限等信息。
-备份完成后备份文件会出现在/var/opt/gitlab/backups/ 当然备份的位置可以更换,使用如下命令：</description>
+      <description>一、 备份gitlab gitlab的备份比较简单，我们直接使用gitlab本身提供的命令进行备份即可。 1.1 通过gitlab-rake命令备份gitlab gitlab提供的备份命令为gitlab-rake，备份命令使用如下: 1 gitlab-rake gitlab:backup:create 该命令会备份gitlab仓库、数据库、用户、用户组、用户</description>
     </item>
     
   </channel>

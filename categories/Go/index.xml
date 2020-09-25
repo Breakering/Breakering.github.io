@@ -17,9 +17,7 @@
       <pubDate>Mon, 16 Mar 2020 13:28:43 +0800</pubDate>
       
       <guid>http://blog.breakering.com/2020/03/16/install-go/</guid>
-      <description>官网下载源码包 官网地址
-获取最新的源码包
-wget https://dl.google.com/go/go1.14.linux-amd64.tar.gz 解压到指定目录 sudo tar zxvf go1.14.linux-amd64.tar.gz -C /usr/local 配置环境变量 看你使用的是bash还是zsh</description>
+      <description>官网下载源码包 官网地址 获取最新的源码包 wget https://dl.google.com/go/go1.14.linux-amd64.tar.gz 解压到指定目录 sudo tar zxvf go1.14.linux-amd64.tar.gz -C /usr/local 配置环境变量 看你使用的是bash还是zsh vim ~/.bashrc 添加 export GOROOT=/usr/local/go export GOPATH=$HOME/go export PATH=$PATH::$GOROOT/bin:$GOPATH/bin 保存并使生效 source ~/.bashrc 检查Go的版本</description>
     </item>
     
   </channel>

@@ -17,9 +17,7 @@
       <pubDate>Mon, 19 Nov 2018 14:00:41 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/19/postgresql-remote/</guid>
-      <description>1.修改postgresql.conf postgresql.conf存放位置在/etc/postgresql/9.x/main下，这里的x取决于你安装PostgreSQL的版本号，编辑或添加下面一行，使PostgreSQL可以接受来自任意IP的连接请求。
-listen_addresses = &amp;#39;*&amp;#39; 2.修改pg_hba.conf 修改pg_hba.conf位置与postgresql.conf相同，虽然上面配置允许任意地址连接PostgreSQL，但是这在pg中还不够，我们还需在pg_hba.conf中配置服务端允许的认证方式。任意编辑器打开该文件，编辑或添加下面一行。
-# TYPE DATABASE USER CIDR-ADDRESS METHOD host all all 0.</description>
+      <description>1.修改postgresql.conf postgresql.conf存放位置在/etc/postgresql/9.x/main下，这里的x取决于你安装PostgreSQL的版本号，编辑或添加下面一行，使PostgreSQL可以接受来自任意IP的连接请求。 1 listen_addresses = &amp;#39;*&amp;#39; 2.修改pg_hb</description>
     </item>
     
   </channel>

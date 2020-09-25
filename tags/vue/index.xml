@@ -17,8 +17,7 @@
       <pubDate>Fri, 30 Nov 2018 15:16:11 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/30/vue-cross-domain/</guid>
-      <description>开发环境 如果你使用的是vue-cli3的话，则可按如下配置
- 在你的项目根目录创建vue.config.js文件 在文件中写入如下配置信息:  // 配置proxy module.exports = { devServer: { proxy: { &amp;#39;/api&amp;#39;: { target: &amp;#39;https://xxxx.</description>
+      <description>开发环境 如果你使用的是vue-cli3的话，则可按如下配置 在你的项目根目录创建vue.config.js文件 在文件中写入如下配置信息: 1 2 3 4 5 6 7 8 9 10 11 12 // 配置proxy module.exports = { devServer: { proxy: { &amp;#39;/api&amp;#39;: { target: &amp;#39;https://xxxx.xxxxxxxxxx.com&amp;#39;, ws: true, changeOrigin: true }, } } }; 参考devserver-proxy 线上环境 线上通过nginx代理,实</description>
     </item>
     
     <item>
@@ -27,9 +26,7 @@
       <pubDate>Thu, 29 Nov 2018 18:48:17 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/29/vue-axios-set/</guid>
-      <description>说在前面 我们都知道，用django做后端服务时，对于post请求提交表单时总是需要csrftoken的验证，那么我们如何在vue中使用axios发起请求时全局在headers里面设置csrftoken呢？以及全局设置Authorization?
-设置 其实非常简单，在main.js中设置下即可，示例代码如下:
-import Vue from &amp;#39;vue&amp;#39; import App from &amp;#39;.</description>
+      <description>说在前面 我们都知道，用django做后端服务时，对于post请求提交表单时总是需要csrftoken的验证，那么我们如何在vue中使用axios发起请求时全局在headers里面设置csrftoken呢？以及全局设置Authorization? 设置 其实非常简单，在main.js中</description>
     </item>
     
     <item>
@@ -38,7 +35,7 @@ import Vue from &amp;#39;vue&amp;#39; import App from &amp;#39;.</description>
       <pubDate>Tue, 27 Nov 2018 10:23:02 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/27/vue-use-axios/</guid>
-      <description>安装 npm install --save axios vue-axios引入 import Vue from &amp;#39;vue&amp;#39; import axios from &amp;#39;axios&amp;#39; import VueAxios from &amp;#39;vue-axios&amp;#39; axios.</description>
+      <description>安装 1 npm install --save axios vue-axios 引入 1 2 3 4 5 6 import Vue from &amp;#39;vue&amp;#39; import axios from &amp;#39;axios&amp;#39; import VueAxios from &amp;#39;vue-axios&amp;#39; axios.defaults.baseURL=&amp;#39;http://localhost:8000&amp;#39;; // 可以设置baseURL Vue.use(VueAxios, axios) 使用 1 2 3 4 5 6 7 getNewsList(){ this.axios.get(&amp;#39;api/getNewsList&amp;#39;).then((response)=&amp;gt;{ this.newsList=response.data.data; }).catch((response)=&amp;gt;{ console.log(response); }) } 参考 vue全局使用axios的方法 vue-axios vue添加axios，并且指定baseurl</description>
     </item>
     
   </channel>

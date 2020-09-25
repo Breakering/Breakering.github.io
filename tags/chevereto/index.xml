@@ -17,8 +17,7 @@
       <pubDate>Wed, 18 Sep 2019 13:29:24 +0800</pubDate>
       
       <guid>http://blog.breakering.com/2019/09/18/setup-chevereto/</guid>
-      <description>环境配置 安装 Dockers 和 Dockers-Compose，新建docker-compose.yml, 参考Dockerhub
-version: &#39;3&#39; services: db: image: mariadb volumes: - .</description>
+      <description>环境配置 安装 Dockers 和 Dockers-Compose，新建docker-compose.yml, 参考Dockerhub version: &#39;3&#39; services: db: image: mariadb volumes: - ./database:/var/lib/mysql:rw restart: always networks: - private environment: MYSQL_ROOT_PASSWORD: chevereto_root MYSQL_DATABASE: chevereto MYSQL_USER: chevereto MYSQL_PASSWORD: chevereto chevereto: depends_on: - db image: nmtan/chevereto restart: always networks: - private environment: CHEVERETO_DB_HOST: db CHEVERETO_DB_USERNAME: chevereto CHEVERETO_DB_PASSWORD: chevereto CHEVERETO_DB_NAME: chevereto CHEVERETO_DB_PREFIX: chv_ volumes: - ./images:/var/www/html/images:rw - ./content:/var/www/html/content - ./conf/php.ini:/usr/local/etc/php/conf.d/php.ini ports: - 63080:80 networks: private: 新建目录 mkdir database images content conf 创建 conf/php.ini 文件,内容如下: PHP: max_execution_time = 60; memory_limit = 256M;</description>
     </item>
     
   </channel>

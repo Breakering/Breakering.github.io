@@ -16,24 +16,24 @@
         
     <meta name="author" content="Jacob">
     <meta property="og:url" content="http://blog.breakering.com/categories/vue/">
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
     <link rel="alternate" type="application/rss+xml+xml" href="http://blog.breakering.com/categories/vue/index.xml" title="Jacob个人技术博客" />
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
-
-
+    
+    
+    
     
     
 </head>
 
 
 <body>
-<header id="header" class="clearfix">
+    <header id="header" class="clearfix">
     <div class="container">
         <div class="col-group">
             <div class="site-name ">
@@ -50,7 +50,7 @@
                     
                     <a  href="http://blog.breakering.com/archives/" title="归档">归档</a>
                     
-                    <a  href="http://blog.breakering.com/series/" title="系列">系列</a>
+                    <a  href="http://blog.breakering.com/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -58,107 +58,147 @@
     </div>
 </header>
 
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
 
-<div id="body">
-    <div class="container">
-        <div class="col-group">
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <h3 class="archive-title">
+        分类
+        <span class="keyword">vue</span>
+        中的文章
+    </h3>
+    
 
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    
-                    <h3 class="archive-title">
-                        分类
-                        <span class="keyword">vue</span>
-                        中的文章
-                    </h3>
-                    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://blog.breakering.com/2018/11/30/vue-cross-domain/">vue跨域配置</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月30日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='http://blog.breakering.com/categories/vue'>vue</a>
+            
+        </div>
+        
+        <div class="post-content">
+            开发环境 如果你使用的是vue-cli3的话，则可按如下配置 在你的项目根目录创建vue.config.js文件 在文件中写入如下配置信息: 1 2 3 4 5 6 7 8 9 10 11 12 // 配置proxy module.exports = { devServer: { proxy: { &#39;/api&#39;: { target: &#39;https://xxxx.xxxxxxxxxx.com&#39;, ws: true, changeOrigin: true }, } } }; 参考devserver-proxy 线上环境 线上通过nginx代理,实……
+            <p class="readmore"><a href="http://blog.breakering.com/2018/11/30/vue-cross-domain/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://blog.breakering.com/2018/11/29/vue-axios-set/">vue中axios全局设置csrftoken以及Authorization</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月29日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='http://blog.breakering.com/categories/vue'>vue</a>
+            
+        </div>
+        
+        <div class="post-content">
+            说在前面 我们都知道，用django做后端服务时，对于post请求提交表单时总是需要csrftoken的验证，那么我们如何在vue中使用axios发起请求时全局在headers里面设置csrftoken呢？以及全局设置Authorization? 设置 其实非常简单，在main.js中……
+            <p class="readmore"><a href="http://blog.breakering.com/2018/11/29/vue-axios-set/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://blog.breakering.com/2018/11/27/vue-use-axios/">vue使用axios</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月27日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='http://blog.breakering.com/categories/vue'>vue</a>
+            
+        </div>
+        
+        <div class="post-content">
+            安装 1 npm install --save axios vue-axios 引入 1 2 3 4 5 6 import Vue from &#39;vue&#39; import axios from &#39;axios&#39; import VueAxios from &#39;vue-axios&#39; axios.defaults.baseURL=&#39;http://localhost:8000&#39;; // 可以设置baseURL Vue.use(VueAxios, axios) 使用 1 2 3 4 5 6 7 getNewsList(){ this.axios.get(&#39;api/getNewsList&#39;).then((response)=&gt;{ this.newsList=response.data.data; }).catch((response)=&gt;{ console.log(response); }) } 参考 vue全局使用axios的方法 vue-axios vue添加axios，并且指定baseurl……
+            <p class="readmore"><a href="http://blog.breakering.com/2018/11/27/vue-use-axios/">阅读全文</a></p>
+        </div>
+    </article>
+    
 
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://blog.breakering.com/2018/11/30/vue-cross-domain/">vue跨域配置</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2018年11月30日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="http://blog.breakering.com/categories/vue">vue</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                开发环境 如果你使用的是vue-cli3的话，则可按如下配置
- 在你的项目根目录创建vue.config.js文件 在文件中写入如下配置信息:  // 配置proxy module.exports = { devServer: { proxy: { &#39;/api&#39;: { target: &#39;https://xxxx.……
-                                <p class="readmore"><a href="http://blog.breakering.com/2018/11/30/vue-cross-domain/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://blog.breakering.com/2018/11/29/vue-axios-set/">vue中axios全局设置csrftoken以及Authorization</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2018年11月29日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="http://blog.breakering.com/categories/vue">vue</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                说在前面 我们都知道，用django做后端服务时，对于post请求提交表单时总是需要csrftoken的验证，那么我们如何在vue中使用axios发起请求时全局在headers里面设置csrftoken呢？以及全局设置Authorization?
-设置 其实非常简单，在main.js中设置下即可，示例代码如下:
-import Vue from &#39;vue&#39; import App from &#39;.……
-                                <p class="readmore"><a href="http://blog.breakering.com/2018/11/29/vue-axios-set/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://blog.breakering.com/2018/11/27/vue-use-axios/">vue使用axios</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2018年11月27日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="http://blog.breakering.com/categories/vue">vue</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                安装 npm install --save axios vue-axios引入 import Vue from &#39;vue&#39; import axios from &#39;axios&#39; import VueAxios from &#39;vue-axios&#39; axios.……
-                                <p class="readmore"><a href="http://blog.breakering.com/2018/11/27/vue-use-axios/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
+    
 
-                    
 
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2020 <a href="http://blog.breakering.com">Jacob个人技术博客 By Jacob</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-130599767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
 
 
                 </div>
-            </div>
 
-            <div id="secondary">
+                <div id="secondary">
     <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='http://blog.breakering.com/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
       <input type="hidden" name="sitesearch" value="http://blog.breakering.com">
@@ -231,86 +271,50 @@ import Vue from &#39;vue&#39; import App from &#39;.……
 
 
     <section class="widget">
-        <h3 class="widget-title">分类</h3>
+        <h3 class="widget-title"><a href="/categories">分类</a></h3>
 <ul class="widget-list">
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Django/">Django(4)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Django/">Django (4)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/GitLab/">GitLab(3)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/GitLab/">GitLab (3)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Go/">Go(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Go/">Go (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Google/">Google(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Google/">Google (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Hexo/">Hexo(2)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Hexo/">Hexo (2)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Linux/">Linux(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Linux/">Linux (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Neo4j/">Neo4j(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Neo4j/">Neo4j (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/PostgreSQL/">PostgreSQL(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/PostgreSQL/">PostgreSQL (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Python/">Python(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Python/">Python (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Ubuntu/">Ubuntu(2)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Ubuntu/">Ubuntu (2)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/jupyter/">jupyter(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/jupyter/">jupyter (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/ssl/">ssl(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/ssl/">ssl (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/supervisor/">supervisor(2)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/supervisor/">supervisor (2)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/vscode/">vscode(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/vscode/">vscode (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/vue/">vue(3)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/vue/">vue (3)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透 (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/">图床(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/">图床 (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/">工具(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/">工具 (1)</a></li>
     
 </ul>
     </section>
 
     <section class="widget">
-        <h3 class="widget-title">标签</h3>
+        <h3 class="widget-title"><a href="/tags">标签</a></h3>
 <div class="tagcloud">
     
     <a href="http://blog.breakering.com/tags/Django/">Django</a>
@@ -389,10 +393,6 @@ import Vue from &#39;vue&#39; import App from &#39;.……
             <a target="_blank" href="https://www.cnblogs.com/zhaof/" title="赵凡">赵凡</a>
         </li>
         
-        <li>
-            <a target="_blank" href="https://luuman.github.io/" title="luuman">luuman</a>
-        </li>
-        
     </ul>
 </section>
 
@@ -404,40 +404,9 @@ import Vue from &#39;vue&#39; import App from &#39;.……
         </ul>
     </section>
 </div>
+            </div>
         </div>
     </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2020 <a href="http://blog.breakering.com">Jacob个人技术博客 By Jacob</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
-        
-    </div>
-</footer>
-
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-130599767-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
-
 </body>
+
 </html>

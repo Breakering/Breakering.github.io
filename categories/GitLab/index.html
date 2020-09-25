@@ -16,24 +16,24 @@
         
     <meta name="author" content="Jacob">
     <meta property="og:url" content="http://blog.breakering.com/categories/GitLab/">
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
     <link rel="alternate" type="application/rss+xml+xml" href="http://blog.breakering.com/categories/GitLab/index.xml" title="Jacob个人技术博客" />
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
-
-
+    
+    
+    
     
     
 </head>
 
 
 <body>
-<header id="header" class="clearfix">
+    <header id="header" class="clearfix">
     <div class="container">
         <div class="col-group">
             <div class="site-name ">
@@ -50,7 +50,7 @@
                     
                     <a  href="http://blog.breakering.com/archives/" title="归档">归档</a>
                     
-                    <a  href="http://blog.breakering.com/series/" title="系列">系列</a>
+                    <a  href="http://blog.breakering.com/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -58,109 +58,147 @@
     </div>
 </header>
 
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
 
-<div id="body">
-    <div class="container">
-        <div class="col-group">
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <h3 class="archive-title">
+        分类
+        <span class="keyword">GitLab</span>
+        中的文章
+    </h3>
+    
 
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    
-                    <h3 class="archive-title">
-                        分类
-                        <span class="keyword">GitLab</span>
-                        中的文章
-                    </h3>
-                    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://blog.breakering.com/2019/06/17/gitlab-migrations/">记GitLab服务器宕机的迁移过程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年6月17日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='http://blog.breakering.com/categories/GitLab'>GitLab</a>
+            
+        </div>
+        
+        <div class="post-content">
+            问题描述 公司gitlab服务器的硬件比较老旧，内存也相对较少，在一次增加内存条的时候，由于和主板不兼容的问题，导致系统引导出错，无法再进入系统并运行gitlab了，而公司所有项目都在该gitlab服务器上面，开发小组的工作受到了很大的影响，所以修复gitlab服务器变得刻不容缓。……
+            <p class="readmore"><a href="http://blog.breakering.com/2019/06/17/gitlab-migrations/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://blog.breakering.com/2018/11/19/gitlab-update/">GitLab升级</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月19日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='http://blog.breakering.com/categories/GitLab'>GitLab</a>
+            
+        </div>
+        
+        <div class="post-content">
+            更新 GitLab 我们用的是 GitLab Omnibus 7.10.5 版本，查到Doc（6.x.x 等低版本区别对待，详见文档）。 按照文档： # To update to a newer GitLab version, all you have to do is: # Debian/Ubuntu sudo apt-get update sudo apt-get install gitlab-ce # Centos/RHEL sudo yum install gitlab-ce 看起来太简单了！事实上，也就是这么简单。 但是，问题来了，sudo apt-get install gilab-ce 默认所用的源是 packages-gitlab-com.s3.a……
+            <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/gitlab-update/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://blog.breakering.com/2018/11/19/gitlab-backup/">GitLab备份与恢复</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月19日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='http://blog.breakering.com/categories/GitLab'>GitLab</a>
+            
+        </div>
+        
+        <div class="post-content">
+            一、 备份gitlab gitlab的备份比较简单，我们直接使用gitlab本身提供的命令进行备份即可。 1.1 通过gitlab-rake命令备份gitlab gitlab提供的备份命令为gitlab-rake，备份命令使用如下: 1 gitlab-rake gitlab:backup:create 该命令会备份gitlab仓库、数据库、用户、用户组、用户……
+            <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/gitlab-backup/">阅读全文</a></p>
+        </div>
+    </article>
+    
 
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://blog.breakering.com/2019/06/17/gitlab-migrations/">记GitLab服务器宕机的迁移过程</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="http://blog.breakering.com/categories/GitLab">GitLab</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                问题描述 公司gitlab服务器的硬件比较老旧，内存也相对较少，在一次增加内存条的时候，由于和主板不兼容的问题，导致系统引导出错，无法再进入系统并运行gitlab了，而公司所有项目都在该gitlab服务器上面，开发小组的工作受到了很大的影响，所以修复gitlab服务器变得刻不容缓。
-解决问题 第一次：尝试修复系统 从u盘启动，并挂载之前gitlab服务器的系统盘，查找原因是系统引导出现问题，用网上找到的一些办法来尝试修复引导均失败了，多次尝试无果之后开始尝试其他方法，由于gitlab兼容性较强，所以想着可不可以在gitlab服务无法启动的情况下通过转移文件来迁移整个gitlab,在网上查了一些资料之后发现的确可行，话不多说，开始实践吧。
-第二次：尝试转移gitlab 1. 查看gitlab的版本 默认安装在/opt/gitlab/, 找到version-manifest.txt文件，文件第一行记录gitlab的版本：……
-                                <p class="readmore"><a href="http://blog.breakering.com/2019/06/17/gitlab-migrations/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://blog.breakering.com/2018/11/19/gitlab-update/">GitLab升级</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2018年11月19日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="http://blog.breakering.com/categories/GitLab">GitLab</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                更新 GitLab  我们用的是 GitLab Omnibus 7.10.5 版本，查到Doc（6.x.x 等低版本区别对待，详见文档）。 按照文档：……
-                                <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/gitlab-update/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="http://blog.breakering.com/2018/11/19/gitlab-backup/">GitLab备份与恢复</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2018年11月19日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="http://blog.breakering.com/categories/GitLab">GitLab</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                一、 备份gitlab gitlab的备份比较简单，我们直接使用gitlab本身提供的命令进行备份即可。
-1.1 通过gitlab-rake命令备份gitlab gitlab提供的备份命令为gitlab-rake，备份命令使用如下:
-gitlab-rake gitlab:backup:create 该命令会备份gitlab仓库、数据库、用户、用户组、用户密钥、权限等信息。
-备份完成后备份文件会出现在/var/opt/gitlab/backups/ 当然备份的位置可以更换,使用如下命令：……
-                                <p class="readmore"><a href="http://blog.breakering.com/2018/11/19/gitlab-backup/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
+    
 
-                    
 
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2020 <a href="http://blog.breakering.com">Jacob个人技术博客 By Jacob</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-130599767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
 
 
                 </div>
-            </div>
 
-            <div id="secondary">
+                <div id="secondary">
     <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='http://blog.breakering.com/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
       <input type="hidden" name="sitesearch" value="http://blog.breakering.com">
@@ -233,86 +271,50 @@ gitlab-rake gitlab:backup:create 该命令会备份gitlab仓库、数据库、�
 
 
     <section class="widget">
-        <h3 class="widget-title">分类</h3>
+        <h3 class="widget-title"><a href="/categories">分类</a></h3>
 <ul class="widget-list">
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Django/">Django(4)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Django/">Django (4)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/GitLab/">GitLab(3)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/GitLab/">GitLab (3)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Go/">Go(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Go/">Go (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Google/">Google(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Google/">Google (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Hexo/">Hexo(2)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Hexo/">Hexo (2)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Linux/">Linux(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Linux/">Linux (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Neo4j/">Neo4j(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Neo4j/">Neo4j (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/PostgreSQL/">PostgreSQL(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/PostgreSQL/">PostgreSQL (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Python/">Python(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Python/">Python (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Ubuntu/">Ubuntu(2)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Ubuntu/">Ubuntu (2)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/jupyter/">jupyter(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/jupyter/">jupyter (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/ssl/">ssl(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/ssl/">ssl (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/supervisor/">supervisor(2)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/supervisor/">supervisor (2)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/vscode/">vscode(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/vscode/">vscode (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/vue/">vue(3)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/vue/">vue (3)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透 (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/">图床(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/">图床 (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/">工具(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/">工具 (1)</a></li>
     
 </ul>
     </section>
 
     <section class="widget">
-        <h3 class="widget-title">标签</h3>
+        <h3 class="widget-title"><a href="/tags">标签</a></h3>
 <div class="tagcloud">
     
     <a href="http://blog.breakering.com/tags/Django/">Django</a>
@@ -391,10 +393,6 @@ gitlab-rake gitlab:backup:create 该命令会备份gitlab仓库、数据库、�
             <a target="_blank" href="https://www.cnblogs.com/zhaof/" title="赵凡">赵凡</a>
         </li>
         
-        <li>
-            <a target="_blank" href="https://luuman.github.io/" title="luuman">luuman</a>
-        </li>
-        
     </ul>
 </section>
 
@@ -406,40 +404,9 @@ gitlab-rake gitlab:backup:create 该命令会备份gitlab仓库、数据库、�
         </ul>
     </section>
 </div>
+            </div>
         </div>
     </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2020 <a href="http://blog.breakering.com">Jacob个人技术博客 By Jacob</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
-        
-    </div>
-</footer>
-
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-130599767-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
-
 </body>
+
 </html>

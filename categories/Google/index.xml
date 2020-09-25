@@ -17,9 +17,7 @@
       <pubDate>Mon, 16 Mar 2020 16:21:36 +0800</pubDate>
       
       <guid>http://blog.breakering.com/2020/03/16/gdrive/</guid>
-      <description>gdrive自带的证书认证已经失效，本文是使用自建的own Google credential来进行认证
-安装go 使用源码安装go
-创建own Google credential  打开链接 https://console.</description>
+      <description>gdrive自带的证书认证已经失效，本文是使用自建的own Google credential来进行认证 安装go 使用源码安装go 创建own Google credential 打开链接 https://console.developers.google.com/apis/dashboard登录你的google账号 如果你的账号是第</description>
     </item>
     
   </channel>

@@ -17,7 +17,7 @@
       <pubDate>Mon, 26 Nov 2018 09:53:19 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/26/ubuntu-typora/</guid>
-      <description># optional, but recommendedsudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE# add Typora&amp;#39;s repositorysudo add-apt-repository &amp;#39;deb http://typora.</description>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 # optional, but recommendedsudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE# add Typora&amp;#39;s repositorysudo add-apt-repository &amp;#39;deb http://typora.io linux/&amp;#39;sudo apt-get update# install typorasudo apt-get install typora 另外推荐安装下Vue的theme，地址:https://theme.typora.io/theme/Vue/</description>
     </item>
     
   </channel>

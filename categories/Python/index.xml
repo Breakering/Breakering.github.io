@@ -17,7 +17,7 @@
       <pubDate>Mon, 19 Nov 2018 14:19:10 +0000</pubDate>
       
       <guid>http://blog.breakering.com/2018/11/19/pipenv/</guid>
-      <description>安装pipenv pip install pipenv 项目初始化 cd your_project PIPENV_VENV_IN_PROJECT=true pipenv --python=3.6 将在项目目录中创建新文件Pipfile和一个虚拟环境.</description>
+      <description>安装pipenv 1 pip install pipenv 项目初始化 1 2 cd your_project PIPENV_VENV_IN_PROJECT=true pipenv --python=3.6 将在项目目录中创建新文件Pipfile和一个虚拟环境.venv, --python=3.6则是使用python3.6来创建虚拟环境,PIPENV_VENV_IN_PROJECT=true则是让虚拟环境创建在该项目目录下，方便管理。 如果</description>
     </item>
     
   </channel>

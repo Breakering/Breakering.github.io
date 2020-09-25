@@ -17,8 +17,7 @@
       <pubDate>Tue, 09 Jul 2019 15:42:32 +0800</pubDate>
       
       <guid>http://blog.breakering.com/2019/07/09/ubuntu-neo4j/</guid>
-      <description>安装步骤 下载 Neo4j 官网下载地址：https://neo4j.com/download/
-解压 将 Neo4j 安装到一个目录 /usr/local/neo4j，直接压缩包复制到该目录下解压 tar -xzvf neo4j-community-3.</description>
+      <description>安装步骤 下载 Neo4j 官网下载地址：https://neo4j.com/download/ 解压 将 Neo4j 安装到一个目录 /usr/local/neo4j，直接压缩包复制到该目录下解压 tar -xzvf neo4j-community-3.5.3-unix.tar.gz 启动 在 Neo4j 目录下启动，具体路径和命令为： /usr/local/neo4j/neo4j-community-3.5.3/bin# ./neo4j start 开机自启请自行google 如果提示如下信息 ERROR: Unable to find Java executable. Please use Oracle(R) Java(TM) 8,</description>
     </item>
     
   </channel>

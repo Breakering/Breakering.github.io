@@ -10,34 +10,33 @@
     <meta property="og:title" content="PostgreSQL允许被远程访问 - Jacob个人技术博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-11-19T14:00:41&#43;08:00">
+    <meta property="article:published_time" content='2018-11-19T14:00:41&#43;08:00'>
         
         
-    <meta property="article:modified_time" content="2018-11-19T14:00:41&#43;08:00">
+    <meta property="article:modified_time" content='2018-11-19T14:00:41&#43;08:00'>
         
     <meta name="Keywords" content="Jacob,Blog,Python">
     <meta name="description" content="PostgreSQL允许被远程访问">
         
     <meta name="author" content="Jacob">
     <meta property="og:url" content="http://blog.breakering.com/2018/11/19/postgresql-remote/">
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="/css/normalize.css">
-    
-        <link rel="stylesheet" href="/css/prism.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
-
-
+    
+    
+    
     
     
 </head>
 
+
 <body>
-<header id="header" class="clearfix">
+    <header id="header" class="clearfix">
     <div class="container">
         <div class="col-group">
             <div class="site-name ">
@@ -50,11 +49,11 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="http://blog.breakering.com">首页</a>
+                    <a class="current" href="http://blog.breakering.com">首页</a>
                     
                     <a  href="http://blog.breakering.com/archives/" title="归档">归档</a>
                     
-                    <a  href="http://blog.breakering.com/series/" title="系列">系列</a>
+                    <a  href="http://blog.breakering.com/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -62,51 +61,175 @@
     </div>
 </header>
 
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
 
-<div id="body">
-    <div class="container">
-        <div class="col-group">
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 
-            <div class="col-8" id="main">
-                <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title">PostgreSQL允许被远程访问</h1>
-                        </header>
-                        <date class="post-meta meta-date">
-                            2018年11月19日
-                        </date>
-                        
-                        <div class="post-meta">
-                            <span>|</span>
-                            
-                                <span class="meta-category"><a href="http://blog.breakering.com/categories/PostgreSQL">PostgreSQL</a></span>
-                            
-                        </div>
-                        
-                        
-                        <div class="post-meta">
-                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
-                        </div>
-                        
-                        
-                        <div class="post-content">
-                            <h2 id="1修改postgresqlconf">1.修改postgresql.conf</h2>
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1修改postgresqlconf">1.修改postgresql.conf</a></li>
+    <li><a href="#2修改pg_hbaconf">2.修改pg_hba.conf</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">PostgreSQL允许被远程访问</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年11月19日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='http://blog.breakering.com/categories/PostgreSQL'>PostgreSQL</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <h2 id="1修改postgresqlconf">1.修改postgresql.conf</h2>
 <p><code>postgresql.conf</code>存放位置在<code>/etc/postgresql/9.x/main</code>下，这里的<code>x</code>取决于你安装PostgreSQL的版本号，编辑或添加下面一行，使PostgreSQL可以接受来自任意IP的连接请求。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">listen_addresses = &#39;*&#39;
-</code></pre></div><h2 id="2修改pg_hbaconf">2.修改pg_hba.conf</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">listen_addresses = &#39;*&#39;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2修改pg_hbaconf">2.修改pg_hba.conf</h2>
 <p><code>修改pg_hba.conf</code>位置与<code>postgresql.conf</code>相同，虽然上面配置允许任意地址连接PostgreSQL，但是这在pg中还不够，我们还需在<code>pg_hba.conf</code>中配置服务端允许的认证方式。任意编辑器打开该文件，编辑或添加下面一行。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># TYPE  DATABASE  USER  CIDR-ADDRESS  METHOD
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># TYPE  DATABASE  USER  CIDR-ADDRESS  METHOD
 host  all  all 0.0.0.0/0 md5
-</code></pre></div><p>默认pg只允许本机通过密码认证登录，修改为上面内容后即可以对任意IP访问进行密码验证。对照上面的注释可以很容易搞明白每列的含义，具体的支持项可以查阅文末参考引用。</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>默认pg只允许本机通过密码认证登录，修改为上面内容后即可以对任意IP访问进行密码验证。对照上面的注释可以很容易搞明白每列的含义，具体的支持项可以查阅文末参考引用。</p>
 <p>完成上两项配置后执行<code>sudo service postgresql restart</code>重启PostgreSQL服务后，允许外网访问的配置就算生效了。</p>
 
-                        </div>
+        </div>
 
-                        
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="http://blog.breakering.com">Jacob</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="http://blog.breakering.com/2018/11/19/postgresql-remote/">http://blog.breakering.com/2018/11/19/postgresql-remote/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
 
 
-                        
+
+        
 
 <div class="post-archive">
     <h2>See Also</h2>
@@ -126,17 +249,17 @@ host  all  all 0.0.0.0/0 md5
 </div>
 
 
-                        <div class="post-meta meta-tags">
-                            
-                            <ul class="clearfix">
-                                
-                                <li><a href="http://blog.breakering.com/tags/PostgreSQL">PostgreSQL</a></li>
-                                
-                            </ul>
-                            
-                        </div>
-                    </article>
-                    
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='http://blog.breakering.com/tags/PostgreSQL'>PostgreSQL</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
     
 
     
@@ -151,11 +274,65 @@ host  all  all 0.0.0.0/0 md5
       </script>
     </div>
     
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2020 <a href="http://blog.breakering.com">Jacob个人技术博客 By Jacob</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-130599767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
                 </div>
-            </div>
-            <div id="secondary">
+
+                <div id="secondary">
     <section class="widget">
-        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='http://blog.breakering.com/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
       <input type="hidden" name="sitesearch" value="http://blog.breakering.com">
@@ -228,86 +405,50 @@ host  all  all 0.0.0.0/0 md5
 
 
     <section class="widget">
-        <h3 class="widget-title">分类</h3>
+        <h3 class="widget-title"><a href="/categories">分类</a></h3>
 <ul class="widget-list">
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Django/">Django(4)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Django/">Django (4)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/GitLab/">GitLab(3)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/GitLab/">GitLab (3)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Go/">Go(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Go/">Go (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Google/">Google(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Google/">Google (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Hexo/">Hexo(2)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Hexo/">Hexo (2)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Linux/">Linux(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Linux/">Linux (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Neo4j/">Neo4j(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Neo4j/">Neo4j (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/PostgreSQL/">PostgreSQL(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/PostgreSQL/">PostgreSQL (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Python/">Python(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Python/">Python (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/Ubuntu/">Ubuntu(2)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/Ubuntu/">Ubuntu (2)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/jupyter/">jupyter(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/jupyter/">jupyter (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/ssl/">ssl(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/ssl/">ssl (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/supervisor/">supervisor(2)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/supervisor/">supervisor (2)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/vscode/">vscode(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/vscode/">vscode (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/vue/">vue(3)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/vue/">vue (3)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透 (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/">图床(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/%E5%9B%BE%E5%BA%8A/">图床 (1)</a></li>
     
-    <li>
-        <a href="http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/">工具(1)</a>
-    </li>
+    <li><a href="http://blog.breakering.com/categories/%E5%B7%A5%E5%85%B7/">工具 (1)</a></li>
     
 </ul>
     </section>
 
     <section class="widget">
-        <h3 class="widget-title">标签</h3>
+        <h3 class="widget-title"><a href="/tags">标签</a></h3>
 <div class="tagcloud">
     
     <a href="http://blog.breakering.com/tags/Django/">Django</a>
@@ -386,10 +527,6 @@ host  all  all 0.0.0.0/0 md5
             <a target="_blank" href="https://www.cnblogs.com/zhaof/" title="赵凡">赵凡</a>
         </li>
         
-        <li>
-            <a target="_blank" href="https://luuman.github.io/" title="luuman">luuman</a>
-        </li>
-        
     </ul>
 </section>
 
@@ -401,55 +538,9 @@ host  all  all 0.0.0.0/0 md5
         </ul>
     </section>
 </div>
+            </div>
         </div>
     </div>
-</div>
-<footer id="footer">
-    <div class="container">
-        &copy; 2020 <a href="http://blog.breakering.com">Jacob个人技术博客 By Jacob</a>.
-        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
-        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
-        
-    </div>
-</footer>
-
-
-    <script type="text/javascript">
-    
-    (function(){
-        $("pre code").parent().addClass("line-numbers")
-    }())
-
-    window.MathJax = {
-        tex2jax: {
-            inlineMath: [ ['$','$'] ],
-            processEscapes: true
-        }
-    };
-    </script>
-    <script type="text/javascript" src="/js/prism.js" async="true"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-130599767-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
 </body>
+
 </html>
