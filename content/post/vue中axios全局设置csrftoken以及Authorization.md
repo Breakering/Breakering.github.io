@@ -3,8 +3,8 @@ title: vue中axios全局设置csrftoken以及Authorization
 draft: false
 date: 2018-11-29 18:48:17
 description: vue中axios全局设置csrftoken以及Authorization
-tags: ["vue"]
-categories: ["vue"]
+tags: ["Vue"]
+categories: ["Vue"]
 series: []
 url: /2018/11/29/vue-axios-set/
 ---

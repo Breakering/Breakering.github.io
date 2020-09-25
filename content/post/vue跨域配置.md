@@ -3,8 +3,8 @@ title: vue跨域配置
 draft: false
 date: 2018-11-30 15:16:11
 description: vue跨域配置
-tags: ["vue"]
-categories: ["vue"]
+tags: ["Vue"]
+categories: ["Vue"]
 series: []
 url: /2018/11/30/vue-cross-domain/
 ---

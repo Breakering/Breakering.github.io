@@ -3,8 +3,8 @@ title: "Supervisor运行时的编码设置"
 date: 2020-03-16T13:49:44+08:00
 description: "Supervisor运行时的编码设置"
 draft: false
-tags: ["supervisor"]
-categories: ["supervisor"]
+tags: ["Supervisor"]
+categories: ["Supervisor"]
 series: []
 toc: false
 url: /2020/03/16/supervisor-encode/

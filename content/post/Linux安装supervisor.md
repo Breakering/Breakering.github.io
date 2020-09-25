@@ -3,8 +3,8 @@ title: Linux安装supervisor
 draft: false
 date: 2019-01-27 15:07:49
 description: Linux下安装supervisor
-tags: ["supervisor"]
-categories: ["supervisor"]
+tags: ["Supervisor"]
+categories: ["Supervisor"]
 series: []
 url: /2019/01/27/install-supervisor/
 ---
