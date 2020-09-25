@@ -204,18 +204,18 @@
 <p>实现queryset级别的缓存，不是view层面的，相当于缓存sql查询结果。</p>
 <h2 id="使用">使用</h2>
 <h3 id="首先在你的django项目中安装依赖的模块">首先在你的django项目中安装依赖的模块</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pip install django-cache-machine
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pip install django-cache-machine
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="创建queryset_cachepy文件文件内容如下">创建queryset_cache.py文件,文件内容如下</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
@@ -318,113 +318,113 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic">#! /usr/bin/env python</span>
-<span style="color:#998;font-style:italic"># -*- coding: utf-8 -*-</span>
-<span style="color:#998;font-style:italic"># __author__ = &#34;Breakering&#34;</span>
-<span style="color:#998;font-style:italic"># Date: 18-8-29</span>
-<span style="color:#d14">&#34;&#34;&#34;
-</span><span style="color:#d14">依赖django-cache-machine，并在此基础上实现了轻松切换使用queryset级别缓存以及count等缓存
-</span><span style="color:#d14">&#34;&#34;&#34;</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">contextlib</span>
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#! /usr/bin/env python</span>
+<span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#75715e"># __author__ = &#34;Breakering&#34;</span>
+<span style="color:#75715e"># Date: 18-8-29</span>
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">依赖django-cache-machine，并在此基础上实现了轻松切换使用queryset级别缓存以及count等缓存
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+<span style="color:#f92672">import</span> contextlib
 
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">caching</span> <span style="color:#000;font-weight:bold">import</span> config
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">caching.base</span> <span style="color:#000;font-weight:bold">import</span> CachingQuerySet, cached_with
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">django.db.models.sql</span> <span style="color:#000;font-weight:bold">import</span> query
-
-
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">queryset_cache_decorator</span>(always_cached<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>):
-    <span style="color:#d14">&#34;&#34;&#34;queryset级别缓存的装饰器，可以使得queryset直接从缓存中获取数据&#34;&#34;&#34;</span>
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">wrapper</span>(func):
-        <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">inner</span>(<span style="color:#999">self</span>, <span style="color:#000;font-weight:bold">*</span>args, <span style="color:#000;font-weight:bold">**</span>kwargs):
-            queryset <span style="color:#000;font-weight:bold">=</span> func(<span style="color:#999">self</span>, <span style="color:#000;font-weight:bold">*</span>args, <span style="color:#000;font-weight:bold">**</span>kwargs)
-            <span style="color:#000;font-weight:bold">if</span> always_cached:  <span style="color:#998;font-style:italic"># 此装饰器默认从cache中获取数据</span>
-                queryset <span style="color:#000;font-weight:bold">=</span> queryset<span style="color:#000;font-weight:bold">.</span>from_cache()
-            <span style="color:#000;font-weight:bold">else</span>:
-                <span style="color:#000;font-weight:bold">with</span> contextlib<span style="color:#000;font-weight:bold">.</span>suppress(<span style="color:#900;font-weight:bold">Exception</span>):
-                    queryset_cache_time <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>request<span style="color:#000;font-weight:bold">.</span>query_params<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#d14">&#39;queryset_cache_time&#39;</span>, <span style="color:#d14">&#39;&#39;</span>)
-                    <span style="color:#000;font-weight:bold">if</span> queryset_cache_time <span style="color:#000;font-weight:bold">and</span> queryset_cache_time<span style="color:#000;font-weight:bold">.</span>isdigit():
-                        queryset <span style="color:#000;font-weight:bold">=</span> queryset<span style="color:#000;font-weight:bold">.</span>from_cache(<span style="color:#0086b3">int</span>(queryset_cache_time))
-            <span style="color:#000;font-weight:bold">return</span> queryset
-        <span style="color:#000;font-weight:bold">return</span> inner
-    <span style="color:#000;font-weight:bold">return</span> wrapper
+<span style="color:#f92672">from</span> caching <span style="color:#f92672">import</span> config
+<span style="color:#f92672">from</span> caching.base <span style="color:#f92672">import</span> CachingQuerySet, cached_with
+<span style="color:#f92672">from</span> django.db.models.sql <span style="color:#f92672">import</span> query
 
 
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">queryset_cache_count_decorator</span>(always_cached<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>):
-    <span style="color:#d14">&#34;&#34;&#34;queryset count缓存的装饰器，可以使得queryset直接从缓存中获取count的值&#34;&#34;&#34;</span>
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">wrapper</span>(func):
-        <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">inner</span>(<span style="color:#999">self</span>, <span style="color:#000;font-weight:bold">*</span>args, <span style="color:#000;font-weight:bold">**</span>kwargs):
-            queryset <span style="color:#000;font-weight:bold">=</span> func(<span style="color:#999">self</span>, <span style="color:#000;font-weight:bold">*</span>args, <span style="color:#000;font-weight:bold">**</span>kwargs)
-            <span style="color:#000;font-weight:bold">if</span> always_cached:  <span style="color:#998;font-style:italic"># 此装饰器默认从cache中获取数据</span>
-                queryset <span style="color:#000;font-weight:bold">=</span> queryset<span style="color:#000;font-weight:bold">.</span>cache_count()
-            <span style="color:#000;font-weight:bold">else</span>:
-                <span style="color:#000;font-weight:bold">with</span> contextlib<span style="color:#000;font-weight:bold">.</span>suppress(<span style="color:#900;font-weight:bold">Exception</span>):
-                    queryset_cache_time <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>request<span style="color:#000;font-weight:bold">.</span>query_params<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#d14">&#39;queryset_cache_time&#39;</span>, <span style="color:#d14">&#39;&#39;</span>)
-                    <span style="color:#000;font-weight:bold">if</span> queryset_cache_time <span style="color:#000;font-weight:bold">and</span> queryset_cache_time<span style="color:#000;font-weight:bold">.</span>isdigit():
-                        queryset <span style="color:#000;font-weight:bold">=</span> queryset<span style="color:#000;font-weight:bold">.</span>cache_count(<span style="color:#0086b3">int</span>(queryset_cache_time))
-            <span style="color:#000;font-weight:bold">return</span> queryset
-        <span style="color:#000;font-weight:bold">return</span> inner
-    <span style="color:#000;font-weight:bold">return</span> wrapper
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">queryset_cache_decorator</span>(always_cached<span style="color:#f92672">=</span>True):
+    <span style="color:#e6db74">&#34;&#34;&#34;queryset级别缓存的装饰器，可以使得queryset直接从缓存中获取数据&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(func):
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+            queryset <span style="color:#f92672">=</span> func(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+            <span style="color:#66d9ef">if</span> always_cached:  <span style="color:#75715e"># 此装饰器默认从cache中获取数据</span>
+                queryset <span style="color:#f92672">=</span> queryset<span style="color:#f92672">.</span>from_cache()
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">with</span> contextlib<span style="color:#f92672">.</span>suppress(<span style="color:#a6e22e">Exception</span>):
+                    queryset_cache_time <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>query_params<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;queryset_cache_time&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+                    <span style="color:#66d9ef">if</span> queryset_cache_time <span style="color:#f92672">and</span> queryset_cache_time<span style="color:#f92672">.</span>isdigit():
+                        queryset <span style="color:#f92672">=</span> queryset<span style="color:#f92672">.</span>from_cache(int(queryset_cache_time))
+            <span style="color:#66d9ef">return</span> queryset
+        <span style="color:#66d9ef">return</span> inner
+    <span style="color:#66d9ef">return</span> wrapper
 
 
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">CachedQuerySet</span>(CachingQuerySet):
-    <span style="color:#d14">&#34;&#34;&#34;
-</span><span style="color:#d14">    Return queryset from cache if query_key in cache
-</span><span style="color:#d14">    &#34;&#34;&#34;</span>
-    <span style="color:#000;font-weight:bold">def</span> __init__(<span style="color:#999">self</span>, <span style="color:#000;font-weight:bold">*</span>args, <span style="color:#000;font-weight:bold">**</span>kwargs):
-        <span style="color:#0086b3">super</span>(CachedQuerySet, <span style="color:#999">self</span>)<span style="color:#000;font-weight:bold">.</span>__init__(<span style="color:#000;font-weight:bold">*</span>args, <span style="color:#000;font-weight:bold">**</span>kwargs)
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>timeout <span style="color:#000;font-weight:bold">=</span> config<span style="color:#000;font-weight:bold">.</span>NO_CACHE  <span style="color:#998;font-style:italic"># 默认直接从数据库取数据</span>
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>cache_count_timeout <span style="color:#000;font-weight:bold">=</span> config<span style="color:#000;font-weight:bold">.</span>NO_CACHE  <span style="color:#998;font-style:italic"># 自定义queryset count的缓存时间</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">queryset_cache_count_decorator</span>(always_cached<span style="color:#f92672">=</span>True):
+    <span style="color:#e6db74">&#34;&#34;&#34;queryset count缓存的装饰器，可以使得queryset直接从缓存中获取count的值&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(func):
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+            queryset <span style="color:#f92672">=</span> func(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+            <span style="color:#66d9ef">if</span> always_cached:  <span style="color:#75715e"># 此装饰器默认从cache中获取数据</span>
+                queryset <span style="color:#f92672">=</span> queryset<span style="color:#f92672">.</span>cache_count()
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">with</span> contextlib<span style="color:#f92672">.</span>suppress(<span style="color:#a6e22e">Exception</span>):
+                    queryset_cache_time <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>query_params<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;queryset_cache_time&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+                    <span style="color:#66d9ef">if</span> queryset_cache_time <span style="color:#f92672">and</span> queryset_cache_time<span style="color:#f92672">.</span>isdigit():
+                        queryset <span style="color:#f92672">=</span> queryset<span style="color:#f92672">.</span>cache_count(int(queryset_cache_time))
+            <span style="color:#66d9ef">return</span> queryset
+        <span style="color:#66d9ef">return</span> inner
+    <span style="color:#66d9ef">return</span> wrapper
 
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">_clone</span>(<span style="color:#999">self</span>, <span style="color:#000;font-weight:bold">*</span>args, <span style="color:#000;font-weight:bold">**</span>kw):
-        qs <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">super</span>(CachedQuerySet, <span style="color:#999">self</span>)<span style="color:#000;font-weight:bold">.</span>_clone(<span style="color:#000;font-weight:bold">*</span>args, <span style="color:#000;font-weight:bold">**</span>kw)
-        qs<span style="color:#000;font-weight:bold">.</span>cache_count_timeout <span style="color:#000;font-weight:bold">=</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>cache_count_timeout
-        <span style="color:#000;font-weight:bold">return</span> qs
 
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">from_cache</span>(<span style="color:#999">self</span>, timeout<span style="color:#000;font-weight:bold">=</span><span style="color:#099">60</span><span style="color:#000;font-weight:bold">*</span><span style="color:#099">60</span>):
-        <span style="color:#d14">&#34;&#34;&#34;在queryset中调用此函数则是从缓存中获取,且调用之后返回的仍是queryset&#34;&#34;&#34;</span>
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>timeout <span style="color:#000;font-weight:bold">=</span> timeout
-        <span style="color:#000;font-weight:bold">return</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>_clone()
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CachedQuerySet</span>(CachingQuerySet):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Return queryset from cache if query_key in cache
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        super(CachedQuerySet, self)<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        self<span style="color:#f92672">.</span>timeout <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span>NO_CACHE  <span style="color:#75715e"># 默认直接从数据库取数据</span>
+        self<span style="color:#f92672">.</span>cache_count_timeout <span style="color:#f92672">=</span> config<span style="color:#f92672">.</span>NO_CACHE  <span style="color:#75715e"># 自定义queryset count的缓存时间</span>
 
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">cache_count</span>(<span style="color:#999">self</span>, cache_count_timeout<span style="color:#000;font-weight:bold">=</span><span style="color:#099">60</span><span style="color:#000;font-weight:bold">*</span><span style="color:#099">60</span>):
-        <span style="color:#d14">&#34;&#34;&#34;实现queryset count的缓存,且调用之后返回的仍是queryset&#34;&#34;&#34;</span>
-        <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>cache_count_timeout <span style="color:#000;font-weight:bold">=</span> cache_count_timeout
-        <span style="color:#000;font-weight:bold">return</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>_clone()
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_clone</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kw):
+        qs <span style="color:#f92672">=</span> super(CachedQuerySet, self)<span style="color:#f92672">.</span>_clone(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kw)
+        qs<span style="color:#f92672">.</span>cache_count_timeout <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cache_count_timeout
+        <span style="color:#66d9ef">return</span> qs
 
-    <span style="color:#998;font-style:italic"># todo values目前的实现方式有BUG，现已取消</span>
-    <span style="color:#998;font-style:italic"># def values(self, *fields, **expressions):</span>
-    <span style="color:#998;font-style:italic">#     &#34;&#34;&#34;rewrite queryset&#39;s values&#34;&#34;&#34;</span>
-    <span style="color:#998;font-style:italic">#     if self.timeout == config.NO_CACHE:  # 默认情况下values直接从数据库获取数据</span>
-    <span style="color:#998;font-style:italic">#         return super(CachedQuerySet, self).values(*fields, **expressions)</span>
-    <span style="color:#998;font-style:italic">#</span>
-    <span style="color:#998;font-style:italic">#     clone = self._clone()</span>
-    <span style="color:#998;font-style:italic">#     clone.query.set_values(fields)</span>
-    <span style="color:#998;font-style:italic">#     key = make_key(&#39;values:{key}&#39;.format(key=clone.query_key()))</span>
-    <span style="color:#998;font-style:italic">#     val = cache.get(key)</span>
-    <span style="color:#998;font-style:italic">#     if val is None:</span>
-    <span style="color:#998;font-style:italic">#         val = super(CachedQuerySet, self).values(*fields, **expressions)</span>
-    <span style="color:#998;font-style:italic">#         cache.set(key, val, self.timeout)</span>
-    <span style="color:#998;font-style:italic">#     return val</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">from_cache</span>(self, timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span>):
+        <span style="color:#e6db74">&#34;&#34;&#34;在queryset中调用此函数则是从缓存中获取,且调用之后返回的仍是queryset&#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>timeout <span style="color:#f92672">=</span> timeout
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_clone()
 
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">count</span>(<span style="color:#999">self</span>):
-        <span style="color:#d14">&#34;&#34;&#34;自定义queryset的count&#34;&#34;&#34;</span>
-        super_count <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">super</span>(CachingQuerySet, <span style="color:#999">self</span>)<span style="color:#000;font-weight:bold">.</span>count
-        <span style="color:#000;font-weight:bold">try</span>:
-            query_string <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;count:</span><span style="color:#d14">%s</span><span style="color:#d14">&#39;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>query_key()
-        <span style="color:#000;font-weight:bold">except</span> query<span style="color:#000;font-weight:bold">.</span>EmptyResultSet:
-            <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>
-        <span style="color:#000;font-weight:bold">if</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>cache_count_timeout:
-            <span style="color:#000;font-weight:bold">return</span> cached_with(<span style="color:#999">self</span>, super_count, query_string, <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>cache_count_timeout)
-        <span style="color:#000;font-weight:bold">elif</span> <span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>timeout <span style="color:#000;font-weight:bold">==</span> config<span style="color:#000;font-weight:bold">.</span>NO_CACHE <span style="color:#000;font-weight:bold">or</span> config<span style="color:#000;font-weight:bold">.</span>TIMEOUT <span style="color:#000;font-weight:bold">==</span> config<span style="color:#000;font-weight:bold">.</span>NO_CACHE:
-            <span style="color:#000;font-weight:bold">return</span> super_count()
-        <span style="color:#000;font-weight:bold">else</span>:
-            <span style="color:#000;font-weight:bold">return</span> cached_with(<span style="color:#999">self</span>, super_count, query_string, config<span style="color:#000;font-weight:bold">.</span>TIMEOUT)
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cache_count</span>(self, cache_count_timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span>):
+        <span style="color:#e6db74">&#34;&#34;&#34;实现queryset count的缓存,且调用之后返回的仍是queryset&#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>cache_count_timeout <span style="color:#f92672">=</span> cache_count_timeout
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_clone()
+
+    <span style="color:#75715e"># todo values目前的实现方式有BUG，现已取消</span>
+    <span style="color:#75715e"># def values(self, *fields, **expressions):</span>
+    <span style="color:#75715e">#     &#34;&#34;&#34;rewrite queryset&#39;s values&#34;&#34;&#34;</span>
+    <span style="color:#75715e">#     if self.timeout == config.NO_CACHE:  # 默认情况下values直接从数据库获取数据</span>
+    <span style="color:#75715e">#         return super(CachedQuerySet, self).values(*fields, **expressions)</span>
+    <span style="color:#75715e">#</span>
+    <span style="color:#75715e">#     clone = self._clone()</span>
+    <span style="color:#75715e">#     clone.query.set_values(fields)</span>
+    <span style="color:#75715e">#     key = make_key(&#39;values:{key}&#39;.format(key=clone.query_key()))</span>
+    <span style="color:#75715e">#     val = cache.get(key)</span>
+    <span style="color:#75715e">#     if val is None:</span>
+    <span style="color:#75715e">#         val = super(CachedQuerySet, self).values(*fields, **expressions)</span>
+    <span style="color:#75715e">#         cache.set(key, val, self.timeout)</span>
+    <span style="color:#75715e">#     return val</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count</span>(self):
+        <span style="color:#e6db74">&#34;&#34;&#34;自定义queryset的count&#34;&#34;&#34;</span>
+        super_count <span style="color:#f92672">=</span> super(CachingQuerySet, self)<span style="color:#f92672">.</span>count
+        <span style="color:#66d9ef">try</span>:
+            query_string <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;count:</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> self<span style="color:#f92672">.</span>query_key()
+        <span style="color:#66d9ef">except</span> query<span style="color:#f92672">.</span>EmptyResultSet:
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>cache_count_timeout:
+            <span style="color:#66d9ef">return</span> cached_with(self, super_count, query_string, self<span style="color:#f92672">.</span>cache_count_timeout)
+        <span style="color:#66d9ef">elif</span> self<span style="color:#f92672">.</span>timeout <span style="color:#f92672">==</span> config<span style="color:#f92672">.</span>NO_CACHE <span style="color:#f92672">or</span> config<span style="color:#f92672">.</span>TIMEOUT <span style="color:#f92672">==</span> config<span style="color:#f92672">.</span>NO_CACHE:
+            <span style="color:#66d9ef">return</span> super_count()
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">return</span> cached_with(self, super_count, query_string, config<span style="color:#f92672">.</span>TIMEOUT)
 
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="改造您的model">改造您的model</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -437,47 +437,47 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">django.db</span> <span style="color:#000;font-weight:bold">import</span> models
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">queryset_cache</span> <span style="color:#000;font-weight:bold">import</span> CachedQuerySet
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">caching.base</span> <span style="color:#000;font-weight:bold">import</span> CachingMixin
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.db <span style="color:#f92672">import</span> models
+<span style="color:#f92672">from</span> queryset_cache <span style="color:#f92672">import</span> CachedQuerySet
+<span style="color:#f92672">from</span> caching.base <span style="color:#f92672">import</span> CachingMixin
 
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">ModelClassManger</span>(models<span style="color:#000;font-weight:bold">.</span>Manager):
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ModelClassManger</span>(models<span style="color:#f92672">.</span>Manager):
 
-    <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_queryset</span>(<span style="color:#999">self</span>):
-        <span style="color:#000;font-weight:bold">return</span> CachedQuerySet(<span style="color:#999">self</span><span style="color:#000;font-weight:bold">.</span>model)
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_queryset</span>(self):
+        <span style="color:#66d9ef">return</span> CachedQuerySet(self<span style="color:#f92672">.</span>model)
     
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">ModelClass</span>(CachingMixin, models<span style="color:#000;font-weight:bold">.</span>Model):
-    objects <span style="color:#000;font-weight:bold">=</span> ModelClassManger()
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ModelClass</span>(CachingMixin, models<span style="color:#f92672">.</span>Model):
+    objects <span style="color:#f92672">=</span> ModelClassManger()
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="view层只需在get_queryset上加上装饰器即可">view层只需在get_queryset上加上装饰器即可</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#3c5d5d;font-weight:bold">@queryset_cache_count_decorator</span>()
-<span style="color:#3c5d5d;font-weight:bold">@queryset_cache_decorator</span>()
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_queryset</span>(<span style="color:#999">self</span>):
-    <span style="color:#000;font-weight:bold">pass</span>
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@queryset_cache_count_decorator</span>()
+<span style="color:#a6e22e">@queryset_cache_decorator</span>()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_queryset</span>(self):
+    <span style="color:#66d9ef">pass</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>如果添加了always_cached=False</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#3c5d5d;font-weight:bold">@queryset_cache_count_decorator</span>(always_cached<span style="color:#000;font-weight:bold">=</span><span style="color:#999">False</span>)
-<span style="color:#3c5d5d;font-weight:bold">@queryset_cache_decorator</span>(always_cached<span style="color:#000;font-weight:bold">=</span><span style="color:#999">False</span>)
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_queryset</span>(<span style="color:#999">self</span>):
-    <span style="color:#000;font-weight:bold">pass</span>
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@queryset_cache_count_decorator</span>(always_cached<span style="color:#f92672">=</span>False)
+<span style="color:#a6e22e">@queryset_cache_decorator</span>(always_cached<span style="color:#f92672">=</span>False)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_queryset</span>(self):
+    <span style="color:#66d9ef">pass</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>则需要在query参数中加上queryset_cache_time=180,参数后面的数字即为缓存的时间。</p>

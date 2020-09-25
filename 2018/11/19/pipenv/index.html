@@ -199,49 +199,49 @@
         
         <div class="post-content">
             <h2 id="安装pipenv">安装pipenv</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install pipenv
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install pipenv
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="项目初始化">项目初始化</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#0086b3">cd</span> your_project
-<span style="color:#008080">PIPENV_VENV_IN_PROJECT</span><span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">true</span> pipenv --python<span style="color:#000;font-weight:bold">=</span>3.6
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd your_project
+PIPENV_VENV_IN_PROJECT<span style="color:#f92672">=</span>true pipenv --python<span style="color:#f92672">=</span>3.6
 </code></pre></td></tr></table>
 </div>
 </div><p>将在项目目录中创建新文件<code>Pipfile</code>和一个虚拟环境<code>.venv</code>, <code>--python=3.6</code>则是使用<code>python3.6</code>来创建虚拟环境,<code>PIPENV_VENV_IN_PROJECT=true</code>则是让虚拟环境创建在该项目目录下，方便管理。</p>
 <p>如果你添加&ndash;two或&ndash;three标志到上面的最后一个命令，它分别使用Python 2或3来初始化你的项目。 否则将使用默认版本的Python。</p>
 <h2 id="激活开发环境">激活开发环境</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv shell
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv shell
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="退出开发环境">退出开发环境</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#0086b3">exit</span>
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">exit
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="使用说明pipenv--h">使用说明(<code>pipenv -h</code>)</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -304,7 +304,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Usage: pipenv <span style="color:#000;font-weight:bold">[</span>OPTIONS<span style="color:#000;font-weight:bold">]</span> COMMAND <span style="color:#000;font-weight:bold">[</span>ARGS<span style="color:#000;font-weight:bold">]</span>...
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Usage: pipenv <span style="color:#f92672">[</span>OPTIONS<span style="color:#f92672">]</span> COMMAND <span style="color:#f92672">[</span>ARGS<span style="color:#f92672">]</span>...
 
 Options:
   --where             Output project home information.
@@ -313,13 +313,13 @@ Options:
   --envs              Output Environment Variable options.
   --rm                Remove the virtualenv.
   --bare              Minimal output.
-  --completion        Output completion <span style="color:#000;font-weight:bold">(</span>to be eval<span style="color:#a61717;background-color:#e3d2d2">&#39;</span>d<span style="color:#000;font-weight:bold">)</span>.
+  --completion        Output completion <span style="color:#f92672">(</span>to be eval<span style="color:#960050;background-color:#1e0010">&#39;</span>d<span style="color:#f92672">)</span>.
   --man               Display manpage.
-  --support           Output diagnostic information <span style="color:#000;font-weight:bold">for</span> use in GitHub issues.
-  --site-packages     Enable site-packages <span style="color:#000;font-weight:bold">for</span> the virtualenv.
+  --support           Output diagnostic information <span style="color:#66d9ef">for</span> use in GitHub issues.
+  --site-packages     Enable site-packages <span style="color:#66d9ef">for</span> the virtualenv.
   --python TEXT       Specify which version of Python virtualenv should use.
   --three / --two     Use Python 3/2 when creating virtualenv.
-  --clear             Clears caches <span style="color:#000;font-weight:bold">(</span>pipenv, pip, and pip-tools<span style="color:#000;font-weight:bold">)</span>.
+  --clear             Clears caches <span style="color:#f92672">(</span>pipenv, pip, and pip-tools<span style="color:#f92672">)</span>.
   -v, --verbose       Verbose mode.
   --pypi-mirror TEXT  Specify a PyPI mirror.
   --version           Show the version and exit.
@@ -330,10 +330,10 @@ Usage Examples:
    Create a new project using Python 3.7, specifically:
    $ pipenv --python 3.7
 
-   Remove project virtualenv <span style="color:#000;font-weight:bold">(</span>inferred from current directory<span style="color:#000;font-weight:bold">)</span>:
+   Remove project virtualenv <span style="color:#f92672">(</span>inferred from current directory<span style="color:#f92672">)</span>:
    $ pipenv --rm
 
-   Install all dependencies <span style="color:#000;font-weight:bold">for</span> a project <span style="color:#000;font-weight:bold">(</span>including dev<span style="color:#000;font-weight:bold">)</span>:
+   Install all dependencies <span style="color:#66d9ef">for</span> a project <span style="color:#f92672">(</span>including dev<span style="color:#f92672">)</span>:
    $ pipenv install --dev
 
    Create a lockfile containing pre-releases:
@@ -342,55 +342,55 @@ Usage Examples:
    Show a graph of your installed dependencies:
    $ pipenv graph
 
-   Check your installed dependencies <span style="color:#000;font-weight:bold">for</span> security vulnerabilities:
+   Check your installed dependencies <span style="color:#66d9ef">for</span> security vulnerabilities:
    $ pipenv check
 
-   Install a <span style="color:#0086b3">local</span> setup.py into your virtual environment/Pipfile:
+   Install a local setup.py into your virtual environment/Pipfile:
    $ pipenv install -e .
 
    Use a lower-level pip command:
    $ pipenv run pip freeze
 
 Commands:
-  check      Checks <span style="color:#000;font-weight:bold">for</span> security vulnerabilities and against PEP <span style="color:#099">508</span> markers
+  check      Checks <span style="color:#66d9ef">for</span> security vulnerabilities and against PEP <span style="color:#ae81ff">508</span> markers
              provided in Pipfile.
   clean      Uninstalls all packages not specified in Pipfile.lock.
   graph      Displays currently-installed dependency graph information.
-  install    Installs provided packages and adds them to Pipfile, or <span style="color:#000;font-weight:bold">(</span><span style="color:#000;font-weight:bold">if</span> no
-             packages are given<span style="color:#000;font-weight:bold">)</span>, installs all packages from Pipfile.
+  install    Installs provided packages and adds them to Pipfile, or <span style="color:#f92672">(</span><span style="color:#66d9ef">if</span> no
+             packages are given<span style="color:#f92672">)</span>, installs all packages from Pipfile.
   lock       Generates Pipfile.lock.
   open       View a given module in your editor.
-  run        Spawns a <span style="color:#0086b3">command</span> installed into the virtualenv.
+  run        Spawns a command installed into the virtualenv.
   shell      Spawns a shell within the virtualenv.
   sync       Installs all packages specified in Pipfile.lock.
   uninstall  Un-installs a provided package and removes it from Pipfile.
-  update     Runs lock, <span style="color:#000;font-weight:bold">then</span> sync.
+  update     Runs lock, <span style="color:#66d9ef">then</span> sync.
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="总结">总结</h2>
 <p><code>pipenv</code>使得开发和管理项目包的过程变成的简单，让我们尽早使用起来吧。</p>
 <h2 id="一些错误">一些错误</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">...
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">...
   File &#34;/usr/lib/python3.7/site-packages/pipenv/vendor/pythonfinder/models/python.py&#34;, line 70, in get_version_order
     version_order = [versions[v] for v in parse_pyenv_version_order()]
 TypeError: &#39;NoneType&#39; object is not iterable
 </code></pre></td></tr></table>
 </div>
 </div><p>这时可以使用下面的命令解决:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pyenv global 3.7.1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pyenv global 3.7.1
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>

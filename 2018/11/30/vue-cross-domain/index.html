@@ -199,9 +199,9 @@
 <li>在你的项目根目录创建<code>vue.config.js</code>文件</li>
 <li>在文件中写入如下配置信息:</li>
 </ul>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -215,14 +215,14 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#998;font-style:italic">// 配置proxy
-</span><span style="color:#998;font-style:italic"></span>module.exports <span style="color:#000;font-weight:bold">=</span> {
-    devServer<span style="color:#000;font-weight:bold">:</span> {
-        proxy<span style="color:#000;font-weight:bold">:</span> {
-            <span style="color:#d14">&#39;/api&#39;</span><span style="color:#000;font-weight:bold">:</span> {
-                target<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;https://xxxx.xxxxxxxxxx.com&#39;</span>,
-                ws<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">true</span>,
-                changeOrigin<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">true</span>
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 配置proxy
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">devServer</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">proxy</span><span style="color:#f92672">:</span> {
+            <span style="color:#e6db74">&#39;/api&#39;</span><span style="color:#f92672">:</span> {
+                <span style="color:#a6e22e">target</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;https://xxxx.xxxxxxxxxx.com&#39;</span>,
+                <span style="color:#a6e22e">ws</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+                <span style="color:#a6e22e">changeOrigin</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>
             },
         }
     }
@@ -234,9 +234,9 @@
 </blockquote>
 <h2 id="线上环境">线上环境</h2>
 <p><strong>线上通过nginx代理,实现跨域</strong></p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -257,24 +257,24 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#000;font-weight:bold">server</span> {
-   <span style="color:#000;font-weight:bold">listen</span> <span style="color:#099">80</span>;
-   <span style="color:#000;font-weight:bold">server_name</span> <span style="color:#d14">www.breakering.com</span>;  <span style="color:#998;font-style:italic"># 你的域名
-</span><span style="color:#998;font-style:italic"></span>   <span style="color:#000;font-weight:bold">location</span> <span style="color:#d14">/</span> {
-        <span style="color:#000;font-weight:bold">index</span> <span style="color:#d14">index.html</span>;
-        <span style="color:#000;font-weight:bold">root</span> <span style="color:#d14">/home/jacob/study/licaishi_pc/dist</span>;  <span style="color:#998;font-style:italic"># vue buil之后dist文件夹位置
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">try_files</span> <span style="color:#008080">$uri</span> <span style="color:#008080">$uri/</span> <span style="color:#d14">/index.html</span> =<span style="color:#099">404</span>;  <span style="color:#998;font-style:italic"># 可以让浏览器在子页面也能刷新，主要是vue-router的路径不是真实路径导致
-</span><span style="color:#998;font-style:italic"></span>   }
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">server</span> {
+   <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
+   <span style="color:#f92672">server_name</span> <span style="color:#e6db74">www.breakering.com</span>;  <span style="color:#75715e"># 你的域名
+</span><span style="color:#75715e"></span>   <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+        <span style="color:#f92672">index</span> <span style="color:#e6db74">index.html</span>;
+        <span style="color:#f92672">root</span> <span style="color:#e6db74">/home/jacob/study/licaishi_pc/dist</span>;  <span style="color:#75715e"># vue buil之后dist文件夹位置
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">try_files</span> $uri $uri/ <span style="color:#e6db74">/index.html</span> =<span style="color:#ae81ff">404</span>;  <span style="color:#75715e"># 可以让浏览器在子页面也能刷新，主要是vue-router的路径不是真实路径导致
+</span><span style="color:#75715e"></span>   }
 
-   <span style="color:#998;font-style:italic"># 用/api来访问其他网站的接口，实现跨域
-</span><span style="color:#998;font-style:italic"></span>   <span style="color:#000;font-weight:bold">location</span> <span style="color:#d14">/api</span> {
-        <span style="color:#998;font-style:italic"># 下面三个是跨域的一些设置
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">add_header</span> <span style="color:#d14">Access-Control-Allow-Origin</span> <span style="color:#d14">*</span>;
-        <span style="color:#000;font-weight:bold">add_header</span> <span style="color:#d14">Access-Control-Allow-Methods</span> <span style="color:#d14">&#39;GET,</span> <span style="color:#d14">POST,</span> <span style="color:#d14">PUT,</span> <span style="color:#d14">PATCH,</span> <span style="color:#d14">DELETE,</span> <span style="color:#d14">OPTIONS&#39;</span>;
-        <span style="color:#998;font-style:italic"># Access-Control-Allow-Headers需要注意，会屏蔽一些headers，部署时需要注意
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">add_header</span> <span style="color:#d14">Access-Control-Allow-Headers</span> <span style="color:#d14">&#39;DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,X-CSRFTOKEN&#39;</span>;
-        <span style="color:#000;font-weight:bold">proxy_pass</span> <span style="color:#d14">https://xxxx.xxxxxxxxxx.com/api</span>;  <span style="color:#998;font-style:italic"># 其他网站的接口
-</span><span style="color:#998;font-style:italic"></span>   }
+   <span style="color:#75715e"># 用/api来访问其他网站的接口，实现跨域
+</span><span style="color:#75715e"></span>   <span style="color:#f92672">location</span> <span style="color:#e6db74">/api</span> {
+        <span style="color:#75715e"># 下面三个是跨域的一些设置
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">add_header</span> <span style="color:#e6db74">Access-Control-Allow-Origin</span> <span style="color:#e6db74">*</span>;
+        <span style="color:#f92672">add_header</span> <span style="color:#e6db74">Access-Control-Allow-Methods</span> <span style="color:#e6db74">&#39;GET,</span> <span style="color:#e6db74">POST,</span> <span style="color:#e6db74">PUT,</span> <span style="color:#e6db74">PATCH,</span> <span style="color:#e6db74">DELETE,</span> <span style="color:#e6db74">OPTIONS&#39;</span>;
+        <span style="color:#75715e"># Access-Control-Allow-Headers需要注意，会屏蔽一些headers，部署时需要注意
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">add_header</span> <span style="color:#e6db74">Access-Control-Allow-Headers</span> <span style="color:#e6db74">&#39;DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,X-CSRFTOKEN&#39;</span>;
+        <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">https://xxxx.xxxxxxxxxx.com/api</span>;  <span style="color:#75715e"># 其他网站的接口
+</span><span style="color:#75715e"></span>   }
 }
 </code></pre></td></tr></table>
 </div>

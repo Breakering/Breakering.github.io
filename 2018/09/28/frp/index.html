@@ -335,9 +335,9 @@ remote_port = 8081
 # 找到如下位置取消注释并设置为false
 nginx['enable'] = false
 </code></pre><h4 id="创建gitlab的nginx配置文件">创建gitlab的nginx配置文件</h4>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -397,62 +397,62 @@ nginx['enable'] = false
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#998;font-style:italic"># gitlab socket 文件地址
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">upstream</span> <span style="color:#d14">gitlab</span> {
-  <span style="color:#000;font-weight:bold">server</span> <span style="color:#d14">unix:/var/opt/gitlab/gitlab-workhorse/socket</span>;
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#75715e"># gitlab socket 文件地址
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">upstream</span> <span style="color:#e6db74">gitlab</span> {
+  <span style="color:#f92672">server</span> <span style="color:#e6db74">unix:/var/opt/gitlab/gitlab-workhorse/socket</span>;
 }
 
-<span style="color:#000;font-weight:bold">server</span> {
-    <span style="color:#000;font-weight:bold">listen</span> <span style="color:#099">80</span>;
-    <span style="color:#000;font-weight:bold">server_tokens</span> <span style="color:#008080">off</span>;
-    <span style="color:#000;font-weight:bold">root</span> <span style="color:#d14">/opt/gitlab/embedded/service/gitlab-rails/public</span>;
+<span style="color:#66d9ef">server</span> {
+    <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
+    <span style="color:#f92672">server_tokens</span> <span style="color:#66d9ef">off</span>;
+    <span style="color:#f92672">root</span> <span style="color:#e6db74">/opt/gitlab/embedded/service/gitlab-rails/public</span>;
 
-    <span style="color:#998;font-style:italic"># Increase this if you want to upload large attachments
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic"># Or if you want to accept large git objects over http
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">client_max_body_size</span> <span style="color:#099">250m</span>;
+    <span style="color:#75715e"># Increase this if you want to upload large attachments
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># Or if you want to accept large git objects over http
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">client_max_body_size</span> <span style="color:#ae81ff">250m</span>;
 
-    <span style="color:#998;font-style:italic"># individual nginx logs for this gitlab vhost
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">access_log</span>  <span style="color:#d14">/var/log/gitlab/nginx/gitlab_access.log</span>;
-    <span style="color:#000;font-weight:bold">error_log</span>    <span style="color:#d14">/var/log/gitlab/nginx/gitlab_error.log</span>;
+    <span style="color:#75715e"># individual nginx logs for this gitlab vhost
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">access_log</span>  <span style="color:#e6db74">/var/log/gitlab/nginx/gitlab_access.log</span>;
+    <span style="color:#f92672">error_log</span>    <span style="color:#e6db74">/var/log/gitlab/nginx/gitlab_error.log</span>;
 
 
-    <span style="color:#000;font-weight:bold">location</span> <span style="color:#d14">/</span> {
-      <span style="color:#998;font-style:italic"># serve static files from defined root folder;.
-</span><span style="color:#998;font-style:italic"></span>      <span style="color:#998;font-style:italic"># @gitlab is a named location for the upstream fallback, see below
-</span><span style="color:#998;font-style:italic"></span>      <span style="color:#000;font-weight:bold">try_files</span> <span style="color:#008080">$uri</span> <span style="color:#008080">$uri/index.html</span> <span style="color:#008080">$uri.html</span> <span style="color:#d14">@gitlab</span>;
+    <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+      <span style="color:#75715e"># serve static files from defined root folder;.
+</span><span style="color:#75715e"></span>      <span style="color:#75715e"># @gitlab is a named location for the upstream fallback, see below
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">try_files</span> $uri $uri/index.html $uri.html <span style="color:#e6db74">@gitlab</span>;
     }
 
-    <span style="color:#998;font-style:italic"># if a file, which is not found in the root folder is requested,
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic"># then the proxy pass the request to the upsteam (gitlab unicorn)
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">location</span> <span style="color:#d14">@gitlab</span> {
-      <span style="color:#998;font-style:italic"># If you use https make sure you disable gzip compression 
-</span><span style="color:#998;font-style:italic"></span>      <span style="color:#998;font-style:italic"># to be safe against BREACH attack
-</span><span style="color:#998;font-style:italic"></span>
-      <span style="color:#000;font-weight:bold">proxy_read_timeout</span> <span style="color:#099">300</span>; <span style="color:#998;font-style:italic"># Some requests take more than 30 seconds.
-</span><span style="color:#998;font-style:italic"></span>      <span style="color:#000;font-weight:bold">proxy_connect_timeout</span> <span style="color:#099">300</span>; <span style="color:#998;font-style:italic"># Some requests take more than 30 seconds.
-</span><span style="color:#998;font-style:italic"></span>      <span style="color:#000;font-weight:bold">proxy_redirect</span>     <span style="color:#008080">off</span>;
+    <span style="color:#75715e"># if a file, which is not found in the root folder is requested,
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># then the proxy pass the request to the upsteam (gitlab unicorn)
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">location</span> <span style="color:#e6db74">@gitlab</span> {
+      <span style="color:#75715e"># If you use https make sure you disable gzip compression 
+</span><span style="color:#75715e"></span>      <span style="color:#75715e"># to be safe against BREACH attack
+</span><span style="color:#75715e"></span>
+      <span style="color:#f92672">proxy_read_timeout</span> <span style="color:#ae81ff">300</span>; <span style="color:#75715e"># Some requests take more than 30 seconds.
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">proxy_connect_timeout</span> <span style="color:#ae81ff">300</span>; <span style="color:#75715e"># Some requests take more than 30 seconds.
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">proxy_redirect</span>     <span style="color:#66d9ef">off</span>;
 
-      <span style="color:#000;font-weight:bold">proxy_set_header</span>   <span style="color:#d14">X-Forwarded-Proto</span> <span style="color:#008080">$scheme</span>;
-      <span style="color:#000;font-weight:bold">proxy_set_header</span>   <span style="color:#d14">Host</span>              <span style="color:#008080">$http_host</span>;
-      <span style="color:#000;font-weight:bold">proxy_set_header</span>   <span style="color:#d14">X-Real-IP</span>         <span style="color:#008080">$remote_addr</span>;
-      <span style="color:#000;font-weight:bold">proxy_set_header</span>   <span style="color:#d14">X-Forwarded-For</span>   <span style="color:#008080">$proxy_add_x_forwarded_for</span>;
-      <span style="color:#000;font-weight:bold">proxy_set_header</span>   <span style="color:#d14">X-Frame-Options</span>   <span style="color:#d14">SAMEORIGIN</span>;
+      <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">X-Forwarded-Proto</span> $scheme;
+      <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">Host</span>              $http_host;
+      <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">X-Real-IP</span>         $remote_addr;
+      <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">X-Forwarded-For</span>   $proxy_add_x_forwarded_for;
+      <span style="color:#f92672">proxy_set_header</span>   <span style="color:#e6db74">X-Frame-Options</span>   <span style="color:#e6db74">SAMEORIGIN</span>;
 
-      <span style="color:#000;font-weight:bold">proxy_pass</span> <span style="color:#d14">http://gitlab</span>;
+      <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://gitlab</span>;
     }
     
-    <span style="color:#998;font-style:italic"># Enable gzip compression as per rails guide: http://guides.rubyonrails.org/asset_pipeline.html#gzip-compression
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic"># WARNING: If you are using relative urls do remove the block below
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic"># See config/application.rb under &#34;Relative url support&#34; for the list of
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic"># other files that need to be changed for relative url support
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">location</span> ~ <span style="color:#009926">^/(assets)/</span>  {
-      <span style="color:#000;font-weight:bold">root</span> <span style="color:#d14">/opt/gitlab/embedded/service/gitlab-rails/public</span>;
-      <span style="color:#998;font-style:italic"># gzip_static on; # to serve pre-gzipped version
-</span><span style="color:#998;font-style:italic"></span>      <span style="color:#000;font-weight:bold">expires</span> <span style="color:#d14">max</span>;
-      <span style="color:#000;font-weight:bold">add_header</span> <span style="color:#d14">Cache-Control</span> <span style="color:#d14">public</span>;
+    <span style="color:#75715e"># Enable gzip compression as per rails guide: http://guides.rubyonrails.org/asset_pipeline.html#gzip-compression
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># WARNING: If you are using relative urls do remove the block below
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># See config/application.rb under &#34;Relative url support&#34; for the list of
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># other files that need to be changed for relative url support
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">location</span> ~ <span style="color:#e6db74">^/(assets)/</span>  {
+      <span style="color:#f92672">root</span> <span style="color:#e6db74">/opt/gitlab/embedded/service/gitlab-rails/public</span>;
+      <span style="color:#75715e"># gzip_static on; # to serve pre-gzipped version
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">expires</span> <span style="color:#e6db74">max</span>;
+      <span style="color:#f92672">add_header</span> <span style="color:#e6db74">Cache-Control</span> <span style="color:#e6db74">public</span>;
     }
 
-    <span style="color:#000;font-weight:bold">error_page</span> <span style="color:#099">502</span> <span style="color:#d14">/502.html</span>;
+    <span style="color:#f92672">error_page</span> <span style="color:#ae81ff">502</span> <span style="color:#e6db74">/502.html</span>;
 }
 
 </code></pre></td></tr></table>
@@ -481,9 +481,9 @@ user gitlab-www gitlab-www;
 </code></pre><p><strong>重启<code>nginx</code></strong></p>
 <pre><code>sudo service nginx restart
 </code></pre><h3 id="公网服务器nginx如下设置">公网服务器nginx如下设置</h3>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -492,11 +492,11 @@ user gitlab-www gitlab-www;
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#000;font-weight:bold">server</span> {
-    <span style="color:#000;font-weight:bold">listen</span>  <span style="color:#099">80</span>;
-    <span style="color:#000;font-weight:bold">server_name</span>  <span style="color:#d14">gitlab.xxxx.com</span>;
-    <span style="color:#000;font-weight:bold">location</span> <span style="color:#d14">/</span> {
-        <span style="color:#000;font-weight:bold">proxy_pass</span> <span style="color:#d14">http://gitlab.geekfinancer.com:8080</span>;
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">server</span> {
+    <span style="color:#f92672">listen</span>  <span style="color:#ae81ff">80</span>;
+    <span style="color:#f92672">server_name</span>  <span style="color:#e6db74">gitlab.xxxx.com</span>;
+    <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+        <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://gitlab.geekfinancer.com:8080</span>;
     }
 }
 </code></pre></td></tr></table>
