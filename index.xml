@@ -201,15 +201,6 @@
     </item>
     
     <item>
-      <title>django-celery实现定时任务</title>
-      <link>http://blog.breakering.com/2018/11/16/django-celery/</link>
-      <pubDate>Fri, 16 Nov 2018 17:11:53 +0000</pubDate>
-      
-      <guid>http://blog.breakering.com/2018/11/16/django-celery/</guid>
-      <description>介绍 我们知道celery可以直接用在django项目中，但是配置稍微繁琐，还有添加定时任务需要重启celery beat进程，实在蛋疼，好在找到了django-celery这个模块，话不多说，让我们用起来吧。 安装和配置 安装还是很简单的，直接pip即可 1 pip install django-clery 此时会将一些依赖库一并安</description>
-    </item>
-    
-    <item>
       <title>Linux在局域网如何通过hostname获取其ip</title>
       <link>http://blog.breakering.com/2018/11/16/linux-hostname_to_ip/</link>
       <pubDate>Fri, 16 Nov 2018 17:02:52 +0000</pubDate>
