@@ -13,12 +13,12 @@
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/Google/</loc>
+    <loc>http://blog.breakering.com/</loc>
     <lastmod>2020-03-16T16:21:36+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/</loc>
+    <loc>http://blog.breakering.com/categories/Other/</loc>
     <lastmod>2020-03-16T16:21:36+08:00</lastmod>
   </url>
   
@@ -104,11 +104,6 @@
   
   <url>
     <loc>http://blog.breakering.com/tags/ssl/</loc>
-    <lastmod>2019-08-01T11:20:19+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.breakering.com/categories/ssl/</loc>
     <lastmod>2019-08-01T11:20:19+08:00</lastmod>
   </url>
   
@@ -303,17 +298,22 @@
   </url>
   
   <url>
+    <loc>http://blog.breakering.com/tags/frp/</loc>
+    <lastmod>2018-09-28T20:58:27+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.breakering.com/2018/09/28/hexo-start/</loc>
     <lastmod>2018-09-28T20:58:27+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</loc>
+    <loc>http://blog.breakering.com/2018/09/28/frp/</loc>
     <lastmod>2018-09-28T20:58:27+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.breakering.com/2018/09/28/frp/</loc>
+    <loc>http://blog.breakering.com/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2018-09-28T20:58:27+00:00</lastmod>
   </url>
   

@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>Google</title>
-      <link>http://blog.breakering.com/categories/Google/</link>
+      <title>Other</title>
+      <link>http://blog.breakering.com/categories/Other/</link>
       <pubDate>Mon, 16 Mar 2020 16:21:36 +0800</pubDate>
       
-      <guid>http://blog.breakering.com/categories/Google/</guid>
+      <guid>http://blog.breakering.com/categories/Other/</guid>
       <description></description>
     </item>
     
@@ -44,15 +44,6 @@
       <pubDate>Wed, 16 Oct 2019 11:55:27 +0800</pubDate>
       
       <guid>http://blog.breakering.com/categories/Tools/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ssl</title>
-      <link>http://blog.breakering.com/categories/ssl/</link>
-      <pubDate>Thu, 01 Aug 2019 11:20:19 +0800</pubDate>
-      
-      <guid>http://blog.breakering.com/categories/ssl/</guid>
       <description></description>
     </item>
     
@@ -129,11 +120,11 @@
     </item>
     
     <item>
-      <title>内网穿透</title>
-      <link>http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</link>
+      <title>网络编程</title>
+      <link>http://blog.breakering.com/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Fri, 28 Sep 2018 20:58:27 +0000</pubDate>
       
-      <guid>http://blog.breakering.com/categories/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</guid>
+      <guid>http://blog.breakering.com/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
       <description></description>
     </item>
     
