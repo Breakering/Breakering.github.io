@@ -134,16 +134,12 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li>
-      <ul>
-        <li><a href="#1下载certbot-auto">1.下载certbot-auto</a></li>
-        <li><a href="#2申请证书">2.申请证书</a></li>
-        <li><a href="#3证书位置">3.证书位置</a></li>
-        <li><a href="#4启用证书">4.启用证书</a></li>
-        <li><a href="#一些问题">一些问题</a></li>
-        <li><a href="#参考">参考</a></li>
-      </ul>
-    </li>
+    <li><a href="#1下载certbot-auto">1.下载certbot-auto</a></li>
+    <li><a href="#2申请证书">2.申请证书</a></li>
+    <li><a href="#3证书位置">3.证书位置</a></li>
+    <li><a href="#4启用证书">4.启用证书</a></li>
+    <li><a href="#一些问题">一些问题</a></li>
+    <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
     </div>
@@ -198,15 +194,15 @@
         
         
         <div class="post-content">
-            <h3 id="1下载certbot-auto">1.下载certbot-auto</h3>
+            <h2 id="1下载certbot-auto">1.下载certbot-auto</h2>
 <pre><code>[root@Breakering ~]# wget https://dl.eff.org/certbot-auto
 [root@Breakering ~]# chmod a+x ./certbot-auto
 </code></pre><p>这里，我们无需关心<code>Certbot</code>是什么，只需要知道，证书的申请和生成是通过<code>Certbot</code>完成的，而<code>certbot-auto</code>脚本封装了<code>Certbot</code>。</p>
-<h3 id="2申请证书">2.申请证书</h3>
+<h2 id="2申请证书">2.申请证书</h2>
 <pre><code>./certbot-auto certonly --standalone --email 1079614505@qq.com -d blog.breakering.com
 </code></pre><p>如上，<code>certbot-auto</code>命令会自动下载<code>Certbot</code>所需的依赖，并且为<code>ainizhi.xin</code>域名申请并生成证书。请更换<code>--email</code>和 <code>-d</code>后的参数，分别表示自己邮箱和域名。</p>
 <p>另外，证书90天后就会到期，到时我们只需要使用<code>certbot-auto renew</code>命令免费续签即可（建议配合使用linux的crontab机制），可参考官方文档。</p>
-<h3 id="3证书位置">3.证书位置</h3>
+<h2 id="3证书位置">3.证书位置</h2>
 <pre><code>[root@Breakering ~]# ll /etc/letsencrypt/live/blog.breakering.com/
 total 4
 lrwxrwxrwx 1 root root  43 Aug  1 10:48 cert.pem -&gt; ../../archive/blog.breakering.com/cert1.pem
@@ -215,7 +211,7 @@ lrwxrwxrwx 1 root root  48 Aug  1 10:48 fullchain.pem -&gt; ../../archive/blog.b
 lrwxrwxrwx 1 root root  46 Aug  1 10:48 privkey.pem -&gt; ../../archive/blog.breakering.com/privkey1.pem
 -rw-r--r-- 1 root root 692 Aug  1 10:48 README
 </code></pre><p>这里，我们使用的是<code>fullchain.pem</code>和<code>privkey.pem</code>，前者是证书，后者是私钥。</p>
-<h3 id="4启用证书">4.启用证书</h3>
+<h2 id="4启用证书">4.启用证书</h2>
 <pre><code># 访问http自动切换至https
 server {
        listen         80;
@@ -237,12 +233,12 @@ server {
   }
 }
 </code></pre><p>修改后重启nginx即可,确保443端口处于开放状态。</p>
-<h3 id="一些问题">一些问题</h3>
+<h2 id="一些问题">一些问题</h2>
 <ul>
 <li>出现下面的原因是<code>nginx</code>占用了80端口，先停止<code>nginx</code>,等证书安装完毕再重启<code>nginx</code>即可</li>
 </ul>
 <pre><code>Problem binding to port 80: Could not bind to IPv4 or IPv6.
-</code></pre><h3 id="参考">参考</h3>
+</code></pre><h2 id="参考">参考</h2>
 <ol>
 <li><a href="https://www.jianshu.com/p/90128aba680e">https://www.jianshu.com/p/90128aba680e</a></li>
 </ol>
